@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>위성·공간정보 기반 중소 공장 인수심사 분석 · 신현진</title>
-<meta name="description" content="국내 대형 손해보험사와 진행한 PoC에서 대구 성서산업단지 중소 공장 물건을 위성영상·공공 공간데이터로 판독하는 인수심사 참고자료를 만들었다. 본인은 공장등록현황→KSIC 업종 연결과 GIS건물통합정보 분석을 맡았고, 공장 필지 1,237곳 중 966곳(78.1%)이 특수건물 기준(연면적 3,000㎡) 미만이라 안전점검 자료가 없다는 점을 원자료에서 산출했다.">
+<meta name="description" content="국내 대형 손해보험사와 진행한 PoC에서 대구 성서산업단지 중소 공장 물건을 위성영상·공공 공간데이터로 판독하는 인수심사 참고자료를 만들었음. 본인은 공장등록현황→KSIC 업종 연결과 GIS건물통합정보 분석을 맡았고, 공장 필지 1,237곳 중 966곳(78.1%)이 특수건물 기준(연면적 3,000㎡) 미만이라 안전점검 자료가 없다는 점을 원자료에서 산출함.">
 <meta property="og:title" content="위성·공간정보 기반 중소 공장 인수심사 분석 · 신현진">
-<meta property="og:description" content="국내 대형 손해보험사와 진행한 PoC에서 대구 성서산업단지 중소 공장 물건을 위성영상·공공 공간데이터로 판독하는 인수심사 참고자료를 만들었다. 본인은 공장등록현황→KSIC 업종 연결과 GIS건물통합정보 분석을 맡았고, 공장 필지 1,237곳 중 966곳(78.1%)이 특수건물 기준(연면적 3,000㎡) 미만이라 안전점검 자료가 없다는 점을 원자료에서 산출했다.">
+<meta property="og:description" content="국내 대형 손해보험사와 진행한 PoC에서 대구 성서산업단지 중소 공장 물건을 위성영상·공공 공간데이터로 판독하는 인수심사 참고자료를 만들었음. 본인은 공장등록현황→KSIC 업종 연결과 GIS건물통합정보 분석을 맡았고, 공장 필지 1,237곳 중 966곳(78.1%)이 특수건물 기준(연면적 3,000㎡) 미만이라 안전점검 자료가 없다는 점을 원자료에서 산출함.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,7 +56,7 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
       <span lang="ko" class="chip chip-done">PoC 완료 · 최종 발표 준비 중(2026-10)</span><span lang="en" class="chip chip-done">PoC completed; final presentation in preparation (Oct 2026)</span>
     </div>
     <div class="tags"><span class="tag">보험 인수심사</span><span class="tag">GIS건물통합정보</span><span class="tag">건축물대장</span><span class="tag">KSIC</span><span class="tag">공공데이터</span></div>
-    <p class="proj-sum"><span lang="ko">국내 대형 손해보험사와 진행한 PoC에서 대구 성서산업단지 중소 공장 물건을 위성영상·공공 공간데이터로 판독하는 인수심사 참고자료를 만들었다. 본인은 공장등록현황→KSIC 업종 연결과 GIS건물통합정보 분석을 맡았고, 공장 필지 1,237곳 중 966곳(78.1%)이 특수건물 기준(연면적 3,000㎡) 미만이라 안전점검 자료가 없다는 점을 원자료에서 산출했다.</span><span lang="en">In a PoC with a major Korean P&amp;C insurer, we built underwriting reference reports for small and mid-sized factories in Daegu&#x27;s Seongseo industrial complex from satellite imagery and public geospatial data. I handled the factory-registry-to-KSIC industry linkage and the building-register GIS analysis, and computed from raw data that 966 of 1,237 factory parcels (78.1%) fall below the 3,000 m² special-building threshold and therefore have no mandatory fire-safety inspection record.</span></p>
+    <p class="proj-sum"><span lang="ko">국내 대형 손해보험사와 진행한 PoC에서 대구 성서산업단지 중소 공장 물건을 위성영상·공공 공간데이터로 판독하는 인수심사 참고자료를 만들었음. 본인은 공장등록현황→KSIC 업종 연결과 GIS건물통합정보 분석을 맡았고, 공장 필지 1,237곳 중 966곳(78.1%)이 특수건물 기준(연면적 3,000㎡) 미만이라 안전점검 자료가 없다는 점을 원자료에서 산출함.</span><span lang="en">In a PoC with a major Korean P&amp;C insurer, we built underwriting reference reports for small and mid-sized factories in Daegu&#x27;s Seongseo industrial complex from satellite imagery and public geospatial data. I handled the factory-registry-to-KSIC industry linkage and the building-register GIS analysis, and computed from raw data that 966 of 1,237 factory parcels (78.1%) fall below the 3,000 m² special-building threshold and therefore have no mandatory fire-safety inspection record.</span></p>
   </div>
 
   <section class="sec">
@@ -67,6 +67,12 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   <section class="sec">
     <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
     <ul lang="ko"><li>공장등록현황(data.go.kr, 대구 11,744행) 프로파일링: 성서 3,637행, 단지 차수 표기는 &#x27;성서지방&#x27;·&#x27;성서5차&#x27; 2종뿐, 주원자재 44% 결측 확인</li><li>GIS건물통합정보 shapefile의 익명 필드 A0~A39를 값 분포로 역판별하고 관계식(건폐율=A23/A22, 용적률=A24/A22, 주차면적=A36×11.5)으로 검증</li><li>주소→필지(PNU)→지번→공장등록현황 업종명→KSIC 11차 연계표 대·중분류로 대상·인접 건물 업종 연결; 지번 꼬리표(&#x27;번지&#x27;·블록/로트)와 &#x27;외 N 종&#x27;·공백 차이를 정규화</li><li>주용도=공장(A29=&#x27;17000&#x27;) 건물을 PNU로 묶어 연면적 합을 3,000㎡ 기준과 비교(필지 폴리곤 겹침이 아니라 PNU로 선택 — 공단에서는 겹침 선택 시 면적이 3~8배 부풀었음)</li><li>업종·위험물 정보원 후보(소상공인 상권정보, 위험물 관련 공공데이터 6종, 공장등록현황 생산품·주원자재)를 전수 확인해 사용 가능 여부 판정</li></ul><ul lang="en"><li>Profiled the Daegu factory registry (11,744 rows, data.go.kr): 3,637 rows in Seongseo, only two complex-name variants (no phase-level labels), 44% missing raw-material field</li><li>Reverse-engineered the anonymised A0–A39 fields of the national building-GIS shapefile from value distributions and validated them with identities (coverage = A23/A22, FAR = A24/A22, parking area = A36 × 11.5)</li><li>Linked address → parcel (PNU) → lot number → registered industry name → KSIC rev.11 section/division for the target and neighbouring buildings, normalising lot suffixes, multi-industry &#x27;+N more&#x27; tags and whitespace differences</li><li>Grouped factory buildings (main use code 17000) by PNU and compared summed floor area with the 3,000 m² threshold, selecting by PNU rather than polygon overlap (overlap selection inflated areas 3–8× in the dense complex)</li><li>Exhaustively checked candidate industry and hazardous-material sources (small-business commercial district data, six hazmat-related public datasets, product/raw-material fields) for usability</li></ul>
+    
+    <figure class="flow">
+      <script type="application/json" class="flow-src">{"ko": "flowchart TD\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    fac[(\"공장등록현황 (대구 11,744행)\")]\n    bld[(\"GIS건물통합정보 shapefile — 익명 필드 A0~A39\")]\n    ksic[(\"KSIC 11차 연계표\")]\n    prof[\"프로파일링 — 단지 차수 표기 2종 · 주원자재 44% 결측 확인\"]\n    rev[\"익명 필드 역판별 — 건폐율 A23/A22 · 용적률 A24/A22 · 주차 A36×11.5 로 검증\"]\n    link[\"주소 → PNU → 지번 → 업종명 → KSIC 대·중분류 연계\"]\n    norm[\"지번 꼬리표 · 외 N 종 · 공백 차이 정규화\"]\n    pnu{\"주용도 = 공장(A29 17000) 을 PNU 로 묶어 연면적 합 vs 3,000㎡ — 폴리곤 겹침 선택 시 3~8배 과대\"}\n    src{\"업종·위험물 정보원 후보 전수 확인 → 사용 가능 여부 판정\"}\n    out([\"대상 공장 식별 · 규모 판정 · 활용 가능 정보원 목록\"])\n    fac --> prof\n    bld --> rev\n    prof --> link\n    rev --> link\n    ksic --> link\n    link --> norm\n    norm --> pnu\n    pnu --> src\n    src --> out\n    class fac data\n    class bld data\n    class ksic data\n    class prof proc\n    class rev proc\n    class link proc\n    class norm proc\n    class pnu dec\n    class src dec\n    class out out", "en": "flowchart TD\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    fac[(\"Factory registry, 11,744 rows for Daegu\")]\n    bld[(\"Integrated building GIS shapefile with anonymous fields A0-A39\")]\n    ksic[(\"KSIC 11th-revision crosswalk\")]\n    prof[\"Profiling: only two complex-phase spellings, 44% of main raw material missing\"]\n    rev[\"Reverse-identify the anonymous fields and verify via coverage A23/A22, FAR A24/A22, parking A36 x 11.5\"]\n    link[\"Link address to PNU to lot number to industry name to KSIC divisions\"]\n    norm[\"Normalise lot-number suffixes, the N-others notation and whitespace variants\"]\n    pnu{\"Group factory-use buildings (A29 = 17000) by PNU and compare floor area to 3,000 sq m; polygon overlap inflates it 3-8x\"}\n    src{\"Audit every candidate source for industry and hazardous-material data and rule on usability\"}\n    out([\"Identified target factories, size verdict, and the list of usable data sources\"])\n    fac --> prof\n    bld --> rev\n    prof --> link\n    rev --> link\n    ksic --> link\n    link --> norm\n    norm --> pnu\n    pnu --> src\n    src --> out\n    class fac data\n    class bld data\n    class ksic data\n    class prof proc\n    class rev proc\n    class link proc\n    class norm proc\n    class pnu dec\n    class src dec\n    class out out"}</script>
+      <pre class="mermaid" aria-hidden="true"></pre>
+      <figcaption><span lang="ko">처리 흐름 — 원통: 입력 자료 · 사각형: 처리 · 마름모: 판정·검증 · 양끝 둥근 사각형: 산출물</span><span lang="en">Processing flow — cylinder: input data · rectangle: processing · diamond: decision · stadium: output</span></figcaption>
+    </figure>
   </section>
 
   <section class="sec">
@@ -109,16 +115,18 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   </section>
 
   
+
+  
   <section class="sec">
     <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
     <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/applications/underwriting"><code>applications/underwriting/</code></a></li></ul>
-    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있음.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>특수건물 공백 산출 스크립트와 지도·분포 그림</li><li>주소→업종→KSIC 연결 스크립트와 재현 절차</li><li>공장등록현황·GIS건물통합정보 프로파일링·필드 매핑 검증 스크립트</li><li>물건별 위성 분석 보고서의 업종·인접 업종 항목</li><li>최종 발표자료 정리(고객 내부 자료, 비공개)</li></ul><ul lang="en"><li>Special-building gap script with map and distribution figures</li><li>Address → industry → KSIC linkage script and reproduction guide</li><li>Profiling and field-mapping validation scripts for the factory registry and building GIS</li><li>Industry and neighbouring-industry section of the per-property satellite report</li><li>Final presentation deck (client-internal, not public)</li></ul>
-    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않음. 분석 코드는 GitHub에 정리되어 있음.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
   </section>
 
   <nav class="proj-pager">
@@ -132,10 +140,49 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   <img src="" alt="">
   <p class="lb-cap"></p>
 </div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+var root = document.documentElement;
+function isDark(){
+  var t = root.getAttribute('data-theme');
+  return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+function curLang(){ return root.getAttribute('data-lang') === 'en' ? 'en' : 'ko'; }
+var busy = false;
+async function render(){
+  if (busy) return;
+  busy = true;
+  var boxes = document.querySelectorAll('.flow');
+  if (!boxes.length) { busy = false; return; }
+  mermaid.initialize({
+    startOnLoad: false, securityLevel: 'loose',
+    theme: isDark() ? 'dark' : 'neutral',
+    themeVariables: { fontSize: '13px' },
+    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis',
+                 nodeSpacing: 34, rankSpacing: 46, padding: 10, wrappingWidth: 230 }
+  });
+  var lang = curLang(), nodes = [];
+  boxes.forEach(function (b) {
+    var src = JSON.parse(b.querySelector('.flow-src').textContent);
+    var pre = b.querySelector('pre.mermaid');
+    pre.removeAttribute('data-processed');
+    pre.innerHTML = '';
+    pre.textContent = src[lang];
+    pre.removeAttribute('aria-hidden');
+    nodes.push(pre);
+  });
+  try { await mermaid.run({ nodes: nodes }); } catch (e) { console.error(e); }
+  busy = false;
+}
+window.renderFlows = render;
+render();
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+</script>
+
 <footer class="site-foot">
-  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물임.</p>
   <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
-  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않음. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있음.</p>
   <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately in the <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> repository.</p>
 </footer>
 <script src="../assets/js/site.js"></script>

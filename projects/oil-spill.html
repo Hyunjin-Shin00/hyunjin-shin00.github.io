@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SAR 기반 해상 기름유출 탐지 · 신현진</title>
-<meta name="description" content="기름막은 해수면의 잔물결을 눌러 SAR에서 검게 보인다. 이 성질로 실제 유출 사고 2건을 탐지하고, 자연 현상과의 오탐지를 구분했다.">
+<meta name="description" content="기름막은 해수면의 잔물결을 눌러 SAR에서 검게 보임. 이 성질로 실제 유출 사고 2건을 탐지하고, 자연 현상과의 오탐지를 구분함.">
 <meta property="og:title" content="SAR 기반 해상 기름유출 탐지 · 신현진">
-<meta property="og:description" content="기름막은 해수면의 잔물결을 눌러 SAR에서 검게 보인다. 이 성질로 실제 유출 사고 2건을 탐지하고, 자연 현상과의 오탐지를 구분했다.">
+<meta property="og:description" content="기름막은 해수면의 잔물결을 눌러 SAR에서 검게 보임. 이 성질로 실제 유출 사고 2건을 탐지하고, 자연 현상과의 오탐지를 구분함.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,17 +56,23 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
       <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
     </div>
     <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">dark spot</span><span class="tag">재난대응</span></div>
-    <p class="proj-sum"><span lang="ko">기름막은 해수면의 잔물결을 눌러 SAR에서 검게 보인다. 이 성질로 실제 유출 사고 2건을 탐지하고, 자연 현상과의 오탐지를 구분했다.</span><span lang="en">Oil damps capillary waves, so slicks appear dark in SAR. Used that to detect two real spill events — and to separate them from look-alike natural features.</span></p>
+    <p class="proj-sum"><span lang="ko">기름막은 해수면의 잔물결을 눌러 SAR에서 검게 보임. 이 성질로 실제 유출 사고 2건을 탐지하고, 자연 현상과의 오탐지를 구분함.</span><span lang="en">Oil damps capillary waves, so slicks appear dark in SAR. Used that to detect two real spill events — and to separate them from look-alike natural features.</span></p>
   </div>
 
   <section class="sec">
     <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
-    <ul lang="ko"><li>SAR 영상에서 기름 슬릭(oil slick)을 탐지할 수 있는지 확인하고 실사례에 적용했다.</li><li>에콰도르 해안(2025.12), 이란 카르그섬(2026.05) 두 건의 실제 유출 사고를 분석했다.</li></ul><ul lang="en"><li>Tested whether oil slicks are detectable in SAR, then applied it to real incidents.</li><li>Two events analysed: the Ecuadorian coast (Dec 2025) and Kharg Island, Iran (May 2026).</li></ul>
+    <ul lang="ko"><li>SAR 영상에서 기름 슬릭(oil slick)을 탐지할 수 있는지 확인하고 실사례에 적용함.</li><li>에콰도르 해안(2025.12), 이란 카르그섬(2026.05) 두 건의 실제 유출 사고를 분석함.</li></ul><ul lang="en"><li>Tested whether oil slicks are detectable in SAR, then applied it to real incidents.</li><li>Two events analysed: the Ecuadorian coast (Dec 2025) and Kharg Island, Iran (May 2026).</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
     <ul lang="ko"><li>Sentinel-1 SAR 영상의 dark spot(저후방산란 영역) 분석으로 기름막 탐지.</li><li>기름이 모세관파를 감쇠시켜 Bragg 산란이 줄어드는 원리를 탐지 근거로 사용.</li><li>풍속·파고 영향을 고려해 후방산란 임계값을 설정 — 저풍속 구역은 기름 없이도 어둡게 보이기 때문.</li><li>광학 영상과 교차 확인해 오탐지를 걸러냄.</li></ul><ul lang="en"><li>Detected slicks via dark-spot (low-backscatter) analysis of Sentinel-1 scenes.</li><li>The physical basis: oil damps capillary waves, suppressing Bragg scattering.</li><li>Set backscatter thresholds with wind and wave state in mind — low-wind zones look dark without any oil.</li><li>Cross-checked against optical imagery to screen out false positives.</li></ul>
+    
+    <figure class="flow">
+      <script type="application/json" class="flow-src">{"ko": "flowchart LR\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    s1[(\"Sentinel-1 GRD\")]\n    wind[(\"풍속 · 파고\")]\n    opt[(\"광학 영상\")]\n    cal[\"방사보정 → σ⁰ → 스펙클 필터\"]\n    dark[\"dark spot 추출 — 모세관파 감쇠로 Bragg 산란 저하\"]\n    thr{\"풍속 보정 후방산란 임계 — 저풍속 구역 배제\"}\n    shape[\"형상·면적·가장자리 특징 산출\"]\n    cross{\"광학 교차 확인으로 오탐 제거\"}\n    out([\"기름막 폴리곤 · 면적\"])\n    s1 --> cal\n    cal --> dark\n    wind --> thr\n    dark --> thr\n    thr --> shape\n    shape --> cross\n    opt --> cross\n    cross --> out\n    class s1 data\n    class wind data\n    class opt data\n    class cal proc\n    class dark proc\n    class thr dec\n    class shape proc\n    class cross dec\n    class out out", "en": "flowchart LR\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    s1[(\"Sentinel-1 GRD\")]\n    wind[(\"Wind speed and wave height\")]\n    opt[(\"Optical imagery\")]\n    cal[\"Calibration, sigma0, speckle filter\"]\n    dark[\"Dark-spot extraction: damped capillary waves reduce Bragg scattering\"]\n    thr{\"Wind-adjusted backscatter threshold, excluding low-wind areas\"}\n    shape[\"Shape, area and edge features\"]\n    cross{\"Cross-check with optical to remove false alarms\"}\n    out([\"Oil-slick polygons and area\"])\n    s1 --> cal\n    cal --> dark\n    wind --> thr\n    dark --> thr\n    thr --> shape\n    shape --> cross\n    opt --> cross\n    cross --> out\n    class s1 data\n    class wind data\n    class opt data\n    class cal proc\n    class dark proc\n    class thr dec\n    class shape proc\n    class cross dec\n    class out out"}</script>
+      <pre class="mermaid" aria-hidden="true"></pre>
+      <figcaption><span lang="ko">처리 흐름 — 원통: 입력 자료 · 사각형: 처리 · 마름모: 판정·검증 · 양끝 둥근 사각형: 산출물</span><span lang="en">Processing flow — cylinder: input data · rectangle: processing · diamond: decision · stadium: output</span></figcaption>
+    </figure>
   </section>
 
   <section class="sec">
@@ -93,20 +99,22 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
 
   <section class="sec">
     <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
-    <ul lang="ko"><li>SAR 후방산란 감쇠(damping) 메커니즘과 기름 슬릭의 물리적 관계를 이해했다.</li><li>dark spot이 전부 기름은 아니다 — 오탐지 구분이 탐지 자체보다 중요하다는 걸 배웠다.</li></ul><ul lang="en"><li>Understood the damping mechanism linking backscatter suppression to oil films.</li><li>Learned that not every dark spot is oil — telling look-alikes apart matters more than the detection itself.</li></ul>
+    <ul lang="ko"><li>SAR 후방산란 감쇠(damping) 메커니즘과 기름 슬릭의 물리적 관계를 이해함.</li><li>dark spot이 전부 기름은 아니다 — 오탐지 구분이 탐지 자체보다 중요하다는 걸 배웠음.</li></ul><ul lang="en"><li>Understood the damping mechanism linking backscatter suppression to oil films.</li><li>Learned that not every dark spot is oil — telling look-alikes apart matters more than the detection itself.</li></ul>
   </section>
+
+  
 
   
   <section class="sec">
     <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
     <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/sar/sentinel-1/water/oil-spill"><code>sar/sentinel-1/water/oil-spill/</code></a></li></ul>
-    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있음.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>기름유출 탐지 분석 자료</li></ul><ul lang="en"><li>Oil spill detection analysis</li></ul>
-    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않음. 분석 코드는 GitHub에 정리되어 있음.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
   </section>
 
   <nav class="proj-pager">
@@ -120,10 +128,49 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   <img src="" alt="">
   <p class="lb-cap"></p>
 </div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+var root = document.documentElement;
+function isDark(){
+  var t = root.getAttribute('data-theme');
+  return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+function curLang(){ return root.getAttribute('data-lang') === 'en' ? 'en' : 'ko'; }
+var busy = false;
+async function render(){
+  if (busy) return;
+  busy = true;
+  var boxes = document.querySelectorAll('.flow');
+  if (!boxes.length) { busy = false; return; }
+  mermaid.initialize({
+    startOnLoad: false, securityLevel: 'loose',
+    theme: isDark() ? 'dark' : 'neutral',
+    themeVariables: { fontSize: '13px' },
+    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis',
+                 nodeSpacing: 34, rankSpacing: 46, padding: 10, wrappingWidth: 230 }
+  });
+  var lang = curLang(), nodes = [];
+  boxes.forEach(function (b) {
+    var src = JSON.parse(b.querySelector('.flow-src').textContent);
+    var pre = b.querySelector('pre.mermaid');
+    pre.removeAttribute('data-processed');
+    pre.innerHTML = '';
+    pre.textContent = src[lang];
+    pre.removeAttribute('aria-hidden');
+    nodes.push(pre);
+  });
+  try { await mermaid.run({ nodes: nodes }); } catch (e) { console.error(e); }
+  busy = false;
+}
+window.renderFlows = render;
+render();
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+</script>
+
 <footer class="site-foot">
-  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물임.</p>
   <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
-  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않음. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있음.</p>
   <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately in the <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> repository.</p>
 </footer>
 <script src="../assets/js/site.js"></script>

@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>국산 SAR(NEXTSat-2) InSAR 처리 파이프라인 — 국립공원 지표변위 모니터링 · 신현진</title>
-<meta name="description" content="ISCE2에 리더가 없는 국산 소형 SAR 위성 NEXTSat-2(N2) 영상을, ISCE2를 고치지 않고 COSMO-SkyMed 리더를 런타임 패치(spoofing)해 InSAR 처리하는 파이프라인을 만들었다. 실제 CSK 1일 쌍으로 처리 체인을, N2 구조 시험파일로 메타데이터 주입을 검증하고 고객 측 노트북용 현장 번들로 이관했다. 재검토에서 CSK 검증 결과가 빈 DEM 때문에 지형 위상을 제거하지 못했다는 점을 찾아 기록했다.">
+<meta name="description" content="ISCE2에 리더가 없는 국산 소형 SAR 위성 NEXTSat-2(N2) 영상을, ISCE2를 고치지 않고 COSMO-SkyMed 리더를 런타임 패치(spoofing)해 InSAR 처리하는 파이프라인을 만들었음. 실제 CSK 1일 쌍으로 처리 체인을, N2 구조 시험파일로 메타데이터 주입을 검증하고 고객 측 노트북용 현장 번들로 이관함. 재검토에서 CSK 검증 결과가 빈 DEM 때문에 지형 위상을 제거하지 못했다는 점을 찾아 기록함.">
 <meta property="og:title" content="국산 SAR(NEXTSat-2) InSAR 처리 파이프라인 — 국립공원 지표변위 모니터링 · 신현진">
-<meta property="og:description" content="ISCE2에 리더가 없는 국산 소형 SAR 위성 NEXTSat-2(N2) 영상을, ISCE2를 고치지 않고 COSMO-SkyMed 리더를 런타임 패치(spoofing)해 InSAR 처리하는 파이프라인을 만들었다. 실제 CSK 1일 쌍으로 처리 체인을, N2 구조 시험파일로 메타데이터 주입을 검증하고 고객 측 노트북용 현장 번들로 이관했다. 재검토에서 CSK 검증 결과가 빈 DEM 때문에 지형 위상을 제거하지 못했다는 점을 찾아 기록했다.">
+<meta property="og:description" content="ISCE2에 리더가 없는 국산 소형 SAR 위성 NEXTSat-2(N2) 영상을, ISCE2를 고치지 않고 COSMO-SkyMed 리더를 런타임 패치(spoofing)해 InSAR 처리하는 파이프라인을 만들었음. 실제 CSK 1일 쌍으로 처리 체인을, N2 구조 시험파일로 메타데이터 주입을 검증하고 고객 측 노트북용 현장 번들로 이관함. 재검토에서 CSK 검증 결과가 빈 DEM 때문에 지형 위상을 제거하지 못했다는 점을 찾아 기록함.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,7 +56,7 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
       <span lang="ko" class="chip chip-done">파이프라인 완성·현장 이관, 실제 N2 두 날짜 결과는 미확보</span><span lang="en" class="chip chip-done">Pipeline delivered for on-site use; no two-date N2 result on record yet</span>
     </div>
     <div class="tags"><span class="tag">NEXTSat-2</span><span class="tag">ISCE2</span><span class="tag">InSAR</span><span class="tag">COSMO-SkyMed</span><span class="tag">snaphu</span></div>
-    <p class="proj-sum"><span lang="ko">ISCE2에 리더가 없는 국산 소형 SAR 위성 NEXTSat-2(N2) 영상을, ISCE2를 고치지 않고 COSMO-SkyMed 리더를 런타임 패치(spoofing)해 InSAR 처리하는 파이프라인을 만들었다. 실제 CSK 1일 쌍으로 처리 체인을, N2 구조 시험파일로 메타데이터 주입을 검증하고 고객 측 노트북용 현장 번들로 이관했다. 재검토에서 CSK 검증 결과가 빈 DEM 때문에 지형 위상을 제거하지 못했다는 점을 찾아 기록했다.</span><span lang="en">Built a pipeline that runs InSAR on NEXTSat-2 (N2), a Korean small SAR satellite that ISCE2 cannot read, by patching the COSMO-SkyMed reader at runtime instead of modifying ISCE2. The processing chain was tested on a real one-day CSK pair and the metadata injection on an N2 structure-only file, then packaged for on-site processing on the client&#x27;s laptop. A later review found that the CSK test used a void DEM, so topographic phase was never removed.</span></p>
+    <p class="proj-sum"><span lang="ko">ISCE2에 리더가 없는 국산 소형 SAR 위성 NEXTSat-2(N2) 영상을, ISCE2를 고치지 않고 COSMO-SkyMed 리더를 런타임 패치(spoofing)해 InSAR 처리하는 파이프라인을 만들었음. 실제 CSK 1일 쌍으로 처리 체인을, N2 구조 시험파일로 메타데이터 주입을 검증하고 고객 측 노트북용 현장 번들로 이관함. 재검토에서 CSK 검증 결과가 빈 DEM 때문에 지형 위상을 제거하지 못했다는 점을 찾아 기록함.</span><span lang="en">Built a pipeline that runs InSAR on NEXTSat-2 (N2), a Korean small SAR satellite that ISCE2 cannot read, by patching the COSMO-SkyMed reader at runtime instead of modifying ISCE2. The processing chain was tested on a real one-day CSK pair and the metadata injection on an N2 structure-only file, then packaged for on-site processing on the client&#x27;s laptop. A later review found that the CSK test used a void DEM, so topographic phase was never removed.</span></p>
   </div>
 
   <section class="sec">
@@ -67,6 +67,12 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   <section class="sec">
     <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
     <ul lang="ko"><li>ISCE2 센서 신규 등록·CSK 헤더를 N2 형식으로 재작성하는 방식은 23회 시도 모두 실패(PortError, 속성 불일치) → ISCE2 수정 없는 런타임 패치로 전환</li><li>sitecustomize.py를 PYTHONPATH 맨 앞에 두어 COSMO_SkyMed_SLC의 parse/populateMetadata/extractImage를 monkey-patch, N2 헤더 키를 대소문자·공백 무시로 찾아 파장·시작거리(c·τ0/2)·샘플링(c/2Δr)·zero-Doppler 시각·60개 궤도벡터·PRF·처프·관측방향을 주입</li><li>매핑 결과를 Mapping_Report에 줄 단위로 즉시 기록(중간 실패 시에도 원인 추적 가능), runRefineSecondaryTiming 실패 skip·DataAccessor &#x27;r&#x27;→&#x27;read&#x27; 런타임 패치</li><li>처리 체인(코레지→간섭도→결맞음→필터→지오코딩→snaphu MCF)은 실제 COSMO-SkyMed HIMAGE 1일 tandem 쌍(2020-07-12/13, 동남극)으로 확보</li><li>현장 이관: conda-pack 환경(645 MB), 경로 하드코딩 제거판 진입점, 533줄 매뉴얼(데이터 반출 원칙·sha256 무변경 증명·예상 문제 11종·LiDAR 25 cm DEM을 1 m·WGS84 타원체고로 변환하는 절차)</li><li>병행 과제: Sentinel-2로 6개 국립공원 2025년 공원평균 NDVI 시계열(16–30장/공원)</li></ul><ul lang="en"><li>Registering a new ISCE2 sensor and rewriting CSK headers into N2 form failed in all 23 attempts (PortError, attribute mismatches), so the approach switched to runtime patching with ISCE2 left untouched</li><li>A sitecustomize.py placed first on PYTHONPATH monkey-patches COSMO_SkyMed_SLC parse/populateMetadata/extractImage; N2 header keys are matched case/space-insensitively and wavelength, starting range (c·τ0/2), sampling rate (c/2Δr), zero-Doppler times, 60 orbit state vectors, PRF, chirp and look side are injected</li><li>Each mapped value is flushed to a Mapping_Report line by line so failures stay traceable; runtime patches skip a failing runRefineSecondaryTiming and normalise DataAccessor mode &#x27;r&#x27;→&#x27;read&#x27;</li><li>The processing chain (coregistration → interferogram → coherence → filter → geocode → snaphu MCF) was exercised on a real COSMO-SkyMed HIMAGE one-day tandem pair (2020-07-12/13, East Antarctica)</li><li>On-site handover: conda-pack environment (645 MB), path-free entry script and a 533-line manual (data-export rules, sha256 proof of unmodified inputs, 11 expected failure modes, converting a 25 cm LiDAR DEM to 1 m WGS84 ellipsoidal heights)</li><li>Side task: 2025 park-mean Sentinel-2 NDVI time series for six national parks (16–30 scenes per park)</li></ul>
+    
+    <figure class="flow">
+      <script type="application/json" class="flow-src">{"ko": "flowchart TD\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    try{\"ISCE2 센서 신규 등록 · CSK 헤더 재작성 23회 시도 — 전부 실패\"}\n    sc[\"sitecustomize.py 를 PYTHONPATH 맨 앞에 배치\"]\n    mp[\"COSMO_SkyMed_SLC 의 parse / populateMetadata / extractImage monkey-patch\"]\n    key[\"N2 헤더 키를 대소문자·공백 무시로 탐색 → 파장 · c·τ0/2 · 샘플링 주입\"]\n    log[\"Mapping_Report 에 줄 단위 즉시 기록 — 중간 실패도 추적\"]\n    skip[\"runRefineSecondaryTiming 실패 skip · DataAccessor r → read 패치\"]\n    chain[\"코레지 → 간섭도 → 결맞음 → 필터 → 지오코딩 → snaphu MCF\"]\n    ver{\"CSK HIMAGE 1일 tandem 쌍(2020-07-12/13)으로 체인 검증\"}\n    pack[\"현장 이관 — conda-pack 645 MB · 경로 하드코딩 제거 · 533줄 매뉴얼\"]\n    out([\"ISCE2 무수정 N2 InSAR 처리 환경 · 재현 가능한 매핑 기록\"])\n    try --> sc\n    sc --> mp\n    mp --> key\n    key --> log\n    log --> skip\n    skip --> chain\n    chain --> ver\n    ver --> pack\n    pack --> out\n    class try dec\n    class sc proc\n    class mp proc\n    class key proc\n    class log proc\n    class skip proc\n    class chain proc\n    class ver dec\n    class pack proc\n    class out out", "en": "flowchart TD\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    try{\"23 attempts to register a new ISCE2 sensor or rewrite CSK headers, all failed\"}\n    sc[\"Put sitecustomize.py at the front of PYTHONPATH\"]\n    mp[\"Monkey-patch parse, populateMetadata and extractImage on COSMO_SkyMed_SLC\"]\n    key[\"Find NEXTSat-2 header keys case- and space-insensitively, inject wavelength, c tau0 over 2, sampling\"]\n    log[\"Write Mapping_Report line by line so mid-run failures stay traceable\"]\n    skip[\"Skip failing runRefineSecondaryTiming, patch DataAccessor r to read\"]\n    chain[\"Coregistration, interferogram, coherence, filtering, geocoding, snaphu MCF\"]\n    ver{\"Validate the chain on a 1-day CSK HIMAGE tandem pair, 2020-07-12/13\"}\n    pack[\"Field handover: 645 MB conda-pack, de-hardcoded entry points, 533-page-line manual\"]\n    out([\"A NEXTSat-2 InSAR environment that leaves ISCE2 untouched, with a reproducible mapping log\"])\n    try --> sc\n    sc --> mp\n    mp --> key\n    key --> log\n    log --> skip\n    skip --> chain\n    chain --> ver\n    ver --> pack\n    pack --> out\n    class try dec\n    class sc proc\n    class mp proc\n    class key proc\n    class log proc\n    class skip proc\n    class chain proc\n    class ver dec\n    class pack proc\n    class out out"}</script>
+      <pre class="mermaid" aria-hidden="true"></pre>
+      <figcaption><span lang="ko">처리 흐름 — 원통: 입력 자료 · 사각형: 처리 · 마름모: 판정·검증 · 양끝 둥근 사각형: 산출물</span><span lang="en">Processing flow — cylinder: input data · rectangle: processing · diamond: decision · stadium: output</span></figcaption>
+    </figure>
   </section>
 
   <section class="sec">
@@ -105,20 +111,22 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
 
   <section class="sec">
     <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
-    <ul lang="ko"><li>센서 리더가 없을 때 소프트웨어를 포크하는 대신 런타임 패치로 우회하면 설치본을 건드리지 않고 이식할 수 있다. 대가는 &#x27;조용한 실패&#x27; — 실패 단계 자동 skip은 시험용으로만, 실데이터에선 로그로 refinement 수행 여부를 반드시 확인해야 한다</li><li>주입값 검증은 &#x27;같은 식으로 다시 계산&#x27;이 아니라 독립 기하(궤도+zero-Doppler 지오로케이션)로 해야 의미가 있다 — 이번에 입사각 근사의 0.5–1° 편차와 도플러 54 Hz 불일치(−21.5 vs 32.9 Hz, 규약 미해결)를 이렇게 찾았다</li><li>&#x27;끝까지 돌았다&#x27;는 &#x27;맞게 돌았다&#x27;가 아니다: CSK 시험은 4.9시간 완주했지만 DEM이 void였다. 고위도 처리 전 DEM 커버리지(SRTM ±60°)를 먼저 확인하고, 지형 전용 위상이 평평하면 즉시 의심해야 한다</li><li>ISCE2 XML은 속성 위치가 틀려도 경고 없이 무시한다(demFilename). 실행 후 isce.log의 DEM 크기로 실제 적용 여부를 확인하는 습관이 필요</li><li>phsig.cor(중앙 0.99)는 필터 위상 분산 지표이지 결맞음이 아니다 — 결맞음은 topophase.cor 2번 밴드(중앙 0.50). snaphu에 2밴드 파일을 그대로 넘긴 문제도 남아 있다(미수정)</li><li>한계: 실제 N2 두 날짜 간섭 결과·X밴드 산림 결맞음 수준은 아직 확인하지 못했다. NDVI는 공원 평균 계절곡선 수준이라 산사태 탐지 근거로 쓸 수 없다</li></ul><ul lang="en"><li>When a sensor reader is missing, runtime patching avoids forking the toolchain and keeps the install portable. The price is silent failure: auto-skipping a failed step is fine for a test file, but on real data the log must confirm that coregistration refinement actually ran</li><li>Injected values are only verified by independent geometry (orbit + zero-Doppler geolocation), not by recomputing the same formula — that is how the 0.5–1° incidence-angle bias and the 54 Hz Doppler mismatch (−21.5 vs 32.9 Hz, convention unresolved) surfaced</li><li>Completing is not the same as being correct: the CSK test ran for 4.9 h with a void DEM. Check DEM coverage (SRTM ends at ±60°) before high-latitude processing, and treat a flat terrain-only phase as an immediate red flag</li><li>ISCE2 silently ignores a misplaced XML property (demFilename); check the DEM size in isce.log to confirm what was actually used</li><li>phsig.cor (median 0.99) is a filtered-phase variance measure, not coherence; coherence is band 2 of topophase.cor (median 0.50). Passing that 2-band file straight to snaphu is an open issue</li><li>Limits: interferometric quality of real two-date N2 data and X-band coherence over forest are still unknown. The NDVI work is a park-mean seasonal curve and cannot support landslide detection</li></ul>
+    <ul lang="ko"><li>센서 리더가 없을 때 소프트웨어를 포크하는 대신 런타임 패치로 우회하면 설치본을 건드리지 않고 이식할 수 있음. 대가는 &#x27;조용한 실패&#x27; — 실패 단계 자동 skip은 시험용으로만, 실데이터에선 로그로 refinement 수행 여부를 반드시 확인해야 한다</li><li>주입값 검증은 &#x27;같은 식으로 다시 계산&#x27;이 아니라 독립 기하(궤도+zero-Doppler 지오로케이션)로 해야 의미가 있다 — 이번에 입사각 근사의 0.5–1° 편차와 도플러 54 Hz 불일치(−21.5 vs 32.9 Hz, 규약 미해결)를 이렇게 찾았다</li><li>&#x27;끝까지 돌았다&#x27;는 &#x27;맞게 돌았다&#x27;가 아니다: CSK 시험은 4.9시간 완주했지만 DEM이 void였음. 고위도 처리 전 DEM 커버리지(SRTM ±60°)를 먼저 확인하고, 지형 전용 위상이 평평하면 즉시 의심해야 한다</li><li>ISCE2 XML은 속성 위치가 틀려도 경고 없이 무시한다(demFilename). 실행 후 isce.log의 DEM 크기로 실제 적용 여부를 확인하는 습관이 필요</li><li>phsig.cor(중앙 0.99)는 필터 위상 분산 지표이지 결맞음이 아니다 — 결맞음은 topophase.cor 2번 밴드(중앙 0.50). snaphu에 2밴드 파일을 그대로 넘긴 문제도 남아 있다(미수정)</li><li>한계: 실제 N2 두 날짜 간섭 결과·X밴드 산림 결맞음 수준은 아직 확인하지 못함. NDVI는 공원 평균 계절곡선 수준이라 산사태 탐지 근거로 쓸 수 없다</li></ul><ul lang="en"><li>When a sensor reader is missing, runtime patching avoids forking the toolchain and keeps the install portable. The price is silent failure: auto-skipping a failed step is fine for a test file, but on real data the log must confirm that coregistration refinement actually ran</li><li>Injected values are only verified by independent geometry (orbit + zero-Doppler geolocation), not by recomputing the same formula — that is how the 0.5–1° incidence-angle bias and the 54 Hz Doppler mismatch (−21.5 vs 32.9 Hz, convention unresolved) surfaced</li><li>Completing is not the same as being correct: the CSK test ran for 4.9 h with a void DEM. Check DEM coverage (SRTM ends at ±60°) before high-latitude processing, and treat a flat terrain-only phase as an immediate red flag</li><li>ISCE2 silently ignores a misplaced XML property (demFilename); check the DEM size in isce.log to confirm what was actually used</li><li>phsig.cor (median 0.99) is a filtered-phase variance measure, not coherence; coherence is band 2 of topophase.cor (median 0.50). Passing that 2-band file straight to snaphu is an open issue</li><li>Limits: interferometric quality of real two-date N2 data and X-band coherence over forest are still unknown. The NDVI work is a park-mean seasonal curve and cannot support landslide detection</li></ul>
   </section>
+
+  
 
   
   <section class="sec">
     <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
     <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/sar/nextsat-2/isce2-spoofing"><code>sar/nextsat-2/isce2-spoofing/</code></a></li></ul>
-    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있음.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>N2→ISCE2 spoofing 코드(n2_main/n2_patch/n2_viz) + 이식판 진입점</li><li>CSK 실데이터 처리 체인(csk_main/csk_viz)과 처리 결과 3벌</li><li>현장 셋업 번들(conda-pack 환경, 533줄 매뉴얼)</li><li>6개 국립공원 2025 NDVI 시계열·변화 GeoTIFF</li><li>재검증 스크립트(기하·결맞음·위상-DEM 회귀)</li></ul><ul lang="en"><li>N2→ISCE2 spoofing code (n2_main/n2_patch/n2_viz) and a portable entry script</li><li>CSK real-data processing chain (csk_main/csk_viz) with three processing runs</li><li>On-site setup bundle (conda-pack environment, 533-line manual)</li><li>2025 NDVI time series and change GeoTIFFs for six national parks</li><li>Re-verification scripts (geometry, coherence, phase-vs-DEM regression)</li></ul>
-    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않음. 분석 코드는 GitHub에 정리되어 있음.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
   </section>
 
   <nav class="proj-pager">
@@ -132,10 +140,49 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   <img src="" alt="">
   <p class="lb-cap"></p>
 </div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+var root = document.documentElement;
+function isDark(){
+  var t = root.getAttribute('data-theme');
+  return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+function curLang(){ return root.getAttribute('data-lang') === 'en' ? 'en' : 'ko'; }
+var busy = false;
+async function render(){
+  if (busy) return;
+  busy = true;
+  var boxes = document.querySelectorAll('.flow');
+  if (!boxes.length) { busy = false; return; }
+  mermaid.initialize({
+    startOnLoad: false, securityLevel: 'loose',
+    theme: isDark() ? 'dark' : 'neutral',
+    themeVariables: { fontSize: '13px' },
+    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis',
+                 nodeSpacing: 34, rankSpacing: 46, padding: 10, wrappingWidth: 230 }
+  });
+  var lang = curLang(), nodes = [];
+  boxes.forEach(function (b) {
+    var src = JSON.parse(b.querySelector('.flow-src').textContent);
+    var pre = b.querySelector('pre.mermaid');
+    pre.removeAttribute('data-processed');
+    pre.innerHTML = '';
+    pre.textContent = src[lang];
+    pre.removeAttribute('aria-hidden');
+    nodes.push(pre);
+  });
+  try { await mermaid.run({ nodes: nodes }); } catch (e) { console.error(e); }
+  busy = false;
+}
+window.renderFlows = render;
+render();
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+</script>
+
 <footer class="site-foot">
-  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물임.</p>
   <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
-  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않음. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있음.</p>
   <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately in the <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> repository.</p>
 </footer>
 <script src="../assets/js/site.js"></script>

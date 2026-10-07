@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>중남미 고해상도 DTM 제작 및 초해상화 · 신현진</title>
-<meta name="description" content="중남미에는 30m급 무료 DEM밖에 없다. 저비용으로 5–10m DTM을 만들 수 있는지를 InSAR · 스테레오 · LiDAR 세 경로로 검증했다.">
+<meta name="description" content="중남미에는 30m급 무료 DEM밖에 없음. 저비용으로 5–10m DTM을 만들 수 있는지를 InSAR · 스테레오 · LiDAR 세 경로로 검증함.">
 <meta property="og:title" content="중남미 고해상도 DTM 제작 및 초해상화 · 신현진">
-<meta property="og:description" content="중남미에는 30m급 무료 DEM밖에 없다. 저비용으로 5–10m DTM을 만들 수 있는지를 InSAR · 스테레오 · LiDAR 세 경로로 검증했다.">
+<meta property="og:description" content="중남미에는 30m급 무료 DEM밖에 없음. 저비용으로 5–10m DTM을 만들 수 있는지를 InSAR · 스테레오 · LiDAR 세 경로로 검증함.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,17 +56,23 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
       <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
     </div>
     <div class="tags"><span class="tag">InSAR DSM</span><span class="tag">LiDAR</span><span class="tag">Stereo</span><span class="tag">DSM→DTM</span></div>
-    <p class="proj-sum"><span lang="ko">중남미에는 30m급 무료 DEM밖에 없다. 저비용으로 5–10m DTM을 만들 수 있는지를 InSAR · 스테레오 · LiDAR 세 경로로 검증했다.</span><span lang="en">Latin America only has free 30 m DEMs. We tested whether 5–10 m DTMs could be produced cheaply, via three routes: InSAR, stereo photogrammetry and LiDAR.</span></p>
+    <p class="proj-sum"><span lang="ko">중남미에는 30m급 무료 DEM밖에 없음. 저비용으로 5–10m DTM을 만들 수 있는지를 InSAR · 스테레오 · LiDAR 세 경로로 검증함.</span><span lang="en">Latin America only has free 30 m DEMs. We tested whether 5–10 m DTMs could be produced cheaply, via three routes: InSAR, stereo photogrammetry and LiDAR.</span></p>
   </div>
 
   <section class="sec">
     <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
-    <ul lang="ko"><li>중남미에는 SRTM·ASTER GDEM·Copernicus GLO-30·ANADEM 등 30m급 무료 DEM만 존재하고 고해상도 DTM이 부족하다.</li><li>저비용 DSM/DTM 구축은 개발도상국, 오지 탐사, 국방·안보 지역에서 수요가 있다.</li><li>고해상도 DTM은 유량 시뮬레이션과 인프라 설계의 전제조건이다.</li></ul><ul lang="en"><li>Latin America has only 30 m free DEMs (SRTM, ASTER GDEM, Copernicus GLO-30, ANADEM) and little high-resolution terrain data.</li><li>Low-cost DSM/DTM production has demand in developing regions, remote surveys and security applications.</li><li>High-resolution DTMs are a prerequisite for flow simulation and infrastructure design.</li></ul>
+    <ul lang="ko"><li>중남미에는 SRTM·ASTER GDEM·Copernicus GLO-30·ANADEM 등 30m급 무료 DEM만 존재하고 고해상도 DTM이 부족함.</li><li>저비용 DSM/DTM 구축은 개발도상국, 오지 탐사, 국방·안보 지역에서 수요가 있음.</li><li>고해상도 DTM은 유량 시뮬레이션과 인프라 설계의 전제조건임.</li></ul><ul lang="en"><li>Latin America has only 30 m free DEMs (SRTM, ASTER GDEM, Copernicus GLO-30, ANADEM) and little high-resolution terrain data.</li><li>Low-cost DSM/DTM production has demand in developing regions, remote surveys and security applications.</li><li>High-resolution DTMs are a prerequisite for flow simulation and infrastructure design.</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
     <ul lang="ko"><li>Sentinel-1 SLC InSAR로 DSM 제작 — perpendicular baseline 150–300 m, temporal baseline은 가능한 짧게.</li><li>SNAP 처리 체인: split → orbit → back-geocoding → interferogram → deburst → filtering → unwrapping → phase-to-elevation → terrain correction.</li><li>COSMO-SkyMed InSAR로도 DSM 제작해 비교.</li><li>SPOT-5 HRS 스테레오 영상 기반 DSM 생성 (전·후방 스테레오 쌍).</li><li>멕시코 0.5m LiDAR 데이터를 참값(GT)으로 확보.</li><li>DSM→DTM 변환: slope 기반 필터(경사 10° 임계) → 단계적 보간으로 빈 공간 채움 → 가우시안 평활화.</li></ul><ul lang="en"><li>DSMs from Sentinel-1 SLC InSAR — perpendicular baseline 150–300 m, temporal baseline kept as short as possible.</li><li>SNAP chain: split → orbit → back-geocoding → interferogram → deburst → filtering → unwrapping → phase-to-elevation → terrain correction.</li><li>A second DSM from COSMO-SkyMed InSAR for comparison.</li><li>DSM generation from SPOT-5 HRS stereo pairs (forward/backward).</li><li>0.5 m Mexican LiDAR secured as ground truth.</li><li>DSM→DTM conversion: slope-based filtering (10° threshold) → stepwise interpolation of gaps → Gaussian smoothing.</li></ul>
+    
+    <figure class="flow">
+      <script type="application/json" class="flow-src">{"ko": "flowchart TD\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    subgraph g0[\"DSM 제작 경로\"]\n    direction TB\n    s1[\"Sentinel-1 InSAR — Bperp 150~300 m · 시간기선 최소\"]\n    csk[\"COSMO-SkyMed InSAR\"]\n    spot[\"SPOT-5 HRS 전·후방 스테레오\"]\n    end\n    chain[\"SNAP: split → orbit → back-geocoding → 간섭도 → deburst → filter → unwrap → phase-to-elevation → TC\"]\n    dsm[\"DSM 생성\"]\n    slope{\"slope 필터 — 경사 10° 초과는 건물·식생으로 제거\"}\n    fill[\"단계적 보간으로 빈 공간 채움 (close gaps)\"]\n    smooth[\"가우시안 평활화\"]\n    gt[(\"멕시코 0.5 m LiDAR DSM/DTM (참값)\")]\n    val{\"정량 검증 — 평균 0.7 m (0.76%) · 최대 30 m\"}\n    out([\"5~14 m 급 DTM · 검증 보고\"])\n    s1 --> chain\n    chain --> dsm\n    csk --> dsm\n    spot --> dsm\n    dsm --> slope\n    slope --> fill\n    fill --> smooth\n    gt --> val\n    smooth --> val\n    val --> out\n    class s1 proc\n    class csk proc\n    class spot proc\n    class chain proc\n    class dsm proc\n    class slope dec\n    class fill proc\n    class smooth proc\n    class gt data\n    class val dec\n    class out out", "en": "flowchart TD\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    subgraph g0[\"DSM generation branches\"]\n    direction TB\n    s1[\"Sentinel-1 InSAR: 150-300 m perpendicular baseline, shortest possible temporal baseline\"]\n    csk[\"COSMO-SkyMed InSAR\"]\n    spot[\"SPOT-5 HRS fore/aft stereo\"]\n    end\n    chain[\"SNAP: split, orbit, back-geocoding, interferogram, deburst, filter, unwrap, phase-to-elevation, terrain correction\"]\n    dsm[\"DSM generation\"]\n    slope{\"Slope filter: above 10 degrees is treated as building or vegetation and removed\"}\n    fill[\"Fill the gaps by stepwise resampling\"]\n    smooth[\"Gaussian smoothing\"]\n    gt[(\"0.5 m LiDAR DSM/DTM over Mexico as ground truth\")]\n    val{\"Quantitative validation: 0.7 m mean (0.76%), 30 m maximum\"}\n    out([\"DTM at 5-14 m, with a validation report\"])\n    s1 --> chain\n    chain --> dsm\n    csk --> dsm\n    spot --> dsm\n    dsm --> slope\n    slope --> fill\n    fill --> smooth\n    gt --> val\n    smooth --> val\n    val --> out\n    class s1 proc\n    class csk proc\n    class spot proc\n    class chain proc\n    class dsm proc\n    class slope dec\n    class fill proc\n    class smooth proc\n    class gt data\n    class val dec\n    class out out"}</script>
+      <pre class="mermaid" aria-hidden="true"></pre>
+      <figcaption><span lang="ko">처리 흐름 — 원통: 입력 자료 · 사각형: 처리 · 마름모: 판정·검증 · 양끝 둥근 사각형: 산출물</span><span lang="en">Processing flow — cylinder: input data · rectangle: processing · diamond: decision · stadium: output</span></figcaption>
+    </figure>
   </section>
 
   <section class="sec">
@@ -109,20 +115,22 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
 
   <section class="sec">
     <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
-    <ul lang="ko"><li>InSAR 베이스라인 선택이 DEM 정확도를 어떻게 좌우하는지 실측으로 확인했다.</li><li>DSM과 DTM의 차이, 그리고 비지형 객체 제거가 왜 어려운지를 데이터로 이해했다.</li><li>한계: 비교 가능한 고해상도 참값이 없는 지역에서는 정량 검증 자체가 불가능했다. 멕시코 LiDAR 지역만이 유일한 검증지였다.</li></ul><ul lang="en"><li>Saw empirically how baseline selection drives DEM accuracy.</li><li>Understood from the data why removing non-terrain objects is the hard part of DSM→DTM.</li><li>Limitation: without high-resolution ground truth, quantitative validation is simply impossible. The Mexican LiDAR site was the only place we could actually check.</li></ul>
+    <ul lang="ko"><li>InSAR 베이스라인 선택이 DEM 정확도를 어떻게 좌우하는지 실측으로 확인함.</li><li>DSM과 DTM의 차이, 그리고 비지형 객체 제거가 왜 어려운지를 데이터로 이해함.</li><li>한계: 비교 가능한 고해상도 참값이 없는 지역에서는 정량 검증 자체가 불가능함. 멕시코 LiDAR 지역만이 유일한 검증지였음.</li></ul><ul lang="en"><li>Saw empirically how baseline selection drives DEM accuracy.</li><li>Understood from the data why removing non-terrain objects is the hard part of DSM→DTM.</li><li>Limitation: without high-resolution ground truth, quantitative validation is simply impossible. The Mexican LiDAR site was the only place we could actually check.</li></ul>
   </section>
+
+  
 
   
   <section class="sec">
     <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
     <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/applications/dem-generation"><code>applications/dem-generation/</code></a></li></ul>
-    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있음.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>연구개발 결과보고서</li><li>DSM→DTM 변환 처리 체인</li><li>지역별 DSM 산출물</li></ul><ul lang="en"><li>R&amp;D results report</li><li>DSM→DTM processing chain</li><li>Regional DSM products</li></ul>
-    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않음. 분석 코드는 GitHub에 정리되어 있음.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
   </section>
 
   <nav class="proj-pager">
@@ -136,10 +144,49 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   <img src="" alt="">
   <p class="lb-cap"></p>
 </div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+var root = document.documentElement;
+function isDark(){
+  var t = root.getAttribute('data-theme');
+  return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+function curLang(){ return root.getAttribute('data-lang') === 'en' ? 'en' : 'ko'; }
+var busy = false;
+async function render(){
+  if (busy) return;
+  busy = true;
+  var boxes = document.querySelectorAll('.flow');
+  if (!boxes.length) { busy = false; return; }
+  mermaid.initialize({
+    startOnLoad: false, securityLevel: 'loose',
+    theme: isDark() ? 'dark' : 'neutral',
+    themeVariables: { fontSize: '13px' },
+    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis',
+                 nodeSpacing: 34, rankSpacing: 46, padding: 10, wrappingWidth: 230 }
+  });
+  var lang = curLang(), nodes = [];
+  boxes.forEach(function (b) {
+    var src = JSON.parse(b.querySelector('.flow-src').textContent);
+    var pre = b.querySelector('pre.mermaid');
+    pre.removeAttribute('data-processed');
+    pre.innerHTML = '';
+    pre.textContent = src[lang];
+    pre.removeAttribute('aria-hidden');
+    nodes.push(pre);
+  });
+  try { await mermaid.run({ nodes: nodes }); } catch (e) { console.error(e); }
+  busy = false;
+}
+window.renderFlows = render;
+render();
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+</script>
+
 <footer class="site-foot">
-  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물임.</p>
   <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
-  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않음. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있음.</p>
   <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately in the <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> repository.</p>
 </footer>
 <script src="../assets/js/site.js"></script>

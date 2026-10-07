@@ -12,6 +12,7 @@
       root.setAttribute('data-lang', next);
       root.setAttribute('lang', next);
       save('lang', next);
+      if (window.renderFlows) window.renderFlows();
     });
   }
 
@@ -28,6 +29,7 @@
       var next = cur === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
       save('theme', next);
+      if (window.renderFlows) window.renderFlows();
     });
   }
 

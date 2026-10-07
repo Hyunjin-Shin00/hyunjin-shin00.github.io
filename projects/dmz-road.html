@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>접경지역 도로 공사 진행 변화탐지 · 신현진</title>
-<meta name="description" content="공개 상용 위성영상 시계열로 접경지역 도로 공사의 진행을 시기별로 추적했다. 5개월 만에 누적 연장 0.2 km에서 7.06 km로 늘었고, 최근접 지점은 군사분계선에서 약 230 m다.">
+<meta name="description" content="공개 상용 위성영상 시계열로 접경지역 도로 공사의 진행을 시기별로 추적함. 5개월 만에 누적 연장 0.2 km에서 7.06 km로 늘었고, 최근접 지점은 군사분계선에서 약 230 m다.">
 <meta property="og:title" content="접경지역 도로 공사 진행 변화탐지 · 신현진">
-<meta property="og:description" content="공개 상용 위성영상 시계열로 접경지역 도로 공사의 진행을 시기별로 추적했다. 5개월 만에 누적 연장 0.2 km에서 7.06 km로 늘었고, 최근접 지점은 군사분계선에서 약 230 m다.">
+<meta property="og:description" content="공개 상용 위성영상 시계열로 접경지역 도로 공사의 진행을 시기별로 추적함. 5개월 만에 누적 연장 0.2 km에서 7.06 km로 늘었고, 최근접 지점은 군사분계선에서 약 230 m다.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,17 +56,23 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
       <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
     </div>
     <div class="tags"><span class="tag">PlanetScope</span><span class="tag">변화탐지</span><span class="tag">시계열</span><span class="tag">GIS</span></div>
-    <p class="proj-sum"><span lang="ko">공개 상용 위성영상 시계열로 접경지역 도로 공사의 진행을 시기별로 추적했다. 5개월 만에 누적 연장 0.2 km에서 7.06 km로 늘었고, 최근접 지점은 군사분계선에서 약 230 m다.</span><span lang="en">Tracked road construction near the inter-Korean border through a time series of commercial satellite imagery. Cumulative length grew from 0.2 km to 7.06 km in five months; the nearest point sits about 230 m from the Military Demarcation Line.</span></p>
+    <p class="proj-sum"><span lang="ko">공개 상용 위성영상 시계열로 접경지역 도로 공사의 진행을 시기별로 추적함. 5개월 만에 누적 연장 0.2 km에서 7.06 km로 늘었고, 최근접 지점은 군사분계선에서 약 230 m다.</span><span lang="en">Tracked road construction near the inter-Korean border through a time series of commercial satellite imagery. Cumulative length grew from 0.2 km to 7.06 km in five months; the nearest point sits about 230 m from the Military Demarcation Line.</span></p>
   </div>
 
   <section class="sec">
     <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
-    <ul lang="ko"><li>접경지역의 지형 변화는 현장 접근이 불가능해 위성영상이 사실상 유일한 관측 수단이다.</li><li>공개된 상용 위성영상만으로 공사 진행을 시기별로 정량화할 수 있는지 확인하고자 했다.</li><li>구름이 적고 재방문 주기가 짧은 PlanetScope를 선택했다 — 일 단위 관측이 가능해 공사처럼 빠르게 변하는 대상에 적합하다.</li></ul><ul lang="en"><li>Terrain change in the border area cannot be surveyed on the ground, so satellite imagery is effectively the only observation route.</li><li>The question was whether construction progress can be quantified by date using commercial imagery alone.</li><li>PlanetScope was chosen for its near-daily revisit — short enough to follow something that changes as fast as roadworks.</li></ul>
+    <ul lang="ko"><li>접경지역의 지형 변화는 현장 접근이 불가능해 위성영상이 사실상 유일한 관측 수단임.</li><li>공개된 상용 위성영상만으로 공사 진행을 시기별로 정량화할 수 있는지 확인하고자 함.</li><li>구름이 적고 재방문 주기가 짧은 PlanetScope를 선택했다 — 일 단위 관측이 가능해 공사처럼 빠르게 변하는 대상에 적합함.</li></ul><ul lang="en"><li>Terrain change in the border area cannot be surveyed on the ground, so satellite imagery is effectively the only observation route.</li><li>The question was whether construction progress can be quantified by date using commercial imagery alone.</li><li>PlanetScope was chosen for its near-daily revisit — short enough to follow something that changes as fast as roadworks.</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
-    <ul lang="ko"><li>PlanetScope PSScene (analytic 8-band, 표면반사도 SR, UDM2 품질 마스크) 7시기 수집 — 2024.04.27 ~ 2026.09.29.</li><li>구름·그림자 화소를 UDM2 마스크로 제거하고, 시기 간 색감이 흔들리지 않도록 동일한 스트레치를 적용했다.</li><li>각 시기 영상에서 새로 드러난 절토·성토 구간을 선형(LineString)으로 디지타이징했다 — 총 5개 시기, 피처 2개에서 8개로 증가.</li><li>OpenStreetMap 군사분계선(MDL) 선형을 참조 레이어로 사용했다.</li><li>EPSG:5179(Korea 2000 Unified CS)로 투영해 연장과 거리를 미터 단위로 산출했다 — 경위도상 거리 계산의 왜곡을 피하기 위함.</li><li>시기별 누적 연장과 증가분, MDL까지의 최단거리를 계산해 지도에 주기했다.</li></ul><ul lang="en"><li>Collected seven PlanetScope PSScene acquisitions (8-band analytic, surface reflectance, UDM2 quality mask) from 2024-04-27 to 2026-09-29.</li><li>Removed cloud and shadow pixels using the UDM2 mask and applied an identical stretch across dates so colour would not drift between scenes.</li><li>Digitised newly exposed cut-and-fill segments as LineStrings for each date — five dates, growing from 2 to 8 features.</li><li>Used the OpenStreetMap Military Demarcation Line as a reference layer.</li><li>Reprojected to EPSG:5179 (Korea 2000 Unified CS) so lengths and distances compute in metres, avoiding the distortion of measuring in degrees.</li><li>Computed cumulative length, per-period increment, and minimum distance to the MDL, and annotated them on each map.</li></ul>
+    <ul lang="ko"><li>PlanetScope PSScene (analytic 8-band, 표면반사도 SR, UDM2 품질 마스크) 7시기 수집 — 2024.04.27 ~ 2026.09.29.</li><li>구름·그림자 화소를 UDM2 마스크로 제거하고, 시기 간 색감이 흔들리지 않도록 동일한 스트레치를 적용함.</li><li>각 시기 영상에서 새로 드러난 절토·성토 구간을 선형(LineString)으로 디지타이징했다 — 총 5개 시기, 피처 2개에서 8개로 증가.</li><li>OpenStreetMap 군사분계선(MDL) 선형을 참조 레이어로 사용함.</li><li>EPSG:5179(Korea 2000 Unified CS)로 투영해 연장과 거리를 미터 단위로 산출했다 — 경위도상 거리 계산의 왜곡을 피하기 위함.</li><li>시기별 누적 연장과 증가분, MDL까지의 최단거리를 계산해 지도에 주기함.</li></ul><ul lang="en"><li>Collected seven PlanetScope PSScene acquisitions (8-band analytic, surface reflectance, UDM2 quality mask) from 2024-04-27 to 2026-09-29.</li><li>Removed cloud and shadow pixels using the UDM2 mask and applied an identical stretch across dates so colour would not drift between scenes.</li><li>Digitised newly exposed cut-and-fill segments as LineStrings for each date — five dates, growing from 2 to 8 features.</li><li>Used the OpenStreetMap Military Demarcation Line as a reference layer.</li><li>Reprojected to EPSG:5179 (Korea 2000 Unified CS) so lengths and distances compute in metres, avoiding the distortion of measuring in degrees.</li><li>Computed cumulative length, per-period increment, and minimum distance to the MDL, and annotated them on each map.</li></ul>
+    
+    <figure class="flow">
+      <script type="application/json" class="flow-src">{"ko": "flowchart LR\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    ps[(\"PlanetScope PSScene 8밴드 SR — 7시기 (2024.04~2026.09)\")]\n    mdl[(\"OSM 군사분계선 선형\")]\n    udm[\"UDM2 마스크로 구름·그림자 제거\"]\n    str[\"시기 간 동일 스트레치 적용 — 색감 흔들림 제거\"]\n    dig[\"절토·성토 구간 LineString 디지타이징 (피처 2 → 8)\"]\n    prj[\"EPSG:5179 투영 — 미터 단위 연장·거리\"]\n    out([\"시기별 누적 연장 · 증가분 · MDL 최단거리\"])\n    ps --> udm\n    udm --> str\n    str --> dig\n    mdl --> prj\n    dig --> prj\n    prj --> out\n    class ps data\n    class mdl data\n    class udm proc\n    class str proc\n    class dig proc\n    class prj proc\n    class out out", "en": "flowchart LR\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    ps[(\"PlanetScope PSScene, 8-band surface reflectance, 7 dates (2024-04 to 2026-09)\")]\n    mdl[(\"OSM military demarcation line\")]\n    udm[\"Remove cloud and shadow with the UDM2 mask\"]\n    str[\"Apply an identical stretch across dates to stop tone drift\"]\n    dig[\"Digitise cut and fill segments as LineStrings, features 2 to 8\"]\n    prj[\"Project to EPSG:5179 so lengths and distances are in metres\"]\n    out([\"Cumulative length per date, increment, and shortest distance to the MDL\"])\n    ps --> udm\n    udm --> str\n    str --> dig\n    mdl --> prj\n    dig --> prj\n    prj --> out\n    class ps data\n    class mdl data\n    class udm proc\n    class str proc\n    class dig proc\n    class prj proc\n    class out out"}</script>
+      <pre class="mermaid" aria-hidden="true"></pre>
+      <figcaption><span lang="ko">처리 흐름 — 원통: 입력 자료 · 사각형: 처리 · 마름모: 판정·검증 · 양끝 둥근 사각형: 산출물</span><span lang="en">Processing flow — cylinder: input data · rectangle: processing · diamond: decision · stadium: output</span></figcaption>
+    </figure>
   </section>
 
   <section class="sec">
@@ -109,20 +115,22 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
 
   <section class="sec">
     <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
-    <ul lang="ko"><li>일 단위 재방문이 가능한 소형위성 군집이 &#x27;언제 시작해서 얼마나 빨리 진행되는가&#x27;라는 질문에 특히 강하다는 걸 확인했다. 중해상도 위성의 재방문 주기로는 2024년 5월의 급격한 증가 구간을 놓쳤을 것이다.</li><li>자동 변화탐지보다 수동 디지타이징이 정확했다. 산지 절토면은 나지(裸地)와 분광 특성이 비슷해 자동 분류가 혼동한다. 대상이 선형이고 시기가 7개뿐이라 사람이 그리는 편이 빠르고 믿을 만했다.</li><li>미터 단위 결과를 낼 때는 투영 선택이 결론을 바꾼다. 경위도(EPSG:4326)에서 그대로 길이를 재면 위도에 따라 오차가 생겨, 국내 표준 투영으로 변환한 뒤 계산했다.</li><li>한계: 광학 영상이라 구름 낀 시기는 공백이다. 2024.06 이후 2024.10까지 네 달의 공백이 있어 그 사이 진행 속도는 알 수 없다. Sentinel-1 SAR을 보조로 쓰면 메울 수 있었을 것이다.</li></ul><ul lang="en"><li>Confirmed that a daily-revisit smallsat constellation is especially strong at answering &#x27;when did it start and how fast is it going&#x27;. A mid-resolution satellite&#x27;s revisit would have missed the sharp May 2024 jump entirely.</li><li>Manual digitising beat automatic change detection here. Fresh cut slopes are spectrally close to bare ground, which confuses a classifier. With a linear target and only seven dates, drawing by hand was both faster and more trustworthy.</li><li>When the output is in metres, the projection choice changes the answer. Measuring length directly in EPSG:4326 introduces latitude-dependent error, so everything was reprojected to the national grid first.</li><li>Limitation: optical imagery means cloudy dates are simply gaps. There is a four-month hole between June and October 2024, so the rate in that window is unknown. Sentinel-1 SAR as a fallback would have filled it.</li></ul>
+    <ul lang="ko"><li>일 단위 재방문이 가능한 소형위성 군집이 &#x27;언제 시작해서 얼마나 빨리 진행되는가&#x27;라는 질문에 특히 강하다는 걸 확인함. 중해상도 위성의 재방문 주기로는 2024년 5월의 급격한 증가 구간을 놓쳤을 것임.</li><li>자동 변화탐지보다 수동 디지타이징이 정확함. 산지 절토면은 나지(裸地)와 분광 특성이 비슷해 자동 분류가 혼동함. 대상이 선형이고 시기가 7개뿐이라 사람이 그리는 편이 빠르고 믿을 만함.</li><li>미터 단위 결과를 낼 때는 투영 선택이 결론을 바꿈. 경위도(EPSG:4326)에서 그대로 길이를 재면 위도에 따라 오차가 생겨, 국내 표준 투영으로 변환한 뒤 계산함.</li><li>한계: 광학 영상이라 구름 낀 시기는 공백임. 2024.06 이후 2024.10까지 네 달의 공백이 있어 그 사이 진행 속도는 알 수 없음. Sentinel-1 SAR을 보조로 쓰면 메울 수 있었을 것임.</li></ul><ul lang="en"><li>Confirmed that a daily-revisit smallsat constellation is especially strong at answering &#x27;when did it start and how fast is it going&#x27;. A mid-resolution satellite&#x27;s revisit would have missed the sharp May 2024 jump entirely.</li><li>Manual digitising beat automatic change detection here. Fresh cut slopes are spectrally close to bare ground, which confuses a classifier. With a linear target and only seven dates, drawing by hand was both faster and more trustworthy.</li><li>When the output is in metres, the projection choice changes the answer. Measuring length directly in EPSG:4326 introduces latitude-dependent error, so everything was reprojected to the national grid first.</li><li>Limitation: optical imagery means cloudy dates are simply gaps. There is a four-month hole between June and October 2024, so the rate in that window is unknown. Sentinel-1 SAR as a fallback would have filled it.</li></ul>
   </section>
+
+  
 
   
   <section class="sec">
     <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
-    <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/eo/planetscope/change-detection"><code>eo/planetscope/change-detection/</code></a></li></ul><p class="sec-note"><span lang="ko">디지타이징은 QGIS 수작업이고, 저장소에는 연장·거리를 계량하는 스크립트만 있습니다.</span><span lang="en">Digitising was manual in QGIS; the repository holds only the script that measures length and distance.</span></p>
-    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+    <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/eo/planetscope/change-detection"><code>eo/planetscope/change-detection/</code></a></li></ul><p class="sec-note"><span lang="ko">디지타이징은 QGIS 수작업이고, 저장소에는 연장·거리를 계량하는 스크립트만 있음.</span><span lang="en">Digitising was manual in QGIS; the repository holds only the script that measures length and distance.</span></p>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있음.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>시기별 공사현황 shapefile 5종</li><li>군사분계선 참조 레이어</li><li>시기별 주기 지도 13장</li><li>QGIS 프로젝트</li></ul><ul lang="en"><li>Five dated construction shapefiles</li><li>MDL reference layer</li><li>Thirteen annotated date maps</li><li>QGIS project</li></ul>
-    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않음. 분석 코드는 GitHub에 정리되어 있음.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
   </section>
 
   <nav class="proj-pager">
@@ -136,10 +144,49 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   <img src="" alt="">
   <p class="lb-cap"></p>
 </div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+var root = document.documentElement;
+function isDark(){
+  var t = root.getAttribute('data-theme');
+  return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+function curLang(){ return root.getAttribute('data-lang') === 'en' ? 'en' : 'ko'; }
+var busy = false;
+async function render(){
+  if (busy) return;
+  busy = true;
+  var boxes = document.querySelectorAll('.flow');
+  if (!boxes.length) { busy = false; return; }
+  mermaid.initialize({
+    startOnLoad: false, securityLevel: 'loose',
+    theme: isDark() ? 'dark' : 'neutral',
+    themeVariables: { fontSize: '13px' },
+    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis',
+                 nodeSpacing: 34, rankSpacing: 46, padding: 10, wrappingWidth: 230 }
+  });
+  var lang = curLang(), nodes = [];
+  boxes.forEach(function (b) {
+    var src = JSON.parse(b.querySelector('.flow-src').textContent);
+    var pre = b.querySelector('pre.mermaid');
+    pre.removeAttribute('data-processed');
+    pre.innerHTML = '';
+    pre.textContent = src[lang];
+    pre.removeAttribute('aria-hidden');
+    nodes.push(pre);
+  });
+  try { await mermaid.run({ nodes: nodes }); } catch (e) { console.error(e); }
+  busy = false;
+}
+window.renderFlows = render;
+render();
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+</script>
+
 <footer class="site-foot">
-  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물임.</p>
   <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
-  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않음. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있음.</p>
   <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately in the <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> repository.</p>
 </footer>
 <script src="../assets/js/site.js"></script>

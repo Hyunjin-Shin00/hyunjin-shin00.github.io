@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>맹그로브 분포 · 변화 모니터링 · 신현진</title>
-<meta name="description" content="입사 후 첫 프로젝트. Google Earth Engine과 Random Forest로 맹그로브를 분류하고, 태풍 전후 5년 NDVI 시계열로 회복 과정을 추적했다.">
+<meta name="description" content="입사 후 첫 프로젝트. Google Earth Engine과 Random Forest로 맹그로브를 분류하고, 태풍 전후 5년 NDVI 시계열로 회복 과정을 추적함.">
 <meta property="og:title" content="맹그로브 분포 · 변화 모니터링 · 신현진">
-<meta property="og:description" content="입사 후 첫 프로젝트. Google Earth Engine과 Random Forest로 맹그로브를 분류하고, 태풍 전후 5년 NDVI 시계열로 회복 과정을 추적했다.">
+<meta property="og:description" content="입사 후 첫 프로젝트. Google Earth Engine과 Random Forest로 맹그로브를 분류하고, 태풍 전후 5년 NDVI 시계열로 회복 과정을 추적함.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,17 +56,23 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
       <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
     </div>
     <div class="tags"><span class="tag">Sentinel-2</span><span class="tag">Random Forest</span><span class="tag">GEE</span><span class="tag">NDVI</span><span class="tag">블루카본</span></div>
-    <p class="proj-sum"><span lang="ko">입사 후 첫 프로젝트. Google Earth Engine과 Random Forest로 맹그로브를 분류하고, 태풍 전후 5년 NDVI 시계열로 회복 과정을 추적했다.</span><span lang="en">My first project here. Classified mangroves with Google Earth Engine and Random Forest, then tracked five years of NDVI to follow post-typhoon recovery.</span></p>
+    <p class="proj-sum"><span lang="ko">입사 후 첫 프로젝트. Google Earth Engine과 Random Forest로 맹그로브를 분류하고, 태풍 전후 5년 NDVI 시계열로 회복 과정을 추적함.</span><span lang="en">My first project here. Classified mangroves with Google Earth Engine and Random Forest, then tracked five years of NDVI to follow post-typhoon recovery.</span></p>
   </div>
 
   <section class="sec">
     <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
-    <ul lang="ko"><li>입사 후 첫 프로젝트로, GEE와 머신러닝 기반 모니터링 역량을 구축하는 것이 목적이었다.</li><li>글로벌 블루카본·맹그로브 탄소시장 수요 증가에 대응한 원격탐사 기술 탐색.</li><li>필리핀 팔라완 등 태풍 피해 지역의 5개년 변화 탐지 가능성 검토.</li></ul><ul lang="en"><li>My first project here, aimed at building up GEE and machine-learning monitoring capability.</li><li>Motivated by growing demand in blue carbon and mangrove carbon markets.</li><li>Tested five-year change detection over typhoon-affected sites such as Palawan in the Philippines.</li></ul>
+    <ul lang="ko"><li>입사 후 첫 프로젝트로, GEE와 머신러닝 기반 모니터링 역량을 구축하는 것이 목적이었음.</li><li>글로벌 블루카본·맹그로브 탄소시장 수요 증가에 대응한 원격탐사 기술 탐색.</li><li>필리핀 팔라완 등 태풍 피해 지역의 5개년 변화 탐지 가능성 검토.</li></ul><ul lang="en"><li>My first project here, aimed at building up GEE and machine-learning monitoring capability.</li><li>Motivated by growing demand in blue carbon and mangrove carbon markets.</li><li>Tested five-year change detection over typhoon-affected sites such as Palawan in the Philippines.</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
     <ul lang="ko"><li>Google Earth Engine + Random Forest로 맹그로브 분류 시스템 구현.</li><li>연중 구름 30% 미만 영상만 골라 median 합성 영상을 제작.</li><li>ALOS DSM &lt; 30 m, NDVI &gt; 0.15 임계값으로 후보 지역 제한.</li><li>GMW(Global Mangrove Watch) 폴리곤 내에서 훈련자료를 선정하고 검증에 활용.</li><li>NDVI·MVI 등 다수 지수를 입력 변수로 사용.</li><li>2020–2024년 월별·연별 NDVI 시계열 분석으로 태풍 전후 회복 추적.</li></ul><ul lang="en"><li>Built a mangrove classifier with Google Earth Engine and Random Forest.</li><li>Composited annual medians from scenes with under 30% cloud.</li><li>Constrained candidates with ALOS DSM &lt; 30 m and NDVI &gt; 0.15.</li><li>Drew training samples from inside Global Mangrove Watch polygons, and used GMW for validation.</li><li>Fed multiple indices, including NDVI and MVI, as predictors.</li><li>Tracked post-typhoon recovery through monthly and annual NDVI series, 2020–2024.</li></ul>
+    
+    <figure class="flow">
+      <script type="application/json" class="flow-src">{"ko": "flowchart LR\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    s2[(\"Sentinel-2 — 연중 구름 30% 미만\")]\n    dsm[(\"ALOS DSM\")]\n    gmw[(\"GMW 맹그로브 폴리곤\")]\n    med[\"median 합성 영상 제작\"]\n    lim{\"후보 제한 — DSM 30 m 미만 ∧ NDVI 0.15 초과\"}\n    feat[\"입력 변수 — NDVI · MVI 등 다수 지수\"]\n    rf[\"Random Forest 분류 (GEE)\"]\n    ts[\"2020–2024 월별·연별 NDVI 시계열\"]\n    out([\"맹그로브 분포도 · 태풍 전후 회복 추적\"])\n    s2 --> med\n    med --> lim\n    dsm --> lim\n    lim --> feat\n    feat --> rf\n    gmw --> rf\n    rf --> ts\n    ts --> out\n    class s2 data\n    class dsm data\n    class gmw data\n    class med proc\n    class lim dec\n    class feat proc\n    class rf proc\n    class ts proc\n    class out out", "en": "flowchart LR\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    s2[(\"Sentinel-2, scenes under 30% cloud\")]\n    dsm[(\"ALOS DSM\")]\n    gmw[(\"Global Mangrove Watch polygons\")]\n    med[\"Build a median composite\"]\n    lim{\"Restrict candidates: DSM below 30 m AND NDVI above 0.15\"}\n    feat[\"Features: NDVI, MVI and other indices\"]\n    rf[\"Random Forest classification in GEE\"]\n    ts[\"Monthly and annual NDVI series, 2020-2024\"]\n    out([\"Mangrove distribution map and post-typhoon recovery tracking\"])\n    s2 --> med\n    med --> lim\n    dsm --> lim\n    lim --> feat\n    feat --> rf\n    gmw --> rf\n    rf --> ts\n    ts --> out\n    class s2 data\n    class dsm data\n    class gmw data\n    class med proc\n    class lim dec\n    class feat proc\n    class rf proc\n    class ts proc\n    class out out"}</script>
+      <pre class="mermaid" aria-hidden="true"></pre>
+      <figcaption><span lang="ko">처리 흐름 — 원통: 입력 자료 · 사각형: 처리 · 마름모: 판정·검증 · 양끝 둥근 사각형: 산출물</span><span lang="en">Processing flow — cylinder: input data · rectangle: processing · diamond: decision · stadium: output</span></figcaption>
+    </figure>
   </section>
 
   <section class="sec">
@@ -109,20 +115,22 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
 
   <section class="sec">
     <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
-    <ul lang="ko"><li>GEE 플랫폼과 클라우드 기반 대용량 위성 분석 워크플로우를 익혔다.</li><li>Random Forest의 성능이 훈련 데이터 품질에 얼마나 의존하는지 체감했다 — 구름 낀 영역에서 훈련자료를 추가했더니 결과가 오히려 나빠졌다.</li><li>한계: 현장 검증 데이터가 없어 정확도 개선에 명확한 한계가 있었다.</li></ul><ul lang="en"><li>Picked up GEE and cloud-scale satellite analysis workflows.</li><li>Felt how much Random Forest depends on training-sample quality — adding samples from cloudy areas actively made results worse.</li><li>Limitation: with no field validation data, there was a hard ceiling on how far accuracy could be pushed.</li></ul>
+    <ul lang="ko"><li>GEE 플랫폼과 클라우드 기반 대용량 위성 분석 워크플로우를 익혔음.</li><li>Random Forest의 성능이 훈련 데이터 품질에 얼마나 의존하는지 체감했다 — 구름 낀 영역에서 훈련자료를 추가했더니 결과가 오히려 나빠졌음.</li><li>한계: 현장 검증 데이터가 없어 정확도 개선에 명확한 한계가 있었음.</li></ul><ul lang="en"><li>Picked up GEE and cloud-scale satellite analysis workflows.</li><li>Felt how much Random Forest depends on training-sample quality — adding samples from cloudy areas actively made results worse.</li><li>Limitation: with no field validation data, there was a hard ceiling on how far accuracy could be pushed.</li></ul>
   </section>
+
+  
 
   
   <section class="sec">
     <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
-    <p class="sec-note"><span lang="ko">분석을 Google Earth Engine 웹 편집기에서 해서 내려받은 코드가 없습니다.</span><span lang="en">The analysis ran in the Google Earth Engine web editor, so there is no exported code.</span></p>
-    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+    <p class="sec-note"><span lang="ko">분석을 Google Earth Engine 웹 편집기에서 해서 내려받은 코드가 없음.</span><span lang="en">The analysis ran in the Google Earth Engine web editor, so there is no exported code.</span></p>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있음.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>맹그로브 모니터링 발표자료</li><li>GEE Random Forest 분석 결과</li></ul><ul lang="en"><li>Mangrove monitoring deck</li><li>GEE Random Forest results</li></ul>
-    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않음. 분석 코드는 GitHub에 정리되어 있음.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
   </section>
 
   <nav class="proj-pager">
@@ -136,10 +144,49 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   <img src="" alt="">
   <p class="lb-cap"></p>
 </div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+var root = document.documentElement;
+function isDark(){
+  var t = root.getAttribute('data-theme');
+  return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+function curLang(){ return root.getAttribute('data-lang') === 'en' ? 'en' : 'ko'; }
+var busy = false;
+async function render(){
+  if (busy) return;
+  busy = true;
+  var boxes = document.querySelectorAll('.flow');
+  if (!boxes.length) { busy = false; return; }
+  mermaid.initialize({
+    startOnLoad: false, securityLevel: 'loose',
+    theme: isDark() ? 'dark' : 'neutral',
+    themeVariables: { fontSize: '13px' },
+    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis',
+                 nodeSpacing: 34, rankSpacing: 46, padding: 10, wrappingWidth: 230 }
+  });
+  var lang = curLang(), nodes = [];
+  boxes.forEach(function (b) {
+    var src = JSON.parse(b.querySelector('.flow-src').textContent);
+    var pre = b.querySelector('pre.mermaid');
+    pre.removeAttribute('data-processed');
+    pre.innerHTML = '';
+    pre.textContent = src[lang];
+    pre.removeAttribute('aria-hidden');
+    nodes.push(pre);
+  });
+  try { await mermaid.run({ nodes: nodes }); } catch (e) { console.error(e); }
+  busy = false;
+}
+window.renderFlows = render;
+render();
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+</script>
+
 <footer class="site-foot">
-  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물임.</p>
   <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
-  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않음. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있음.</p>
   <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately in the <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> repository.</p>
 </footer>
 <script src="../assets/js/site.js"></script>

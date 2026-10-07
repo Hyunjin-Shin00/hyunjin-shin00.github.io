@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>SpaceUp 경진대회 — 도시녹지 모니터링 · 신현진</title>
-<meta name="description" content="중동 도시의 녹지를 위성으로 감시하는 대시보드 프로토타입. 건조 기후에서 식생지수가 어떻게 다르게 작동하는지를 다뤘다.">
+<meta name="description" content="중동 도시의 녹지를 위성으로 감시하는 대시보드 프로토타입. 건조 기후에서 식생지수가 어떻게 다르게 작동하는지를 다뤘음.">
 <meta property="og:title" content="SpaceUp 경진대회 — 도시녹지 모니터링 · 신현진">
-<meta property="og:description" content="중동 도시의 녹지를 위성으로 감시하는 대시보드 프로토타입. 건조 기후에서 식생지수가 어떻게 다르게 작동하는지를 다뤘다.">
+<meta property="og:description" content="중동 도시의 녹지를 위성으로 감시하는 대시보드 프로토타입. 건조 기후에서 식생지수가 어떻게 다르게 작동하는지를 다뤘음.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,17 +56,23 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
       <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
     </div>
     <div class="tags"><span class="tag">Sentinel-2</span><span class="tag">NDVI</span><span class="tag">도시</span><span class="tag">대시보드</span></div>
-    <p class="proj-sum"><span lang="ko">중동 도시의 녹지를 위성으로 감시하는 대시보드 프로토타입. 건조 기후에서 식생지수가 어떻게 다르게 작동하는지를 다뤘다.</span><span lang="en">A dashboard prototype for monitoring urban greenery in the Middle East, working through how vegetation indices behave differently in arid climates.</span></p>
+    <p class="proj-sum"><span lang="ko">중동 도시의 녹지를 위성으로 감시하는 대시보드 프로토타입. 건조 기후에서 식생지수가 어떻게 다르게 작동하는지를 다뤘음.</span><span lang="en">A dashboard prototype for monitoring urban greenery in the Middle East, working through how vegetation indices behave differently in arid climates.</span></p>
   </div>
 
   <section class="sec">
     <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
-    <ul lang="ko"><li>사우디아라비아 주최 SpaceUp 우주·위성 활용 경진대회 Track 2 참가.</li><li>도시 녹지(Urban Greenery) 위성 기반 모니터링을 주제로 선정했다.</li></ul><ul lang="en"><li>Entered Track 2 of SpaceUp, a space and satellite applications competition hosted by Saudi Arabia.</li><li>Chose urban greenery monitoring as the theme.</li></ul>
+    <ul lang="ko"><li>사우디아라비아 주최 SpaceUp 우주·위성 활용 경진대회 Track 2 참가.</li><li>도시 녹지(Urban Greenery) 위성 기반 모니터링을 주제로 선정함.</li></ul><ul lang="en"><li>Entered Track 2 of SpaceUp, a space and satellite applications competition hosted by Saudi Arabia.</li><li>Chose urban greenery monitoring as the theme.</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
-    <ul lang="ko"><li>Sentinel-2 기반 도시 식생지수 산출 및 녹지 분류.</li><li>건조 지역 특성에 맞춘 지수 임계값 조정 — 일반 NDVI 임계값이 사막 도시에서는 작동하지 않는다.</li><li>녹지 모니터링 대시보드 프로토타입 개발 (v1.0 → v1.3).</li><li>중동 지역 위성 분석 논문 및 argan tree 분류 사례 검토.</li></ul><ul lang="en"><li>Computed vegetation indices and classified green cover from Sentinel-2.</li><li>Re-tuned index thresholds for arid conditions — standard NDVI cut-offs do not work in a desert city.</li><li>Built a greenery monitoring dashboard prototype (v1.0 → v1.3).</li><li>Reviewed Middle East remote-sensing literature, including argan tree classification cases.</li></ul>
+    <ul lang="ko"><li>Sentinel-2 기반 도시 식생지수 산출 및 녹지 분류.</li><li>건조 지역 특성에 맞춘 지수 임계값 조정 — 일반 NDVI 임계값이 사막 도시에서는 작동하지 않음.</li><li>녹지 모니터링 대시보드 프로토타입 개발 (v1.0 → v1.3).</li><li>중동 지역 위성 분석 논문 및 argan tree 분류 사례 검토.</li></ul><ul lang="en"><li>Computed vegetation indices and classified green cover from Sentinel-2.</li><li>Re-tuned index thresholds for arid conditions — standard NDVI cut-offs do not work in a desert city.</li><li>Built a greenery monitoring dashboard prototype (v1.0 → v1.3).</li><li>Reviewed Middle East remote-sensing literature, including argan tree classification cases.</li></ul>
+    
+    <figure class="flow">
+      <script type="application/json" class="flow-src">{"ko": "flowchart LR\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    s2[(\"Sentinel-2\")]\n    idx[\"도시 식생지수 산출\"]\n    thr{\"건조지역 임계 재조정 — 일반 NDVI 임계는 사막 도시에서 미작동\"}\n    cls[\"녹지 분류\"]\n    dash[\"모니터링 대시보드 v1.0 → v1.3\"]\n    out([\"도시 녹지 분포 · 변화 모니터링 화면\"])\n    s2 --> idx\n    idx --> thr\n    thr --> cls\n    cls --> dash\n    dash --> out\n    class s2 data\n    class idx proc\n    class thr dec\n    class cls proc\n    class dash proc\n    class out out", "en": "flowchart LR\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    s2[(\"Sentinel-2\")]\n    idx[\"Compute urban vegetation indices\"]\n    thr{\"Re-tune thresholds for arid cities, where standard NDVI cuts fail\"}\n    cls[\"Green-space classification\"]\n    dash[\"Monitoring dashboard, v1.0 to v1.3\"]\n    out([\"Urban green-space distribution and a change-monitoring view\"])\n    s2 --> idx\n    idx --> thr\n    thr --> cls\n    cls --> dash\n    dash --> out\n    class s2 data\n    class idx proc\n    class thr dec\n    class cls proc\n    class dash proc\n    class out out"}</script>
+      <pre class="mermaid" aria-hidden="true"></pre>
+      <figcaption><span lang="ko">처리 흐름 — 원통: 입력 자료 · 사각형: 처리 · 마름모: 판정·검증 · 양끝 둥근 사각형: 산출물</span><span lang="en">Processing flow — cylinder: input data · rectangle: processing · diamond: decision · stadium: output</span></figcaption>
+    </figure>
   </section>
 
   <section class="sec">
@@ -97,20 +103,22 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
 
   <section class="sec">
     <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
-    <ul lang="ko"><li>국제 경진대회 참가와 영문 제안서 작성 경험을 쌓았다.</li><li>기후대가 다르면 같은 지수라도 임계값을 다시 잡아야 한다는 것을 실제로 겪었다.</li></ul><ul lang="en"><li>Gained experience with an international competition and English proposal writing.</li><li>Learned first-hand that the same index needs different thresholds in a different climate zone.</li></ul>
+    <ul lang="ko"><li>국제 경진대회 참가와 영문 제안서 작성 경험을 쌓았음.</li><li>기후대가 다르면 같은 지수라도 임계값을 다시 잡아야 한다는 것을 실제로 겪었음.</li></ul><ul lang="en"><li>Gained experience with an international competition and English proposal writing.</li><li>Learned first-hand that the same index needs different thresholds in a different climate zone.</li></ul>
   </section>
+
+  
 
   
   <section class="sec">
     <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
     <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/eo/sentinel-2/vegetation"><code>eo/sentinel-2/vegetation/</code></a></li></ul>
-    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있음.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>SpaceUp Track 2 공식 제출본</li><li>녹지 대시보드 프로토타입</li></ul><ul lang="en"><li>Official SpaceUp Track 2 submission</li><li>Greenery dashboard prototype</li></ul>
-    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않음. 분석 코드는 GitHub에 정리되어 있음.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
   </section>
 
   <nav class="proj-pager">
@@ -124,10 +132,49 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   <img src="" alt="">
   <p class="lb-cap"></p>
 </div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+var root = document.documentElement;
+function isDark(){
+  var t = root.getAttribute('data-theme');
+  return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+function curLang(){ return root.getAttribute('data-lang') === 'en' ? 'en' : 'ko'; }
+var busy = false;
+async function render(){
+  if (busy) return;
+  busy = true;
+  var boxes = document.querySelectorAll('.flow');
+  if (!boxes.length) { busy = false; return; }
+  mermaid.initialize({
+    startOnLoad: false, securityLevel: 'loose',
+    theme: isDark() ? 'dark' : 'neutral',
+    themeVariables: { fontSize: '13px' },
+    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis',
+                 nodeSpacing: 34, rankSpacing: 46, padding: 10, wrappingWidth: 230 }
+  });
+  var lang = curLang(), nodes = [];
+  boxes.forEach(function (b) {
+    var src = JSON.parse(b.querySelector('.flow-src').textContent);
+    var pre = b.querySelector('pre.mermaid');
+    pre.removeAttribute('data-processed');
+    pre.innerHTML = '';
+    pre.textContent = src[lang];
+    pre.removeAttribute('aria-hidden');
+    nodes.push(pre);
+  });
+  try { await mermaid.run({ nodes: nodes }); } catch (e) { console.error(e); }
+  busy = false;
+}
+window.renderFlows = render;
+render();
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+</script>
+
 <footer class="site-foot">
-  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물임.</p>
   <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
-  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않음. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있음.</p>
   <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately in the <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> repository.</p>
 </footer>
 <script src="../assets/js/site.js"></script>

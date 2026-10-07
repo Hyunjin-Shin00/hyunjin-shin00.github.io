@@ -292,3 +292,38 @@ main{max-width:var(--maxw);margin:0 auto;padding:0 1.25rem}
   *{animation:none !important;transition:none !important}
   html{scroll-behavior:auto}
 }
+
+/* ── 분석 결과 문서 카드 ───────────────────────────────── */
+.report-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.8rem;margin:.2rem 0 1.4rem}
+.report-card{
+  display:flex;flex-direction:column;gap:.35rem;padding:.9rem 1rem;
+  border:1px solid var(--line);border-radius:10px;background:var(--bg-2);
+  text-decoration:none;color:inherit;transition:border-color .15s,background .15s,transform .15s}
+.report-card:hover{border-color:var(--accent);background:var(--bg-3);transform:translateY(-2px)}
+.report-kind{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);font-weight:600}
+.report-size{
+  margin-left:.45rem;padding:.08rem .35rem;border-radius:4px;
+  background:var(--bg-3);color:var(--fg-3);font-weight:500;letter-spacing:.02em;text-transform:none}
+.report-title{font-weight:600;font-size:.95rem;line-height:1.35}
+.report-card:hover .report-title{color:var(--accent)}
+.report-desc{color:var(--fg-3);font-size:.84rem;line-height:1.5}
+.report-card::after{content:"↗";position:absolute}
+.report-card{position:relative}
+.report-card::after{top:.7rem;right:.8rem;color:var(--fg-3);font-size:.8rem}
+
+/* ── 처리 흐름도 (mermaid) ─────────────────────────────── */
+.flow{
+  margin:1.1rem 0 1.5rem;padding:1rem .9rem .7rem;
+  border:1px solid var(--line);border-radius:10px;background:var(--bg-2)}
+.flow pre.mermaid{
+  margin:0;padding:0;background:none;border:0;overflow-x:auto;
+  font-family:var(--mono);font-size:.8rem;line-height:1.5;color:var(--fg-3);
+  text-align:center}
+.flow pre.mermaid[aria-hidden]{display:none}
+.flow pre.mermaid svg{max-width:100%;height:auto}
+.flow figcaption{
+  margin-top:.6rem;padding-top:.55rem;border-top:1px solid var(--line);
+  color:var(--fg-3);font-size:.82rem;text-align:center}
+@media (max-width:640px){.flow{padding:.7rem .5rem .5rem}}

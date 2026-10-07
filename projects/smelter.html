@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>제련소 열원 활동 모니터링 (TAI) · 신현진</title>
-<meta name="description" content="Sentinel-2 SWIR 밴드로 용광로의 열 신호를 잡아 제련소 가동 여부를 원격 판정했다. 철강(독일·호주)과 구리(칠레·중국) 양쪽에 적용했다.">
+<meta name="description" content="Sentinel-2 SWIR 밴드로 용광로의 열 신호를 잡아 제련소 가동 여부를 원격 판정함. 철강(독일·호주)과 구리(칠레·중국) 양쪽에 적용함.">
 <meta property="og:title" content="제련소 열원 활동 모니터링 (TAI) · 신현진">
-<meta property="og:description" content="Sentinel-2 SWIR 밴드로 용광로의 열 신호를 잡아 제련소 가동 여부를 원격 판정했다. 철강(독일·호주)과 구리(칠레·중국) 양쪽에 적용했다.">
+<meta property="og:description" content="Sentinel-2 SWIR 밴드로 용광로의 열 신호를 잡아 제련소 가동 여부를 원격 판정함. 철강(독일·호주)과 구리(칠레·중국) 양쪽에 적용함.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,17 +56,23 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
       <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
     </div>
     <div class="tags"><span class="tag">Sentinel-2 SWIR</span><span class="tag">TAI</span><span class="tag">GEE</span><span class="tag">시계열</span><span class="tag">ESG</span></div>
-    <p class="proj-sum"><span lang="ko">Sentinel-2 SWIR 밴드로 용광로의 열 신호를 잡아 제련소 가동 여부를 원격 판정했다. 철강(독일·호주)과 구리(칠레·중국) 양쪽에 적용했다.</span><span lang="en">Used Sentinel-2 SWIR bands to pick up furnace heat signatures and infer whether a smelter is running — applied to steel (Germany, Australia) and copper (Chile, China).</span></p>
+    <p class="proj-sum"><span lang="ko">Sentinel-2 SWIR 밴드로 용광로의 열 신호를 잡아 제련소 가동 여부를 원격 판정함. 철강(독일·호주)과 구리(칠레·중국) 양쪽에 적용함.</span><span lang="en">Used Sentinel-2 SWIR bands to pick up furnace heat signatures and infer whether a smelter is running — applied to steel (Germany, Australia) and copper (Chile, China).</span></p>
   </div>
 
   <section class="sec">
     <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
-    <ul lang="ko"><li>금속 제련소의 가동 여부를 위성으로 원격 판정할 수 있는지 기술적 가능성을 탐색했다.</li><li>탄소 배출 추적과 ESG 공급망 리스크 분석 수요에 대응하는 신규 솔루션이 목적이었다.</li><li>공식 생산 통계는 보통 한 달 지연된다. 위성이 그보다 빠르면 원자재 시장에 실질적 가치가 있다.</li></ul><ul lang="en"><li>Explored whether smelter operating status can be judged remotely from orbit.</li><li>Motivated by demand for carbon-emission tracking and ESG supply-chain risk analysis.</li><li>Official production statistics lag by about a month; a satellite signal that beats that lag has real value in commodity markets.</li></ul>
+    <ul lang="ko"><li>금속 제련소의 가동 여부를 위성으로 원격 판정할 수 있는지 기술적 가능성을 탐색함.</li><li>탄소 배출 추적과 ESG 공급망 리스크 분석 수요에 대응하는 신규 솔루션이 목적이었음.</li><li>공식 생산 통계는 보통 한 달 지연됨. 위성이 그보다 빠르면 원자재 시장에 실질적 가치가 있음.</li></ul><ul lang="en"><li>Explored whether smelter operating status can be judged remotely from orbit.</li><li>Motivated by demand for carbon-emission tracking and ESG supply-chain risk analysis.</li><li>Official production statistics lag by about a month; a satellite signal that beats that lag has real value in commodity markets.</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
-    <ul lang="ko"><li>Sentinel-2 SWIR 밴드(B11·B12)의 고온 물체 감도를 이용해 TAI(Thermal Anomaly Index)를 설계·구현했다.</li><li>Google Earth Engine에서 전체 관측 날짜의 누적 TAI 맵을 제작해 장기 가동 패턴을 분석했다.</li><li>제련소별 AOI 폴리곤을 공정 지식 기반으로 수동 제작했다 (용광로·슬래그장·원료야적장 구분).</li><li>독일(딜링엔·잘츠기터·브레멘·HKM·TK)·호주(와이알라·켐블라) 사례에서 실제 가동 기록(GT)과 상관분석.</li><li>Sentinel-5P NO₂ 대류권 칼럼과 교차 비교해 배출 신호와의 정합성을 확인했다.</li><li>칠레·중국 구리 제련소로 확장 적용 (TAIsum 2018–2025 시계열).</li></ul><ul lang="en"><li>Designed and implemented a Thermal Anomaly Index (TAI) from Sentinel-2 SWIR bands (B11/B12), which respond to high-temperature targets.</li><li>Built cumulative TAI maps across all acquisition dates in Google Earth Engine to reveal long-run operating patterns.</li><li>Hand-drew per-smelter AOI polygons from process knowledge, separating furnaces, slag yards and feedstock stockpiles.</li><li>Correlated against actual operating records for German (Dillingen, Salzgitter, Bremen, HKM, TK) and Australian (Whyalla, Kembla) sites.</li><li>Cross-checked with Sentinel-5P tropospheric NO₂ columns to see whether the thermal and emission signals agree.</li><li>Extended to Chilean and Chinese copper smelters (TAIsum 2018–2025 time series).</li></ul>
+    <ul lang="ko"><li>Sentinel-2 SWIR 밴드(B11·B12)의 고온 물체 감도를 이용해 TAI(Thermal Anomaly Index)를 설계·구현함.</li><li>Google Earth Engine에서 전체 관측 날짜의 누적 TAI 맵을 제작해 장기 가동 패턴을 분석함.</li><li>제련소별 AOI 폴리곤을 공정 지식 기반으로 수동 제작했다 (용광로·슬래그장·원료야적장 구분).</li><li>독일(딜링엔·잘츠기터·브레멘·HKM·TK)·호주(와이알라·켐블라) 사례에서 실제 가동 기록(GT)과 상관분석.</li><li>Sentinel-5P NO₂ 대류권 칼럼과 교차 비교해 배출 신호와의 정합성을 확인함.</li><li>칠레·중국 구리 제련소로 확장 적용 (TAIsum 2018–2025 시계열).</li></ul><ul lang="en"><li>Designed and implemented a Thermal Anomaly Index (TAI) from Sentinel-2 SWIR bands (B11/B12), which respond to high-temperature targets.</li><li>Built cumulative TAI maps across all acquisition dates in Google Earth Engine to reveal long-run operating patterns.</li><li>Hand-drew per-smelter AOI polygons from process knowledge, separating furnaces, slag yards and feedstock stockpiles.</li><li>Correlated against actual operating records for German (Dillingen, Salzgitter, Bremen, HKM, TK) and Australian (Whyalla, Kembla) sites.</li><li>Cross-checked with Sentinel-5P tropospheric NO₂ columns to see whether the thermal and emission signals agree.</li><li>Extended to Chilean and Chinese copper smelters (TAIsum 2018–2025 time series).</li></ul>
+    
+    <figure class="flow">
+      <script type="application/json" class="flow-src">{"ko": "flowchart LR\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    s2[(\"Sentinel-2 SWIR B11 · B12\")]\n    aoi[(\"제련소 AOI 폴리곤 — 용광로 · 슬래그장 · 원료야적장 수동 구분\")]\n    gt[(\"실제 가동 기록 (독일 · 호주)\")]\n    no2[(\"Sentinel-5P NO₂ 대류권 칼럼\")]\n    tai[\"TAI 설계 — SWIR 고온물체 감도 이용\"]\n    gee[\"GEE 전체 관측일 누적 TAI 맵\"]\n    ts[\"TAIsum 2018–2025 시계열\"]\n    corr{\"가동 기록 상관분석 · NO₂ 교차 비교\"}\n    out([\"제련소별 가동 활동성 지수 · 장기 패턴\"])\n    s2 --> tai\n    aoi --> tai\n    tai --> gee\n    gee --> ts\n    gt --> corr\n    no2 --> corr\n    ts --> corr\n    corr --> out\n    class s2 data\n    class aoi data\n    class gt data\n    class no2 data\n    class tai proc\n    class gee proc\n    class ts proc\n    class corr dec\n    class out out", "en": "flowchart LR\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    s2[(\"Sentinel-2 SWIR B11 and B12\")]\n    aoi[(\"Smelter AOI polygons, manually split into furnace, slag yard and feedstock yard\")]\n    gt[(\"Reported operating records, Germany and Australia\")]\n    no2[(\"Sentinel-5P tropospheric NO2 column\")]\n    tai[\"Design TAI using SWIR sensitivity to hot objects\"]\n    gee[\"Cumulative TAI map over all observation dates in GEE\"]\n    ts[\"TAIsum time series, 2018-2025\"]\n    corr{\"Correlate with operating records, cross-compare with NO2\"}\n    out([\"Per-smelter activity index and long-term pattern\"])\n    s2 --> tai\n    aoi --> tai\n    tai --> gee\n    gee --> ts\n    gt --> corr\n    no2 --> corr\n    ts --> corr\n    corr --> out\n    class s2 data\n    class aoi data\n    class gt data\n    class no2 data\n    class tai proc\n    class gee proc\n    class ts proc\n    class corr dec\n    class out out"}</script>
+      <pre class="mermaid" aria-hidden="true"></pre>
+      <figcaption><span lang="ko">처리 흐름 — 원통: 입력 자료 · 사각형: 처리 · 마름모: 판정·검증 · 양끝 둥근 사각형: 산출물</span><span lang="en">Processing flow — cylinder: input data · rectangle: processing · diamond: decision · stadium: output</span></figcaption>
+    </figure>
   </section>
 
   <section class="sec">
@@ -113,20 +119,22 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
 
   <section class="sec">
     <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
-    <ul lang="ko"><li>SWIR 밴드가 왜 고온 물체에 반응하는지(플랑크 복사의 단파장 꼬리) 물리적으로 이해했다.</li><li>GT 데이터 확보의 어려움 — 기업은 가동률을 공개하지 않는다. 검증 설계 자체가 연구의 절반이었다.</li><li>위성 데이터가 공급망·ESG 분석이라는 비(非)지리 도메인에서 어떻게 값이 매겨지는지 감을 잡았다.</li><li>한계: 구름 오염 시 시계열이 끊긴다. Sentinel-3 SLSTR 열적외 연계를 시도하지 못한 것이 아쉽다.</li></ul><ul lang="en"><li>Understood physically why SWIR responds to hot targets — the short-wavelength tail of Planck emission.</li><li>Ground truth is the hard part: companies do not publish utilisation rates, so designing the validation was half the work.</li><li>Got a feel for how satellite data gets priced in a non-geospatial domain like supply-chain and ESG analysis.</li><li>Limitation: cloud breaks the time series. I never got to pair it with Sentinel-3 SLSTR thermal infrared.</li></ul>
+    <ul lang="ko"><li>SWIR 밴드가 왜 고온 물체에 반응하는지(플랑크 복사의 단파장 꼬리) 물리적으로 이해함.</li><li>GT 데이터 확보의 어려움 — 기업은 가동률을 공개하지 않음. 검증 설계 자체가 연구의 절반이었음.</li><li>위성 데이터가 공급망·ESG 분석이라는 비(非)지리 도메인에서 어떻게 값이 매겨지는지 감을 잡았음.</li><li>한계: 구름 오염 시 시계열이 끊김. Sentinel-3 SLSTR 열적외 연계를 시도하지 못한 것이 아쉽음.</li></ul><ul lang="en"><li>Understood physically why SWIR responds to hot targets — the short-wavelength tail of Planck emission.</li><li>Ground truth is the hard part: companies do not publish utilisation rates, so designing the validation was half the work.</li><li>Got a feel for how satellite data gets priced in a non-geospatial domain like supply-chain and ESG analysis.</li><li>Limitation: cloud breaks the time series. I never got to pair it with Sentinel-3 SLSTR thermal infrared.</li></ul>
   </section>
+
+  
 
   
   <section class="sec">
     <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
     <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/eo/sentinel-2/thermal-anomaly"><code>eo/sentinel-2/thermal-anomaly/</code></a></li></ul>
-    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있음.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>TAI 산출 알고리즘 코드</li><li>제련소 AOI 폴리곤 세트</li><li>국가별 분석 결과 보고서</li></ul><ul lang="en"><li>TAI computation code</li><li>Smelter AOI polygon set</li><li>Per-country analysis reports</li></ul>
-    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않음. 분석 코드는 GitHub에 정리되어 있음.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
   </section>
 
   <nav class="proj-pager">
@@ -140,10 +148,49 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   <img src="" alt="">
   <p class="lb-cap"></p>
 </div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+var root = document.documentElement;
+function isDark(){
+  var t = root.getAttribute('data-theme');
+  return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+function curLang(){ return root.getAttribute('data-lang') === 'en' ? 'en' : 'ko'; }
+var busy = false;
+async function render(){
+  if (busy) return;
+  busy = true;
+  var boxes = document.querySelectorAll('.flow');
+  if (!boxes.length) { busy = false; return; }
+  mermaid.initialize({
+    startOnLoad: false, securityLevel: 'loose',
+    theme: isDark() ? 'dark' : 'neutral',
+    themeVariables: { fontSize: '13px' },
+    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis',
+                 nodeSpacing: 34, rankSpacing: 46, padding: 10, wrappingWidth: 230 }
+  });
+  var lang = curLang(), nodes = [];
+  boxes.forEach(function (b) {
+    var src = JSON.parse(b.querySelector('.flow-src').textContent);
+    var pre = b.querySelector('pre.mermaid');
+    pre.removeAttribute('data-processed');
+    pre.innerHTML = '';
+    pre.textContent = src[lang];
+    pre.removeAttribute('aria-hidden');
+    nodes.push(pre);
+  });
+  try { await mermaid.run({ nodes: nodes }); } catch (e) { console.error(e); }
+  busy = false;
+}
+window.renderFlows = render;
+render();
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+</script>
+
 <footer class="site-foot">
-  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물임.</p>
   <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
-  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않음. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있음.</p>
   <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately in the <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> repository.</p>
 </footer>
 <script src="../assets/js/site.js"></script>

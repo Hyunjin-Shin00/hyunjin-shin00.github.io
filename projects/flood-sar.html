@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sentinel-1 홍수 탐지 — Edge-Otsu 수체 변화 + KuroSiwo 검증 · 신현진</title>
-<meta name="description" content="Sentinel-1 GRD 사전·사후 영상에서 Edge-Otsu로 수체를 분리하고 차이로 침수(GAIN)·퇴수(LOSS)를 산출하는 비지도 파이프라인을 만들어 텔레픽스 SatCHAT 홍수 모듈로 정리했다. 진주(2025.7)·필리핀 카가얀(2025.9)·태국 남부(2025.11)·고흥(2024.5)에 적용했고, 공개 벤치마크 KuroSiwo 67타일에서 사후 수체 F1 0.905(VV)를 재계산으로 확인했다.">
+<meta name="description" content="Sentinel-1 GRD 사전·사후 영상에서 Edge-Otsu로 수체를 분리하고 차이로 침수(GAIN)·퇴수(LOSS)를 산출하는 비지도 파이프라인을 만들어 텔레픽스 SatCHAT 홍수 모듈로 정리함. 진주(2025.7)·필리핀 카가얀(2025.9)·태국 남부(2025.11)·고흥(2024.5)에 적용했고, 공개 벤치마크 KuroSiwo 67타일에서 사후 수체 F1 0.905(VV)를 재계산으로 확인함.">
 <meta property="og:title" content="Sentinel-1 홍수 탐지 — Edge-Otsu 수체 변화 + KuroSiwo 검증 · 신현진">
-<meta property="og:description" content="Sentinel-1 GRD 사전·사후 영상에서 Edge-Otsu로 수체를 분리하고 차이로 침수(GAIN)·퇴수(LOSS)를 산출하는 비지도 파이프라인을 만들어 텔레픽스 SatCHAT 홍수 모듈로 정리했다. 진주(2025.7)·필리핀 카가얀(2025.9)·태국 남부(2025.11)·고흥(2024.5)에 적용했고, 공개 벤치마크 KuroSiwo 67타일에서 사후 수체 F1 0.905(VV)를 재계산으로 확인했다.">
+<meta property="og:description" content="Sentinel-1 GRD 사전·사후 영상에서 Edge-Otsu로 수체를 분리하고 차이로 침수(GAIN)·퇴수(LOSS)를 산출하는 비지도 파이프라인을 만들어 텔레픽스 SatCHAT 홍수 모듈로 정리함. 진주(2025.7)·필리핀 카가얀(2025.9)·태국 남부(2025.11)·고흥(2024.5)에 적용했고, 공개 벤치마크 KuroSiwo 67타일에서 사후 수체 F1 0.905(VV)를 재계산으로 확인함.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,22 +56,28 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
       <span lang="ko" class="chip chip-done">완료 (모듈 납품 단계, 도시 침수 미해결)</span><span lang="en" class="chip chip-done">Completed (module delivered; urban flooding unresolved)</span>
     </div>
     <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">GRD</span><span class="tag">홍수</span><span class="tag">Edge-Otsu</span><span class="tag">SNAP</span></div>
-    <p class="proj-sum"><span lang="ko">Sentinel-1 GRD 사전·사후 영상에서 Edge-Otsu로 수체를 분리하고 차이로 침수(GAIN)·퇴수(LOSS)를 산출하는 비지도 파이프라인을 만들어 텔레픽스 SatCHAT 홍수 모듈로 정리했다. 진주(2025.7)·필리핀 카가얀(2025.9)·태국 남부(2025.11)·고흥(2024.5)에 적용했고, 공개 벤치마크 KuroSiwo 67타일에서 사후 수체 F1 0.905(VV)를 재계산으로 확인했다.</span><span lang="en">Built an unsupervised pipeline that separates water from Sentinel-1 GRD pre/post images with Edge-Otsu and derives newly flooded (GAIN) and receded (LOSS) areas, packaged as the flood module of Telepix&#x27;s SatCHAT service. Applied to Jinju, Korea (Jul 2025), Cagayan, Philippines (Sep 2025), southern Thailand (Nov 2025) and Goheung (May 2024); on 67 tiles of the public KuroSiwo benchmark the post-event water F1 is 0.905 (VV), recomputed from the masks.</span></p>
+    <p class="proj-sum"><span lang="ko">Sentinel-1 GRD 사전·사후 영상에서 Edge-Otsu로 수체를 분리하고 차이로 침수(GAIN)·퇴수(LOSS)를 산출하는 비지도 파이프라인을 만들어 텔레픽스 SatCHAT 홍수 모듈로 정리함. 진주(2025.7)·필리핀 카가얀(2025.9)·태국 남부(2025.11)·고흥(2024.5)에 적용했고, 공개 벤치마크 KuroSiwo 67타일에서 사후 수체 F1 0.905(VV)를 재계산으로 확인함.</span><span lang="en">Built an unsupervised pipeline that separates water from Sentinel-1 GRD pre/post images with Edge-Otsu and derives newly flooded (GAIN) and receded (LOSS) areas, packaged as the flood module of Telepix&#x27;s SatCHAT service. Applied to Jinju, Korea (Jul 2025), Cagayan, Philippines (Sep 2025), southern Thailand (Nov 2025) and Goheung (May 2024); on 67 tiles of the public KuroSiwo benchmark the post-event water F1 is 0.905 (VV), recomputed from the masks.</span></p>
   </div>
 
   <section class="sec">
     <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
-    <ul lang="ko"><li>홍수 직후 광학 영상은 구름으로 막히는 경우가 많아, 구름과 무관한 SAR로 침수 범위를 빠르게 내는 기능이 필요했다.</li><li>학습 라벨이 없는 지역·사건에도 바로 돌아가야 해서 지도학습 대신 임계값 기반 비지도 방법을 택했다.</li><li>결과물은 텔레픽스 SatCHAT 서비스의 홍수 모듈(전처리된 dB GeoTIFF 입력 → 수체·변화 마스크·면적 통계)로 들어간다.</li></ul><ul lang="en"><li>Optical imagery right after a flood is often cloud-blocked; a SAR-based flood extent that ignores clouds was needed.</li><li>It had to run on any region or event without training labels, so a threshold-based unsupervised method was chosen over supervised segmentation.</li><li>The output feeds the flood module of Telepix&#x27;s SatCHAT service (preprocessed dB GeoTIFF in → water/change masks and area statistics out).</li></ul>
+    <ul lang="ko"><li>홍수 직후 광학 영상은 구름으로 막히는 경우가 많아, 구름과 무관한 SAR로 침수 범위를 빠르게 내는 기능이 필요함.</li><li>학습 라벨이 없는 지역·사건에도 바로 돌아가야 해서 지도학습 대신 임계값 기반 비지도 방법을 택함.</li><li>결과물은 텔레픽스 SatCHAT 서비스의 홍수 모듈(전처리된 dB GeoTIFF 입력 → 수체·변화 마스크·면적 통계)로 들어감.</li></ul><ul lang="en"><li>Optical imagery right after a flood is often cloud-blocked; a SAR-based flood extent that ignores clouds was needed.</li><li>It had to run on any region or event without training labels, so a threshold-based unsupervised method was chosen over supervised segmentation.</li><li>The output feeds the flood module of Telepix&#x27;s SatCHAT service (preprocessed dB GeoTIFF in → water/change masks and area statistics out).</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
     <ul lang="ko"><li>전처리(SNAP): 궤도 보정 → 열잡음·GRD 경계잡음 제거 → σ⁰ 보정 → Lee-sigma 필터 → 지형보정 10 m → dB 변환.</li><li>Edge-Otsu: −20 dB 초기 후보의 경계(팽창−침식)에 5화소 버퍼를 주고, 그 안 화소만으로 Otsu 임계 산출 → 물·육지가 섞인 표본이라 히스토그램이 이봉형이 됨(진주 07-19: 임계 −15.9 dB).</li><li>경사 마스크: Copernicus DEM 30 m 타일 자동 다운로드 → UTM에서 경사 계산 → 경사 ≥ 5° 는 육지로 강제(산 그림자 오탐 억제).</li><li>변화 탐지: 두 영상을 유효 데이터 공통 영역으로 정렬 → 사후&amp;~사전 = GAIN, 사전&amp;~사후 = LOSS → 화소면적(위도 보정)으로 km² 집계.</li><li>검증: KuroSiwo AOI 08(호주 리즈모어 2022.2 홍수) 67타일 224×224 에 같은 방법을 VV·VH 각각 적용, 전문가 라벨(0 비수체·1 영구수체·2 홍수·3 무효)과 화소 단위 P/R/F1/IoU 비교. 놓친 화소의 후방산란 분포를 따로 분석.</li><li>JRC 영구수체 마스크를 차분해 상시 수체와 신규 침수를 구분했다(로컬 파이프라인 s1_processor 계열).</li><li>DEM과 결합해 침수심을 추정하고 등급화했다 — 탐지 면적만으로는 피해 규모를 가늠할 수 없기 때문.</li></ul><ul lang="en"><li>Preprocessing (SNAP): orbit file → thermal and GRD border noise removal → σ⁰ calibration → Lee-sigma filter → terrain correction at 10 m → dB.</li><li>Edge-Otsu: buffer the morphological boundary of a −20 dB seed mask by 5 px and compute Otsu only on those pixels; the mixed land/water sample makes the histogram bimodal (Jinju 2025-07-19: threshold −15.9 dB).</li><li>Slope mask: auto-download Copernicus DEM 30 m tiles, compute slope in UTM, force slope ≥ 5° to dry land to suppress mountain-shadow false water.</li><li>Change: clip both images to their common valid footprint; post &amp; ~pre = GAIN, pre &amp; ~post = LOSS; area in km² with latitude-corrected pixel area.</li><li>Validation: the same method run on 67 KuroSiwo tiles (AOI 08, Lismore, Australia, Feb 2022 flood; 224 × 224 px) for VV and VH, compared pixel-wise with expert labels (0 dry, 1 permanent water, 2 flood, 3 invalid) for P/R/F1/IoU; backscatter of missed pixels analysed separately.</li><li>Subtracted the JRC permanent-water mask to separate standing water from new inundation (local s1_processor line).</li><li>Estimated and classified flood depth by combining the mask with a DEM — detected area alone says little about damage.</li></ul>
+    
+    <figure class="flow">
+      <script type="application/json" class="flow-src">{"ko": "flowchart TD\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    s1[(\"Sentinel-1 GRD 사전·사후\")]\n    dem[(\"Copernicus DEM 30 m\")]\n    jrc[(\"JRC 영구수체\")]\n    pre[\"SNAP 전처리: 궤도 · 열잡음 · σ⁰ · Lee-sigma · 지형보정 10 m · dB\"]\n    cand[\"−20 dB 초기 수체 후보\"]\n    edge[\"경계 팽창−침식 + 5화소 버퍼\"]\n    otsu{\"버퍼 내 화소만으로 Otsu 임계\"}\n    slope{\"경사 ≥ 5° 는 육지로 강제\"}\n    chg[\"사후 ∧ ¬사전 = GAIN / 사전 ∧ ¬사후 = LOSS\"]\n    perm[\"영구수체 차분 → 신규 침수\"]\n    depth[\"DEM 결합 침수심 추정 · 등급화\"]\n    area([\"침수 면적 km² · 침수심 등급도\"])\n    val([\"KuroSiwo 67타일 P/R/F1/IoU 검증\"])\n    s1 --> pre\n    pre --> cand\n    cand --> edge\n    edge --> otsu\n    dem --> slope\n    otsu --> slope\n    slope --> chg\n    jrc --> perm\n    chg --> perm\n    perm --> depth\n    depth --> area\n    perm --> val\n    class s1 data\n    class dem data\n    class jrc data\n    class pre proc\n    class cand proc\n    class edge proc\n    class otsu dec\n    class slope dec\n    class chg proc\n    class perm proc\n    class depth proc\n    class area out\n    class val out", "en": "flowchart TD\n    classDef data stroke-width:1.5px\n    classDef proc stroke-width:1.5px\n    classDef dec stroke-width:2px\n    classDef out stroke-width:2.5px\n    s1[(\"Sentinel-1 GRD pre / post\")]\n    dem[(\"Copernicus DEM 30 m\")]\n    jrc[(\"JRC permanent water\")]\n    pre[\"SNAP: orbit, thermal noise, sigma0, Lee-sigma, terrain correction 10 m, dB\"]\n    cand[\"Initial water candidate at −20 dB\"]\n    edge[\"Edge dilation − erosion, 5-pixel buffer\"]\n    otsu{\"Otsu threshold from buffer pixels only\"}\n    slope{\"Slope ≥ 5 deg forced to land\"}\n    chg[\"post AND NOT pre = GAIN / pre AND NOT post = LOSS\"]\n    perm[\"Subtract permanent water for new flooding\"]\n    depth[\"Flood depth from DEM, then severity classes\"]\n    area([\"Flooded area in sq km and depth-class map\"])\n    val([\"Validation on 67 KuroSiwo tiles: P/R/F1/IoU\"])\n    s1 --> pre\n    pre --> cand\n    cand --> edge\n    edge --> otsu\n    dem --> slope\n    otsu --> slope\n    slope --> chg\n    jrc --> perm\n    chg --> perm\n    perm --> depth\n    depth --> area\n    perm --> val\n    class s1 data\n    class dem data\n    class jrc data\n    class pre proc\n    class cand proc\n    class edge proc\n    class otsu dec\n    class slope dec\n    class chg proc\n    class perm proc\n    class depth proc\n    class area out\n    class val out"}</script>
+      <pre class="mermaid" aria-hidden="true"></pre>
+      <figcaption><span lang="ko">처리 흐름 — 원통: 입력 자료 · 사각형: 처리 · 마름모: 판정·검증 · 양끝 둥근 사각형: 산출물</span><span lang="en">Processing flow — cylinder: input data · rectangle: processing · diamond: decision · stadium: output</span></figcaption>
+    </figure>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
-    <ul lang="ko"><li>KuroSiwo 67타일(무효 화소 제외, 화소 합산): 사후 수체 F1 VV 0.905 / VH 0.926, IoU 0.827 / 0.862. 정밀도는 0.998 / 0.992로 매우 높고 재현율이 0.828 / 0.868로 한계.</li><li>홍수만(GAIN vs 홍수 라벨): F1 VV 0.880 / VH 0.810. 사전 영상 vs 영구수체: VV 0.936, VH 0.647(VH 사전영상에서 정밀도 0.50 — 오탐 다수).</li><li>놓친 수체(FN, VV)의 사후 후방산란 중앙값 −15.1 dB(탐지된 물 −23.6 dB). 13%는 −12 dB보다 밝음 → 침수 식생·시가지처럼 &#x27;어둡지 않은 물&#x27;은 임계값으로 못 잡음.</li><li>진주(2025-07-12→07-19, AOI 4,897 km²): 수체 75.3 → 107.4 km², GAIN 44.7 km², LOSS 12.5 km². 남강 하류·합류부를 따라 띠 모양 침수.</li><li>필리핀 카가얀(S1C 2025-09-12→09-24): 수체 129.1 → 174.9 km², GAIN 55.0 km². 태국 남부(2025-11-11→11-23, 전 장면): GAIN 357.6 km², LOSS 45.1 km². 고흥(15 km² 소구역, 2024-04-24→05-06): GAIN 0.94 km².</li><li>같은 진주 장면을 세 번 돌린 결과가 서로 달랐다: 순 수체 변화 +32.1(10/24 실행) / −0.5(11/04 SNAP 체인, EPSG:3857) / −14.1 km²(11/05 배치). 처리 경로(입력 스케일·경사 마스크·투영) 차이가 결론의 부호까지 바꿨다.</li><li>로컬 파이프라인(s1_processor v3→v8)으로 브라질·인도네시아 발리·부탄·멕시코·인도까지 추가 검증. Copernicus EMS 공식 활성화 지도와도 대조했다.</li></ul><ul lang="en"><li>KuroSiwo, 67 tiles (invalid pixels excluded, pooled): post-event water F1 0.905 VV / 0.926 VH, IoU 0.827 / 0.862. Precision is very high (0.998 / 0.992); recall (0.828 / 0.868) is the limit.</li><li>Flood only (GAIN vs flood label): F1 0.880 VV / 0.810 VH. Pre-event mask vs permanent water: 0.936 VV but 0.647 VH (precision 0.50 — many false positives in the VH pre-image).</li><li>Missed water (FN, VV) has a median post-event backscatter of −15.1 dB versus −23.6 dB for detected water; 13% are brighter than −12 dB — &#x27;non-dark water&#x27; such as flooded vegetation or built-up areas is out of reach for a threshold.</li><li>Jinju (2025-07-12 → 07-19, AOI 4,897 km²): water 75.3 → 107.4 km², GAIN 44.7 km², LOSS 12.5 km², banded along the lower Nam River and its confluences.</li><li>Cagayan, Philippines (S1C 2025-09-12 → 09-24): water 129.1 → 174.9 km², GAIN 55.0 km². Southern Thailand (2025-11-11 → 11-23, full scene): GAIN 357.6 km², LOSS 45.1 km². Goheung (15 km² AOI, 2024-04-24 → 05-06): GAIN 0.94 km².</li><li>Three runs on the same Jinju scene disagreed: net water change +32.1 (24 Oct run) / −0.5 (4 Nov SNAP chain, EPSG:3857) / −14.1 km² (5 Nov batch). Processing path (input scaling, slope mask, projection) flipped even the sign of the conclusion.</li><li>The local pipeline (s1_processor v3→v8) additionally covered Brazil, Bali, Bhutan, Mexico and India, cross-checked against official Copernicus EMS activation maps.</li></ul>
+    <ul lang="ko"><li>KuroSiwo 67타일(무효 화소 제외, 화소 합산): 사후 수체 F1 VV 0.905 / VH 0.926, IoU 0.827 / 0.862. 정밀도는 0.998 / 0.992로 매우 높고 재현율이 0.828 / 0.868로 한계.</li><li>홍수만(GAIN vs 홍수 라벨): F1 VV 0.880 / VH 0.810. 사전 영상 vs 영구수체: VV 0.936, VH 0.647(VH 사전영상에서 정밀도 0.50 — 오탐 다수).</li><li>놓친 수체(FN, VV)의 사후 후방산란 중앙값 −15.1 dB(탐지된 물 −23.6 dB). 13%는 −12 dB보다 밝음 → 침수 식생·시가지처럼 &#x27;어둡지 않은 물&#x27;은 임계값으로 못 잡음.</li><li>진주(2025-07-12→07-19, AOI 4,897 km²): 수체 75.3 → 107.4 km², GAIN 44.7 km², LOSS 12.5 km². 남강 하류·합류부를 따라 띠 모양 침수.</li><li>필리핀 카가얀(S1C 2025-09-12→09-24): 수체 129.1 → 174.9 km², GAIN 55.0 km². 태국 남부(2025-11-11→11-23, 전 장면): GAIN 357.6 km², LOSS 45.1 km². 고흥(15 km² 소구역, 2024-04-24→05-06): GAIN 0.94 km².</li><li>같은 진주 장면을 세 번 돌린 결과가 서로 달랐다: 순 수체 변화 +32.1(10/24 실행) / −0.5(11/04 SNAP 체인, EPSG:3857) / −14.1 km²(11/05 배치). 처리 경로(입력 스케일·경사 마스크·투영) 차이가 결론의 부호까지 바꿨음.</li><li>로컬 파이프라인(s1_processor v3→v8)으로 브라질·인도네시아 발리·부탄·멕시코·인도까지 추가 검증. Copernicus EMS 공식 활성화 지도와도 대조함.</li></ul><ul lang="en"><li>KuroSiwo, 67 tiles (invalid pixels excluded, pooled): post-event water F1 0.905 VV / 0.926 VH, IoU 0.827 / 0.862. Precision is very high (0.998 / 0.992); recall (0.828 / 0.868) is the limit.</li><li>Flood only (GAIN vs flood label): F1 0.880 VV / 0.810 VH. Pre-event mask vs permanent water: 0.936 VV but 0.647 VH (precision 0.50 — many false positives in the VH pre-image).</li><li>Missed water (FN, VV) has a median post-event backscatter of −15.1 dB versus −23.6 dB for detected water; 13% are brighter than −12 dB — &#x27;non-dark water&#x27; such as flooded vegetation or built-up areas is out of reach for a threshold.</li><li>Jinju (2025-07-12 → 07-19, AOI 4,897 km²): water 75.3 → 107.4 km², GAIN 44.7 km², LOSS 12.5 km², banded along the lower Nam River and its confluences.</li><li>Cagayan, Philippines (S1C 2025-09-12 → 09-24): water 129.1 → 174.9 km², GAIN 55.0 km². Southern Thailand (2025-11-11 → 11-23, full scene): GAIN 357.6 km², LOSS 45.1 km². Goheung (15 km² AOI, 2024-04-24 → 05-06): GAIN 0.94 km².</li><li>Three runs on the same Jinju scene disagreed: net water change +32.1 (24 Oct run) / −0.5 (4 Nov SNAP chain, EPSG:3857) / −14.1 km² (5 Nov batch). Processing path (input scaling, slope mask, projection) flipped even the sign of the conclusion.</li><li>The local pipeline (s1_processor v3→v8) additionally covered Brazil, Bali, Bhutan, Mexico and India, cross-checked against official Copernicus EMS activation maps.</li></ul>
     <div class="figs">
       <figure class="fig">
         <img src="../assets/img/flood-sar/00-key.webp" alt="진주 남강 일대 2025-07-12→07-19 수체 변화 (파랑=새로 잠김, 주황=물 빠짐)" loading="lazy" decoding="async">
@@ -133,20 +139,32 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
 
   <section class="sec">
     <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
-    <ul lang="ko"><li>Edge-Otsu는 &#x27;경계 표본&#x27;으로 이봉형을 만들어 내는 게 핵심 — 전체 히스토그램은 육지가 압도해 Otsu가 의미 없는 임계를 낸다.</li><li>정밀도 0.99대·재현율 0.83: 임계값 방식은 &#x27;확실히 어두운 물&#x27;만 잡는다. 놓친 물의 중앙값이 −15.1 dB로 물과 육지 사이에 있다.</li><li>한계: 도시 침수에서는 건물-수면 이중산란으로 후방산란이 오히려 높아져 미탐지가 남았다. 진주 시가지 중심부에는 GAIN이 거의 없다. 이 문제는 해결하지 못했다(현장 침수 자료로 정량 검증도 못 함).</li><li>EPSG:3857 출력의 &#x27;10 m 화소&#x27;는 위도 35.5°에서 실제 8.1 m — 면적을 화소×100 m²로 세면 1.51배 과대. 면적은 등적/위도 보정 필수.</li><li>같은 장면을 처리 경로만 바꿔 돌렸을 때 순변화 +32 ~ −14 km²로 갈렸다. 산악지가 많은 AOI에서는 경사 마스크·입력 스케일이 결과를 지배한다 — 버전·설정을 결과와 함께 기록해야 한다(이번엔 어느 실행에 어떤 설정이 쓰였는지 일부만 확인 가능).</li><li>before/after를 파일 수정시각으로 정렬하는 코드는 재처리 순서에 따라 GAIN/LOSS가 뒤집힐 수 있다 → 파일명 날짜로 정렬하도록 바꿈(SatCHAT판).</li></ul><ul lang="en"><li>The key of Edge-Otsu is the boundary sample that makes the histogram bimodal; on the whole image land dominates and Otsu returns a meaningless threshold.</li><li>Precision ~0.99 with recall 0.83: a threshold only catches clearly dark water. Missed water has a median of −15.1 dB, between water and land.</li><li>Limitation: in urban flooding, building–water double bounce raises backscatter, so floods there stay undetected; central Jinju shows almost no GAIN. This was not solved (and not quantitatively validated against field flood records).</li><li>&#x27;10 m pixels&#x27; in EPSG:3857 are 8.1 m on the ground at 35.5°N — counting pixels × 100 m² overstates area by 1.51×. Use equal-area or latitude-corrected areas.</li><li>Re-running the same scene with different processing paths gave net change from +32 to −14 km². In mountainous AOIs the slope mask and input scaling dominate the result; versions and settings must be stored with outputs (here only partly recoverable).</li><li>Code that orders before/after by file modification time can swap GAIN and LOSS depending on processing order; the SatCHAT version orders by the date in the filename.</li></ul>
+    <ul lang="ko"><li>Edge-Otsu는 &#x27;경계 표본&#x27;으로 이봉형을 만들어 내는 게 핵심 — 전체 히스토그램은 육지가 압도해 Otsu가 의미 없는 임계를 냄.</li><li>정밀도 0.99대·재현율 0.83: 임계값 방식은 &#x27;확실히 어두운 물&#x27;만 잡음. 놓친 물의 중앙값이 −15.1 dB로 물과 육지 사이에 있음.</li><li>한계: 도시 침수에서는 건물-수면 이중산란으로 후방산란이 오히려 높아져 미탐지가 남았음. 진주 시가지 중심부에는 GAIN이 거의 없음. 이 문제는 해결하지 못했다(현장 침수 자료로 정량 검증도 못 함).</li><li>EPSG:3857 출력의 &#x27;10 m 화소&#x27;는 위도 35.5°에서 실제 8.1 m — 면적을 화소×100 m²로 세면 1.51배 과대. 면적은 등적/위도 보정 필수.</li><li>같은 장면을 처리 경로만 바꿔 돌렸을 때 순변화 +32 ~ −14 km²로 갈렸음. 산악지가 많은 AOI에서는 경사 마스크·입력 스케일이 결과를 지배한다 — 버전·설정을 결과와 함께 기록해야 한다(이번엔 어느 실행에 어떤 설정이 쓰였는지 일부만 확인 가능).</li><li>before/after를 파일 수정시각으로 정렬하는 코드는 재처리 순서에 따라 GAIN/LOSS가 뒤집힐 수 있다 → 파일명 날짜로 정렬하도록 바꿈(SatCHAT판).</li></ul><ul lang="en"><li>The key of Edge-Otsu is the boundary sample that makes the histogram bimodal; on the whole image land dominates and Otsu returns a meaningless threshold.</li><li>Precision ~0.99 with recall 0.83: a threshold only catches clearly dark water. Missed water has a median of −15.1 dB, between water and land.</li><li>Limitation: in urban flooding, building–water double bounce raises backscatter, so floods there stay undetected; central Jinju shows almost no GAIN. This was not solved (and not quantitatively validated against field flood records).</li><li>&#x27;10 m pixels&#x27; in EPSG:3857 are 8.1 m on the ground at 35.5°N — counting pixels × 100 m² overstates area by 1.51×. Use equal-area or latitude-corrected areas.</li><li>Re-running the same scene with different processing paths gave net change from +32 to −14 km². In mountainous AOIs the slope mask and input scaling dominate the result; versions and settings must be stored with outputs (here only partly recoverable).</li><li>Code that orders before/after by file modification time can swap GAIN and LOSS depending on processing order; the SatCHAT version orders by the date in the filename.</li></ul>
+  </section>
+
+  
+  <section class="sec">
+    <h2><span lang="ko">분석 결과 문서</span><span lang="en">Analysis documents</span></h2>
+    <p class="sec-note"><span lang="ko">분석 당시 작성한 결과 문서를 그대로 싣음. 새 탭에서 열림.</span><span lang="en">The result documents written during the analysis, published as-is. Opens in a new tab.</span></p>
+    <div class="report-grid">
+      <a class="report-card" href="../reports/flood-sar/chiba-flood-mapping.html" target="_blank" rel="noopener">
+        <span class="report-kind"><span lang="ko">리포트</span><span lang="en">Report</span> <span class="report-size"><span lang="ko">8 MB · 로딩 느림</span><span lang="en">8 MB, slow to load</span></span></span>
+        <span lang="ko" class="report-title">지바 호우 침수 판독</span><span lang="en" class="report-title">Chiba heavy-rain flood mapping</span>
+        <span lang="ko" class="report-desc">호우 전후 SAR 영상 비교로 침수 범위 판독. 기준영상·판정 근거 수록</span><span lang="en" class="report-desc">Flood extent from pre/post heavy-rain SAR comparison, with reference scenes and decision basis.</span>
+      </a></div>
   </section>
 
   
   <section class="sec">
     <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
     <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/sar/sentinel-1/water/flood"><code>sar/sentinel-1/water/flood/</code></a></li></ul>
-    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있음.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>수체 마스크·GAIN/LOSS GeoTIFF (진주·필리핀·태국·고흥)</li><li>면적 통계 txt (SatCHAT 모듈 출력)</li><li>KuroSiwo VV/VH 67타일 수체 마스크 + 평가 스크립트</li><li>SatCHAT 홍수 모듈 코드 (SNAP 비의존판)</li><li>s1_processor v3–v8 코드 시리즈</li></ul><ul lang="en"><li>Water masks and GAIN/LOSS GeoTIFFs (Jinju, Philippines, Thailand, Goheung)</li><li>Area statistics text output (SatCHAT module)</li><li>KuroSiwo VV/VH water masks for 67 tiles + evaluation script</li><li>SatCHAT flood module code (SNAP-free version)</li><li>s1_processor v3–v8 code series</li></ul>
-    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않음. 분석 코드는 GitHub에 정리되어 있음.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
   </section>
 
   <nav class="proj-pager">
@@ -160,10 +178,49 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   <img src="" alt="">
   <p class="lb-cap"></p>
 </div>
+<script type="module">
+import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+var root = document.documentElement;
+function isDark(){
+  var t = root.getAttribute('data-theme');
+  return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+}
+function curLang(){ return root.getAttribute('data-lang') === 'en' ? 'en' : 'ko'; }
+var busy = false;
+async function render(){
+  if (busy) return;
+  busy = true;
+  var boxes = document.querySelectorAll('.flow');
+  if (!boxes.length) { busy = false; return; }
+  mermaid.initialize({
+    startOnLoad: false, securityLevel: 'loose',
+    theme: isDark() ? 'dark' : 'neutral',
+    themeVariables: { fontSize: '13px' },
+    flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis',
+                 nodeSpacing: 34, rankSpacing: 46, padding: 10, wrappingWidth: 230 }
+  });
+  var lang = curLang(), nodes = [];
+  boxes.forEach(function (b) {
+    var src = JSON.parse(b.querySelector('.flow-src').textContent);
+    var pre = b.querySelector('pre.mermaid');
+    pre.removeAttribute('data-processed');
+    pre.innerHTML = '';
+    pre.textContent = src[lang];
+    pre.removeAttribute('aria-hidden');
+    nodes.push(pre);
+  });
+  try { await mermaid.run({ nodes: nodes }); } catch (e) { console.error(e); }
+  busy = false;
+}
+window.renderFlows = render;
+render();
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+</script>
+
 <footer class="site-foot">
-  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물임.</p>
   <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
-  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않음. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> 저장소에 별도 정리되어 있음.</p>
   <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately in the <a href="https://github.com/Hyunjin-Shin00/sar-eo-analysis">sar-eo-analysis</a> repository.</p>
 </footer>
 <script src="../assets/js/site.js"></script>

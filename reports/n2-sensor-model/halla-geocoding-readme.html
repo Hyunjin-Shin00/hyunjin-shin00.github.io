@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><title>차소2호 SAR 한라산 기하보정 — 산출물 설명</title>
+<style>
+body{font-family:"Malgun Gothic","맑은 고딕",system-ui,sans-serif;max-width:1100px;margin:0 auto;padding:24px 20px;color:#222;line-height:1.55;background:#fafafa}
+h1{font-size:1.6em;border-bottom:3px solid #2b5797;padding-bottom:6px} h2{font-size:1.25em;margin-top:2em;border-left:5px solid #2b5797;padding-left:10px} h3{font-size:1.05em;margin-top:1.4em}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:.93em;background:#fff} th,td{border:1px solid #ccc;padding:5px 8px;vertical-align:top} th{background:#e9eef7;text-align:left} td.num{font-family:Consolas,monospace;white-space:nowrap}
+code,pre{font-family:Consolas,monospace;background:#eee;padding:1px 4px;border-radius:3px} pre{padding:10px;overflow-x:auto}
+.box{background:#fff;border:1px solid #ddd;padding:12px 16px;border-radius:6px;margin:12px 0} .warn{border-left:5px solid #c0392b} .ok{border-left:5px solid #27ae60}
+img{max-width:100%;border:1px solid #ccc;background:#fff} .cap{font-size:.88em;color:#555;margin:4px 0 16px} .small{font-size:.88em;color:#555}
+</style></head><body>
+<h1>차세대소형위성 2호(NEXTSat-2) SAR 한라산 12씬 — 엄밀센서모델 기하보정 산출물 설명</h1>
+<p class="small">작성 2026-09-14 · 코드 <code><WORK_ROOT>/N2_InSAR/N2_Gemetric_Correction\Code</code> · 산출물 <code>…\Output</code> · 파이썬 환경 <code>conda activate isce2_snaphu</code></p>
+
+<div class="box ok"><b>한 줄 요약.</b> 한라산 LV1A SSC 12씬에 대해 궤도·타이밍만으로 거리-도플러 엄밀센서모델을 세우고, DEM 지형 시뮬레이션 정합으로 센서 편향(거리 +31 m, 방위 −0.6 ms)을 추정·보정한 뒤, 백록담 중심 6 km를 5 m 격자로 지오코딩했다. 절대 위치 ~5 m(Sentinel-1 교차검증 3~14 m), 씬 간 상대 위치는 미세정합 후 <b>중앙 0.6 m · 최대 1.1 m</b>.</div>
+
+<h2>1. 폴더 구조</h2>
+<table><tr><th style="width:38%">경로</th><th>내용</th></tr>
+<tr><td><code>Output\baengnokdam\output\</code> ★</td><td><b>최종 시계열용 타일.</b> 10씬 × 5종(amp·int·dB·locinc·mask), 미세정합 적용(<code>_coreg</code>). 씬별 개별 GeoTIFF, 모두 동일 격자</td></tr>
+<tr><td><code>Output\baengnokdam\</code></td><td>미세정합 <b>전</b> 타일(센서모델+DEM만, 절대위치 기준), 그룹 스택(<code>stack_AR_*</code>, <code>stack_ALDR_*</code>), <code>scenes.csv</code>, 상대정합 검증 <code>coreg_check.*</code>, 썸네일</td></tr>
+<tr><td><code>Output\geo\</code></td><td>20250611 전체 스트립 지오코딩(10 m)·스트립정렬 클립·Sentinel-1 RTC 비교</td></tr>
+<tr><td><code>Output\step0X_*</code></td><td>검증 산출물: 풋프린트 GeoJSON, 씬별 편향 json/png, 12씬 결합조정 <code>step08_joint.*</code></td></tr>
+<tr><td><code>Code\</code></td><td>라이브러리 <code>n2reader · orbit · geometry · tropo · dem · simulate</code> + 실행 <code>step01 ~ step10</code></td></tr></table>
+
+<h2>2. 격자와 파일 종류</h2>
+<p>모든 백록담 타일: <b>EPSG:32652 (UTM 52N), 5 m, 1200 × 1200</b>, 좌상단 E 267105 / N 3697115, 중심 = 백록담(126.5292°E, 33.3617°N). 파일명 <code>&lt;날짜&gt;_&lt;기하&gt;_&lt;종류&gt;_utm5m_aoi6km[_coreg].tif</code></p>
+<table><tr><th>종류</th><th>값</th><th>단위</th><th>용도</th></tr>
+<tr><td><code>amp</code></td><td>진폭 = √강도</td><td>DN (~15,000)</td><td>원본 I/Q 크기 척도. "원본값"이 필요할 때</td></tr>
+<tr><td><code>int</code></td><td>강도 = 평균(I²+Q²), 멀티룩 4×3</td><td>DN²</td><td>통계·평균 계산 (선형 평균이 맞는 물리량)</td></tr>
+<tr><td><code>dB</code></td><td>10·log₁₀(강도)</td><td>dB (상대)</td><td>시각화. <b>σ⁰가 아님</b> — 보정상수 없어 씬 간 절대 비교 불가</td></tr>
+<tr><td><code>locinc</code></td><td>국지입사각 (DEM 경사면 기준)</td><td>도</td><td>지형이 만든 밝기 보정(γ⁰), 입사각 정규화</td></tr>
+<tr><td><code>mask</code></td><td>0 정상 · 1 레이오버 · 2 등돌린면(그림자) · 255 자료없음</td><td>코드</td><td><b>분석은 0인 화소만</b></td></tr></table>
+<p><code>amp² = int</code>, <code>10·log₁₀(int) = dB</code> — 세 밝기 파일은 같은 정보의 다른 척도다. 스택 파일의 <code>dBn</code>은 공통 유효화소 중앙값을 0 dB로 맞춘 정규화본이다.</p>
+
+<h2>3. 기하 표기와 그룹</h2>
+<table><tr><th>표기</th><th>뜻</th><th>위성 위치 → 시선</th><th>밝은 사면</th><th>그룹</th></tr>
+<tr><td><b>AR</b></td><td>상승궤도(남→북) · 우측룩</td><td>서쪽(황해) → 동쪽</td><td>서향 사면</td><td>AR</td></tr>
+<tr><td><b>AL</b></td><td>상승 · 좌측룩</td><td>동쪽 → 서쪽</td><td>동향 사면</td><td>ALDR</td></tr>
+<tr><td><b>DR</b></td><td>하강궤도(북→남) · 우측룩</td><td>동쪽 → 서쪽</td><td>동향 사면</td><td>ALDR</td></tr></table>
+<div class="box warn"><b>시계열은 반드시 같은 그룹 안에서.</b> 그룹을 섞으면 밝은 사면이 좌우로 뒤집혀 지형 변화가 아닌 조명 변화가 보인다. 미세정합도 그룹별로 수행됐다(기준씬 AR=20250301, ALDR=20250104).</div>
+
+<h2>4. 씬 목록</h2>
+<table><tr><th>촬영일(KST)</th><th>기하</th><th>그룹</th><th>입사각</th><th>AOI 커버</th><th>편향 Δt_az [ms] / ΔR [m]</th><th>미세정합 이동 (동, 북) [m]</th><th>비고</th></tr><tr><td>2023-07-16</td><td>AR</td><td>AR</td><td>24.3°</td><td>0 %</td><td class='num'>+0.214 / +34.05</td><td class='num'>—</td><td>AOI 밖</td></tr><tr><td>2024-02-29</td><td>AR</td><td>AR</td><td>33.5°</td><td>47 %</td><td class='num'>+0.214 / +32.77</td><td class='num'>-6.5, -6.3</td><td>적설 100 % — 밝기 시계열 제외 권고</td></tr><tr><td>2025-01-04</td><td>AL</td><td>ALDR</td><td>21.4°</td><td>100 %</td><td class='num'>+0.442 / +32.39</td><td class='num'>+0.0, +0.0</td><td></td></tr><tr><td>2025-01-10</td><td>AL</td><td>ALDR</td><td>25.1°</td><td>0 %</td><td class='num'>추정 불가 (육지 없음)</td><td class='num'>—</td><td>AOI 밖 · 편향 추정 불가</td></tr><tr><td>2025-03-01</td><td>AR</td><td>AR</td><td>20.9°</td><td>100 %</td><td class='num'>+0.485 / +30.61</td><td class='num'>-0.0, -0.0</td><td></td></tr><tr><td>2025-03-17</td><td>AR</td><td>AR</td><td>31.3°</td><td>100 %</td><td class='num'>+0.037 / +32.36</td><td class='num'>+1.6, +0.6</td><td></td></tr><tr><td>2025-03-29</td><td>AL</td><td>ALDR</td><td>31.0°</td><td>100 %</td><td class='num'>-0.563 / +30.40</td><td class='num'>-0.1, +2.0</td><td></td></tr><tr><td>2025-04-02</td><td>AR</td><td>AR</td><td>26.1°</td><td>56 %</td><td class='num'>+0.369 / +33.59</td><td class='num'>-4.1, -5.2</td><td>부분 커버</td></tr><tr><td>2025-04-03</td><td>AL</td><td>ALDR</td><td>21.5°</td><td>37 %</td><td class='num'>+0.059 / +30.58</td><td class='num'>+2.7, -1.1</td><td>부분 커버</td></tr><tr><td>2025-04-20</td><td>DR</td><td>ALDR</td><td>22.6°</td><td>100 %</td><td class='num'>-2.098 / +28.97</td><td class='num'>-0.5, -1.8</td><td></td></tr><tr><td>2025-05-25</td><td>DR</td><td>ALDR</td><td>24.9°</td><td>100 %</td><td class='num'>-0.991 / +30.76</td><td class='num'>-2.0, +0.4</td><td></td></tr><tr><td>2025-06-11</td><td>AR</td><td>AR</td><td>32.6°</td><td>100 %</td><td class='num'>-0.423 / +32.94</td><td class='num'>-0.2, -0.3</td><td></td></tr></table>
+<p class="small">편향 = 헤더 기준 보정량(씬별 창 최소제곱, step07). 미세정합 이동 = 그룹 기준씬 대비 적용량(step10). 20230716·20250110은 보유 스트립 앞 절반에 백록담이 없어 AOI 타일이 비어 있다.</p>
+<img src="baengnokdam/thumbnails.png"><p class="cap">그림 1. 백록담 6 km 타일 10씬(마스크 0만 표시). 사선으로 잘린 3씬은 반쪽 스트립 경계.</p>
+
+<h2>5. 처리 절차</h2>
+<table><tr><th>단계</th><th>내용</th><th>코드</th></tr>
+<tr><td>1–2</td><td>헤더 값(t0, dt, τ0, dτ) → 격자 ↔ (방위시각, 슬랜트거리). 상태벡터 60점(1 s) 4차 다항 보간 (값이 float32 양자화돼 0.3 m가 바닥)</td><td>n2reader, orbit</td></tr>
+<tr><td>3–5</td><td>거리-도플러 3방정식: geo2rdr(제로도플러 뉴턴), rdr2geo(룩각 뉴턴 + DEM 반복), 룩사이드 판별</td><td>geometry</td></tr>
+<tr><td>6</td><td>검증: 왕복정합 5e-4 px, 입사각·스와스폭·풋프린트 일치, 백록담 위치</td><td>step02</td></tr>
+<tr><td>7</td><td>대류권 표준대기 모델(슬랜트 2.2~2.9 m) + DEM(Copernicus 30 m, EGM2008 +26 m) 지형 시뮬레이션과 실영상 멀티룩(30 m) 정합 → 창 단위 강건 최소제곱으로 편향 ± 표준오차</td><td>tropo, dem, simulate, step03, step07</td></tr>
+<tr><td>8</td><td>11씬 결합조정(4모수): 센서 상수 + DEM 지상오프셋 분리, 씬별 궤도오차 크기 추정</td><td>step08</td></tr>
+<tr><td>9</td><td>역방향 지오코딩: 지도격자 → DEM 높이 → geo2rdr → 멀티룩 강도 샘플링. 국지입사각·레이오버 마스크 동시 생성. 5 m AOI 타일, 그룹 스택</td><td>step04, step05, step09</td></tr>
+<tr><td>10</td><td>상대정합 검증(그룹 내 20쌍 상호상관) → 네트워크 최소제곱 미세정합 → <code>_coreg</code> 개별 타일</td><td>step10</td></tr>
+<tr><td>검증</td><td>Sentinel-1 RTC(Planetary Computer) 동일 격자 리샘플 후 N2와 정합 — 같은 룩방향 씬으로만</td><td>step06</td></tr></table>
+
+<h2>6. 정확도</h2>
+<table><tr><th>항목</th><th>값</th><th>근거</th></tr>
+<tr><td>모델 자기일관성</td><td class="num">5.4e-4 px</td><td>rdr2geo→geo2rdr 왕복, h = 0/1000/2000 m</td></tr>
+<tr><td>센서 거리편향 ΔR_s</td><td class="num">+31.15 ± 0.38 m</td><td rowspan="3">11씬 4모수 결합조정 (step08). χ² 651 → 383</td></tr>
+<tr><td>센서 방위편향 Δt_s</td><td class="num">-0.612 ± 0.239 ms (지상 -4.3 m)</td></tr>
+<tr><td>DEM 지상오프셋</td><td class="num">동 +1.5 ± 0.9 m, 북 +4.8 ± 1.7 m</td></tr>
+<tr><td>씬별 궤도오차(잔차 RMS)</td><td class="num">방위 ≈ 2.9 m, 거리 ≈ 1.3 m</td><td>결합조정 단위분산 s0 = 4.6</td></tr>
+<tr><td>절대 위치</td><td class="num">~5 m</td><td>DEM 오프셋 잔여 + S1 교차검증</td></tr>
+<tr><td>씬 간 상대 (모델만)</td><td class="num">중앙 2.8 m · RMS 5.2 m · 최대 11.1 m</td><td>20쌍 상호상관, 부분커버·적설 씬이 큼</td></tr>
+<tr><td><b>씬 간 상대 (미세정합 후)</b></td><td class="num"><b>중앙 0.6 m · RMS 0.7 m · 최대 1.1 m</b></td><td>재검증, 5 m 격자의 0.22 px</td></tr></table>
+<img src="step08_joint.png"><p class="cap">그림 2. 씬별 편향과 4모수 모델. 방위편향이 상승(위)/하강(아래)으로 갈리는 것이 DEM 북쪽 오프셋의 지문.</p>
+<img src="baengnokdam/coreg_check.png" style="max-width:520px"><p class="cap">그림 3. 미세정합 전 그룹 내 씬 쌍 잔여 시프트. 원점 밖 점은 전부 20240229·20250402 관련.</p>
+
+<h3>Sentinel-1 교차검증 (20250611 vs S1 RTC, 동일 격자)</h3>
+<table><tr><th>S1 씬</th><th>궤도</th><th>N2−S1 동 [m]</th><th>북 [m]</th><th>r</th></tr><tr><td>S1C_IW_GRDH_1SDV_20250425T213226…</td><td>DES</td><td class='num'>-46.5</td><td class='num'>+0.4</td><td class='num'>0.20</td></tr><tr><td>S1C_IW_GRDH_1SDH_20250413T093003…</td><td>ASC</td><td class='num'>-54.3</td><td class='num'>-12.0</td><td class='num'>0.24</td></tr><tr><td>S1C_IW_GRDH_1SDV_20250811T093011…</td><td>ASC</td><td class='num'>+13.6</td><td class='num'>-3.8</td><td class='num'>0.29</td></tr></table>
+<p class="small">S1 RTC 자체 정확도 ~10 m. 같은 룩방향(ASC)에서 3~14 m 일치. 하강(DES) 씬은 음영이 거울상이라 −46 m 가짜 오프셋 — 교차검증엔 같은 룩방향만 사용할 것. 편향 미적용 N2는 −54 m.</p>
+
+<h2>7. 사용 시 주의</h2>
+<ul>
+<li><b>LV1A SSC 레이아웃 결함.</b> h5의 <code>S01/SBI</code>가 (2·라인, 샘플) int16으로 잘못 선언돼 있고 실제로는 스트립 <b>앞 절반</b>만 담고 있다. <code>n2reader.read_slc()</code>가 평탄버퍼 규칙(<code>reshape(-1, 5193, 2)</code>)으로 읽는다. 다른 리더로 읽으면 잡음이 나온다.</li>
+<li><b>dB는 상대값.</b> Level 1A에 보정상수가 없어 σ⁰가 아니다. 씬 간 밝기 비교는 <code>dBn</code> 또는 별도 정규화 후에. 절대 σ⁰는 Level 1D 제품이 필요.</li>
+<li><b>mask == 0만 분석에 사용.</b> 산악이라 레이오버가 2~7 %, 그룹 전 씬 공통 유효화소는 AR 45 % / ALDR 37 %.</li>
+<li><b>20240229는 적설 100 %</b>(Sentinel-2 확인). 위치는 맞췄으나 산란 특성이 달라 밝기 시계열에서 제외 권고.</li>
+<li><b>DEM 오프셋 북 +4.8 m</b>는 12씬 공통 → 상대정합엔 무해, 절대에만 남음. 정사영상 GCP나 CR로만 제거 가능.</li>
+<li><b>미세정합본(<code>_coreg</code>)</b>은 데이터 기반 이동이 더해진 것. 절대위치 논의에는 <code>baengnokdam\</code>의 원본 타일을, 시계열엔 <code>output\</code>을 사용.</li>
+<li>대류권은 표준대기 모델(±0.2 m). SaTReC 처리기가 이미 뺐는지 불명 → 순수 계기편향은 30~32 m 범위.</li>
+</ul>
+
+<h2>8. 재현</h2>
+<pre>conda activate isce2_snaphu
+cd <WORK_ROOT>/N2_InSAR/N2_Gemetric_Correction\Code
+python step01_grid_orbit.py [h5]          # 격자·궤도 체크포인트
+python step02_geometry.py   [h5]          # 왕복정합·룰사이드·풋프린트 GeoJSON
+python step07_lsq.py        [h5]          # 편향 (창 LS, 30 m)      ← step03 은 피크 1개 간이판
+python step08_all_scenes.py               # 12씬 일괄 + 결합조정
+python step09_stack.py --outdir ..\Output\baengnokdam        # 5 m 타일 + 스택 + 상대정합 검증
+python step10_fine_coreg.py --outdir ..\Output\baengnokdam\output   # 미세정합 개별 타일
+python step04_geocode.py [h5] --res 5 --center 126.5292 33.3617 --size 6   # 단일 씬 AOI 지오코딩
+python step06_s1_reference.py --pass ascending --days 90 --s1date 20250413  # S1 교차검증</pre>
+
+<h2>9. 남은 과제</h2>
+<ul><li>지형 방사보정(γ⁰ 평탄화) — 밝기 변화 분석 전 <code>locinc</code>로 지형 몫 제거</li>
+<li>KAIST SaTReC 요청: 전체 스트립·정상 shape 재배포, Level 1D(σ⁰), 궤도결정 정확도, 처리기 기하보정 목록. 절대정확도·절대 dB 두 한계가 여기서 풀림</li>
+<li>CR/정사영상 GCP 확보 시 DEM 오프셋 제거 → 절대 1~3 m</li></ul>
+</body></html>
