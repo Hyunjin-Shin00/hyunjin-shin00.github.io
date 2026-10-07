@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>접경지역 도로 공사 진행 변화탐지 · 신현진</title>
+<meta name="description" content="공개 상용 위성영상 시계열로 접경지역 도로 공사의 진행을 시기별로 추적했다. 5개월 만에 누적 연장 0.2 km에서 7.06 km로 늘었고, 최근접 지점은 군사분계선에서 약 230 m다.">
+<meta property="og:title" content="접경지역 도로 공사 진행 변화탐지 · 신현진">
+<meta property="og:description" content="공개 상용 위성영상 시계열로 접경지역 도로 공사의 진행을 시기별로 추적했다. 5개월 만에 누적 연장 0.2 km에서 7.06 km로 늘었고, 최근접 지점은 군사분계선에서 약 230 m다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">🛣️</span>
+    <h1><span lang="ko">접경지역 도로 공사 진행 변화탐지</span><span lang="en">Border-Area Road Construction Change Detection</span></h1>
+    <div class="proj-meta">
+      <span>2024.04 – 2026.09</span>
+      <span class="dot">·</span>
+      <span lang="ko">단독 수행</span><span lang="en">Sole contributor</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+    </div>
+    <div class="tags"><span class="tag">PlanetScope</span><span class="tag">변화탐지</span><span class="tag">시계열</span><span class="tag">GIS</span></div>
+    <p class="proj-sum"><span lang="ko">공개 상용 위성영상 시계열로 접경지역 도로 공사의 진행을 시기별로 추적했다. 5개월 만에 누적 연장 0.2 km에서 7.06 km로 늘었고, 최근접 지점은 군사분계선에서 약 230 m다.</span><span lang="en">Tracked road construction near the inter-Korean border through a time series of commercial satellite imagery. Cumulative length grew from 0.2 km to 7.06 km in five months; the nearest point sits about 230 m from the Military Demarcation Line.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>접경지역의 지형 변화는 현장 접근이 불가능해 위성영상이 사실상 유일한 관측 수단이다.</li><li>공개된 상용 위성영상만으로 공사 진행을 시기별로 정량화할 수 있는지 확인하고자 했다.</li><li>구름이 적고 재방문 주기가 짧은 PlanetScope를 선택했다 — 일 단위 관측이 가능해 공사처럼 빠르게 변하는 대상에 적합하다.</li></ul><ul lang="en"><li>Terrain change in the border area cannot be surveyed on the ground, so satellite imagery is effectively the only observation route.</li><li>The question was whether construction progress can be quantified by date using commercial imagery alone.</li><li>PlanetScope was chosen for its near-daily revisit — short enough to follow something that changes as fast as roadworks.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>PlanetScope PSScene (analytic 8-band, 표면반사도 SR, UDM2 품질 마스크) 7시기 수집 — 2024.04.27 ~ 2026.09.29.</li><li>구름·그림자 화소를 UDM2 마스크로 제거하고, 시기 간 색감이 흔들리지 않도록 동일한 스트레치를 적용했다.</li><li>각 시기 영상에서 새로 드러난 절토·성토 구간을 선형(LineString)으로 디지타이징했다 — 총 5개 시기, 피처 2개에서 8개로 증가.</li><li>OpenStreetMap 군사분계선(MDL) 선형을 참조 레이어로 사용했다.</li><li>EPSG:5179(Korea 2000 Unified CS)로 투영해 연장과 거리를 미터 단위로 산출했다 — 경위도상 거리 계산의 왜곡을 피하기 위함.</li><li>시기별 누적 연장과 증가분, MDL까지의 최단거리를 계산해 지도에 주기했다.</li></ul><ul lang="en"><li>Collected seven PlanetScope PSScene acquisitions (8-band analytic, surface reflectance, UDM2 quality mask) from 2024-04-27 to 2026-09-29.</li><li>Removed cloud and shadow pixels using the UDM2 mask and applied an identical stretch across dates so colour would not drift between scenes.</li><li>Digitised newly exposed cut-and-fill segments as LineStrings for each date — five dates, growing from 2 to 8 features.</li><li>Used the OpenStreetMap Military Demarcation Line as a reference layer.</li><li>Reprojected to EPSG:5179 (Korea 2000 Unified CS) so lengths and distances compute in metres, avoiding the distortion of measuring in degrees.</li><li>Computed cumulative length, per-period increment, and minimum distance to the MDL, and annotated them on each map.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>2024.05.02 — 누적 0.20 km (최초 확인)</li><li>2024.05.08 — 누적 0.62 km (+0.41 km)</li><li>2024.05.16 — 누적 3.01 km (+2.39 km, 가장 빠른 구간)</li><li>2024.06.03 — 누적 5.15 km (+2.14 km)</li><li>2024.10.02 — 누적 7.06 km (+1.91 km)</li><li>공사 구간에서 군사분계선까지의 최단거리 약 233 m (EPSG:5179 기준 실측)</li><li>2026.09.29 최신 영상에서도 노선 형상이 유지됨을 확인</li></ul><ul lang="en"><li>2024-05-02 — 0.20 km cumulative (first detection)</li><li>2024-05-08 — 0.62 km (+0.41 km)</li><li>2024-05-16 — 3.01 km (+2.39 km, the fastest interval)</li><li>2024-06-03 — 5.15 km (+2.14 km)</li><li>2024-10-02 — 7.06 km (+1.91 km)</li><li>Minimum distance from the works to the Military Demarcation Line: about 233 m, measured in EPSG:5179</li><li>The alignment remains visible in the most recent imagery (2026-09-29)</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/dmz-road/00-extent-final.webp" alt="2024.10.02 — 누적 연장 7.06 km (+1.91 km). 붉은 선이 확인된 공사 구간" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">2024.10.02 — 누적 연장 7.06 km (+1.91 km). 붉은 선이 확인된 공사 구간</span><span lang="en">2024-10-02 — 7.06 km cumulative (+1.91 km). Red marks the identified works</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/dmz-road/01-baseline-0427.webp" alt="2024.04.27 — 착공 전 기준 영상" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">2024.04.27 — 착공 전 기준 영상</span><span lang="en">2024-04-27 — pre-construction baseline</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/dmz-road/02-d0502.webp" alt="2024.05.02 — 누적 0.20 km, 최초 확인" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">2024.05.02 — 누적 0.20 km, 최초 확인</span><span lang="en">2024-05-02 — 0.20 km, first detection</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/dmz-road/03-d0508.webp" alt="2024.05.08 — 누적 0.62 km (+0.41 km)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">2024.05.08 — 누적 0.62 km (+0.41 km)</span><span lang="en">2024-05-08 — 0.62 km (+0.41 km)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/dmz-road/04-d0516.webp" alt="2024.05.16 — 누적 3.01 km (+2.39 km). 8일 만에 가장 크게 증가" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">2024.05.16 — 누적 3.01 km (+2.39 km). 8일 만에 가장 크게 증가</span><span lang="en">2024-05-16 — 3.01 km (+2.39 km), the largest jump, in eight days</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/dmz-road/05-d0603.webp" alt="2024.06.03 — 누적 5.15 km (+2.14 km)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">2024.06.03 — 누적 5.15 km (+2.14 km)</span><span lang="en">2024-06-03 — 5.15 km (+2.14 km)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/dmz-road/06-latest-2026.webp" alt="2026.09.29 — 최신 영상, 노선 형상 유지" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">2026.09.29 — 최신 영상, 노선 형상 유지</span><span lang="en">2026-09-29 — latest imagery, alignment still visible</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/dmz-road/07-mdl-distance.webp" alt="군사분계선까지 최단거리 약 230 m" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">군사분계선까지 최단거리 약 230 m</span><span lang="en">Minimum distance to the Military Demarcation Line: about 230 m</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>일 단위 재방문이 가능한 소형위성 군집이 &#x27;언제 시작해서 얼마나 빨리 진행되는가&#x27;라는 질문에 특히 강하다는 걸 확인했다. 중해상도 위성의 재방문 주기로는 2024년 5월의 급격한 증가 구간을 놓쳤을 것이다.</li><li>자동 변화탐지보다 수동 디지타이징이 정확했다. 산지 절토면은 나지(裸地)와 분광 특성이 비슷해 자동 분류가 혼동한다. 대상이 선형이고 시기가 7개뿐이라 사람이 그리는 편이 빠르고 믿을 만했다.</li><li>미터 단위 결과를 낼 때는 투영 선택이 결론을 바꾼다. 경위도(EPSG:4326)에서 그대로 길이를 재면 위도에 따라 오차가 생겨, 국내 표준 투영으로 변환한 뒤 계산했다.</li><li>한계: 광학 영상이라 구름 낀 시기는 공백이다. 2024.06 이후 2024.10까지 네 달의 공백이 있어 그 사이 진행 속도는 알 수 없다. Sentinel-1 SAR을 보조로 쓰면 메울 수 있었을 것이다.</li></ul><ul lang="en"><li>Confirmed that a daily-revisit smallsat constellation is especially strong at answering &#x27;when did it start and how fast is it going&#x27;. A mid-resolution satellite&#x27;s revisit would have missed the sharp May 2024 jump entirely.</li><li>Manual digitising beat automatic change detection here. Fresh cut slopes are spectrally close to bare ground, which confuses a classifier. With a linear target and only seven dates, drawing by hand was both faster and more trustworthy.</li><li>When the output is in metres, the projection choice changes the answer. Measuring length directly in EPSG:4326 introduces latitude-dependent error, so everything was reprojected to the national grid first.</li><li>Limitation: optical imagery means cloudy dates are simply gaps. There is a four-month hole between June and October 2024, so the rate in that window is unknown. Sentinel-1 SAR as a fallback would have filled it.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>시기별 공사현황 shapefile 5종</li><li>군사분계선 참조 레이어</li><li>시기별 주기 지도 13장</li><li>QGIS 프로젝트</li></ul><ul lang="en"><li>Five dated construction shapefiles</li><li>MDL reference layer</li><li>Thirteen annotated date maps</li><li>QGIS project</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="oil-spill.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">SAR 기반 해상 기름유출 탐지</span><span lang="en" class="pager-title">Marine Oil Spill Detection from SAR</span></a>
+    <a class="pager next" href="mangrove.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">맹그로브 분포 · 변화 모니터링</span><span lang="en" class="pager-title">Mangrove Extent &amp; Change Monitoring</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>
