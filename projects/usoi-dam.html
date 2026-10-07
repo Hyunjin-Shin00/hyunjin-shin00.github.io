@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Usoi 자연댐(Sarez 호) Sentinel-1 SBAS 변위 모니터링 · 신현진</title>
+<meta name="description" content="타지키스탄 파미르의 Usoi 자연댐 일대를 Sentinel-1 상승·하강 두 궤도 SBAS(ISCE2+MintPy)로 처리해 수직/동서 분해를 시도했다. 하강궤도는 2019–2026 223개 날짜로 AOI 육지 78.7%에서 속도장을 얻었지만, 상승궤도는 AOI 내부 시간결맞음이 0.004로 무너져 분해는 댐에서 남쪽 7.1% 영역에만 남았다. 최종 제품은 ERA5와 경험적 고도 detrend로 보정한 하강궤도 LOS 속도장이다.">
+<meta property="og:title" content="Usoi 자연댐(Sarez 호) Sentinel-1 SBAS 변위 모니터링 · 신현진">
+<meta property="og:description" content="타지키스탄 파미르의 Usoi 자연댐 일대를 Sentinel-1 상승·하강 두 궤도 SBAS(ISCE2+MintPy)로 처리해 수직/동서 분해를 시도했다. 하강궤도는 2019–2026 223개 날짜로 AOI 육지 78.7%에서 속도장을 얻었지만, 상승궤도는 AOI 내부 시간결맞음이 0.004로 무너져 분해는 댐에서 남쪽 7.1% 영역에만 남았다. 최종 제품은 ERA5와 경험적 고도 detrend로 보정한 하강궤도 LOS 속도장이다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">🏔️</span>
+    <h1><span lang="ko">Usoi 자연댐(Sarez 호) Sentinel-1 SBAS 변위 모니터링</span><span lang="en">Usoi Natural Dam (Lake Sarez) Sentinel-1 SBAS Monitoring</span></h1>
+    <div class="proj-meta">
+      <span>2026.07</span>
+      <span class="dot">·</span>
+      <span lang="ko">단독 수행</span><span lang="en">Sole contributor</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">완료 (DSC 단독 제품, ASC+DSC 분해는 부분 결과)</span><span lang="en" class="chip chip-done">Completed (descending-only product; ASC+DSC decomposition partial)</span>
+    </div>
+    <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">SBAS</span><span class="tag">MintPy</span><span class="tag">ISCE2</span><span class="tag">ERA5</span></div>
+    <p class="proj-sum"><span lang="ko">타지키스탄 파미르의 Usoi 자연댐 일대를 Sentinel-1 상승·하강 두 궤도 SBAS(ISCE2+MintPy)로 처리해 수직/동서 분해를 시도했다. 하강궤도는 2019–2026 223개 날짜로 AOI 육지 78.7%에서 속도장을 얻었지만, 상승궤도는 AOI 내부 시간결맞음이 0.004로 무너져 분해는 댐에서 남쪽 7.1% 영역에만 남았다. 최종 제품은 ERA5와 경험적 고도 detrend로 보정한 하강궤도 LOS 속도장이다.</span><span lang="en">Processed Sentinel-1 ascending and descending SBAS stacks (ISCE2 + MintPy) over the Usoi natural dam in the Tajik Pamir and attempted a vertical/east-west decomposition. The descending track (223 dates, 2019–2026) yielded velocities over 78.7% of the land AOI, but ascending temporal coherence collapsed to 0.004 inside the AOI, so the decomposition survives only on 7.1% of the grid south of the dam. The delivered product is a descending LOS velocity map corrected with ERA5 plus an empirical elevation detrend.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>Usoi 댐은 1911년 산사태로 생긴 자연댐으로, 뒤의 Sarez 호 담수량이 커서 댐체·주변 사면 안정성 감시 대상이다.</li><li>해발 3,000–5,500 m 급경사 지형이라 C밴드 InSAR 에 결맞음 저하·대류권 성층지연·기하 왜곡이 모두 걸린다.</li><li>상승·하강 두 궤도를 결합하면 LOS 를 수직/동서 성분으로 나눌 수 있어 댐체 침하와 사면 수평이동을 구분할 수 있다는 것이 출발점이었다.</li></ul><ul lang="en"><li>The Usoi dam was formed by a 1911 landslide and impounds Lake Sarez; the dam body and surrounding slopes are a long-standing monitoring target.</li><li>Elevations of 3,000–5,500 m and steep relief expose C-band InSAR to decorrelation, stratified tropospheric delay and geometric distortion at once.</li><li>Combining ascending and descending geometries should split LOS motion into vertical and east-west components, separating dam settlement from lateral slope motion.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>ASF 에서 SLC 365씬(ASC 140, DSC 225, 약 1.5 TB) 수집, COP30 DEM 을 타원체고로 변환, ESA POEORB 정밀궤도 사용.</li><li>ISCE2 topsStack: AOI 가 IW1/IW2 경계에 걸려 IW2 단일 서브스와스로 고정, 작은 AOI 라 ESD 대신 geometry 코레지, 3×9 룩, snaphu 언랩(ASC 550, DSC 433 페어).</li><li>공유 디스크가 가득 차 페어별 병합 직후 버스트 간섭도 삭제(페어당 1.23 GB → 42 MB), 날짜별 zip 삭제 인터리브로 처리 완주.</li><li>MintPy SBAS: 자동 기준점이 개별 간섭도 35% 에서 신뢰불가해 시간결맞음이 전역 0 이 되는 문제를 찾아, 유지 간섭도 다수에서 연결성분이 살아 있는 최고결맞음 픽셀을 트랙별로 자동 선택하도록 바꿈. 네트워크는 ≤24 일·결맞음 ≥0.3.</li><li>대류권: 고도 상관 보정(height_correlation)이 과소보정 → ERA5(PyAPS) 223 날짜 → 잔차를 반복 이상치 제거 선형회귀로 고도 detrend 후 안정암반 재기준, DEM 평탄도로 호수 마스킹.</li><li>분해: 두 트랙을 0.0005° 공통격자로 geocode 하고 공통 기준점으로 재참조한 뒤 MintPy asc_desc2horz_vert 로 수직·동서 산출.</li></ul><ul lang="en"><li>Collected 365 SLCs from ASF (140 ascending, 225 descending, ~1.5 TB), converted COP30 to ellipsoidal heights, used ESA POEORB orbits.</li><li>ISCE2 topsStack: fixed to sub-swath IW2 because the AOI straddles IW1/IW2, geometry-only coregistration (ESD has no burst overlap in a small crop), 3×9 looks, snaphu (550 ascending / 433 descending pairs).</li><li>On a full shared disk, merged each pair and immediately deleted its burst interferograms (1.23 GB → 42 MB per pair) and interleaved per-date zip deletion to finish the stack.</li><li>MintPy SBAS: traced a global temporal-coherence collapse to an auto reference pixel that was unreliable in 35% of interferograms; replaced it with a per-track pixel that is connected in most kept pairs with the highest coherence. Network limited to ≤24-day, coherence ≥0.3 pairs.</li><li>Troposphere: height_correlation under-corrected, so switched to ERA5 (PyAPS, 223 dates), then removed the remaining elevation trend by robust linear regression, re-referenced to stable rock, and masked the lake using DEM flatness.</li><li>Decomposition: geocoded both tracks to a common 0.0005° grid, re-referenced to a shared point, and ran MintPy asc_desc2horz_vert for vertical and east-west components.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>DSC 최종 속도장: AOI 육지 204,311 px(78.7%), 중앙값 −7.9 mm/yr, p2–p98 −101 ~ +38.8 mm/yr (재계산 일치).</li><li>댐 반경 1 km: DSC LOS +9.6 mm/yr(중앙값, 1,422 px, 평균 시간결맞음 0.98) — 위성 쪽 이동. DSC 단독이라 수직/수평 분리는 못 함.</li><li>ERA5 보정으로 속도~고도 상관 r −0.52, 기울기 −0.027 mm/yr/m, 장면 중앙값 −14 mm/yr 까지 줄였고, 경험적 detrend 후 r 0.06.</li><li>ASC 는 AOI 내부 시간결맞음 평균 0.004(공간결맞음 0.56·그림자 9% 로 기하 문제는 아님). 기준점을 AOI 로 옮겨도 회복되지 않음.</li><li>분해 유효 화소 23,459 px(공통격자 7.1%), 전부 댐 남쪽 — 댐 1 km 내 분해값 0개. 분해 결과는 독립 2×2 역산으로 최대차 0.11 mm/yr 로 재현됨.</li></ul><ul lang="en"><li>Descending product: 204,311 land pixels (78.7% of the AOI), median −7.9 mm/yr, p2–p98 −101 to +38.8 mm/yr (reproduced from the h5).</li><li>Within 1 km of the dam: +9.6 mm/yr LOS (median, 1,422 px, mean temporal coherence 0.98), i.e. toward the satellite. With one geometry, vertical and horizontal motion cannot be separated.</li><li>ERA5 reduced the velocity–elevation correlation to r = −0.52 (slope −0.027 mm/yr/m, scene median −14 mm/yr); the empirical detrend brought r to 0.06.</li><li>Ascending temporal coherence inside the AOI averaged 0.004, although spatial coherence was 0.56 and shadow only 9%. Moving the reference into the AOI did not recover it.</li><li>Only 23,459 decomposition pixels (7.1% of the grid) survive, all south of the dam — none within 1 km of it. An independent 2×2 inversion reproduces the up/east grids to within 0.11 mm/yr.</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/usoi-dam/00-key.webp" alt="하강궤도 보정 LOS 속도(2019-01~2026-06, ERA5+고도 detrend, 호수 마스킹). 댐 주변 +10 mm/yr 내외" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">하강궤도 보정 LOS 속도(2019-01~2026-06, ERA5+고도 detrend, 호수 마스킹). 댐 주변 +10 mm/yr 내외</span><span lang="en">Descending LOS velocity 2019-01–2026-06 (ERA5 + elevation detrend, lake masked); about +10 mm/yr around the dam</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/usoi-dam/01-workflow.webp" alt="처리 흐름: SLC → ISCE2 topsStack → 네트워크 → MintPy SBAS → 대류권 보정 → 산출" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">처리 흐름: SLC → ISCE2 topsStack → 네트워크 → MintPy SBAS → 대류권 보정 → 산출</span><span lang="en">Workflow: SLC → ISCE2 topsStack → network → MintPy SBAS → tropospheric correction → products</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/usoi-dam/02-temporal-coherence.webp" alt="시간결맞음: 상승궤도는 AOI(점선) 안에서 평균 0.004로 붕괴, 하강궤도는 사용 가능" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">시간결맞음: 상승궤도는 AOI(점선) 안에서 평균 0.004로 붕괴, 하강궤도는 사용 가능</span><span lang="en">Temporal coherence: ascending collapses to 0.004 inside the AOI (dashed); descending is usable</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/usoi-dam/03-seasonal-coherence.webp" alt="12일 페어 월별 장면평균 결맞음: 1–4월 0.40–0.56, 6–9월 0.63–0.74" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">12일 페어 월별 장면평균 결맞음: 1–4월 0.40–0.56, 6–9월 0.63–0.74</span><span lang="en">Monthly scene-mean coherence of 12-day pairs: 0.40–0.56 in Jan–Apr, 0.63–0.74 in Jun–Sep</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/usoi-dam/04-tropo-vs-elevation.webp" alt="속도~고도 관계: ERA5 후에도 r −0.52, 경험적 detrend 후 r 0.06" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">속도~고도 관계: ERA5 후에도 r −0.52, 경험적 detrend 후 r 0.06</span><span lang="en">Velocity vs elevation: r = −0.52 after ERA5, 0.06 after the empirical detrend</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/usoi-dam/05-decomposition-coverage.webp" alt="ASC+DSC 분해: 유효 23,459 px(7.1%)가 모두 댐 남쪽 — 댐에는 분해값 없음" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">ASC+DSC 분해: 유효 23,459 px(7.1%)가 모두 댐 남쪽 — 댐에는 분해값 없음</span><span lang="en">ASC+DSC decomposition: the 23,459 valid pixels (7.1%) all lie south of the dam; none at the dam</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/usoi-dam/06-point-timeseries.webp" alt="사면 지점·댐 지점 하강궤도 LOS 시계열(+20.8 / +14.4 mm/yr, detrend 전). 2022·2023년 2월 계단 점프" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">사면 지점·댐 지점 하강궤도 LOS 시계열(+20.8 / +14.4 mm/yr, detrend 전). 2022·2023년 2월 계단 점프</span><span lang="en">Descending LOS time series at a slope point and the dam (+20.8 / +14.4 mm/yr before detrend); step jumps in Feb 2022 and Feb 2023</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>MintPy maxCoherence 자동 기준점은 평균 결맞음만 본다. 이 장면에서는 550 간섭도 중 192 개에서 연결성분 0 인 픽셀이 뽑혀 시간결맞음이 전역 0 이 됐다 — 기준점은 개별 간섭도 신뢰성으로 골라야 한다.</li><li>파미르 C밴드는 계절 결맞음 이동이 커서 12일 페어 장면평균 결맞음이 3–4월 0.40–0.46, 7–8월 0.71–0.74 로 움직인다. 모든 간섭도에 공통인 연결영역이 0 이라 MintPy 언랩오류 보정을 쓸 수 없었다.</li><li>ERA5(약 31 km)는 급경사 성층지연을 다 잡지 못했다(r −0.52 잔존). 경험적 고도 detrend 는 고도와 상관된 실제 사면변위까지 지울 수 있어, 지점 속도가 보정 방식에 따라 0 근처 ~ +20.8 mm/yr 로 흔들렸다 — 절대 크기는 보수적으로 해석.</li><li>한계: ASC 간섭도 중 2024-12-06 이후 날짜가 포함된 172 페어가 값 0 으로 생성돼 ASC 시계열이 2024-11 에서 끊겼다. 원인은 확정하지 못했다.</li><li>한계: 분해는 기간이 다른 두 속도(ASC 2021-09~2024-11, DSC 2019-01~2026-06)를 결합했고 동서 성분에 +31 mm/yr 장면 편향이 남아 물리 해석을 보류했다.</li><li>한계: 지점 시계열에 2022-02, 2023-02 무렵 20 mm 이상 계단형 점프가 있고, 겨울 언랩 오류인지 실제 이벤트인지 가르지 못했다. 적설 자료와의 대조는 하지 않았다.</li><li>운영: topsStack run_file 의 줄 끝 &amp; 를 그대로 실행하면 단계가 즉시 완료 처리돼 경합한다. 기준 날짜 burst 는 원본 zip 을 가상참조하므로 run_10 전에 지우면 그 날짜 8 페어가 모두 실패한다.</li></ul><ul lang="en"><li>MintPy&#x27;s maxCoherence reference looks only at average coherence; here it picked a pixel with zero connected component in 192 of 550 interferograms, driving temporal coherence to zero everywhere. Pick the reference by per-interferogram reliability.</li><li>Pamir C-band coherence shifts strongly with season: 12-day scene-mean coherence is 0.40–0.46 in March–April and 0.71–0.74 in July–August. No region was connected in every interferogram, so MintPy unwrapping-error correction could not run.</li><li>ERA5 (~31 km) did not capture stratified delay on steep slopes (r = −0.52 remained). The empirical elevation detrend can also remove real elevation-correlated slope motion; one point&#x27;s rate swung from near zero to +20.8 mm/yr depending on the correction, so absolute rates are interpreted conservatively.</li><li>Limitation: 172 ascending interferograms involving dates from 2024-12-06 onward were written as all zeros, truncating the ascending series at 2024-11. The cause was not established.</li><li>Limitation: the decomposition combines velocities from different periods (ascending 2021-09–2024-11, descending 2019-01–2026-06) and carries a +31 mm/yr scene-wide east-west bias, so it was not interpreted physically.</li><li>Limitation: the point time series shows step jumps above 20 mm around 2022-02 and 2023-02; winter unwrapping errors and real events could not be separated. No snow-cover data were used to check.</li><li>Operations: running topsStack run_file lines with their trailing &amp; marks steps done instantly and causes races; the reference date&#x27;s bursts point into the original zip, so deleting it before run_10 breaks all 8 pairs connected to that date.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>하강궤도 LOS 속도 GeoTIFF(mm/yr, 호수 마스킹·AOI 크롭)</li><li>인터랙티브 웹맵(위성영상 배경, 색범위·투명도 조절, 지점 시계열)</li><li>ASC+DSC 수직/동서 분해 GeoTIFF(부분 커버리지)</li><li>ISCE2+MintPy 재개형 파이프라인 스크립트</li></ul><ul lang="en"><li>Descending LOS velocity GeoTIFF (mm/yr, lake-masked, AOI-cropped)</li><li>Interactive web map (satellite basemap, adjustable color range and opacity, point time series)</li><li>Vertical / east-west decomposition GeoTIFFs (partial coverage)</li><li>Resumable ISCE2 + MintPy pipeline scripts</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="landslide-insar.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">산사태 InSAR — 경주 태풍 산사태 vs 카라코람 사면 (PS·SBAS)</span><span lang="en" class="pager-title">Landslide InSAR — Typhoon Landslides in Gyeongju vs Karakoram Slopes (PS &amp; SBAS)</span></a>
+    <a class="pager next" href="taean-sar.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">해안사구 다중기법 SAR 분석 (InSAR · OT · ACD)</span><span lang="en" class="pager-title">Coastal Dune Monitoring with Three SAR Techniques</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

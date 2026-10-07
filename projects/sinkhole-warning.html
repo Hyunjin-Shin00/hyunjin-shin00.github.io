@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InSAR 기반 싱크홀(지반침하) 조기경보 — 위험 판정·리드타임 백테스트 · 신현진</title>
+<meta name="description" content="Sentinel-1 PS/SBAS 변위에 시추공 지반등급과 국토안전관리원 지반침하 사고 원장(1,631건)을 결합해 &#x27;사고 전에 경보가 가능했나&#x27;를 백테스트했다. 부산 사상~하단에서는 사고 지점이 확실히 더 많이 가라앉아 있었고(AUC 0.94) 위험구역 63.4 ha·점 등급 데모까지 만들었다. 무작위 대조군·LOAO·광역 확장에서는 판별력이 크게 떨어져, InSAR 단독 붕괴 예측은 안 된다는 결론도 함께 남겼다.">
+<meta property="og:title" content="InSAR 기반 싱크홀(지반침하) 조기경보 — 위험 판정·리드타임 백테스트 · 신현진">
+<meta property="og:description" content="Sentinel-1 PS/SBAS 변위에 시추공 지반등급과 국토안전관리원 지반침하 사고 원장(1,631건)을 결합해 &#x27;사고 전에 경보가 가능했나&#x27;를 백테스트했다. 부산 사상~하단에서는 사고 지점이 확실히 더 많이 가라앉아 있었고(AUC 0.94) 위험구역 63.4 ha·점 등급 데모까지 만들었다. 무작위 대조군·LOAO·광역 확장에서는 판별력이 크게 떨어져, InSAR 단독 붕괴 예측은 안 된다는 결론도 함께 남겼다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">🕳️</span>
+    <h1><span lang="ko">InSAR 기반 싱크홀(지반침하) 조기경보 — 위험 판정·리드타임 백테스트</span><span lang="en">InSAR-based sinkhole early warning — risk rules and lead-time backtesting</span></h1>
+    <div class="proj-meta">
+      <span>2026.06 – 2026.09</span>
+      <span class="dot">·</span>
+      <span lang="ko">주도 (분석·규칙·데모 산출물 단독, 챗봇 연동은 타 담당)</span><span lang="en">Lead (analysis, rules and demo deliverables; chatbot integration by others)</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">PoC 완료 · 일반화 실패 기록</span><span lang="en" class="chip chip-done">PoC completed; generalization failure documented</span>
+    </div>
+    <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">PS-InSAR</span><span class="tag">SBAS</span><span class="tag">지반침하</span><span class="tag">백테스트</span></div>
+    <p class="proj-sum"><span lang="ko">Sentinel-1 PS/SBAS 변위에 시추공 지반등급과 국토안전관리원 지반침하 사고 원장(1,631건)을 결합해 &#x27;사고 전에 경보가 가능했나&#x27;를 백테스트했다. 부산 사상~하단에서는 사고 지점이 확실히 더 많이 가라앉아 있었고(AUC 0.94) 위험구역 63.4 ha·점 등급 데모까지 만들었다. 무작위 대조군·LOAO·광역 확장에서는 판별력이 크게 떨어져, InSAR 단독 붕괴 예측은 안 된다는 결론도 함께 남겼다.</span><span lang="en">Combined Sentinel-1 PS/SBAS displacement with borehole-based ground grades and a national ground-subsidence accident register (1,631 cases) to test whether warnings could have preceded collapses. In Busan Sasang, accident sites had clearly subsided more (AUC 0.94), leading to a 63.4 ha risk-zone map and a point-grading demo. Random-control, leave-one-accident-out and wide-area tests showed the skill largely disappears elsewhere, so InSAR alone cannot predict collapses.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>국내 대형 손해보험사 PoC 과제: 공사현장·도심 지반침하(싱크홀) 위험을 위성으로 사전 경보할 수 있는지 검증.</li><li>대상 7개 AOI: 양성 5(서울 강동·서대문 연희동, 경기 광명, 강원 양양, 부산 사상~하단), 음성 2(인천 송도 매립지 압밀, 부산 만덕~센텀 대심도).</li><li>정답 데이터: 국토안전관리원 지하안전정보 Open API. 위경도가 전 건 0이라 VWorld+Kakao 지오코딩으로 1,602/1,631건(98.2%) 좌표 확보.</li><li>전제: 공동 성장·순간 붕괴는 InSAR로 직접 보이지 않는다. 지표 침하·가속을 보조 신호로 쓴다.</li></ul><ul lang="en"><li>PoC for a major Korean P&amp;C insurer: can satellites give advance warning of urban/construction-site ground subsidence (sinkholes)?</li><li>Seven AOIs: five with sinkhole events (Seoul Gangdong and Yeonhui, Gwangmyeong, Yangyang, Busan Sasang–Hadan) and two negatives (Incheon Songdo reclaimed land, Busan Mandeok–Centum deep tunnel).</li><li>Ground truth: the national underground-safety Open API. All coordinates were zero, so cases were geocoded with VWorld + Kakao (1,602 of 1,631, 98.2%).</li><li>Premise: cavity growth and sudden collapse are not directly visible to InSAR; surface subsidence and acceleration are treated as auxiliary signals.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>지반등급 α: 시추공 92,307공 SPT N값으로 연약(0.6)·주의(0.8)·양호(1.0) 3등급, 공백(&gt;500m)은 1:5만/1:25만 지질도로 보완.</li><li>1차 PoC: 속도·최근 2년 누적·2구간 추세 3지표×α, SBAS hotspot 스크리닝 → 반경 30m PS 확인 2단 결합.</li><li>융합 알람: 역속도법(Fukuzono) 붕괴예상시점 + DBSCAN(eps 100m) 클러스터 알람, 사고 이전 시점(as-of)으로 재현.</li><li>리드타임 규칙: SBAS(coh 0.3/tcoh 0.7/버퍼 400m) 워크포워드 12지표→72 파생(증가량·표준화), 1단 게이트(배경 대비 백분위·Youden) + 2단 경보(AND·K회 연속), 배경 30/100점으로 운영 오탐 산출.</li><li>검증: 무작위 비사고 지점 400곳 대조군, 사고 하나씩 빼는 LOAO, GBM 비교, 광역(사고 500/배경 3,000) 확장, 사고원인 실라벨 재계산.</li><li>데모: 언랩 간섭쌍 824개 → SBAS 6,250점×212에폭 역산 → 주소·기준일 입력 시 정상/주의/위험 판정과 위험구역 GeoJSON.</li></ul><ul lang="en"><li>Ground factor α: SPT N-values from 92,307 boreholes give soft (0.6) / caution (0.8) / good (1.0); gaps &gt;500 m filled from 1:50k/1:250k geological maps.</li><li>First PoC: velocity, last-2-year cumulative and two-segment trend indicators scaled by α; SBAS hotspot screening followed by PS confirmation within 30 m.</li><li>Fusion alarms: inverse-velocity (Fukuzono) failure-time estimate plus DBSCAN (eps 100 m) cluster alarms, replayed as-of before each event.</li><li>Lead-time rules: walk-forward SBAS series (coh 0.3 / tcoh 0.7 / 400 m buffer), 12 indicators expanded to 72 (increments, z-scores); stage-1 gate on background percentiles (Youden threshold) and stage-2 AND alarm with K consecutive epochs; operational false-alarm rate on 30/100 background points.</li><li>Validation: 400 random non-accident control points, leave-one-accident-out (LOAO), GBM comparison, wide-area extension (500 accidents / 3,000 background), re-labelling with the official cause field.</li><li>Demo: 824 unwrapped pairs → SBAS inversion (6,250 points × 212 epochs) → normal/caution/danger grade and risk-zone GeoJSON from an address and a reference date.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>1차 PoC: 양성 5건 전부 사고 이전 위험 등급(평균 리드 1,399일). 연희동은 SBAS 버퍼가 정상이라 PS 확인 단계로만 탐지 — 2단 결합이 recall의 핵심.</li><li>융합 알람: 양성 4/5 탐지(연희동 미탐, 최근접 알람 226m), AOI 내 사고 리스트 70/81건(86%) 선행. 단 음성 AOI에도 알람 클러스터 353개.</li><li>부산 사상: 사고 지점 최대 누적침하 중앙 72.5mm vs 대조 20.6mm, AUC 0.94. 2023년 이후 사고 12건 모두 현재 위험구역(63.41 ha) 안.</li><li>사상 점 등급: 1단 AUC 0.962(14/14 통과), 2단 경보 탐지 85.7%(12/14), 중앙 리드 44일(12~1,204일), 배경 오탐 2/30(배경 100점 기준 4%).</li><li>데모 성능: 라이브 SBAS 6.5초·전체 10초, 운영본과 6,250점 속도차 0.0000 mm/yr.</li></ul><ul lang="en"><li>First PoC: all five event AOIs reached a danger grade before the event (mean lead 1,399 days). Yeonhui was caught only by the PS confirmation stage, since its SBAS buffer stayed normal.</li><li>Fusion alarms: 4 of 5 events detected (Yeonhui missed, nearest alarm 226 m); 70 of 81 listed accidents inside the AOIs (86%) preceded by an alarm. Negative AOIs still produced 353 alarm clusters.</li><li>Busan Sasang: median maximum cumulative subsidence near accidents was 72.5 mm vs 20.6 mm at controls (AUC 0.94); all 12 accidents since 2023 fall inside the current 63.41 ha risk zone.</li><li>Sasang point grading: stage-1 AUC 0.962 (14/14 pass), stage-2 detection 85.7% (12/14), median lead 44 days (range 12–1,204), background false alarms 2/30 (4% on 100 points).</li><li>Demo: live SBAS in 6.5 s, end-to-end 10 s; identical to the production run at all 6,250 points (velocity difference 0.0000 mm/yr).</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/sinkhole-warning/00-key.webp" alt="부산 사상~하단 SBAS 침하속도와 위험구역 63.4 ha (2018-01~2025-12, 212장)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">부산 사상~하단 SBAS 침하속도와 위험구역 63.4 ha (2018-01~2025-12, 212장)</span><span lang="en">Busan Sasang–Hadan SBAS velocity and the 63.4 ha risk zone (2018-01 to 2025-12, 212 scenes)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/sinkhole-warning/01-risk-zone-asof.webp" alt="기준일별 위험구역 변화와 이후 1.5년 내 사고(별)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">기준일별 위험구역 변화와 이후 1.5년 내 사고(별)</span><span lang="en">Risk zone at successive reference dates with accidents in the following 1.5 years (stars)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/sinkhole-warning/02-accident-vs-background.webp" alt="사상: 사고 지점 vs 비사고 지점 최근 1년 침하량 분포" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">사상: 사고 지점 vs 비사고 지점 최근 1년 침하량 분포</span><span lang="en">Sasang: last-year subsidence at accident vs non-accident locations</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/sinkhole-warning/03-sasang-roc.webp" alt="사상 사고/대조 판별 ROC (누적침하 AUC 0.94)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">사상 사고/대조 판별 ROC (누적침하 AUC 0.94)</span><span lang="en">Sasang accident-vs-control ROC (cumulative subsidence AUC 0.94)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/sinkhole-warning/04-leadtime-reading.webp" alt="변위 곡선의 가속 개시점에서 리드타임을 읽는 방법(대표 사례 3건)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">변위 곡선의 가속 개시점에서 리드타임을 읽는 방법(대표 사례 3건)</span><span lang="en">Reading lead time from the acceleration onset (three representative cases)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/sinkhole-warning/05-sasang-aligned.webp" alt="사상: 사고일 정렬 누적침하 — 공통 가속 램프" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">사상: 사고일 정렬 누적침하 — 공통 가속 램프</span><span lang="en">Sasang: accident-aligned cumulative subsidence showing a shared acceleration ramp</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/sinkhole-warning/06-nationwide-aligned.webp" alt="7 AOI 전체 사고 111건 정렬 — 공통 전조 궤적 없음" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">7 AOI 전체 사고 111건 정렬 — 공통 전조 궤적 없음</span><span lang="en">All 111 detected accidents across seven AOIs aligned — no common precursor curve</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/sinkhole-warning/07-aoi-discrimination.webp" alt="AOI별 사고/대조 판별력 — 사상만 강함" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">AOI별 사고/대조 판별력 — 사상만 강함</span><span lang="en">Accident-vs-control discrimination by AOI — only Sasang is strong</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/sinkhole-warning/08-two-stage-roles.webp" alt="2단 규칙의 역할: 오탐을 줄이는 것은 1단, 2단은 대부분 그대로 통과" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">2단 규칙의 역할: 오탐을 줄이는 것은 1단, 2단은 대부분 그대로 통과</span><span lang="en">Two-stage rule: the gate removes false alarms; stage 2 mostly passes them through</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/sinkhole-warning/09-rule-vs-gbm-loao.webp" alt="규칙 방식 vs GBM — in-sample과 LOAO 탐지율(39.4% / 16.9%)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">규칙 방식 vs GBM — in-sample과 LOAO 탐지율(39.4% / 16.9%)</span><span lang="en">Rule-based vs GBM — in-sample vs LOAO detection (39.4% / 16.9%)</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>버퍼 최대값 방식은 위치를 못 짚는다: 전국 140건 탐지율 79.3% vs 무작위 대조군 82.5%. 도심 광역침하를 반영할 뿐이다. 7 AOI 밖 1,455건(91%)은 관측 범위 밖이었다.</li><li>침하 ≠ 붕괴: 음성 송도 경보점 가속도 중앙 13.1 mm/yr²가 양성 1.6보다 컸다. 가속·시계열 형상 단일 임계로 발생/미발생을 분리할 수 없었다.</li><li>판별력은 지역에 묶여 있다: 사상 AUC 0.94, 서대문 0.69, 강동 0.59, 만덕 0.47. 광역(사고 500건)에서는 게이트 AUC 0.637, 탐지 80% 운용점 오탐 60.9%로 일반 규칙이 성립하지 않았다.</li><li>in-sample 수치는 낙관적이다: 사고에서 임계를 뽑은 규칙의 탐지율이 LOAO에서 39.4%(규칙)·16.9%(GBM)로 떨어졌다. 2단 경보는 대부분 지역에서 오탐을 줄이지 못했다(강동·만덕·광명·양양 감소 0%).</li><li>라벨을 의심할 것: 복구방법 문구로 추정한 사고원인이 API 실제 값과 93건 중 55건(59%) 달랐고, &#x27;굴착공사형&#x27; 상품 근거(AUC 0.968)는 실라벨·사전확정 조건에서 AUC 0.509(무작위)·오탐 59.5%였다.</li><li>같은 규칙의 리드 원장이 파생지표 계산 순서에 따라 44일 vs 61.5일로 달라졌다. 데모용 &#x27;탐지 100%·421.8일&#x27;(위험구역 규칙)과 &#x27;85.7%·44일&#x27;(점 등급)은 서로 다른 규칙이라 섞으면 안 된다.</li><li>지하수(GIMS) 융합은 과거 수위 API 미인가, 도심 AOI 5곳 관측정 0개로 설계에서 뺐다.</li></ul><ul lang="en"><li>Buffer-maximum scoring does not localize accidents: 79.3% &#x27;detection&#x27; for 140 accidents vs 82.5% for 400 random controls. It mostly reflects city-wide subsidence. 1,455 of 1,595 accidents (91%) were outside the InSAR footprint.</li><li>Subsidence is not collapse: at negative Songdo the median acceleration of alarmed points (13.1 mm/yr²) exceeded that of event sites (1.6). No single acceleration or curve-shape threshold separated events from non-events.</li><li>Skill is local: AUC 0.94 in Sasang but 0.69 Seodaemun, 0.59 Gangdong, 0.47 Mandeok. In the wide-area test (500 accidents) the gate AUC was 0.637 and false alarms reached 60.9% at 80% detection, so no general rule emerged.</li><li>In-sample numbers are optimistic: thresholds drawn from accidents dropped to 39.4% (rules) and 16.9% (GBM) detection under LOAO. The stage-2 alarm did not reduce false alarms in most regions (0% reduction in four of seven).</li><li>Question the labels: causes inferred from repair notes disagreed with the official cause field in 55 of 93 cases (59%), and an &#x27;excavation-only&#x27; product idea (AUC 0.968) fell to AUC 0.509 with 59.5% false alarms under the real labels and a pre-fixed configuration.</li><li>The same rule gave a 44- or 61.5-day median lead depending on when derived features were computed. The demo&#x27;s &#x27;100% / 421.8 days&#x27; (zone rule) and &#x27;85.7% / 44 days&#x27; (point grade) are different rules and should not be mixed.</li><li>Groundwater (GIMS) fusion was dropped: historical levels were not authorized via the API, and five urban AOIs had no national monitoring well.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>사상~하단 위험구역 GeoJSON·위험점수 래스터·SBAS 관측점(원자료, 번들 제외)</li><li>주소+기준일 → 정상/주의/위험 점 등급 데모와 개발자 전달본</li><li>리드타임 재계산 반출본(워크포워드 지표 npz + selftest + README)</li><li>전국 지반침하 사고 원장 수집·지오코딩 파이프라인(1,631건)</li><li>7개 AOI 통합 인터랙티브 지도(HTML, 지역당 100~160MB)</li></ul><ul lang="en"><li>Sasang–Hadan risk-zone GeoJSON, risk-score raster and SBAS points (raw data, not bundled)</li><li>Address + date → normal/caution/danger point-grading demo and developer handover package</li><li>Lead-time recomputation package (walk-forward indicator npz, self-test, README)</li><li>Collection and geocoding pipeline for the national ground-subsidence accident register (1,631 cases)</li><li>Interactive maps for the seven AOIs (HTML, 100–160 MB each)</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="insar-ground.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">Sentinel-1 PS-InSAR·SBAS 지반변위 분석 (국내 7개 지역 + 광역 + 하강궤도)</span><span lang="en" class="pager-title">Sentinel-1 PS-InSAR and SBAS Ground Deformation (7 Korean sites, metro-scale, ascending + descending)</span></a>
+    <a class="pager next" href="seoul-csk-psinsar.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">서울 COSMO-SkyMed PS-InSAR와 Sentinel-1 교차검증</span><span lang="en" class="pager-title">Seoul COSMO-SkyMed PS-InSAR with Sentinel-1 Cross-Validation</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

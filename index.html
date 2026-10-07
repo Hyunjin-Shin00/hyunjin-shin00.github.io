@@ -48,7 +48,7 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
       <h1><span lang="ko">신현진</span><span lang="en">Hyunjin Shin</span></h1>
       <p class="hero-role"><span lang="ko">위성영상 분석 연구원</span><span lang="en">Satellite Imagery Analyst · Earth Observation</span></p>
       <p class="hero-tag"><span lang="ko">SAR와 광학 위성으로 재난·환경·산업활동을 정량화합니다. 홍수·산사태·지반침하·산불·기름유출부터 해빙과 제련소 가동까지, 원시 전파 신호를 의사결정에 쓸 수 있는 지도와 수치로 바꾸는 일을 합니다.</span><span lang="en">I turn SAR and optical satellite data into decision-ready maps and numbers — floods, landslides, ground subsidence, wildfires, oil spills, Arctic sea ice, and industrial activity.</span></p>
-      <div class="stats"><div class="stat"><strong>15</strong><span lang="ko">프로젝트</span><span lang="en">Projects</span></div><div class="stat"><strong>16+</strong><span lang="ko">분석 지역 / 국가</span><span lang="en">Regions &amp; countries</span></div><div class="stat"><strong>2025.02 –</strong><span lang="ko">텔레픽스 재직</span><span lang="en">At TelePIX</span></div></div>
+      <div class="stats"><div class="stat"><strong>24</strong><span lang="ko">프로젝트</span><span lang="en">Projects</span></div><div class="stat"><strong>25+</strong><span lang="ko">분석 지역 / 국가</span><span lang="en">Regions &amp; countries</span></div><div class="stat"><strong>2025.02 –</strong><span lang="ko">텔레픽스 재직</span><span lang="en">At TelePIX</span></div></div>
     </div>
   </section>
 
@@ -96,68 +96,29 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
     <p class="sec-note"><span lang="ko">각 카드를 누르면 배경 · 방법 · 결과 그림 · 한계까지 상세 페이지로 이동합니다.</span><span lang="en">Each card opens a detail page: background, method, result figures and limitations.</span></p>
     <div class="cards">
       <a class="card" href="projects/flood-sar.html">
-        <div class="card-img"><img src="assets/img/flood-sar/00-method-flowchart.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-img"><img src="assets/img/flood-sar/00-key.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <div class="card-meta">
             <span class="card-icon">🌊</span>
-            <span class="card-period">2025.07 – 2026.01</span>
-            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+            <span class="card-period">2025.10 – 2025.12</span>
+            <span lang="ko" class="chip chip-done">완료 (모듈 납품 단계, 도시 침수 미해결)</span><span lang="en" class="chip chip-done">Completed (module delivered; urban flooding unresolved)</span>
           </div>
-          <h3><span lang="ko">Sentinel-1 SAR 기반 홍수 탐지 알고리즘</span><span lang="en">Automated Flood Mapping from Sentinel-1 SAR</span></h3>
-          <p class="card-sum"><span lang="ko">구름을 뚫고 보는 SAR의 장점을 살려, 지역마다 임계값을 손으로 맞추지 않아도 되는 자동 침수 탐지 파이프라인을 만들었다. 국내외 6개 이상 지역에서 검증했다.</span><span lang="en">An automatic inundation-mapping pipeline that removes the need for hand-tuned, per-region thresholds — validated on six-plus flood events worldwide.</span></p>
-          <div class="tags"><span class="tag">SAR</span><span class="tag">Otsu</span><span class="tag">Python</span><span class="tag">재난대응</span></div>
+          <h3><span lang="ko">Sentinel-1 홍수 탐지 — Edge-Otsu 수체 변화 + KuroSiwo 검증</span><span lang="en">Sentinel-1 Flood Mapping — Edge-Otsu Water Change with KuroSiwo Validation</span></h3>
+          <p class="card-sum"><span lang="ko">Sentinel-1 GRD 사전·사후 영상에서 Edge-Otsu로 수체를 분리하고 차이로 침수(GAIN)·퇴수(LOSS)를 산출하는 비지도 파이프라인을 만들어 텔레픽스 SatCHAT 홍수 모듈로 정리했다. 진주(2025.7)·필리핀 카가얀(2025.9)·태국 남부(2025.11)·고흥(2024.5)에 적용했고, 공개 벤치마크 KuroSiwo 67타일에서 사후 수체 F1 0.905(VV)를 재계산으로 확인했다.</span><span lang="en">Built an unsupervised pipeline that separates water from Sentinel-1 GRD pre/post images with Edge-Otsu and derives newly flooded (GAIN) and receded (LOSS) areas, packaged as the flood module of Telepix&#x27;s SatCHAT service. Applied to Jinju, Korea (Jul 2025), Cagayan, Philippines (Sep 2025), southern Thailand (Nov 2025) and Goheung (May 2024); on 67 tiles of the public KuroSiwo benchmark the post-event water F1 is 0.905 (VV), recomputed from the masks.</span></p>
+          <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">GRD</span><span class="tag">홍수</span><span class="tag">Edge-Otsu</span></div>
         </div>
       </a>
-      <a class="card" href="projects/insar-ground.html">
-        <div class="card-img"><img src="assets/img/insar-ground/00-interferogram.webp" alt="" loading="lazy" decoding="async"></div>
+      <a class="card" href="projects/nepal-flood.html">
+        <div class="card-img"><img src="assets/img/nepal-flood/00-key.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <div class="card-meta">
             <span class="card-icon">🏔️</span>
-            <span class="card-period">2025.11 – 진행 중</span>
-            <span lang="ko" class="chip chip-on">진행 중</span><span lang="en" class="chip chip-on">Ongoing</span>
+            <span class="card-period">2026.08</span>
+            <span lang="ko" class="chip chip-done">완료 (예비 분석, 현장 검증 없음)</span><span lang="en" class="chip chip-done">Completed (rapid assessment, no field validation)</span>
           </div>
-          <h3><span lang="ko">InSAR 기반 지반침하 · 산사태 모니터링</span><span lang="en">Ground Subsidence &amp; Landslide Monitoring with InSAR</span></h3>
-          <p class="card-sum"><span lang="ko">밀리미터 단위 지표 변위를 위성으로 잡아내는 InSAR 처리 역량을 사내에 구축했다. SBAS와 PS 두 계열을 모두 구현하고 서로 교차검증했다.</span><span lang="en">Built in-house InSAR capability for millimetre-scale surface displacement — implementing both SBAS and Persistent Scatterer approaches and cross-validating them.</span></p>
-          <div class="tags"><span class="tag">InSAR</span><span class="tag">SBAS</span><span class="tag">PS-InSAR</span><span class="tag">ISCE2</span></div>
-        </div>
-      </a>
-      <a class="card" href="projects/n2-sensor-model.html">
-        <div class="card-img"><img src="assets/img/n2-sensor-model/00-geocoded-5m.webp" alt="" loading="lazy" decoding="async"></div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-icon">📐</span>
-            <span class="card-period">2026.08 – 2026.09</span>
-            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
-          </div>
-          <h3><span lang="ko">국산 SAR 위성 엄밀센서모델 기하보정</span><span lang="en">Rigorous Sensor Model Geocoding for a Domestic SAR Satellite</span></h3>
-          <p class="card-sum"><span lang="ko">국산 X-band SAR 위성은 어떤 상용·공개 소프트웨어도 지원하지 않는다. 파일 안의 궤도·타이밍 정보만으로 거리-도플러 센서모델을 직접 세워 12씬을 5 m 격자로 지오코딩했다.</span><span lang="en">No commercial or open SAR software supports Korea&#x27;s X-band smallsat. I built the range-Doppler sensor model from scratch — using only the orbit and timing inside the file — and geocoded 12 scenes onto a 5 m grid.</span></p>
-          <div class="tags"><span class="tag">Range-Doppler</span><span class="tag">지오코딩</span><span class="tag">결합조정</span><span class="tag">EGM2008</span></div>
-        </div>
-      </a>
-      <a class="card" href="projects/taean-sar.html">
-        <div class="card-img"><img src="assets/img/taean-sar/00-coherence-summary.webp" alt="" loading="lazy" decoding="async"></div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-icon">🏖️</span>
-            <span class="card-period">2026.05 – 2026.09</span>
-            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
-          </div>
-          <h3><span lang="ko">해안사구 다중기법 SAR 분석 (InSAR · OT · ACD)</span><span lang="en">Coastal Dune Monitoring with Three SAR Techniques</span></h3>
-          <p class="card-sum"><span lang="ko">국산 X-band와 Sentinel-1 C-band에 InSAR·오프셋트래킹·진폭변화탐지 세 기법을 동일 절차로 교차 적용했다. 결론은 솔직하다 — 후보 55개 중 유일하게 조건을 통과한 페어조차 평균 코히런스 0.281로 위상이 완전히 탈상관했다.</span><span lang="en">Applied three techniques — phase InSAR, offset tracking and amplitude change detection — identically across a domestic X-band sensor and Sentinel-1 C-band. The honest finding: of 55 candidate pairs only one qualified, and even that one decorrelated completely at a mean coherence of 0.281.</span></p>
-          <div class="tags"><span class="tag">InSAR</span><span class="tag">Offset Tracking</span><span class="tag">ACD</span><span class="tag">ISCE2</span></div>
-        </div>
-      </a>
-      <a class="card" href="projects/smelter.html">
-        <div class="card-img"><img src="assets/img/smelter/00-tai-cumulative.webp" alt="" loading="lazy" decoding="async"></div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-icon">🏭</span>
-            <span class="card-period">2025.04 – 2025.09</span>
-            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
-          </div>
-          <h3><span lang="ko">제련소 열원 활동 모니터링 (TAI)</span><span lang="en">Smelter Thermal Activity Monitoring (TAI)</span></h3>
-          <p class="card-sum"><span lang="ko">Sentinel-2 SWIR 밴드로 용광로의 열 신호를 잡아 제련소 가동 여부를 원격 판정했다. 철강(독일·호주)과 구리(칠레·중국) 양쪽에 적용했다.</span><span lang="en">Used Sentinel-2 SWIR bands to pick up furnace heat signatures and infer whether a smelter is running — applied to steel (Germany, Australia) and copper (Chile, China).</span></p>
-          <div class="tags"><span class="tag">Sentinel-2 SWIR</span><span class="tag">TAI</span><span class="tag">GEE</span><span class="tag">시계열</span></div>
+          <h3><span lang="ko">2026 네팔 라수와 빙하붕괴 돌발홍수 — Sentinel-1 SAR 피해 분석</span><span lang="en">2026 Rasuwa (Nepal) Glacier-Collapse Flash Flood — Sentinel-1 SAR Damage Analysis</span></h3>
+          <p class="card-sum"><span lang="ko">2026-08-26 네팔 라수와 빙하붕괴 돌발홍수를 사건 4일 뒤 Sentinel-1D SLC 버스트로 분석했다. C밴드 결맞음 변화로는 홍수를 분리하지 못했고(고도 교란, 매칭 후 초과 Δcoh +0.014), 후방산란 강임계 + 대조쌍 방식으로 하류 피해 31.7 ha(대조 대비 12.5배)와 붕괴 원점 흔적 51.3 ha(55배, 보고 좌표와 108 m)를 탐지했다.</span><span lang="en">Analysed the 26 Aug 2026 glacier-collapse flash flood in Rasuwa, Nepal, four days after the event, using Sentinel-1D SLC bursts. C-band coherence change could not isolate the flood (elevation confound; matched excess Δcoh +0.014), but a strict backscatter-decrease threshold with a control pair detected 31.7 ha of downstream damage (12.5× the control) and a 51.3 ha scar at the collapse source (55×, 108 m from the reported coordinate).</span></p>
+          <div class="tags"><span class="tag">Sentinel-1D</span><span class="tag">SLC</span><span class="tag">ISCE2</span><span class="tag">결맞음</span></div>
         </div>
       </a>
       <a class="card" href="projects/wildfire.html">
@@ -173,56 +134,17 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
           <div class="tags"><span class="tag">Sentinel-2</span><span class="tag">dNBR</span><span class="tag">GK2A</span><span class="tag">재난대응</span></div>
         </div>
       </a>
-      <a class="card" href="projects/dtm.html">
-        <div class="card-img"><img src="assets/img/dtm/00-dsm-vs-dtm.webp" alt="" loading="lazy" decoding="async"></div>
+      <a class="card" href="projects/earthquake-damage.html">
+        <div class="card-img"><img src="assets/img/earthquake-damage/00-key-ccd-map.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <div class="card-meta">
-            <span class="card-icon">⛰️</span>
-            <span class="card-period">2025.03 – 2025.05</span>
-            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+            <span class="card-icon">🌋</span>
+            <span class="card-period">2026.06 – 2026.08</span>
+            <span lang="ko" class="chip chip-done">완료 (현장 미검증 예비분석)</span><span lang="en" class="chip chip-done">Completed (preliminary, not field-verified)</span>
           </div>
-          <h3><span lang="ko">중남미 고해상도 DTM 제작 및 초해상화</span><span lang="en">High-Resolution DTM Generation for Latin America</span></h3>
-          <p class="card-sum"><span lang="ko">중남미에는 30m급 무료 DEM밖에 없다. 저비용으로 5–10m DTM을 만들 수 있는지를 InSAR · 스테레오 · LiDAR 세 경로로 검증했다.</span><span lang="en">Latin America only has free 30 m DEMs. We tested whether 5–10 m DTMs could be produced cheaply, via three routes: InSAR, stereo photogrammetry and LiDAR.</span></p>
-          <div class="tags"><span class="tag">InSAR DSM</span><span class="tag">LiDAR</span><span class="tag">Stereo</span><span class="tag">DSM→DTM</span></div>
-        </div>
-      </a>
-      <a class="card" href="projects/nsr-arctic.html">
-        <div class="card-img"><img src="assets/img/nsr-arctic/00-opening-overall.webp" alt="" loading="lazy" decoding="async"></div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-icon">🧊</span>
-            <span class="card-period">2025.02 – 진행 중</span>
-            <span lang="ko" class="chip chip-on">진행 중</span><span lang="en" class="chip chip-on">Ongoing</span>
-          </div>
-          <h3><span lang="ko">북극항로(NSR) 개방 시기 정량 분석</span><span lang="en">Quantifying the Northern Sea Route Opening Window</span></h3>
-          <p class="card-sum"><span lang="ko">해빙농도·해빙두께·실제 선박 통항 데이터를 겹쳐, 북극항로가 해마다 언제 열리고 그 기간이 어떻게 변해왔는지를 수치로 만들었다.</span><span lang="en">Overlaid sea-ice concentration, thickness and real vessel traffic to quantify when the Northern Sea Route opens each year — and how that window has shifted.</span></p>
-          <div class="tags"><span class="tag">해빙</span><span class="tag">OSI-SAF</span><span class="tag">NSIDC</span><span class="tag">SMOS</span></div>
-        </div>
-      </a>
-      <a class="card" href="projects/bluebon.html">
-        <div class="card-img"><img src="assets/img/bluebon/00-along-drift.webp" alt="" loading="lazy" decoding="async"></div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-icon">🛰️</span>
-            <span class="card-period">2025.03 – 2026.05</span>
-            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
-          </div>
-          <h3><span lang="ko">초소형 위성 전처리 및 포인팅 오차 분석</span><span lang="en">CubeSat Preprocessing &amp; Pointing Error Analysis</span></h3>
-          <p class="card-sum"><span lang="ko">자사 초소형 위성의 원시 바이너리를 영상으로 바꾸는 파이프라인을 만들고, 촬영 위치가 왜 어긋나는지를 궤도·자세 메타데이터로 통계 분석했다.</span><span lang="en">Built the pipeline that turns our CubeSat&#x27;s raw binary into imagery, then statistically traced why its pointing drifts, using orbit and attitude metadata.</span></p>
-          <div class="tags"><span class="tag">복사보정</span><span class="tag">검보정</span><span class="tag">PRNU</span><span class="tag">통계분석</span></div>
-        </div>
-      </a>
-      <a class="card" href="projects/soil-moisture.html">
-        <div class="card-img"><img src="assets/img/soil-moisture/00-cosmos-validation.webp" alt="" loading="lazy" decoding="async"></div>
-        <div class="card-body">
-          <div class="card-meta">
-            <span class="card-icon">🌾</span>
-            <span class="card-period">2026.09 – 2026.10</span>
-            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
-          </div>
-          <h3><span lang="ko">SAR 기반 표층 토양수분 산출</span><span lang="en">Surface Soil Moisture Retrieval from SAR</span></h3>
-          <p class="card-sum"><span lang="ko">무료 위성만으로 표층 토양수분을 산출하고, 논문의 방법을 수정 없이 적용해 현장 관측과 비교했다. 재현된 것과 재현되지 않은 것을 모두 기록했다.</span><span lang="en">Retrieved surface soil moisture from free satellite data only, applying published methods without modification — and recorded both what reproduced and what did not.</span></p>
-          <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">논문 재현</span><span class="tag">검증</span><span class="tag">농업</span></div>
+          <h3><span lang="ko">지진 피해 SAR 분석 — 2026 베네수엘라 M7.5 (CCD·DInSAR)</span><span lang="en">SAR Earthquake Damage Assessment — 2026 Venezuela M7.5 (CCD &amp; DInSAR)</span></h3>
+          <p class="card-sum"><span lang="ko">2026-06-24 베네수엘라 M7.5 지진 직후 Sentinel-1 SLC로 코히런스 변화탐지(CCD)와 차분간섭(DInSAR)을 수행해 해안 도심(Catia La Mar)의 피해 의심구역·도로 노출을 등급화했다. Copernicus EMS 피해판독(EMSR884)과 광학 AI 건물분류로 교차검증했고, 재계산으로 수치를 다시 확인하면서 기준선 대비 효과가 보고서보다 작다는 점과 DInSAR 절대 변위의 한계를 함께 기록했다.</span><span lang="en">Right after the 24 June 2026 M7.5 Venezuela earthquake, Sentinel-1 SLC pairs were used for coherence change detection (CCD) and differential InSAR to grade suspected damage zones and road exposure in the coastal city of Catia La Mar. Results were cross-checked against Copernicus EMS damage grading (EMSR884) and an optical AI building classifier; a later re-computation confirmed the numbers but showed the lift over baseline is smaller than first reported and that absolute DInSAR displacement is not reliable.</span></p>
+          <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">CCD</span><span class="tag">DInSAR</span><span class="tag">SNAPHU</span></div>
         </div>
       </a>
       <a class="card" href="projects/oil-spill.html">
@@ -238,6 +160,149 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
           <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">dark spot</span><span class="tag">재난대응</span></div>
         </div>
       </a>
+      <a class="card" href="projects/insar-ground.html">
+        <div class="card-img"><img src="assets/img/insar-ground/00-key-capital-wide-sbas.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">🛰️</span>
+            <span class="card-period">2026.05 – 2026.09</span>
+            <span lang="ko" class="chip chip-done">완료 (경보 규칙 연계는 별도 프로젝트)</span><span lang="en" class="chip chip-done">Completed (alert-rule work continues as a separate project)</span>
+          </div>
+          <h3><span lang="ko">Sentinel-1 PS-InSAR·SBAS 지반변위 분석 (국내 7개 지역 + 광역 + 하강궤도)</span><span lang="en">Sentinel-1 PS-InSAR and SBAS Ground Deformation (7 Korean sites, metro-scale, ascending + descending)</span></h3>
+          <p class="card-sum"><span lang="ko">국내 대형 손해보험사와의 지반침하 PoC에서 사고 지역 7곳의 지표 변위를 Sentinel-1로 측정했다. 같은 코레지 스택에서 PS-InSAR(StaMPS)와 자체 SBAS를 함께 돌려 PS 2만8천~20만 점/지역, 수도권 광역 SBAS 107만 픽셀을 만들고, 하강궤도 재처리로 수직·동서 성분을 분리했다. 두 기법 비교와 하강궤도 공백(2022~2024)처럼 잘 안 된 부분도 수치로 남겼다.</span><span lang="en">Measured surface deformation at seven Korean ground-collapse sites for a ground-subsidence PoC with a major Korean P&amp;C insurer. PS-InSAR (StaMPS) and an in-house SBAS ran on the same coregistered Sentinel-1 stacks, giving 28k–206k PS points per site and a 1.07M-pixel SBAS map of the Seoul metro area; descending-orbit reprocessing separated vertical and east-west motion. Where things did not work (PS/SBAS disagreement, the 2022–2024 descending data gap), the numbers are recorded as well.</span></p>
+          <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">PS-InSAR</span><span class="tag">SBAS</span><span class="tag">StaMPS</span></div>
+        </div>
+      </a>
+      <a class="card" href="projects/sinkhole-warning.html">
+        <div class="card-img"><img src="assets/img/sinkhole-warning/00-key.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">🕳️</span>
+            <span class="card-period">2026.06 – 2026.09</span>
+            <span lang="ko" class="chip chip-done">PoC 완료 · 일반화 실패 기록</span><span lang="en" class="chip chip-done">PoC completed; generalization failure documented</span>
+          </div>
+          <h3><span lang="ko">InSAR 기반 싱크홀(지반침하) 조기경보 — 위험 판정·리드타임 백테스트</span><span lang="en">InSAR-based sinkhole early warning — risk rules and lead-time backtesting</span></h3>
+          <p class="card-sum"><span lang="ko">Sentinel-1 PS/SBAS 변위에 시추공 지반등급과 국토안전관리원 지반침하 사고 원장(1,631건)을 결합해 &#x27;사고 전에 경보가 가능했나&#x27;를 백테스트했다. 부산 사상~하단에서는 사고 지점이 확실히 더 많이 가라앉아 있었고(AUC 0.94) 위험구역 63.4 ha·점 등급 데모까지 만들었다. 무작위 대조군·LOAO·광역 확장에서는 판별력이 크게 떨어져, InSAR 단독 붕괴 예측은 안 된다는 결론도 함께 남겼다.</span><span lang="en">Combined Sentinel-1 PS/SBAS displacement with borehole-based ground grades and a national ground-subsidence accident register (1,631 cases) to test whether warnings could have preceded collapses. In Busan Sasang, accident sites had clearly subsided more (AUC 0.94), leading to a 63.4 ha risk-zone map and a point-grading demo. Random-control, leave-one-accident-out and wide-area tests showed the skill largely disappears elsewhere, so InSAR alone cannot predict collapses.</span></p>
+          <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">PS-InSAR</span><span class="tag">SBAS</span><span class="tag">지반침하</span></div>
+        </div>
+      </a>
+      <a class="card" href="projects/seoul-csk-psinsar.html">
+        <div class="card-img"><img src="assets/img/seoul-csk-psinsar/00-key.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">🛰️</span>
+            <span class="card-period">2026.09 – 2026.10</span>
+            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+          </div>
+          <h3><span lang="ko">서울 COSMO-SkyMed PS-InSAR와 Sentinel-1 교차검증</span><span lang="en">Seoul COSMO-SkyMed PS-InSAR with Sentinel-1 Cross-Validation</span></h3>
+          <p class="card-sum"><span lang="ko">COSMO-SkyMed 2세대(X밴드) 32씬으로 서울 전역 PS-InSAR 6,022,448점을 산출했다. CSG 포맷용 ISCE2 어댑터를 직접 만들고 StaMPS Python 포팅판의 결과 오류·미종료·메모리 버그를 고쳐 완주했다. Sentinel-1 상승·하강 결과와 비교해 같은 계절창에서 r=0.91~0.92를 확인했고, 도시 규모 남북경사가 수직 지반운동임을 상승/하강 경사벡터로 판정했다.</span><span lang="en">Produced a city-wide PS-InSAR map of Seoul with 6,022,448 persistent scatterers from 32 COSMO-SkyMed Second Generation (X-band) scenes. This required a custom ISCE2 reader for the CSG format and fixes to correctness, runtime and memory bugs in a Python port of StaMPS. Cross-validated against Sentinel-1 ascending and descending stacks (r = 0.91–0.92 for matching seasonal windows) and used ascending/descending tilt vectors to show that a city-scale north–south tilt is vertical ground motion.</span></p>
+          <div class="tags"><span class="tag">COSMO-SkyMed</span><span class="tag">Sentinel-1</span><span class="tag">PS-InSAR</span><span class="tag">SBAS</span></div>
+        </div>
+      </a>
+      <a class="card" href="projects/landslide-insar.html">
+        <div class="card-img"><img src="assets/img/landslide-insar/00-key.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">⛰️</span>
+            <span class="card-period">2025.11 – 2025.12</span>
+            <span lang="ko" class="chip chip-done">완료 (경주는 탐지 실패로 결론)</span><span lang="en" class="chip chip-done">Completed (Gyeongju concluded as a non-detection)</span>
+          </div>
+          <h3><span lang="ko">산사태 InSAR — 경주 태풍 산사태 vs 카라코람 사면 (PS·SBAS)</span><span lang="en">Landslide InSAR — Typhoon Landslides in Gyeongju vs Karakoram Slopes (PS &amp; SBAS)</span></h3>
+          <p class="card-sum"><span lang="ko">Sentinel-1 버스트 SLC 를 PyGMTSAR 로 PS·SBAS 처리해 2022 태풍 힌남노 직후 경주 토함산 일대 산사태와 파키스탄 카라코람 산악 사면의 변위속도를 비교했다. 건조 산악(파키스탄)에서는 SBAS와 PS가 r=0.86으로 일치하며 최대 −192 mm/yr 이동 사면을 잡았지만, 숲이 덮인 경주에서는 결맞음 중앙값 0.16으로 잡음이 지배했고 66개 산사태 지점의 속도가 배경과 구별되지 않았다.</span><span lang="en">Sentinel-1 burst SLCs were processed with PyGMTSAR (PS and SBAS) to compare post-typhoon landslides in Gyeongju, Korea (Typhoon Hinnamnor, Sept 2022) with mountain slopes in the Pakistani Karakoram. In the arid Karakoram, SBAS and PS agreed (r = 0.86) and resolved slopes moving up to −192 mm/yr; in forested Gyeongju, median coherence was 0.16, the velocity field was noise-dominated, and velocities at 66 mapped landslides were indistinguishable from background.</span></p>
+          <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">PS-InSAR</span><span class="tag">SBAS</span><span class="tag">PyGMTSAR</span></div>
+        </div>
+      </a>
+      <a class="card" href="projects/usoi-dam.html">
+        <div class="card-img"><img src="assets/img/usoi-dam/00-key.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">🏔️</span>
+            <span class="card-period">2026.07</span>
+            <span lang="ko" class="chip chip-done">완료 (DSC 단독 제품, ASC+DSC 분해는 부분 결과)</span><span lang="en" class="chip chip-done">Completed (descending-only product; ASC+DSC decomposition partial)</span>
+          </div>
+          <h3><span lang="ko">Usoi 자연댐(Sarez 호) Sentinel-1 SBAS 변위 모니터링</span><span lang="en">Usoi Natural Dam (Lake Sarez) Sentinel-1 SBAS Monitoring</span></h3>
+          <p class="card-sum"><span lang="ko">타지키스탄 파미르의 Usoi 자연댐 일대를 Sentinel-1 상승·하강 두 궤도 SBAS(ISCE2+MintPy)로 처리해 수직/동서 분해를 시도했다. 하강궤도는 2019–2026 223개 날짜로 AOI 육지 78.7%에서 속도장을 얻었지만, 상승궤도는 AOI 내부 시간결맞음이 0.004로 무너져 분해는 댐에서 남쪽 7.1% 영역에만 남았다. 최종 제품은 ERA5와 경험적 고도 detrend로 보정한 하강궤도 LOS 속도장이다.</span><span lang="en">Processed Sentinel-1 ascending and descending SBAS stacks (ISCE2 + MintPy) over the Usoi natural dam in the Tajik Pamir and attempted a vertical/east-west decomposition. The descending track (223 dates, 2019–2026) yielded velocities over 78.7% of the land AOI, but ascending temporal coherence collapsed to 0.004 inside the AOI, so the decomposition survives only on 7.1% of the grid south of the dam. The delivered product is a descending LOS velocity map corrected with ERA5 plus an empirical elevation detrend.</span></p>
+          <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">SBAS</span><span class="tag">MintPy</span><span class="tag">ISCE2</span></div>
+        </div>
+      </a>
+      <a class="card" href="projects/taean-sar.html">
+        <div class="card-img"><img src="assets/img/taean-sar/00-coherence-summary.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">🏖️</span>
+            <span class="card-period">2026.05 – 2026.09</span>
+            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+          </div>
+          <h3><span lang="ko">해안사구 다중기법 SAR 분석 (InSAR · OT · ACD)</span><span lang="en">Coastal Dune Monitoring with Three SAR Techniques</span></h3>
+          <p class="card-sum"><span lang="ko">국산 X-band와 Sentinel-1 C-band에 InSAR·오프셋트래킹·진폭변화탐지 세 기법을 동일 절차로 교차 적용했다. 결론은 솔직하다 — 후보 55개 중 유일하게 조건을 통과한 페어조차 평균 코히런스 0.281로 위상이 완전히 탈상관했다.</span><span lang="en">Applied three techniques — phase InSAR, offset tracking and amplitude change detection — identically across a domestic X-band sensor and Sentinel-1 C-band. The honest finding: of 55 candidate pairs only one qualified, and even that one decorrelated completely at a mean coherence of 0.281.</span></p>
+          <div class="tags"><span class="tag">InSAR</span><span class="tag">Offset Tracking</span><span class="tag">ACD</span><span class="tag">ISCE2</span></div>
+        </div>
+      </a>
+      <a class="card" href="projects/nationalpark-insar.html">
+        <div class="card-img"><img src="assets/img/nationalpark-insar/00-key.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">🛰️</span>
+            <span class="card-period">2025.12 – 2026.07</span>
+            <span lang="ko" class="chip chip-done">파이프라인 완성·현장 이관, 실제 N2 두 날짜 결과는 미확보</span><span lang="en" class="chip chip-done">Pipeline delivered for on-site use; no two-date N2 result on record yet</span>
+          </div>
+          <h3><span lang="ko">국산 SAR(NEXTSat-2) InSAR 처리 파이프라인 — 국립공원 지표변위 모니터링</span><span lang="en">NEXTSat-2 SAR InSAR pipeline for national-park ground-motion monitoring</span></h3>
+          <p class="card-sum"><span lang="ko">ISCE2에 리더가 없는 국산 소형 SAR 위성 NEXTSat-2(N2) 영상을, ISCE2를 고치지 않고 COSMO-SkyMed 리더를 런타임 패치(spoofing)해 InSAR 처리하는 파이프라인을 만들었다. 실제 CSK 1일 쌍으로 처리 체인을, N2 구조 시험파일로 메타데이터 주입을 검증하고 고객 측 노트북용 현장 번들로 이관했다. 재검토에서 CSK 검증 결과가 빈 DEM 때문에 지형 위상을 제거하지 못했다는 점을 찾아 기록했다.</span><span lang="en">Built a pipeline that runs InSAR on NEXTSat-2 (N2), a Korean small SAR satellite that ISCE2 cannot read, by patching the COSMO-SkyMed reader at runtime instead of modifying ISCE2. The processing chain was tested on a real one-day CSK pair and the metadata injection on an N2 structure-only file, then packaged for on-site processing on the client&#x27;s laptop. A later review found that the CSK test used a void DEM, so topographic phase was never removed.</span></p>
+          <div class="tags"><span class="tag">NEXTSat-2</span><span class="tag">ISCE2</span><span class="tag">InSAR</span><span class="tag">COSMO-SkyMed</span></div>
+        </div>
+      </a>
+      <a class="card" href="projects/n2-sensor-model.html">
+        <div class="card-img"><img src="assets/img/n2-sensor-model/00-geocoded-5m.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">📐</span>
+            <span class="card-period">2026.08 – 2026.09</span>
+            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+          </div>
+          <h3><span lang="ko">국산 SAR 위성 엄밀센서모델 기하보정</span><span lang="en">Rigorous Sensor Model Geocoding for a Domestic SAR Satellite</span></h3>
+          <p class="card-sum"><span lang="ko">국산 X-band SAR 위성은 어떤 상용·공개 소프트웨어도 지원하지 않는다. 파일 안의 궤도·타이밍 정보만으로 거리-도플러 센서모델을 직접 세워 12씬을 5 m 격자로 지오코딩했다.</span><span lang="en">No commercial or open SAR software supports Korea&#x27;s X-band smallsat. I built the range-Doppler sensor model from scratch — using only the orbit and timing inside the file — and geocoded 12 scenes onto a 5 m grid.</span></p>
+          <div class="tags"><span class="tag">Range-Doppler</span><span class="tag">지오코딩</span><span class="tag">결합조정</span><span class="tag">EGM2008</span></div>
+        </div>
+      </a>
+      <a class="card" href="projects/volcano-sar.html">
+        <div class="card-img"><img src="assets/img/volcano-sar/00-resolution-compare.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">🌋</span>
+            <span class="card-period">2026.02</span>
+            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+          </div>
+          <h3><span lang="ko">초고해상도 SAR 화산 모니터링</span><span lang="en">Volcano Monitoring with Very-High-Resolution SAR</span></h3>
+          <p class="card-sum"><span lang="ko">25cm급 상용 SAR(Umbra)로 화산 지형을 관측하고, Sentinel-1(10m)과 해상도를 직접 비교했다. SICD 포맷을 직접 파싱해 간섭 처리까지 시도했다.</span><span lang="en">Observed volcanic terrain with 25 cm commercial SAR (Umbra) and compared it directly against Sentinel-1 at 10 m — parsing SICD natively and attempting interferometry.</span></p>
+          <div class="tags"><span class="tag">Umbra SAR</span><span class="tag">SICD</span><span class="tag">25cm</span><span class="tag">InSAR</span></div>
+        </div>
+      </a>
+      <a class="card" href="projects/dtm.html">
+        <div class="card-img"><img src="assets/img/dtm/00-dsm-vs-dtm.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">⛰️</span>
+            <span class="card-period">2025.03 – 2025.05</span>
+            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+          </div>
+          <h3><span lang="ko">중남미 고해상도 DTM 제작 및 초해상화</span><span lang="en">High-Resolution DTM Generation for Latin America</span></h3>
+          <p class="card-sum"><span lang="ko">중남미에는 30m급 무료 DEM밖에 없다. 저비용으로 5–10m DTM을 만들 수 있는지를 InSAR · 스테레오 · LiDAR 세 경로로 검증했다.</span><span lang="en">Latin America only has free 30 m DEMs. We tested whether 5–10 m DTMs could be produced cheaply, via three routes: InSAR, stereo photogrammetry and LiDAR.</span></p>
+          <div class="tags"><span class="tag">InSAR DSM</span><span class="tag">LiDAR</span><span class="tag">Stereo</span><span class="tag">DSM→DTM</span></div>
+        </div>
+      </a>
+      <a class="card" href="projects/bluebon.html">
+        <div class="card-img"><img src="assets/img/bluebon/00-along-drift.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">🛰️</span>
+            <span class="card-period">2025.03 – 2026.05</span>
+            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+          </div>
+          <h3><span lang="ko">초소형 위성 전처리 및 포인팅 오차 분석</span><span lang="en">CubeSat Preprocessing &amp; Pointing Error Analysis</span></h3>
+          <p class="card-sum"><span lang="ko">자사 초소형 위성의 원시 바이너리를 영상으로 바꾸는 파이프라인을 만들고, 촬영 위치가 왜 어긋나는지를 궤도·자세 메타데이터로 통계 분석했다.</span><span lang="en">Built the pipeline that turns our CubeSat&#x27;s raw binary into imagery, then statistically traced why its pointing drifts, using orbit and attitude metadata.</span></p>
+          <div class="tags"><span class="tag">복사보정</span><span class="tag">검보정</span><span class="tag">PRNU</span><span class="tag">통계분석</span></div>
+        </div>
+      </a>
       <a class="card" href="projects/dmz-road.html">
         <div class="card-img"><img src="assets/img/dmz-road/00-extent-final.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="card-body">
@@ -249,6 +314,45 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
           <h3><span lang="ko">접경지역 도로 공사 진행 변화탐지</span><span lang="en">Border-Area Road Construction Change Detection</span></h3>
           <p class="card-sum"><span lang="ko">공개 상용 위성영상 시계열로 접경지역 도로 공사의 진행을 시기별로 추적했다. 5개월 만에 누적 연장 0.2 km에서 7.06 km로 늘었고, 최근접 지점은 군사분계선에서 약 230 m다.</span><span lang="en">Tracked road construction near the inter-Korean border through a time series of commercial satellite imagery. Cumulative length grew from 0.2 km to 7.06 km in five months; the nearest point sits about 230 m from the Military Demarcation Line.</span></p>
           <div class="tags"><span class="tag">PlanetScope</span><span class="tag">변화탐지</span><span class="tag">시계열</span><span class="tag">GIS</span></div>
+        </div>
+      </a>
+      <a class="card" href="projects/smelter.html">
+        <div class="card-img"><img src="assets/img/smelter/00-tai-cumulative.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">🏭</span>
+            <span class="card-period">2025.04 – 2025.09</span>
+            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+          </div>
+          <h3><span lang="ko">제련소 열원 활동 모니터링 (TAI)</span><span lang="en">Smelter Thermal Activity Monitoring (TAI)</span></h3>
+          <p class="card-sum"><span lang="ko">Sentinel-2 SWIR 밴드로 용광로의 열 신호를 잡아 제련소 가동 여부를 원격 판정했다. 철강(독일·호주)과 구리(칠레·중국) 양쪽에 적용했다.</span><span lang="en">Used Sentinel-2 SWIR bands to pick up furnace heat signatures and infer whether a smelter is running — applied to steel (Germany, Australia) and copper (Chile, China).</span></p>
+          <div class="tags"><span class="tag">Sentinel-2 SWIR</span><span class="tag">TAI</span><span class="tag">GEE</span><span class="tag">시계열</span></div>
+        </div>
+      </a>
+      <a class="card" href="projects/nsr-arctic.html">
+        <div class="card-img"><img src="assets/img/nsr-arctic/00-opening-overall.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">🧊</span>
+            <span class="card-period">2025.02 – 진행 중</span>
+            <span lang="ko" class="chip chip-on">진행 중</span><span lang="en" class="chip chip-on">Ongoing</span>
+          </div>
+          <h3><span lang="ko">북극항로(NSR) 개방 시기 정량 분석</span><span lang="en">Quantifying the Northern Sea Route Opening Window</span></h3>
+          <p class="card-sum"><span lang="ko">해빙농도·해빙두께·실제 선박 통항 데이터를 겹쳐, 북극항로가 해마다 언제 열리고 그 기간이 어떻게 변해왔는지를 수치로 만들었다.</span><span lang="en">Overlaid sea-ice concentration, thickness and real vessel traffic to quantify when the Northern Sea Route opens each year — and how that window has shifted.</span></p>
+          <div class="tags"><span class="tag">해빙</span><span class="tag">OSI-SAF</span><span class="tag">NSIDC</span><span class="tag">SMOS</span></div>
+        </div>
+      </a>
+      <a class="card" href="projects/soil-moisture.html">
+        <div class="card-img"><img src="assets/img/soil-moisture/00-key.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">🌾</span>
+            <span class="card-period">2026.10 (1일)</span>
+            <span lang="ko" class="chip chip-done">완료 (탐색 연구)</span><span lang="en" class="chip chip-done">Completed (exploratory study)</span>
+          </div>
+          <h3><span lang="ko">Sentinel-1 토양수분 산출 — 논문 3편 재현·검증</span><span lang="en">Sentinel-1 Soil Moisture Retrieval: Reproducing and Validating Three Published Methods</span></h3>
+          <p class="card-sum"><span lang="ko">무료 위성자료(Sentinel-1·2, SMAP)만으로 표층 토양수분을 산출하고, 공개 논문 3편의 방법을 그대로 적용해 현장관측과 비교했다. 영국에서는 상관 수준(r² 평균 0.45 vs 논문 0.47)을 재현했지만 절대오차는 재현하지 못했다. 미국 SCAN 재현과 국내 관측소 1점 비교는 실패했고, 실패 기록도 그대로 남겼다.</span><span lang="en">Retrieved surface soil moisture from free satellite data only (Sentinel-1/2, SMAP) by applying three published methods unchanged and comparing against in-situ networks. In the UK, correlation levels were reproduced (mean r² 0.45 vs 0.47 in the paper) but absolute errors were not. The US SCAN reproduction and Korean single-station comparisons failed; those failures are documented as-is.</span></p>
+          <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">Sentinel-2</span><span class="tag">SMAP</span><span class="tag">토양수분</span></div>
         </div>
       </a>
       <a class="card" href="projects/mangrove.html">
@@ -264,17 +368,30 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
           <div class="tags"><span class="tag">Sentinel-2</span><span class="tag">Random Forest</span><span class="tag">GEE</span><span class="tag">NDVI</span></div>
         </div>
       </a>
-      <a class="card" href="projects/volcano-sar.html">
-        <div class="card-img"><img src="assets/img/volcano-sar/00-resolution-compare.webp" alt="" loading="lazy" decoding="async"></div>
+      <a class="card" href="projects/rail-disaster-sar.html">
+        <div class="card-img"><img src="assets/img/rail-disaster-sar/00-key.webp" alt="" loading="lazy" decoding="async"></div>
         <div class="card-body">
           <div class="card-meta">
-            <span class="card-icon">🌋</span>
-            <span class="card-period">2026.02</span>
-            <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+            <span class="card-icon">🚆</span>
+            <span class="card-period">2026.09</span>
+            <span lang="ko" class="chip chip-done">완료 (타당성 조사)</span><span lang="en" class="chip chip-done">Completed (feasibility study)</span>
           </div>
-          <h3><span lang="ko">초고해상도 SAR 화산 모니터링</span><span lang="en">Volcano Monitoring with Very-High-Resolution SAR</span></h3>
-          <p class="card-sum"><span lang="ko">25cm급 상용 SAR(Umbra)로 화산 지형을 관측하고, Sentinel-1(10m)과 해상도를 직접 비교했다. SICD 포맷을 직접 파싱해 간섭 처리까지 시도했다.</span><span lang="en">Observed volcanic terrain with 25 cm commercial SAR (Umbra) and compared it directly against Sentinel-1 at 10 m — parsing SICD natively and attempting interferometry.</span></p>
-          <div class="tags"><span class="tag">Umbra SAR</span><span class="tag">SICD</span><span class="tag">25cm</span><span class="tag">InSAR</span></div>
+          <h3><span lang="ko">일본 철도 재해 SAR 탐지 타당성 조사</span><span lang="en">Railway Disaster Detection with SAR — Feasibility Study (Japan)</span></h3>
+          <p class="card-sum"><span lang="ko">일본 철도 운영사 대상으로 무료 Sentinel-1 이 철도 재해를 사건 직후 판정할 수 있는지 실제 사건 7건으로 측정. 지진 손상 고가교는 결맞음 변화로 두 궤도가 같은 400 m 구간을 지목했고(무작위 널 백분위 0.10 %), 하천 범람은 당일 관측이면 잡혔다. 교량 유실·늦은 관측·산림 붕괴지·겨울 DInSAR 는 실패했고, 그 원인을 타이밍·해상도·결맞음·후방산란 대비·지형으로 분리했다.</span><span lang="en">For a Japanese railway operator, measured on seven real events whether free Sentinel-1 can assess railway disaster damage right after the event. For an earthquake-damaged viaduct, coherence change from two independent orbits pointed to the same 400 m section (0.10th percentile of a random-transect null), and river flooding was mapped when imaged the same day. Bridge washout, late acquisitions, forest landslides and winter DInSAR failed; the failures were separated into timing, resolution, coherence, backscatter contrast and terrain.</span></p>
+          <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">Coherence</span><span class="tag">Change detection</span><span class="tag">Flood</span></div>
+        </div>
+      </a>
+      <a class="card" href="projects/sme-underwriting.html">
+        <div class="card-img"><img src="assets/img/sme-underwriting/00-key.webp" alt="" loading="lazy" decoding="async"></div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-icon">🏭</span>
+            <span class="card-period">2026.09 – 2026.10</span>
+            <span lang="ko" class="chip chip-done">PoC 완료 · 최종 발표 준비 중(2026-10)</span><span lang="en" class="chip chip-done">PoC completed; final presentation in preparation (Oct 2026)</span>
+          </div>
+          <h3><span lang="ko">위성·공간정보 기반 중소 공장 인수심사 분석</span><span lang="en">Satellite &amp; Geospatial Underwriting Analysis for SME Factories</span></h3>
+          <p class="card-sum"><span lang="ko">국내 대형 손해보험사와 진행한 PoC에서 대구 성서산업단지 중소 공장 물건을 위성영상·공공 공간데이터로 판독하는 인수심사 참고자료를 만들었다. 본인은 공장등록현황→KSIC 업종 연결과 GIS건물통합정보 분석을 맡았고, 공장 필지 1,237곳 중 966곳(78.1%)이 특수건물 기준(연면적 3,000㎡) 미만이라 안전점검 자료가 없다는 점을 원자료에서 산출했다.</span><span lang="en">In a PoC with a major Korean P&amp;C insurer, we built underwriting reference reports for small and mid-sized factories in Daegu&#x27;s Seongseo industrial complex from satellite imagery and public geospatial data. I handled the factory-registry-to-KSIC industry linkage and the building-register GIS analysis, and computed from raw data that 966 of 1,237 factory parcels (78.1%) fall below the 3,000 m² special-building threshold and therefore have no mandatory fire-safety inspection record.</span></p>
+          <div class="tags"><span class="tag">보험 인수심사</span><span class="tag">GIS건물통합정보</span><span class="tag">건축물대장</span><span class="tag">KSIC</span></div>
         </div>
       </a>
       <a class="card" href="projects/spaceup.html">

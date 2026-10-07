@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>InSAR 기반 지반침하 · 산사태 모니터링 · 신현진</title>
-<meta name="description" content="밀리미터 단위 지표 변위를 위성으로 잡아내는 InSAR 처리 역량을 사내에 구축했다. SBAS와 PS 두 계열을 모두 구현하고 서로 교차검증했다.">
-<meta property="og:title" content="InSAR 기반 지반침하 · 산사태 모니터링 · 신현진">
-<meta property="og:description" content="밀리미터 단위 지표 변위를 위성으로 잡아내는 InSAR 처리 역량을 사내에 구축했다. SBAS와 PS 두 계열을 모두 구현하고 서로 교차검증했다.">
+<title>Sentinel-1 PS-InSAR·SBAS 지반변위 분석 (국내 7개 지역 + 광역 + 하강궤도) · 신현진</title>
+<meta name="description" content="국내 대형 손해보험사와의 지반침하 PoC에서 사고 지역 7곳의 지표 변위를 Sentinel-1로 측정했다. 같은 코레지 스택에서 PS-InSAR(StaMPS)와 자체 SBAS를 함께 돌려 PS 2만8천~20만 점/지역, 수도권 광역 SBAS 107만 픽셀을 만들고, 하강궤도 재처리로 수직·동서 성분을 분리했다. 두 기법 비교와 하강궤도 공백(2022~2024)처럼 잘 안 된 부분도 수치로 남겼다.">
+<meta property="og:title" content="Sentinel-1 PS-InSAR·SBAS 지반변위 분석 (국내 7개 지역 + 광역 + 하강궤도) · 신현진">
+<meta property="og:description" content="국내 대형 손해보험사와의 지반침하 PoC에서 사고 지역 7곳의 지표 변위를 Sentinel-1로 측정했다. 같은 코레지 스택에서 PS-InSAR(StaMPS)와 자체 SBAS를 함께 돌려 PS 2만8천~20만 점/지역, 수도권 광역 SBAS 107만 픽셀을 만들고, 하강궤도 재처리로 수직·동서 성분을 분리했다. 두 기법 비교와 하강궤도 공백(2022~2024)처럼 잘 안 된 부분도 수치로 남겼다.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,105 +44,101 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
 <main class="proj">
   <div class="proj-head">
     <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
-    <span class="proj-icon">🏔️</span>
-    <h1><span lang="ko">InSAR 기반 지반침하 · 산사태 모니터링</span><span lang="en">Ground Subsidence &amp; Landslide Monitoring with InSAR</span></h1>
+    <span class="proj-icon">🛰️</span>
+    <h1><span lang="ko">Sentinel-1 PS-InSAR·SBAS 지반변위 분석 (국내 7개 지역 + 광역 + 하강궤도)</span><span lang="en">Sentinel-1 PS-InSAR and SBAS Ground Deformation (7 Korean sites, metro-scale, ascending + descending)</span></h1>
     <div class="proj-meta">
-      <span>2025.11 – 진행 중</span>
+      <span>2026.05 – 2026.09</span>
       <span class="dot">·</span>
-      <span lang="ko">주 담당</span><span lang="en">Lead</span>
+      <span lang="ko">주도 (처리·분석 전 과정 수행, StaMPS Python 포팅 패키지·처리 매뉴얼은 사내 제공)</span><span lang="en">Lead (all processing and analysis; used an in-house StaMPS Python port and manual)</span>
       <span class="dot">·</span>
-      <span lang="ko" class="chip chip-on">진행 중</span><span lang="en" class="chip chip-on">Ongoing</span>
+      <span lang="ko" class="chip chip-done">완료 (경보 규칙 연계는 별도 프로젝트)</span><span lang="en" class="chip chip-done">Completed (alert-rule work continues as a separate project)</span>
     </div>
-    <div class="tags"><span class="tag">InSAR</span><span class="tag">SBAS</span><span class="tag">PS-InSAR</span><span class="tag">ISCE2</span><span class="tag">PyGMTSAR</span></div>
-    <p class="proj-sum"><span lang="ko">밀리미터 단위 지표 변위를 위성으로 잡아내는 InSAR 처리 역량을 사내에 구축했다. SBAS와 PS 두 계열을 모두 구현하고 서로 교차검증했다.</span><span lang="en">Built in-house InSAR capability for millimetre-scale surface displacement — implementing both SBAS and Persistent Scatterer approaches and cross-validating them.</span></p>
+    <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">PS-InSAR</span><span class="tag">SBAS</span><span class="tag">StaMPS</span><span class="tag">ISCE2</span></div>
+    <p class="proj-sum"><span lang="ko">국내 대형 손해보험사와의 지반침하 PoC에서 사고 지역 7곳의 지표 변위를 Sentinel-1로 측정했다. 같은 코레지 스택에서 PS-InSAR(StaMPS)와 자체 SBAS를 함께 돌려 PS 2만8천~20만 점/지역, 수도권 광역 SBAS 107만 픽셀을 만들고, 하강궤도 재처리로 수직·동서 성분을 분리했다. 두 기법 비교와 하강궤도 공백(2022~2024)처럼 잘 안 된 부분도 수치로 남겼다.</span><span lang="en">Measured surface deformation at seven Korean ground-collapse sites for a ground-subsidence PoC with a major Korean P&amp;C insurer. PS-InSAR (StaMPS) and an in-house SBAS ran on the same coregistered Sentinel-1 stacks, giving 28k–206k PS points per site and a 1.07M-pixel SBAS map of the Seoul metro area; descending-orbit reprocessing separated vertical and east-west motion. Where things did not work (PS/SBAS disagreement, the 2022–2024 descending data gap), the numbers are recorded as well.</span></p>
   </div>
 
   <section class="sec">
     <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
-    <ul lang="ko"><li>산사태와 지반침하를 사후 확인이 아니라 선제적으로 감시하려면 InSAR이 필요했다.</li><li>국립공원 관리기관의 SAR 산사태 모니터링 과제를 계기로 내부 기술 역량 구축을 시작했다.</li><li>이후 광역 지자체 지반침하 사업과 AI 기반 위성정보 활용 과제로 수요가 확대됐다.</li></ul><ul lang="en"><li>Detecting landslides and subsidence before they become incidents requires interferometry, not after-the-fact imagery.</li><li>A landslide-monitoring request from a national park authority was the trigger to build the capability in-house.</li><li>Demand then grew to a metropolitan subsidence programme and an AI-based satellite analytics project.</li></ul>
+    <ul lang="ko"><li>지반침하·함몰 사고 지역에서 사고 전 지표 변위가 위성으로 보이는지 확인하는 것이 출발점. 고객 PoC의 위험도 판정에 쓸 변위 입력을 만드는 역할.</li><li>대상 7개 AOI: 서울 강동(명일동)·서대문(연희동), 경기 광명(터널 굴착), 부산 사상~하단(도시철도), 부산 만덕~센텀(대심도, 비교 기준), 인천 송도(매립지 압밀, 비붕괴 기준), 강원 양양(해안 모래지반).</li><li>PS는 건물·구조물 같은 영구산란체에 강하고 SBAS는 도로·공터 같은 분산 산란체를 덮는다. 강동 싱크홀 지점은 도로라 초기 PS의 최근접 점이 80m 떨어져 있었고, 이것이 SBAS를 함께 돌리게 된 계기.</li></ul><ul lang="en"><li>Starting question: is pre-collapse surface motion visible from space at ground-collapse sites? The output feeds the risk grading of the client PoC.</li><li>Seven AOIs: Seoul Gangdong and Seodaemun, Gwangmyeong (tunnel excavation), Busan Sasang–Hadan (metro line), Busan Mandeok–Centum (deep tunnel, reference case), Incheon Songdo (reclaimed-land consolidation, non-collapse reference), Yangyang (coastal sand).</li><li>PS works on persistent scatterers such as buildings, SBAS covers distributed scatterers such as roads and open ground. At the Gangdong sinkhole (a road) the nearest early PS point was 80 m away, which is why SBAS was added.</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
-    <ul lang="ko"><li>PyGMTSAR 기반 SBAS InSAR 구현 — 네팔·파키스탄·경주 지역 시계열 변위 분석.</li><li>ISCE2 프레임워크로 COSMO-SkyMed(X-band) InSAR 처리 파이프라인 구축: SLC 정합 → 간섭도 생성 → coherence 산출 → 필터링 → 지오코딩.</li><li>snaphu로 위상 언래핑(phase unwrapping) 수행.</li><li>isce2 stackSentinel 기반 PS-InSAR 파이썬 구현 — 부산 지역 적용.</li><li>SBAS와 PS 속도장을 교차 비교해 서로의 신뢰도를 검증했다.</li><li>차세대소형위성 2호(N2) 메타데이터를 CSK 포맷으로 변환해 ISCE2에 투입하는 코드 개발.</li><li>SNAP Offset Tracking으로 대변위(사구 이동·빙하) 탐지 테스트.</li></ul><ul lang="en"><li>SBAS InSAR with PyGMTSAR — time-series displacement over Nepal, Pakistan and Gyeongju.</li><li>A COSMO-SkyMed (X-band) InSAR pipeline on ISCE2: SLC coregistration → interferogram → coherence → filtering → geocoding.</li><li>Phase unwrapping with snaphu.</li><li>A Python PS-InSAR implementation on top of isce2 stackSentinel, applied to Busan.</li><li>SBAS and PS velocity fields cross-compared to validate each other.</li><li>Code to translate NEXTSat-2 (N2) metadata into CSK format so ISCE2 could ingest it.</li><li>SNAP Offset Tracking tested for large displacements such as dune migration and glacier flow.</li></ul>
+    <ul lang="ko"><li>코레지: ISCE2 topsStack. 부산은 run_files 단계마다 씬별 독립 명령을 8개 병렬 실행해 170~212씬을 약 2시간에 처리(순차 10시간 이상). 서울 196씬 스택은 강동·서대문·광명·송도가 공유.</li><li>PS: StaMPS Python 포팅판, 진폭분산 0.4, 결맞음 0.4 출력. 기준점 2버전(전역평균 차감 전 / 반경 150m·PS 15개 이상 안정영역 자동선정 차감 후).</li><li>PS 메모리 문제 해결: ps_select가 PS 픽셀마다 큰 딕셔너리를 pickle해 90GB에서도 OOM. multiprocessing.Pool을 치환해 공통 객체를 fork로 공유하고 워커를 주기적으로 재생성 → 약 6.4GB로 고정. 원 패키지는 손대지 않고 import만으로 적용.</li><li>SBAS: MintPy 알고리즘을 numpy로 직접 구현. 9×3 멀티룩, 연결 4개·72일 이내 쌍, snaphu 언랩, 최대결맞음 픽셀 기준, 결맞음 가중 역산, 에폭별 평면 제거, 시간결맞음 0.7 이상만 채택.</li><li>광역 SBAS: 프레임을 87개(수도권)·44개(부산) 픽셀창 타일로 나눠 처리. 채택률이 낮은 큰 타일은 2×2로 다시 쪼개고, 타일 간 차이를 중첩부에서 평면(a+bX+cY) 최소제곱으로 맞춰 병합.</li><li>하강궤도: path 134·61 SLC 264장(1.35TB) 수신 → 5개 AOI SBAS → 55m 격자에서 상승·하강 LOS를 2×2 연립으로 풀어 수직·동서 성분 분리(남북 성분 무시).</li><li>PS–SBAS 비교: 300m 공통 격자에 집계하고 기준점 차이(중앙 오프셋)를 뺀 뒤 상관 r과 잔차 RMS로 판정.</li></ul><ul lang="en"><li>Coregistration: ISCE2 topsStack. For Busan, per-scene commands in each run_files step ran 8-way parallel, bringing 170–212 scenes down to about 2 h (10+ h sequential). The 196-scene Seoul stack is shared by Gangdong, Seodaemun, Gwangmyeong and Songdo.</li><li>PS: Python port of StaMPS, amplitude dispersion 0.4, coherence 0.4 output. Two reference versions: global mean (before) and an automatically picked stable area (150 m radius, at least 15 PS) (after).</li><li>PS memory fix: ps_select pickled a large dict once per PS pixel and ran out of memory even at 90 GB. Replacing multiprocessing.Pool so shared objects are inherited by fork and workers are recycled periodically held memory at about 6.4 GB. The upstream package is untouched; the patch applies on import.</li><li>SBAS: MintPy&#x27;s algorithm re-implemented in numpy. 9×3 looks, up to 4 links within 72 days, snaphu unwrapping, max-coherence reference pixel, coherence-weighted inversion, per-epoch plane removal, temporal coherence ≥ 0.7.</li><li>Metro-scale SBAS: frames split into 87 (Seoul) and 44 (Busan) pixel-window tiles. Large tiles with low acceptance were re-split 2×2, and tiles were merged by solving a per-tile correction plane (a + bX + cY) on the overlaps by least squares.</li><li>Descending: 264 SLCs (1.35 TB) from paths 134 and 61 → SBAS for 5 AOIs → ascending and descending LOS solved as a 2×2 system on a 55 m grid for vertical and east-west motion (north-south ignored).</li><li>PS vs SBAS: both aggregated to a common 300 m grid, the reference offset (median difference) removed, then correlation r and residual RMS.</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
-    <ul lang="ko"><li>CSK InSAR 처리 파이프라인 구축 완료 및 결과 보고서 작성</li><li>네팔 · 파키스탄 · 경주 SBAS 지표 변위 지도 생성</li><li>부산 PS-InSAR LOS 속도장 및 침하 핫스팟 시계열 도출 (Sentinel-1, 2021–2023, 약 29만 PS)</li><li>SBAS–PS 속도 교차비교로 두 기법의 일치도 정량 확인</li><li>N2 → CSK 메타데이터 변환 코드 개발 완료 (이후 전용 센서모델 구현으로 발전 — 아래 별도 프로젝트 참조)</li></ul><ul lang="en"><li>A working CSK InSAR pipeline, with a delivered results report.</li><li>SBAS displacement maps for Nepal, Pakistan and Gyeongju.</li><li>Busan PS-InSAR LOS velocity field and subsidence-hotspot time series (Sentinel-1, 2021–2023, ~293k persistent scatterers).</li><li>Quantified agreement between SBAS and PS velocities via direct cross-comparison.</li><li>Working N2 → CSK metadata conversion, which later grew into a dedicated sensor model — see the separate project below.</li></ul>
+    <ul lang="ko"><li>PS 점 수(차감 후 최종): 강동 96,537 · 서대문 129,712 · 광명 56,694 · 부산 만덕 150,978 · 사상 27,826 · 송도 205,562 · 송도 하강 126,271 · 양양 41,324.</li><li>SBAS 픽셀: 강동 30,574 · 서대문 27,190 · 광명 13,662 · 만덕 39,850 · 사상 6,250 · 송도 32,456 · 양양 6,120. 송도 매립지 SBAS 속도 최솟값 −94.9 mm/yr.</li><li>강동 싱크홀 지점: 최종 SBAS가 23m 거리에서 측정점 확보(50m 내 3셀 중앙 −6.9 mm/yr). 최종 PS는 62m가 최근접.</li><li>광역 SBAS: 수도권 1,069,782 픽셀(196 에폭, 속도 1~99% −8.0~+4.3 mm/yr), 부산 239,653 픽셀(212 에폭, −15.8~+5.3). 타일 중첩부 잔차 RMS 1.53·1.69 mm/yr.</li><li>PS vs SBAS(300m 격자): 서대문 r 0.40·잔차 0.55 mm/yr, 강동 0.23·0.95, 광명 0.30·1.21, 만덕 0.19·1.41 → 도심 저변형 지역은 기준점 차이를 빼면 약 1 mm/yr 안에서 일치. 사상 0.36·3.8 부분 일치.</li><li>불일치: 송도 r −0.03·잔차 14.4 mm/yr. PS는 말뚝 기초 구조물(|v| 중앙 0.38)을, SBAS는 매립 지반(18.4)을 재고 있어 측정 대상 자체가 다름. 양양 r 0.01 — 2년·38씬 짧은 스택이라 SBAS가 노이즈 수준(전체 시간결맞음 중앙 0.18).</li><li>하강궤도 공백: 2022~2024년 하강궤도 촬영이 path 134에서 1장, path 61에서 2장뿐(Sentinel-1B 고장 이후). 2022년 이후 사고는 하강궤도로 검증할 수 없었음.</li><li>수직/동서 분해: 5개 AOI 3,131~16,144 셀, 공통 88~118 에폭. 사상 수직 속도 하위 1% −17.6 mm/yr. 저장 결과를 다시 풀어 0.0001 mm 이내로 재현.</li></ul><ul lang="en"><li>PS points (final, after referencing): Gangdong 96,537 · Seodaemun 129,712 · Gwangmyeong 56,694 · Busan Mandeok 150,978 · Sasang 27,826 · Songdo 205,562 · Songdo descending 126,271 · Yangyang 41,324.</li><li>SBAS pixels: Gangdong 30,574 · Seodaemun 27,190 · Gwangmyeong 13,662 · Mandeok 39,850 · Sasang 6,250 · Songdo 32,456 · Yangyang 6,120. Minimum SBAS rate on Songdo reclaimed land −94.9 mm/yr.</li><li>Gangdong sinkhole: the final SBAS has a measurement 23 m away (median −6.9 mm/yr over 3 cells within 50 m); the nearest final PS point is 62 m away.</li><li>Metro-scale SBAS: Seoul 1,069,782 pixels (196 epochs, 1st–99th percentile −8.0 to +4.3 mm/yr), Busan 239,653 pixels (212 epochs, −15.8 to +5.3). Tile-overlap residual RMS 1.53 and 1.69 mm/yr.</li><li>PS vs SBAS (300 m grid): Seodaemun r 0.40 / residual 0.55 mm/yr, Gangdong 0.23 / 0.95, Gwangmyeong 0.30 / 1.21, Mandeok 0.19 / 1.41 — in low-deformation urban areas the two agree to about 1 mm/yr once the reference offset is removed. Sasang 0.36 / 3.8, partial agreement.</li><li>Disagreement: Songdo r −0.03, residual 14.4 mm/yr. PS tracks pile-founded structures (median |v| 0.38) while SBAS tracks the reclaimed ground (18.4), so they measure different targets. Yangyang r 0.01: with only 38 scenes over two years SBAS is at noise level (median temporal coherence 0.18).</li><li>Descending gap: in 2022–2024 there was 1 descending scene on path 134 and 2 on path 61 (after the Sentinel-1B failure), so collapses after 2022 could not be checked with descending data.</li><li>Vertical/east-west decomposition: 3,131–16,144 cells and 88–118 common epochs per AOI; Sasang vertical rate 1st percentile −17.6 mm/yr. Re-solving the stored inputs reproduces the outputs within 0.0001 mm.</li></ul>
     <div class="figs">
       <figure class="fig">
-        <img src="../assets/img/insar-ground/00-interferogram.webp" alt="간섭도 — 지형 위에 중첩한 위상 프린지" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">간섭도 — 지형 위에 중첩한 위상 프린지</span><span lang="en">Interferogram — phase fringes draped over terrain</span></figcaption>
+        <img src="../assets/img/insar-ground/00-key-capital-wide-sbas.webp" alt="수도권 광역 SBAS 연간 변위속도(2019–2026, 1,069,782 픽셀·87 타일 병합). 음수=침하" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">수도권 광역 SBAS 연간 변위속도(2019–2026, 1,069,782 픽셀·87 타일 병합). 음수=침하</span><span lang="en">Seoul metro SBAS LOS velocity, 2019–2026 (1,069,782 pixels merged from 87 tiles); negative = subsidence</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/insar-ground/01-wrap-unwrap.webp" alt="위상 언래핑 전후 비교 (wrapped → unwrapped)" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">위상 언래핑 전후 비교 (wrapped → unwrapped)</span><span lang="en">Before and after phase unwrapping</span></figcaption>
+        <img src="../assets/img/insar-ground/01-workflow.webp" alt="처리 흐름: 코레지 → PS·SBAS → 기준점·분해 → 비교" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">처리 흐름: 코레지 → PS·SBAS → 기준점·분해 → 비교</span><span lang="en">Workflow: coregistration → PS and SBAS → referencing and decomposition → cross-check</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/insar-ground/02-baseline-network.webp" alt="SBAS 간섭쌍 베이스라인 네트워크" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">SBAS 간섭쌍 베이스라인 네트워크</span><span lang="en">SBAS interferogram pair baseline network</span></figcaption>
+        <img src="../assets/img/insar-ground/02-ps-velocity-seodaemun.webp" alt="서울 서대문 PS 속도(129,712점)와 자동 선정 기준영역(초록 원)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">서울 서대문 PS 속도(129,712점)와 자동 선정 기준영역(초록 원)</span><span lang="en">Seoul Seodaemun PS velocity (129,712 points) with the auto-selected reference area (green circle)</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/insar-ground/03-sbas-cumulative.webp" alt="SBAS 누적 LOS 변위 시계열" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">SBAS 누적 LOS 변위 시계열</span><span lang="en">SBAS cumulative LOS displacement series</span></figcaption>
+        <img src="../assets/img/insar-ground/03-sbas-gangdong-sinkhole.webp" alt="강동 SBAS 초기 정밀판(7,636셀): 싱크홀 지점 주변 국소 침하. 최종판은 30,574셀" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">강동 SBAS 초기 정밀판(7,636셀): 싱크홀 지점 주변 국소 침하. 최종판은 30,574셀</span><span lang="en">Early refined SBAS for Gangdong (7,636 cells) showing local subsidence near the sinkhole; the final run has 30,574 cells</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/insar-ground/04-ps-cumulative.webp" alt="PS 누적 LOS 변위 시계열" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">PS 누적 LOS 변위 시계열</span><span lang="en">PS cumulative LOS displacement series</span></figcaption>
+        <img src="../assets/img/insar-ground/04-busan-wide-sbas.webp" alt="부산 광역 SBAS(239,653 픽셀·44 타일, 212 에폭)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">부산 광역 SBAS(239,653 픽셀·44 타일, 212 에폭)</span><span lang="en">Busan metro SBAS (239,653 pixels, 44 tiles, 212 epochs)</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/insar-ground/05-sbas-ps-compare.webp" alt="SBAS vs PS 속도 교차 비교" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">SBAS vs PS 속도 교차 비교</span><span lang="en">SBAS vs PS velocity cross-comparison</span></figcaption>
+        <img src="../assets/img/insar-ground/05-timeseries-sasang.webp" alt="부산 사상 관측점 시계열(2018–2025): 8년간 약 −25~−60 mm 누적 침하(남측 20점)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">부산 사상 관측점 시계열(2018–2025): 8년간 약 −25~−60 mm 누적 침하(남측 20점)</span><span lang="en">Busan Sasang point time series (2018–2025): about −25 to −60 mm cumulative subsidence over eight years (20 southern points)</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/insar-ground/06-pakistan-velocity.webp" alt="파키스탄 — LOS 변위 속도장" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">파키스탄 — LOS 변위 속도장</span><span lang="en">Pakistan — LOS velocity field</span></figcaption>
+        <img src="../assets/img/insar-ground/06-dsc-acquisition-gap.webp" alt="하강궤도 촬영 이력: 2022–2024년 궤도당 1~2장(Sentinel-1B 고장 이후 공백)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">하강궤도 촬영 이력: 2022–2024년 궤도당 1~2장(Sentinel-1B 고장 이후 공백)</span><span lang="en">Descending acquisitions: 1–2 scenes per track in 2022–2024 after the Sentinel-1B failure</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/insar-ground/07-gyeongju-velocity.webp" alt="경주 — 산사태 지역 변위 속도" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">경주 — 산사태 지역 변위 속도</span><span lang="en">Gyeongju — displacement velocity over the landslide area</span></figcaption>
+        <img src="../assets/img/insar-ground/07-decomp-sasang.webp" alt="부산 사상 상승·하강 LOS와 수직·동서 분해(55m 격자 3,131셀)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">부산 사상 상승·하강 LOS와 수직·동서 분해(55m 격자 3,131셀)</span><span lang="en">Busan Sasang ascending/descending LOS and the vertical/east-west decomposition (3,131 cells on a 55 m grid)</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/insar-ground/08-gyeongju-water.webp" alt="경주 — 수체 및 지형 참조" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">경주 — 수체 및 지형 참조</span><span lang="en">Gyeongju — water and terrain reference</span></figcaption>
+        <img src="../assets/img/insar-ground/08-decomp-gangdong.webp" alt="서울 강동 수직·동서 분해(12,909셀, 2019–2021 공통기간)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">서울 강동 수직·동서 분해(12,909셀, 2019–2021 공통기간)</span><span lang="en">Seoul Gangdong vertical/east-west decomposition (12,909 cells, 2019–2021 overlap)</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/insar-ground/09-landslide-inventory.webp" alt="산사태 인벤토리 — 탐지 지점 번호 부여" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">산사태 인벤토리 — 탐지 지점 번호 부여</span><span lang="en">Landslide inventory — numbered detections</span></figcaption>
+        <img src="../assets/img/insar-ground/09-ps-vs-sbas-summary.webp" alt="7개 지역 PS–SBAS 비교: 상관 r과 오프셋 제거 후 잔차" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">7개 지역 PS–SBAS 비교: 상관 r과 오프셋 제거 후 잔차</span><span lang="en">PS vs SBAS across 7 sites: correlation r and residual after offset removal</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/insar-ground/10-busan-ps-velocity.webp" alt="부산 PS-InSAR LOS 속도 (Sentinel-1, 2021–2023)" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">부산 PS-InSAR LOS 속도 (Sentinel-1, 2021–2023)</span><span lang="en">Busan PS-InSAR LOS velocity (Sentinel-1, 2021–2023)</span></figcaption>
+        <img src="../assets/img/insar-ground/10-ps-vs-sbas-seodaemun.webp" alt="서대문 PS–SBAS 4패널 비교(r 0.40, 잔차 0.6 mm/yr): 도심 일치 사례" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">서대문 PS–SBAS 4패널 비교(r 0.40, 잔차 0.6 mm/yr): 도심 일치 사례</span><span lang="en">Seodaemun PS vs SBAS (r 0.40, residual 0.6 mm/yr): urban agreement</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/insar-ground/11-busan-ps-overlay.webp" alt="부산 PS-InSAR — 위성영상 중첩" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">부산 PS-InSAR — 위성영상 중첩</span><span lang="en">Busan PS-InSAR over satellite imagery</span></figcaption>
+        <img src="../assets/img/insar-ground/11-ps-vs-sbas-songdo.webp" alt="송도 PS–SBAS(r −0.03, 잔차 14.4 mm/yr): 구조물 vs 매립 지반, 측정 대상 차이" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">송도 PS–SBAS(r −0.03, 잔차 14.4 mm/yr): 구조물 vs 매립 지반, 측정 대상 차이</span><span lang="en">Songdo PS vs SBAS (r −0.03, residual 14.4 mm/yr): structures vs reclaimed ground</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/insar-ground/12-busan-timeseries.webp" alt="부산 — 침하 핫스팟 vs 기준점 시계열" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">부산 — 침하 핫스팟 vs 기준점 시계열</span><span lang="en">Busan — subsidence hotspots vs reference time series</span></figcaption>
-      </figure>
-      <figure class="fig">
-        <img src="../assets/img/insar-ground/13-river-change.webp" alt="하천 변화 탐지 — 전후 비교" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">하천 변화 탐지 — 전후 비교</span><span lang="en">River change detection — before/after</span></figcaption>
+        <img src="../assets/img/insar-ground/12-ps-vs-sbas-yangyang.webp" alt="양양 PS–SBAS(r 0.01): 짧은 스택에서 SBAS 노이즈" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">양양 PS–SBAS(r 0.01): 짧은 스택에서 SBAS 노이즈</span><span lang="en">Yangyang PS vs SBAS (r 0.01): SBAS noise on a short stack</span></figcaption>
       </figure></div>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
-    <ul lang="ko"><li>InSAR 전체 워크플로우(SLC → 간섭도 → 언래핑 → 변위)를 도구에 기대지 않고 단계별로 이해했다.</li><li>ISCE2 · PyGMTSAR · SNAP의 장단점을 실제 처리 경험으로 비교할 수 있게 됐다.</li><li>위성 메타데이터 포맷의 복잡성과 SAR 궤도·기하 파라미터 체계를 깊게 파고들었다.</li><li>한계: N2 위성 데이터의 품질 이슈(coherence 부족)로 InSAR 최종 검증까지는 가지 못했다.</li></ul><ul lang="en"><li>Understood the full chain — SLC to interferogram to unwrapping to displacement — step by step rather than as a black box.</li><li>Can now compare ISCE2, PyGMTSAR and SNAP from actual processing experience, not documentation.</li><li>Went deep into satellite metadata formats and SAR orbit/geometry parameter conventions.</li><li>Limitation: N2 data quality (insufficient coherence) stopped the final InSAR validation short.</li></ul>
+    <ul lang="ko"><li>낮은 r이 곧 불일치는 아님: 실제 변형이 거의 없는 도심에서는 r 0.19~0.40이어도 오프셋 제거 후 잔차가 0.6~1.4 mm/yr. 판정은 r과 잔차 RMS를 같이 봐야 함.</li><li>PS와 SBAS는 서로 다른 산란체를 잰다. 송도처럼 구조물과 지반이 따로 움직이면 두 결과가 맞지 않는 것이 정상이고, 점 대 점 비교는 의미가 없음(격자 집계 필요).</li><li>SBAS 노이즈 바닥 약 1~2 mm/yr. 도심 미세 변형은 PS가 유리하고, PS가 없는 도로·공터는 SBAS가 메움.</li><li>한계: 셀 단위 상승–하강 LOS 속도 상관이 0.09~0.44로 낮음. 궤도마다 기준 픽셀이 다르고 도심 저변형 지역은 노이즈가 신호보다 큼. 이 문제는 해결하지 못함.</li><li>한계: 짧은 스택(양양 38씬)의 SBAS는 쓸 수 없는 수준이었고, 하강궤도 2022~2024 공백은 데이터 자체가 없어 대안이 없었음.</li><li>한계: 도심 PS 속도는 99%가 ±2.5 mm/yr 안에 들어 SBAS보다 범위가 훨씬 좁음. 구조물 선택 효과와 필터 평활 효과를 분리하지 못함.</li><li>공통성분(전 픽셀 공통 추세) 제거 판정이 상승·하강에서 정반대로 나와(상승은 사상, 하강은 만덕만 제거) 이 성분은 지반 신호가 아니라 스택별 아티팩트로 판단.</li><li>운영 교훈: 메모리 상한을 걸수록 systemd-oomd에 더 빨리 죽음(24GB 상한에서 시스템 여유 101GB인데 31분 만에 종료). 원인 쪽(GDAL 캐시 512MB, pickle 제거)에서 줄여야 함.</li><li>이상치는 지우지 않기로 함: 싱크홀 감시에서는 급변이 곧 신호일 수 있음. 원인별 진단 방침(공간 일관성·지속성)만 정하고 적용은 보류.</li></ul><ul lang="en"><li>Low r does not mean disagreement: in stable urban areas r was only 0.19–0.40, yet the residual after offset removal was 0.6–1.4 mm/yr. Judge with r and residual RMS together.</li><li>PS and SBAS measure different scatterers. Where structures and ground move separately, as at Songdo, disagreement is expected and point-to-point comparison is meaningless; aggregate to a grid first.</li><li>SBAS noise floor is about 1–2 mm/yr. PS is better for small urban motion; SBAS fills roads and open ground where PS has no points.</li><li>Limitation: per-cell ascending vs descending LOS rate correlation is only 0.09–0.44, because reference pixels differ per track and noise exceeds signal in stable urban areas. Not resolved.</li><li>Limitation: SBAS on a short stack (Yangyang, 38 scenes) was unusable, and the 2022–2024 descending gap has no workaround because the data do not exist.</li><li>Limitation: 99% of urban PS rates fall within ±2.5 mm/yr, far narrower than SBAS. The effects of scatterer selection and filter smoothing were not separated.</li><li>The common-mode trend test gave opposite answers on the two orbits (removed at Sasang in ascending, only at Mandeok in descending), so the component was treated as a stack artefact, not ground motion.</li><li>Operations: tighter memory caps made systemd-oomd kill jobs sooner (a 24 GB cap died in 31 min with 101 GB free). Memory had to be reduced at the source (GDAL cache 512 MB, no per-pixel pickling).</li><li>Outliers are kept: in sinkhole monitoring a sudden jump may be the signal. A cause-based diagnosis policy (spatial consistency, persistence) was agreed but not yet applied.</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
-    <ul lang="ko"><li>CSK InSAR 처리 파이프라인 및 결과 보고서</li><li>PS-InSAR 파이썬 구현</li><li>n2_to_csk 메타데이터 변환 코드</li></ul><ul lang="en"><li>CSK InSAR pipeline and results report</li><li>PS-InSAR Python implementation</li><li>n2_to_csk metadata converter</li></ul>
+    <ul lang="ko"><li>지역별 PS(차감 전·후·raw) shp와 SBAS csv/shp, 클릭맵 HTML(점 클릭 시 시계열)</li><li>수도권·부산 광역 SBAS 병합본(시계열 포함 csv.gz)</li><li>하강궤도 SBAS 5지역 + 수직·동서 분해 csv 4세트×5지역 + 통합 지도 HTML</li><li>PS vs SBAS 비교 그림·요약표</li><li>관측점 시계열 그래프 7,516장(7지역 133,814점)</li><li>일반화 처리 스크립트(코레지 병렬·PS·SBAS·광역 타일·분해·비교)</li></ul><ul lang="en"><li>Per-site PS shapefiles (before/after/raw referencing), SBAS csv/shp, click-to-time-series HTML maps</li><li>Merged metro-scale SBAS for Seoul and Busan (csv.gz with time series)</li><li>Descending SBAS for 5 sites, 4 decomposition sets per site, combined HTML maps</li><li>PS vs SBAS comparison figures and summary table</li><li>7,516 time-series sheets covering 133,814 points at 7 sites</li><li>Generalised scripts: parallel coregistration, PS, SBAS, tiling, decomposition, comparison</li></ul>
     <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
   </section>
 
   <nav class="proj-pager">
-    <a class="pager prev" href="flood-sar.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">Sentinel-1 SAR 기반 홍수 탐지 알고리즘</span><span lang="en" class="pager-title">Automated Flood Mapping from Sentinel-1 SAR</span></a>
-    <a class="pager next" href="n2-sensor-model.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">국산 SAR 위성 엄밀센서모델 기하보정</span><span lang="en" class="pager-title">Rigorous Sensor Model Geocoding for a Domestic SAR Satellite</span></a>
+    <a class="pager prev" href="oil-spill.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">SAR 기반 해상 기름유출 탐지</span><span lang="en" class="pager-title">Marine Oil Spill Detection from SAR</span></a>
+    <a class="pager next" href="sinkhole-warning.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">InSAR 기반 싱크홀(지반침하) 조기경보 — 위험 판정·리드타임 백테스트</span><span lang="en" class="pager-title">InSAR-based sinkhole early warning — risk rules and lead-time backtesting</span></a>
   </nav>
 </main>
 

@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SAR 기반 표층 토양수분 산출 · 신현진</title>
-<meta name="description" content="무료 위성만으로 표층 토양수분을 산출하고, 논문의 방법을 수정 없이 적용해 현장 관측과 비교했다. 재현된 것과 재현되지 않은 것을 모두 기록했다.">
-<meta property="og:title" content="SAR 기반 표층 토양수분 산출 · 신현진">
-<meta property="og:description" content="무료 위성만으로 표층 토양수분을 산출하고, 논문의 방법을 수정 없이 적용해 현장 관측과 비교했다. 재현된 것과 재현되지 않은 것을 모두 기록했다.">
+<title>Sentinel-1 토양수분 산출 — 논문 3편 재현·검증 · 신현진</title>
+<meta name="description" content="무료 위성자료(Sentinel-1·2, SMAP)만으로 표층 토양수분을 산출하고, 공개 논문 3편의 방법을 그대로 적용해 현장관측과 비교했다. 영국에서는 상관 수준(r² 평균 0.45 vs 논문 0.47)을 재현했지만 절대오차는 재현하지 못했다. 미국 SCAN 재현과 국내 관측소 1점 비교는 실패했고, 실패 기록도 그대로 남겼다.">
+<meta property="og:title" content="Sentinel-1 토양수분 산출 — 논문 3편 재현·검증 · 신현진">
+<meta property="og:description" content="무료 위성자료(Sentinel-1·2, SMAP)만으로 표층 토양수분을 산출하고, 공개 논문 3편의 방법을 그대로 적용해 현장관측과 비교했다. 영국에서는 상관 수준(r² 평균 0.45 vs 논문 0.47)을 재현했지만 절대오차는 재현하지 못했다. 미국 SCAN 재현과 국내 관측소 1점 비교는 실패했고, 실패 기록도 그대로 남겼다.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,68 +45,100 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   <div class="proj-head">
     <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
     <span class="proj-icon">🌾</span>
-    <h1><span lang="ko">SAR 기반 표층 토양수분 산출</span><span lang="en">Surface Soil Moisture Retrieval from SAR</span></h1>
+    <h1><span lang="ko">Sentinel-1 토양수분 산출 — 논문 3편 재현·검증</span><span lang="en">Sentinel-1 Soil Moisture Retrieval: Reproducing and Validating Three Published Methods</span></h1>
     <div class="proj-meta">
-      <span>2026.09 – 2026.10</span>
+      <span>2026.10 (1일)</span>
       <span class="dot">·</span>
       <span lang="ko">단독 수행</span><span lang="en">Sole contributor</span>
       <span class="dot">·</span>
-      <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+      <span lang="ko" class="chip chip-done">완료 (탐색 연구)</span><span lang="en" class="chip chip-done">Completed (exploratory study)</span>
     </div>
-    <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">논문 재현</span><span class="tag">검증</span><span class="tag">농업</span></div>
-    <p class="proj-sum"><span lang="ko">무료 위성만으로 표층 토양수분을 산출하고, 논문의 방법을 수정 없이 적용해 현장 관측과 비교했다. 재현된 것과 재현되지 않은 것을 모두 기록했다.</span><span lang="en">Retrieved surface soil moisture from free satellite data only, applying published methods without modification — and recorded both what reproduced and what did not.</span></p>
+    <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">Sentinel-2</span><span class="tag">SMAP</span><span class="tag">토양수분</span><span class="tag">변화탐지</span></div>
+    <p class="proj-sum"><span lang="ko">무료 위성자료(Sentinel-1·2, SMAP)만으로 표층 토양수분을 산출하고, 공개 논문 3편의 방법을 그대로 적용해 현장관측과 비교했다. 영국에서는 상관 수준(r² 평균 0.45 vs 논문 0.47)을 재현했지만 절대오차는 재현하지 못했다. 미국 SCAN 재현과 국내 관측소 1점 비교는 실패했고, 실패 기록도 그대로 남겼다.</span><span lang="en">Retrieved surface soil moisture from free satellite data only (Sentinel-1/2, SMAP) by applying three published methods unchanged and comparing against in-situ networks. In the UK, correlation levels were reproduced (mean r² 0.45 vs 0.47 in the paper) but absolute errors were not. The US SCAN reproduction and Korean single-station comparisons failed; those failures are documented as-is.</span></p>
   </div>
 
   <section class="sec">
     <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
-    <ul lang="ko"><li>Sentinel-1·Sentinel-2만으로 표층 토양수분을 산출할 수 있는지 확인하고 싶었다.</li><li>핵심 원칙: 검증된 논문의 방법을 수정 없이 적용하고, 결과를 현장 관측과 정직하게 비교한다.</li></ul><ul lang="en"><li>The question was whether surface soil moisture can be retrieved from Sentinel-1 and Sentinel-2 alone.</li><li>The rule was: apply published methods unmodified, then compare honestly against in-situ observations.</li></ul>
+    <ul lang="ko"><li>조건: 유료 영상 없이 무료 위성자료만 사용하고, 검증된 최신 문헌의 자료·방법을 수정 없이 적용한다.</li><li>C-band SAR 후방산란은 표층(약 0–5 cm) 수분에 민감하다. 반면 식생, 거칠기, 스페클이 같은 크기의 신호를 만들기 때문에 현장값과 직접 맞추기가 어렵다.</li><li>공개 논문의 수치가 다른 지역과 자료 경로에서도 재현되는지 확인하는 것을 1차 목표로 잡았다.</li></ul><ul lang="en"><li>Constraint: free satellite data only, and published methods applied without modification.</li><li>C-band backscatter is sensitive to the top ~0–5 cm of soil, but vegetation, roughness and speckle produce signals of similar magnitude, which makes direct agreement with in-situ sensors hard.</li><li>The primary goal was to test whether published accuracy figures hold up under an independent data path and in other regions.</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
-    <ul lang="ko"><li>TU Wien 변화탐지(change detection) 기법을 Sentinel-1 GRD에 적용.</li><li>SNAP 전처리: 궤도 보정 → 열잡음 제거 → σ⁰ 보정 → SRTM 30m 지형보정 (스페클 필터 미적용).</li><li>Sentinel-2 L2A NDVI(100 m)로 식생 영향 보정, SCL 구름 마스크 적용.</li><li>영국 COSMOS-UK 3개 지점, 미국 SCAN, 국내 가평·화성에서 현장 관측과 비교.</li><li>선행강수지수(API)와 지역평균 위성 토양수분의 상관 분석.</li></ul><ul lang="en"><li>Applied the TU Wien change-detection method to Sentinel-1 GRD.</li><li>SNAP preprocessing: orbit correction → thermal noise removal → σ⁰ calibration → SRTM 30 m terrain correction, with no speckle filter.</li><li>Vegetation correction from Sentinel-2 L2A NDVI at 100 m, with SCL cloud masking.</li><li>Compared against in-situ networks: COSMOS-UK (3 sites), US SCAN, and Gapyeong/Hwaseong in Korea.</li><li>Correlated regional-mean satellite soil moisture against an antecedent precipitation index.</li></ul>
+    <ul lang="ko"><li>영국(Maslanka 2022, TU Wien 변화탐지): Planetary Computer Sentinel-1 RTC에서 관측소 주변 3.2 km 창만 원격으로 읽었다. 2016–2019 상승궤도 30·132, 410장이다.</li><li>영국 처리: 화소별 β(궤도 간 σ0 차/입사각 차, 중앙값 −0.092 dB/°)로 40° 정규화했다. 10 m를 100/250/500/1000 m로 선형 평균하고, 건조·습윤 기준(P10·P90 ± 범위/8)으로 상대 토양수분 rSSM(0–100 %)을 계산했다.</li><li>영국 검증: COSMOS-UK 3개소(CHIMN·SHEEP·WADDN) 중성자 센서 VWC를 지수화하고, 양쪽에 14회 이동평균을 적용한 뒤 r²·RMSE를 논문 Table IV와 12조합 모두 대조했다.</li><li>미국(Ma 2020): SCAN 2001 관측소에서 Oh-2004 표면산란 + Water Cloud Model(식생수분 = S2 NDWI 식)을 격자탐색으로 역산했다.</li><li>국내(Gao 2017): ASF S1 GRD(가평 66장, 화성 70장)를 SNAP으로 σ0·지형보정하고 S2 NDVI 100 m와 함께 방법1(NDVI 등급별 건조 기준)·방법2(시간차분)를 적용했다. 농촌진흥청 10 cm 관측소와 비교했다.</li><li>보조 검증: 관측소 한 점 대신 지도 전체 평균과 선행강수지수(API, k=0.8)의 상관을 봤다.</li><li>하위 시도: Cho 2026(Zenodo, 비심사) PINN-WCM 재구현과 관측소 제외(LOSO) 교차검증, SMAP L3E 9 km 수동형 vs RDA 9개소 비교.</li><li>시각화: 텔레픽스 SatCHAT 화면에 Esri 위성지도와 rSSM 레이어를 얹은 시연용 합성 이미지를 만들었다. 수면 위치 IoU로 지도 정합을 확인했다.</li></ul><ul lang="en"><li>UK (Maslanka 2022, TU Wien change detection): read only a 3.2 km window around each station from the Planetary Computer Sentinel-1 RTC collection, covering ascending tracks 30 and 132 for 2016–2019 (410 scenes).</li><li>UK processing: normalised backscatter to 40° with a per-pixel slope β (inter-track σ0 difference over incidence difference, median −0.092 dB/°), averaged 10 m pixels linearly to 100/250/500/1000 m, and scaled each cell between dry and wet references (P10/P90 ± range/8) to relative soil moisture (rSSM, 0–100 %).</li><li>UK validation: indexed COSMOS-UK cosmic-ray VWC at three sites (CHIMN, SHEEP, WADDN), applied a 14-acquisition moving average to both series, and compared r² and RMSE with all 12 combinations in the paper&#x27;s Table IV.</li><li>US (Ma 2020): inverted the Oh-2004 surface model plus the Water Cloud Model (vegetation water content from Sentinel-2 NDWI) at a SCAN station with a grid search.</li><li>Korea (Gao 2017): calibrated and terrain-corrected Sentinel-1 GRD in SNAP (66 scenes at Gapyeong, 70 at Hwaseong), combined them with 100 m Sentinel-2 NDVI, applied method 1 (NDVI-class dry reference) and method 2 (temporal difference), and compared with 10 cm stations of the Rural Development Administration (RDA).</li><li>Auxiliary check: correlated the scene-mean soil moisture with an antecedent precipitation index (API, k = 0.8) rather than with a single station.</li><li>Side studies: re-implemented the Cho 2026 PINN-WCM (Zenodo, not peer-reviewed) and tested it with leave-one-site-out (LOSO) validation; compared SMAP L3E 9 km passive soil moisture with nine RDA stations.</li><li>Visualisation: built demo composites that overlay rSSM on Esri imagery inside a Telepix SatCHAT screen, and checked map registration with water-body IoU.</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
-    <ul lang="ko"><li>영국 COSMOS-UK 3개소: r² 부분 재현 (평균 0.45 vs 논문 0.47; CHIMN 250m에서는 0.67로 논문 0.41보다 높음). RMSE는 재현되지 않음</li><li>미국 SCAN: 재현 실패 (R² 0.08 vs 논문 0.597) — 실패 기록도 그대로 보존</li><li>국내 가평: 관측소 1점 비교는 실패했으나, 지역평균과 선행강수지수의 상관 R=0.59</li><li>겨울(81%)과 여름 가뭄기(39%) 토양수분 대비를 정량화</li><li>강원 고랭지 배추밭 면적 변화 분석으로 확장</li></ul><ul lang="en"><li>COSMOS-UK (3 sites): r² partially reproduced (mean 0.45 vs 0.47 published; at CHIMN 250 m we got 0.67 against 0.41 published). RMSE did not reproduce.</li><li>US SCAN: reproduction failed (R² 0.08 vs 0.597 published) — the failure is kept on record.</li><li>Gapyeong, Korea: single-station comparison failed, but regional mean vs antecedent precipitation gave R=0.59.</li><li>Quantified the contrast between winter (81%) and summer-drought (39%) soil moisture.</li><li>Extended to analysing highland cabbage-field area change in Gangwon.</li></ul>
+    <ul lang="ko"><li>영국 r²: 12조합 평균 0.45(논문 0.47)이고, 5개 조합이 논문과 ±0.10 이내였다. 최고 조합은 CHIMN 250 m r² 0.67(논문 0.41)이다. 같은 조합의 일 단위(이동평균 없음) r²는 0.36이다.</li><li>영국 RMSE: 재현 11.1–23.1 %, 논문 6.6–17.4 %로 12개 중 1개만 근접했다. 현장 지수 기간이나 셀 위치를 바꿔도 격차가 유지돼 원인을 확정하지 못했다.</li><li>영국 겨울(2017-12-26)–여름 가뭄(2018-07-18): 영역 평균 rSSM이 86.9 %에서 39.4 %로 떨어졌다. 전체 1,024셀 중 91 %가 감소했고 74 %는 30 pp 넘게 감소했다. 같은 기간 현장 VWC는 40.1 %에서 18.5 %로 내려갔다.</li><li>미국 SCAN: 재현 실패(R² 0.08 vs 논문 0.597, RMSE 0.076 vs 0.069, n 11 vs 14).</li><li>국내 관측소 1점: 실패. 방법1 R은 가평 −0.13(ubRMSE 0.110), 화성 −0.14(0.086)로, 현장 평균값을 그대로 쓰는 상수 예측보다 오차가 컸다.</li><li>국내 지역 평균: 가평 위성 토양수분 지역평균과 선행강수지수의 R은 0.59(n 63), 화성은 0.36이었다. 강수 반응은 지도 단위에서만 보였다.</li><li>PINN-WCM: 저자 공개 R 0.60은 관측소별 학습으로 추정된다. 관측소 제외 검증에서는 RF R 0.07(ubRMSE 0.066)로 상수 기준선(0.064)보다 나빴다.</li><li>SMAP L3E 9 km(예비, n 32): R 0.15, ubRMSE 0.103, bias +0.038 m³/m³. 유효 자료 전부에 품질 &#x27;비권장&#x27; 플래그가 붙어 있었다.</li><li>원본 산출물에서 핵심 수치를 다시 계산했다. 영국 12조합, CHIMN 250 m 전 과정, 겨울·여름 지도 통계, 미국·국내 지표는 일치했다. 문서상 가평 VV 점프 +5.5 dB는 재계산값이 +5.3 dB로 소폭 달랐다.</li><li>확장 적용: 강원 고랭지 배추밭 경작 면적 변화를 같은 전처리 체인으로 분석했다.</li></ul><ul lang="en"><li>UK r²: mean of 12 combinations 0.45 (paper 0.47), with 5 within ±0.10 of the paper. The best combination was CHIMN 250 m at r² 0.67 (paper 0.41); its day-to-day (unsmoothed) r² was 0.36.</li><li>UK RMSE: 11.1–23.1 % reproduced vs 6.6–17.4 % in the paper, with only 1 of 12 close. The gap persisted when the in-situ index period or cell placement changed, so the cause remains unidentified.</li><li>UK winter (2017-12-26) vs summer drought (2018-07-18): area-mean rSSM fell from 86.9 % to 39.4 %. 91 % of all 1,024 cells became drier and 74 % dropped by more than 30 pp, while in-situ VWC went from 40.1 % to 18.5 %.</li><li>US SCAN: reproduction failed (R² 0.08 vs 0.597; RMSE 0.076 vs 0.069; n 11 vs 14).</li><li>Korean single stations: failed. Method 1 gave R −0.13 at Gapyeong (ubRMSE 0.110) and −0.14 at Hwaseong (0.086), worse than a constant in-situ mean.</li><li>Korean scene means: scene-mean soil moisture correlated with the antecedent precipitation index at R 0.59 at Gapyeong (n 63) and 0.36 at Hwaseong. The rainfall response showed up only at map scale.</li><li>PINN-WCM: the published R 0.60 appears to come from per-station training. Under leave-one-site-out, a random forest reached only R 0.07 (ubRMSE 0.066), worse than a constant baseline (0.064).</li><li>SMAP L3E 9 km (preliminary, n 32): R 0.15, ubRMSE 0.103, bias +0.038 m³/m³. Every valid retrieval carried the &#x27;not recommended&#x27; quality flag.</li><li>Key figures were recomputed from the original outputs. The 12 UK combinations, an end-to-end CHIMN 250 m run, the winter/summer map statistics, and the US and Korean metrics all matched. The documented +5.5 dB VV jump at Gapyeong recomputed slightly lower, at +5.3 dB.</li><li>Extension: applied the same preprocessing chain to analyse cultivated-area change in Gangwon highland cabbage fields.</li></ul>
     <div class="figs">
       <figure class="fig">
-        <img src="../assets/img/soil-moisture/00-cosmos-validation.webp" alt="COSMOS-UK 현장 관측 vs Sentinel-1 토양수분 (250 m)" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">COSMOS-UK 현장 관측 vs Sentinel-1 토양수분 (250 m)</span><span lang="en">COSMOS-UK in-situ vs Sentinel-1 soil moisture at 250 m</span></figcaption>
+        <img src="../assets/img/soil-moisture/00-key.webp" alt="Sentinel-1 100 m 상대 토양수분: 영국 Chimney Meadows 2018-07-18 여름 가뭄(평균 39 %, 갈색=건조) vs 2017-12-26 겨울(평균 87 %, 청록=습윤). 배경 © Esri·Maxar·Earthstar Geographics" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">Sentinel-1 100 m 상대 토양수분: 영국 Chimney Meadows 2018-07-18 여름 가뭄(평균 39 %, 갈색=건조) vs 2017-12-26 겨울(평균 87 %, 청록=습윤). 배경 © Esri·Maxar·Earthstar Geographics</span><span lang="en">Sentinel-1 relative soil moisture at 100 m, Chimney Meadows, UK: 2018-07-18 summer drought (mean 39 %, brown = dry) vs 2017-12-26 winter (mean 87 %, teal = wet). Basemap © Esri, Maxar, Earthstar Geographics</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/soil-moisture/01-winter-drought.webp" alt="겨울(81%) vs 여름 가뭄기(39%) 토양수분 대비" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">겨울(81%) vs 여름 가뭄기(39%) 토양수분 대비</span><span lang="en">Winter (81%) vs summer drought (39%) soil moisture</span></figcaption>
+        <img src="../assets/img/soil-moisture/03-uk-winter-summer-bars.webp" alt="겨울→여름 위성 평균 rSSM 87 %→39 %, 현장 COSMOS-UK VWC 40.1 %→18.5 %" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">겨울→여름 위성 평균 rSSM 87 %→39 %, 현장 COSMOS-UK VWC 40.1 %→18.5 %</span><span lang="en">Winter to summer: satellite mean rSSM 87 % → 39 %; in-situ COSMOS-UK VWC 40.1 % → 18.5 %</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/soil-moisture/02-satchat-map.webp" alt="토양수분 지도 — 위성지도 중첩" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">토양수분 지도 — 위성지도 중첩</span><span lang="en">Soil moisture map over satellite basemap</span></figcaption>
+        <img src="../assets/img/soil-moisture/04-uk-timeseries-250m.webp" alt="CHIMN 250 m 4년 시계열(14회 이동평균) r² 0.67. 12조합 중 최고값이고 일 단위 r²는 0.36" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">CHIMN 250 m 4년 시계열(14회 이동평균) r² 0.67. 12조합 중 최고값이고 일 단위 r²는 0.36</span><span lang="en">CHIMN 250 m four-year series (14-acquisition moving average), r² 0.67: the best of 12 combinations; daily r² is 0.36</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/soil-moisture/03-cabbage-ndvi.webp" alt="강원 고랭지 배추밭 — NDVI 기반 경작지 추출" loading="lazy" decoding="async">
+        <img src="../assets/img/soil-moisture/05-uk-3sites-100m.webp" alt="3개소 100 m 시계열: CHIMN 0.49, SHEEP 0.30, WADDN 0.07(논문 0.42, 실패)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">3개소 100 m 시계열: CHIMN 0.49, SHEEP 0.30, WADDN 0.07(논문 0.42, 실패)</span><span lang="en">Three sites at 100 m: CHIMN 0.49, SHEEP 0.30, WADDN 0.07 (paper 0.42, failed)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/soil-moisture/06-uk-vs-paper.webp" alt="논문 Table IV 대비 12조합 r²·RMSE. r²는 평균 0.45 vs 0.47로 부분 재현했지만 RMSE는 재현하지 못했다" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">논문 Table IV 대비 12조합 r²·RMSE. r²는 평균 0.45 vs 0.47로 부분 재현했지만 RMSE는 재현하지 못했다</span><span lang="en">All 12 combinations vs the paper&#x27;s Table IV: r² partly reproduced (mean 0.45 vs 0.47), RMSE not reproduced</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/soil-moisture/07-gp-maps.webp" alt="가평 100 m 토양수분 지도(Gao 2017 방법1, 회색=산림·수면 마스크)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">가평 100 m 토양수분 지도(Gao 2017 방법1, 회색=산림·수면 마스크)</span><span lang="en">Gapyeong 100 m soil moisture maps (Gao 2017 method 1; grey = forest/water mask)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/soil-moisture/08-gp-station-timeseries.webp" alt="가평 관측소 1점 비교 실패: 방법1 R −0.13. 2025-07 이후 셀 VV +5.3 dB 급변" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">가평 관측소 1점 비교 실패: 방법1 R −0.13. 2025-07 이후 셀 VV +5.3 dB 급변</span><span lang="en">Gapyeong single-station comparison failed: method 1 R −0.13; cell VV jumped +5.3 dB after July 2025</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/soil-moisture/09-gp-station-scatter.webp" alt="가평 관측소 산점도: 방법1 ubRMSE 0.110, 방법2 0.071. 상수 예측(0.033)보다 나쁨" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">가평 관측소 산점도: 방법1 ubRMSE 0.110, 방법2 0.071. 상수 예측(0.033)보다 나쁨</span><span lang="en">Gapyeong station scatter: ubRMSE 0.110 (method 1) and 0.071 (method 2), worse than a constant predictor (0.033)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/soil-moisture/10-region-rain.webp" alt="지역 평균 위성 토양수분 vs 선행강수지수: 가평 R 0.59, 화성 R 0.36" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">지역 평균 위성 토양수분 vs 선행강수지수: 가평 R 0.59, 화성 R 0.36</span><span lang="en">Scene-mean soil moisture vs antecedent precipitation index: Gapyeong R 0.59, Hwaseong R 0.36</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/soil-moisture/11-us-scan.webp" alt="미국 SCAN Ma 2020 재현 실패: R² 0.08 vs 논문 0.597(n 11). 상단 점은 탐색 상한 0.45에 고정된 해" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">미국 SCAN Ma 2020 재현 실패: R² 0.08 vs 논문 0.597(n 11). 상단 점은 탐색 상한 0.45에 고정된 해</span><span lang="en">US SCAN (Ma 2020) reproduction failed: R² 0.08 vs 0.597 in the paper (n 11); the top point is pinned to the 0.45 search bound</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/soil-moisture/12-smap-vs-pinn.webp" alt="예비 비교(n 32): SMAP L3E 9 km R 0.15 vs 저자 공개 PINN-WCM 관측소별 R 0.46–0.68(관측소별 학습으로 추정)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">예비 비교(n 32): SMAP L3E 9 km R 0.15 vs 저자 공개 PINN-WCM 관측소별 R 0.46–0.68(관측소별 학습으로 추정)</span><span lang="en">Preliminary (n 32): SMAP L3E 9 km R 0.15 vs published PINN-WCM per-site R 0.46–0.68 (likely trained per station)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/soil-moisture/L0-cabbage-ndvi.webp" alt="강원 고랭지 배추밭 — NDVI 기반 경작지 추출" loading="lazy" decoding="async">
         <figcaption><span lang="ko">강원 고랭지 배추밭 — NDVI 기반 경작지 추출</span><span lang="en">Gangwon highland cabbage fields — NDVI-based extraction</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/soil-moisture/04-cabbage-detail.webp" alt="배추밭 면적 변화 상세" loading="lazy" decoding="async">
+        <img src="../assets/img/soil-moisture/L1-cabbage-detail.webp" alt="배추밭 면적 변화 상세" loading="lazy" decoding="async">
         <figcaption><span lang="ko">배추밭 면적 변화 상세</span><span lang="en">Cabbage-field area change, detail</span></figcaption>
       </figure></div>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
-    <ul lang="ko"><li>논문 재현은 생각보다 자주 실패한다. 실패를 숨기지 않고 어느 조건에서 왜 달랐는지를 기록하는 쪽이 훨씬 유용했다.</li><li>변화탐지 기반 토양수분은 절대값보다 상대 변동에서 신뢰도가 높다는 점을 확인했다.</li><li>식생이 우거진 시기에는 후방산란이 토양이 아니라 캐노피를 보고 있다는 한계를 체감했다.</li></ul><ul lang="en"><li>Reproducing published results fails more often than expected. Recording where and why it diverged turned out to be far more useful than hiding it.</li><li>Change-detection soil moisture is more trustworthy in relative variation than in absolute value.</li><li>Felt the limit directly: under dense vegetation the backscatter is reading the canopy, not the soil.</li></ul>
+    <ul lang="ko"><li>변화탐지 rSSM은 계절 변동(14회 이동평균 r² 0.67)은 잘 따라갔지만 일 단위 일치도는 0.36이었다. 그래서 &#x27;계절·가뭄 추세 감시용&#x27;으로 한정해 표현해야 한다.</li><li>상관(r²)이 재현돼도 진폭(RMSE)은 재현되지 않을 수 있다. 논문에 적히지 않은 처리 선택(σ0 근사, 필터, 셀 정렬, 이동평균 창)이 RMSE를 1–11 %p 바꿨다.</li><li>관측소 한 점 검증은 셀 내부 변화에 취약했다. 가평 관측소 셀은 2025-06→07에 VV가 +5.3 dB 뛰었는데(주변 1 km는 변화 없음, 구조물 추정) 현장 표준편차는 0.029에 불과했다. 화성은 NDVI가 0.06–0.23인 나지라서 논문 마스크(NDVI&lt;0.1)에 대부분 탈락했다(유효 26/70일).</li><li>깊이 불일치: C-band 감지 깊이는 약 0–5 cm인데 현장 센서는 RDA 10 cm, COSMOS 12–25 cm다.</li><li>공개된 고성능 수치(R 0.6)는 평가 방식부터 확인해야 한다. 관측소별 bias가 거의 0(|bias|&lt;0.008)인 것이 in-sample 평가의 신호였다.</li><li>한계: 국내에서 관측소 단위 검증은 끝내 성공하지 못했다. 미국 재현 실패의 원인(방정식 1개·미지수 2개인 해 곡선, SCE-UA 대신 격자탐색)도 확정하지 못했다.</li><li>한계: SMAP·PINN 하위 작업 폴더가 서버에서 사라져 최종 수치(SMAP 116/429일 R 0.12)는 검증하지 못했다. 남은 시험 사본과 공개표로 부분 재계산만 했다.</li></ul><ul lang="en"><li>Change-detection rSSM tracked the seasonal cycle (r² 0.67 after a 14-acquisition moving average) but only reached r² 0.36 day to day, so it should be framed as a seasonal/drought trend monitor.</li><li>Reproducing correlation does not guarantee reproducing amplitude: processing choices the paper leaves unstated (σ0 approximation, speckle filter, cell alignment, moving-window placement) shifted RMSE by 1–11 percentage points.</li><li>Single-station validation is fragile to changes inside the cell. At Gapyeong, VV in the station cell jumped +5.3 dB between June and July 2025 while the surrounding 1 km stayed flat (likely a new structure), and in-situ variability was only 0.029 m³/m³. At Hwaseong the cell is bare ground (NDVI 0.06–0.23), so the paper&#x27;s NDVI &lt; 0.1 mask removed most dates (26 of 70 valid).</li><li>Depth mismatch: C-band senses roughly 0–5 cm, while the in-situ sensors sit at 10 cm (RDA) and 12–25 cm (COSMOS).</li><li>Check the evaluation protocol before trusting a published R ≈ 0.6: near-zero per-station bias (|bias| &lt; 0.008) was the tell-tale sign of in-sample scoring.</li><li>Limitation: station-level validation in Korea never succeeded, and the cause of the US failure (a one-equation, two-unknown solution curve; grid search instead of SCE-UA) was not pinned down.</li><li>Limitation: the SMAP and PINN working folders are no longer on the server, so their final figures (SMAP R 0.12 over 116/429 days) could not be verified; only partial recomputation from a surviving test copy and the public table was possible.</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
-    <ul lang="ko"><li>토양수분 산출 코드 (TU Wien · Gao 2017 방법)</li><li>논문 재현 검증 보고서</li><li>영문·국문 발표자료</li></ul><ul lang="en"><li>Soil moisture retrieval code (TU Wien and Gao 2017 methods)</li><li>Reproduction validation report</li><li>EN/KO presentation decks</li></ul>
+    <ul lang="ko"><li>영국 3개소 × 4해상도 rSSM 시계열 CSV와 논문 대비 지표표</li><li>가평·화성 100 m 토양수분 GeoTIFF(방법1·2, 날짜별 66·70장)와 관측소 시계열·검증 지표</li><li>지역평균–선행강수 상관표, 미국 SCAN 역산 결과</li><li>SatCHAT 합성 이미지(영국 겨울·여름, 국문·영문), 발표자료(국문·영문, 좋은 결과 위주)</li><li>원본 산출물 대비 핵심 수치 재계산 스크립트 6종</li></ul><ul lang="en"><li>rSSM time-series CSVs for 3 UK sites × 4 resolutions, plus a metrics table against the paper</li><li>100 m soil moisture GeoTIFFs for Gapyeong and Hwaseong (methods 1 and 2; 66 and 70 dates), station series and validation metrics</li><li>Scene-mean vs rainfall correlation table and US SCAN inversion results</li><li>SatCHAT demo composites (UK winter/summer, Korean and English) and slide decks in both languages (focused on positive results)</li><li>Six scripts that recompute the key figures from the original outputs</li></ul>
     <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
   </section>
 
   <nav class="proj-pager">
-    <a class="pager prev" href="bluebon.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">초소형 위성 전처리 및 포인팅 오차 분석</span><span lang="en" class="pager-title">CubeSat Preprocessing &amp; Pointing Error Analysis</span></a>
-    <a class="pager next" href="oil-spill.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">SAR 기반 해상 기름유출 탐지</span><span lang="en" class="pager-title">Marine Oil Spill Detection from SAR</span></a>
+    <a class="pager prev" href="nsr-arctic.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">북극항로(NSR) 개방 시기 정량 분석</span><span lang="en" class="pager-title">Quantifying the Northern Sea Route Opening Window</span></a>
+    <a class="pager next" href="mangrove.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">맹그로브 분포 · 변화 모니터링</span><span lang="en" class="pager-title">Mangrove Extent &amp; Change Monitoring</span></a>
   </nav>
 </main>
 

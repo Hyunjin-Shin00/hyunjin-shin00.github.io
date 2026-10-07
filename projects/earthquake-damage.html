@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>지진 피해 SAR 분석 — 2026 베네수엘라 M7.5 (CCD·DInSAR) · 신현진</title>
+<meta name="description" content="2026-06-24 베네수엘라 M7.5 지진 직후 Sentinel-1 SLC로 코히런스 변화탐지(CCD)와 차분간섭(DInSAR)을 수행해 해안 도심(Catia La Mar)의 피해 의심구역·도로 노출을 등급화했다. Copernicus EMS 피해판독(EMSR884)과 광학 AI 건물분류로 교차검증했고, 재계산으로 수치를 다시 확인하면서 기준선 대비 효과가 보고서보다 작다는 점과 DInSAR 절대 변위의 한계를 함께 기록했다.">
+<meta property="og:title" content="지진 피해 SAR 분석 — 2026 베네수엘라 M7.5 (CCD·DInSAR) · 신현진">
+<meta property="og:description" content="2026-06-24 베네수엘라 M7.5 지진 직후 Sentinel-1 SLC로 코히런스 변화탐지(CCD)와 차분간섭(DInSAR)을 수행해 해안 도심(Catia La Mar)의 피해 의심구역·도로 노출을 등급화했다. Copernicus EMS 피해판독(EMSR884)과 광학 AI 건물분류로 교차검증했고, 재계산으로 수치를 다시 확인하면서 기준선 대비 효과가 보고서보다 작다는 점과 DInSAR 절대 변위의 한계를 함께 기록했다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">🌋</span>
+    <h1><span lang="ko">지진 피해 SAR 분석 — 2026 베네수엘라 M7.5 (CCD·DInSAR)</span><span lang="en">SAR Earthquake Damage Assessment — 2026 Venezuela M7.5 (CCD &amp; DInSAR)</span></h1>
+    <div class="proj-meta">
+      <span>2026.06 – 2026.08</span>
+      <span class="dot">·</span>
+      <span lang="ko">주도 (SAR 처리·CCD·검증·보고서)</span><span lang="en">Lead (SAR processing, CCD, validation, reporting)</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">완료 (현장 미검증 예비분석)</span><span lang="en" class="chip chip-done">Completed (preliminary, not field-verified)</span>
+    </div>
+    <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">CCD</span><span class="tag">DInSAR</span><span class="tag">SNAPHU</span><span class="tag">Copernicus EMS</span></div>
+    <p class="proj-sum"><span lang="ko">2026-06-24 베네수엘라 M7.5 지진 직후 Sentinel-1 SLC로 코히런스 변화탐지(CCD)와 차분간섭(DInSAR)을 수행해 해안 도심(Catia La Mar)의 피해 의심구역·도로 노출을 등급화했다. Copernicus EMS 피해판독(EMSR884)과 광학 AI 건물분류로 교차검증했고, 재계산으로 수치를 다시 확인하면서 기준선 대비 효과가 보고서보다 작다는 점과 DInSAR 절대 변위의 한계를 함께 기록했다.</span><span lang="en">Right after the 24 June 2026 M7.5 Venezuela earthquake, Sentinel-1 SLC pairs were used for coherence change detection (CCD) and differential InSAR to grade suspected damage zones and road exposure in the coastal city of Catia La Mar. Results were cross-checked against Copernicus EMS damage grading (EMSR884) and an optical AI building classifier; a later re-computation confirmed the numbers but showed the lift over baseline is smaller than first reported and that absolute DInSAR displacement is not reliable.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>2026-06-24 22:05 UTC 본진 M7.5(깊이 10 km, 우수향 주향이동), 22:04 전진 M7.2. 카라카스 관문인 La Guaira 해안 도심과 국제공항 일대에서 건물 피해 보고.</li><li>재난 직후 광학 영상은 구름·촬영 일정 제약이 있어, 날씨와 무관한 C-band SAR로 피해 의심구역을 빠르게 선별하는 절차가 필요했다.</li><li>국내 대형 손해보험사 대상 재난 피해 분석 시나리오의 지진 파트로 수행.</li></ul><ul lang="en"><li>Mainshock M7.5 at 22:05 UTC on 24 June 2026 (10 km deep, right-lateral strike-slip), preceded by an M7.2 foreshock. Building damage was reported around La Guaira, the coastal gateway to Caracas, and its international airport.</li><li>Post-event optical imagery is limited by clouds and tasking, so a weather-independent C-band SAR workflow was needed to screen suspected damage zones quickly.</li><li>Carried out as the earthquake module of a disaster-impact scenario for a major Korean P&amp;C insurer.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>입력: Sentinel-1A/1C/1D IW SLC 7장(51 GB), 두 통과궤도(left: 진앙 포함, right: 해안 도심).</li><li>DInSAR: SNAP 처리 체인(TOPSAR Split → 궤도 → Back-Geocoding → 간섭도 → Deburst → Goldstein → TC) 후 SNAPHU 2.0.4(DEFO 비용, MCF 초기화, 10×10 타일)로 언랩, d_LOS = −φλ/4π (λ = 5.55 cm).</li><li>1일 페어(06-23 S1A → 06-24 S1C): 두 번째 영상이 본진 약 45분 뒤에 촬영돼 지진 직후 상태를 담음.</li><li>CCD: ΔCoh = γ_pre − γ_co (right: 06-13→06-18 vs 06-18→06-25). γ_pre 저코히런스(수면·식생) 마스크, ΔCoh&lt;0(코히런스 상승)은 피해 신호에서 제외.</li><li>등급: 초기 3등급(0.2/0.4/0.6) → EMS 피해건물 탐지율을 보며 2등급(RISK 0.1~0.4, HIGH ≥0.4)으로 재설정.</li><li>GIS 교차: EMSR884 피해건물(Destroyed/Damaged/Possibly), OSM 건물 30,558동·도로 2,243구간, GEM 활성단층과 중첩. 광학 SkySat 0.5 m 기반 건물 피해 분류기(LR+GB, v7) 결과와도 비교.</li></ul><ul lang="en"><li>Inputs: seven Sentinel-1A/1C/1D IW SLC scenes (51 GB) from two passes (left: covering the epicentre; right: the coastal city).</li><li>DInSAR: SNAP chain (TOPSAR split → orbit → back-geocoding → interferogram → deburst → Goldstein → terrain correction), unwrapped with SNAPHU 2.0.4 (DEFO cost, MCF init, 10×10 tiles); d_LOS = −φλ/4π (λ = 5.55 cm).</li><li>1-day pair (S1A 23 June → S1C 24 June): the second image was acquired about 45 minutes after the mainshock.</li><li>CCD: ΔCoh = γ_pre − γ_co (right pass: 13→18 June vs 18→25 June), masking low pre-event coherence (water, vegetation) and discarding ΔCoh &lt; 0 (coherence gain).</li><li>Grading: an initial three-class scheme (0.2/0.4/0.6) was later reset to two classes (RISK 0.1–0.4, HIGH ≥ 0.4) by checking hit rates on EMS-labelled buildings.</li><li>GIS overlay with EMSR884 damage points/polygons, 30,558 OSM buildings, 2,243 road segments and GEM active faults; compared with an optical (SkySat 0.5 m) building-damage classifier (LR + GB, v7).</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>해안 도심 AOI(70 km²): ΔCoh ≥ 0.1 위험구역 26.0 km²(37.2%), 고위험(≥0.4) 3.6 km²(5.2%). 장면 전체 MID+HIGH 70.8 km².</li><li>EMSR884 Damaged 건물 76동 중 65동(85.5%)이 위험구역 내 — 단, 같은 구역의 일반 건물도 62.4%가 위험구역에 걸려 기준선 대비 약 1.36배.</li><li>피해등급이 높을수록 고변화(≥0.4) 비율이 높음: Destroyed 7/13 &gt; Damaged 37/130 &gt; Possibly 4/43 (장면 전체).</li><li>광학 AI: 30,558동 중 완전파괴 151 / 부분 2,742 / 경미·없음 27,665. 교차검증 CV AUC 0.836. 완전파괴 151동 중 128동(84.8%)이 SAR 위험구역과 겹침.</li><li>DInSAR 1일 페어: 평면 램프 제거 후 Copernicus EMS 지반변위 제품과 r = 0.46 (원값 r = 0.11). 진앙 북쪽에 동서 방향 위상 불연속이 보이나 언랩 오류와 구분하지 못함.</li><li>도로: 지도 레이어 재계산 기준 389 km 중 변화 감지 구간 159 km(41%), 중·고변화 57 km(14.6%).</li></ul><ul lang="en"><li>Coastal AOI (70 km²): RISK zone (ΔCoh ≥ 0.1) 26.0 km² (37.2%), HIGH (≥ 0.4) 3.6 km² (5.2%); 70.8 km² MID+HIGH over the whole scene.</li><li>65 of 76 EMSR884 &#x27;Damaged&#x27; buildings (85.5%) fall in the RISK zone — but 62.4% of ordinary buildings in the same area do too, so the lift over baseline is only about 1.36×.</li><li>The share in HIGH change rises with damage grade: Destroyed 7/13 &gt; Damaged 37/130 &gt; Possibly 4/43 (whole scene).</li><li>Optical AI: of 30,558 buildings, 151 destroyed / 2,742 partially damaged / 27,665 minor or none; cross-validated AUC 0.836; 128 of the 151 destroyed (84.8%) overlap the SAR RISK zone.</li><li>1-day DInSAR vs Copernicus EMS ground-movement product: r = 0.46 after removing a planar ramp (raw r = 0.11). An E–W phase discontinuity north of the epicentre is visible but could not be separated from unwrapping errors.</li><li>Roads (recomputed from the map layer): 159 km of 389 km (41%) show change, 57 km (14.6%) moderate-to-high.</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/earthquake-damage/00-key-ccd-map.webp" alt="Catia La Mar CCD(ΔCoh, VV)와 EMSR884 피해건물 위치 — 빨강일수록 코히런스 손실 (배경 Esri, 피해 위치 © Copernicus EMS)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">Catia La Mar CCD(ΔCoh, VV)와 EMSR884 피해건물 위치 — 빨강일수록 코히런스 손실 (배경 Esri, 피해 위치 © Copernicus EMS)</span><span lang="en">Catia La Mar CCD (ΔCoh, VV) with EMSR884 damage locations; redder = more coherence loss (basemap Esri, damage points © Copernicus EMS)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/earthquake-damage/01-ccd-coherence-pair.webp" alt="지진 전 코히런스(06-13→06-18), 지진 포함 코히런스(06-18→06-25), 차분 ΔCoh" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">지진 전 코히런스(06-13→06-18), 지진 포함 코히런스(06-18→06-25), 차분 ΔCoh</span><span lang="en">Pre-event coherence (13→18 June), co-event coherence (18→25 June) and their difference ΔCoh</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/earthquake-damage/02-dinsar-1day-epicenter.webp" alt="1일 페어(06-23→06-24, 본진 45분 후 촬영) 언랩 LOS 변위, 평면 램프 제거 — 진앙 북쪽 불연속과 남쪽 언랩 오류 의심 구간 공존" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">1일 페어(06-23→06-24, 본진 45분 후 촬영) 언랩 LOS 변위, 평면 램프 제거 — 진앙 북쪽 불연속과 남쪽 언랩 오류 의심 구간 공존</span><span lang="en">1-day pair (23→24 June, imaged 45 min after the mainshock), unwrapped LOS with planar ramp removed — a discontinuity north of the epicentre coexists with a suspected unwrapping error to the south</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/earthquake-damage/03-dinsar-wrapped-catia.webp" alt="Catia La Mar 감긴 위상(06-18→06-25) — 무늬가 지형을 따라가 지형 잔차·대기 영향 가능" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">Catia La Mar 감긴 위상(06-18→06-25) — 무늬가 지형을 따라가 지형 잔차·대기 영향 가능</span><span lang="en">Wrapped phase over Catia La Mar (18→25 June); fringes follow topography, suggesting DEM/atmospheric residuals</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/earthquake-damage/04-optical-ai-buildings.webp" alt="광학(SkySat 0.5 m) AI 건물 피해 판정 30,558동 — 빨강 완전파괴, 주황 부분피해 (배경 Esri)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">광학(SkySat 0.5 m) AI 건물 피해 판정 30,558동 — 빨강 완전파괴, 주황 부분피해 (배경 Esri)</span><span lang="en">Optical (SkySat 0.5 m) AI building damage for 30,558 buildings — red destroyed, orange partial (basemap Esri)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/earthquake-damage/05-road-ccd-grade.webp" alt="도로 구간별 ΔCoh 변화 등급" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">도로 구간별 ΔCoh 변화 등급</span><span lang="en">Road segments graded by ΔCoh change class</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/earthquake-damage/06-optical-ai-cv-roc.webp" alt="광학 AI 분류기 교차검증 ROC (AUC 0.836)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">광학 AI 분류기 교차검증 ROC (AUC 0.836)</span><span lang="en">Cross-validated ROC of the optical damage classifier (AUC 0.836)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/earthquake-damage/07-emsr-ccd-crosstab.webp" alt="EMSR884 피해등급 × CCD 3등급 교차표 (장면 전체 186동)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">EMSR884 피해등급 × CCD 3등급 교차표 (장면 전체 186동)</span><span lang="en">EMSR884 damage grade × CCD class (whole scene, 186 buildings)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/earthquake-damage/08-validation-baseline-ems.webp" alt="재계산 검증: (A) 기준선 대비 CCD 적중률, (B) 자체 DInSAR vs Copernicus EMS 지반변위 (r = 0.46)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">재계산 검증: (A) 기준선 대비 CCD 적중률, (B) 자체 DInSAR vs Copernicus EMS 지반변위 (r = 0.46)</span><span lang="en">Re-computation check: (A) CCD hit rate vs baseline, (B) own DInSAR vs Copernicus EMS ground movement (r = 0.46)</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>CCD 적중률은 기준선과 같이 봐야 한다: EMS 피해건물 84.6% vs 일반 건물 62.4%. 도심은 원래 코히런스 손실이 커서 &#x27;85% 탐지&#x27;만으로는 효과를 말할 수 없다.</li><li>임계치 0.1을 EMS 라벨로 역산한 뒤 같은 라벨로 검증했다 — 독립 검증이 아니라는 점을 보고서에 쓰지 못했다.</li><li>광학 AI 완전파괴 151동에는 학습 양성 86동이 전부 포함(GB in-sample AUC 1.000) — 독립 예측은 65동. 학습 코드가 원 작업 PC에만 남아 재생성은 불가, 학습셋 구성과 CV AUC(0.833)만 재현.</li><li>DInSAR 절대값은 신뢰 불가: right 장면 변위가 −255~+114 cm로 물리적으로 맞지 않고(진앙 160 km 밖), 1일 페어도 약 1 m 램프. 감긴 위상 무늬가 지형을 따라가 지형 잔차·대기 영향 가능성. 해결하지 못함.</li><li>면적 환산에 14×14 m 화소를 가정해 약 2% 과대(실제 13.8×13.9 m). 도로 총연장 409 km vs 지오메트리 389 km, 위험구역 도로 236 km vs 159 km 불일치 — 원인 미확인.</li><li>시간기선 5일(γ_pre) vs 7일(γ_co)로 맞추지 못한 페어가 있어 시간 탈상관이 섞일 수 있다.</li></ul><ul lang="en"><li>CCD hit rates must be read against a baseline: 84.6% of EMS-damaged buildings vs 62.4% of ordinary buildings. Urban areas lose coherence anyway, so &#x27;85% detected&#x27; alone says little.</li><li>The 0.1 threshold was tuned on EMS labels and then validated on the same labels — not an independent test, which the original report did not state.</li><li>All 86 training positives ended up in the optical &#x27;destroyed&#x27; class (GB in-sample AUC 1.000), so only 65 of the 151 are independent predictions. The training code stayed on the original workstation; only the training-set composition and CV AUC (0.833) could be reproduced.</li><li>Absolute DInSAR values are not reliable: the right-pass displacement spans −255 to +114 cm (implausible 160 km from the epicentre) and the 1-day pair carries a ~1 m ramp; wrapped fringes follow topography, pointing to DEM/atmospheric residuals. Not resolved.</li><li>Areas were computed with an assumed 14×14 m pixel, overstating by ~2% (actual 13.8×13.9 m). Road totals (409 vs 389 km) and exposed length (236 vs 159 km) disagree between report and map layer — cause not found.</li><li>One CCD pair mixes 5-day (pre) and 7-day (co-event) baselines, so temporal decorrelation is not fully controlled.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>CCD ΔCoh·등급 래스터(VV/VH, 두 궤도), 위험구역 GeoPackage</li><li>DInSAR 언랩 위상·LOS 변위 GeoTIFF</li><li>건물·도로 × CCD 교차 GIS 레이어와 정량 보고서(MD/HTML)</li><li>광학+SAR+EMS 융합 HTML 리포트, 위성맵 카드뉴스(PNG/PDF/HTML)</li></ul><ul lang="en"><li>CCD ΔCoh and class rasters (VV/VH, two passes), risk-zone GeoPackages</li><li>DInSAR unwrapped phase and LOS displacement GeoTIFFs</li><li>Building/road × CCD GIS layers and quantitative reports (MD/HTML)</li><li>Fused optical + SAR + EMS HTML report and a satellite-map briefing sheet (PNG/PDF/HTML)</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="wildfire.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">산불 피해 등급 분류 (dNBR)</span><span lang="en" class="pager-title">Wildfire Burn Severity Mapping (dNBR)</span></a>
+    <a class="pager next" href="oil-spill.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">SAR 기반 해상 기름유출 탐지</span><span lang="en" class="pager-title">Marine Oil Spill Detection from SAR</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

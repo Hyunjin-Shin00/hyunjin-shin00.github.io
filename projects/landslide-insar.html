@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>산사태 InSAR — 경주 태풍 산사태 vs 카라코람 사면 (PS·SBAS) · 신현진</title>
+<meta name="description" content="Sentinel-1 버스트 SLC 를 PyGMTSAR 로 PS·SBAS 처리해 2022 태풍 힌남노 직후 경주 토함산 일대 산사태와 파키스탄 카라코람 산악 사면의 변위속도를 비교했다. 건조 산악(파키스탄)에서는 SBAS와 PS가 r=0.86으로 일치하며 최대 −192 mm/yr 이동 사면을 잡았지만, 숲이 덮인 경주에서는 결맞음 중앙값 0.16으로 잡음이 지배했고 66개 산사태 지점의 속도가 배경과 구별되지 않았다.">
+<meta property="og:title" content="산사태 InSAR — 경주 태풍 산사태 vs 카라코람 사면 (PS·SBAS) · 신현진">
+<meta property="og:description" content="Sentinel-1 버스트 SLC 를 PyGMTSAR 로 PS·SBAS 처리해 2022 태풍 힌남노 직후 경주 토함산 일대 산사태와 파키스탄 카라코람 산악 사면의 변위속도를 비교했다. 건조 산악(파키스탄)에서는 SBAS와 PS가 r=0.86으로 일치하며 최대 −192 mm/yr 이동 사면을 잡았지만, 숲이 덮인 경주에서는 결맞음 중앙값 0.16으로 잡음이 지배했고 66개 산사태 지점의 속도가 배경과 구별되지 않았다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">⛰️</span>
+    <h1><span lang="ko">산사태 InSAR — 경주 태풍 산사태 vs 카라코람 사면 (PS·SBAS)</span><span lang="en">Landslide InSAR — Typhoon Landslides in Gyeongju vs Karakoram Slopes (PS &amp; SBAS)</span></h1>
+    <div class="proj-meta">
+      <span>2025.11 – 2025.12</span>
+      <span class="dot">·</span>
+      <span lang="ko">단독 수행</span><span lang="en">Sole contributor</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">완료 (경주는 탐지 실패로 결론)</span><span lang="en" class="chip chip-done">Completed (Gyeongju concluded as a non-detection)</span>
+    </div>
+    <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">PS-InSAR</span><span class="tag">SBAS</span><span class="tag">PyGMTSAR</span><span class="tag">산사태</span></div>
+    <p class="proj-sum"><span lang="ko">Sentinel-1 버스트 SLC 를 PyGMTSAR 로 PS·SBAS 처리해 2022 태풍 힌남노 직후 경주 토함산 일대 산사태와 파키스탄 카라코람 산악 사면의 변위속도를 비교했다. 건조 산악(파키스탄)에서는 SBAS와 PS가 r=0.86으로 일치하며 최대 −192 mm/yr 이동 사면을 잡았지만, 숲이 덮인 경주에서는 결맞음 중앙값 0.16으로 잡음이 지배했고 66개 산사태 지점의 속도가 배경과 구별되지 않았다.</span><span lang="en">Sentinel-1 burst SLCs were processed with PyGMTSAR (PS and SBAS) to compare post-typhoon landslides in Gyeongju, Korea (Typhoon Hinnamnor, Sept 2022) with mountain slopes in the Pakistani Karakoram. In the arid Karakoram, SBAS and PS agreed (r = 0.86) and resolved slopes moving up to −192 mm/yr; in forested Gyeongju, median coherence was 0.16, the velocity field was noise-dominated, and velocities at 66 mapped landslides were indistinguishable from background.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>2022-09-06 태풍 힌남노 이후 경주 토함산 일대에 산사태가 다수 발생 — 위성 InSAR 로 사전 징후나 사후 변위를 볼 수 있는지 확인이 목적</li><li>비교군으로 결맞음이 좋은 건조 고산지(파키스탄 길기트-발티스탄, 36.27°N 74.70°E)의 활동 사면을 같은 파이프라인으로 처리</li><li>무료 자료(Sentinel-1, Copernicus DEM)와 오픈소스(PyGMTSAR)만으로 PS·SBAS 를 동시에 산출해 상호검증하는 구성</li></ul><ul lang="en"><li>Typhoon Hinnamnor (6 Sept 2022) triggered many landslides around Tohamsan, Gyeongju; the goal was to test whether InSAR shows precursory or post-event motion there</li><li>As a control, an active slope system in the arid high mountains of Gilgit-Baltistan, Pakistan (36.27°N, 74.70°E) was processed with the identical pipeline</li><li>Free data only (Sentinel-1, Copernicus DEM) and open-source PyGMTSAR, producing PS and SBAS side by side so each can check the other</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>Sentinel-1 버스트 단위 다운로드(ASF): 경주 상승궤도 IW2 VV, 파키스탄 IW1 상승 59장·하강 52장</li><li>경주는 기간을 바꿔 7회 실행 — 태풍 전(2022.01–08, 17장), 태풍 후(2022.08–2023.03, 17장 / –2023.12, 29장 / 2022.09–2024.12, 52장), 2022–23 전체(46장) 등</li><li>SBAS: 60일 이내 쌍 다중룩 간섭도 → 평균 결맞음 기준 쌍 선별 → 스택 결맞음 마스크(경주 0.15, 파키스탄 0.35) → SNAPHU 언랩 → 지형·좌표 다항 추세 회귀 제거 → 결맞음 가중 최소제곱 시계열</li><li>PS: 안정성(PS 함수) 가중 단일룩 간섭도 + 1D 언랩 + 최소제곱, SBAS 추세를 위상 보정에 재사용</li><li>검증: SBAS–PS 화소 상관, 스택 결맞음 분포, 산사태 지점 66개(지점 지도에서 좌표 추출)의 속도 vs 배경(Mann-Whitney U), PlanetScope 전후 NDVI 변화</li></ul><ul lang="en"><li>Burst-level Sentinel-1 download from ASF: Gyeongju ascending IW2 VV; Pakistan IW1 with 59 ascending and 52 descending acquisitions</li><li>Gyeongju was run seven times with different windows: pre-typhoon (Jan–Aug 2022, 17 scenes), post-typhoon (Aug 2022–Mar 2023, 17; to Dec 2023, 29; Sep 2022–Dec 2024, 52) and full 2022–23 (46)</li><li>SBAS: multilooked interferograms for pairs ≤60 days → pair selection by mean coherence → stack-coherence mask (0.15 Gyeongju, 0.35 Pakistan) → SNAPHU unwrapping → regression removal of topography/coordinate trends → coherence-weighted least-squares time series</li><li>PS: stability-weighted single-look interferograms, 1D unwrapping and least squares, reusing the SBAS trend as a phase correction</li><li>Validation: pixel-wise SBAS–PS correlation, stack-coherence distribution, velocities at 66 mapped landslides vs background (Mann-Whitney U), and pre/post PlanetScope NDVI change</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>파키스탄: 스택 결맞음 중앙값 0.37(상승)·0.41(하강), SBAS–PS 속도 r=0.86(상승)·0.80(하강). v&lt;−50 mm/yr 영역 2.37 km²(상승), 최솟값 −192 mm/yr — 두 궤도 모두 같은 사면군에서 음의 LOS 신호</li><li>경주: 스택 결맞음 중앙값 0.16–0.19, SBAS–PS r=0.04–0.19. SBAS 속도 표준편차 13–25 mm/yr, 화소의 37–59%가 |v|&gt;10 mm/yr — 숲 지형에서 실제 운동이 아닌 잡음으로 판단</li><li>경주 66개 산사태 지점: 5개 기간 모두 지점 속도 중앙값 차이가 배경 표준편차의 1/3 이하. 유일하게 p&lt;0.05(0.011)인 기간은 부호가 반대(+6.6 mm/yr) — 산사태 신호로 볼 근거 없음</li><li>PlanetScope NDVI(3 m)도 66지점 중앙 ΔNDVI +0.002, −0.1 이상 하락은 5곳뿐(p=0.46) — 지점 좌표 오차·소규모 산사태 희석 가능성, 원인 미확정</li><li>노트북의 수직 변환이 V_LOS×cosθ 로 계산된 것을 재계산으로 확인(수직운동 가정이면 ÷cosθ, 약 1.67배 과소)</li></ul><ul lang="en"><li>Pakistan: median stack coherence 0.37 (asc) / 0.41 (desc); SBAS–PS velocity r = 0.86 / 0.80. Area faster than −50 mm/yr: 2.37 km² (asc), minimum −192 mm/yr, with both geometries showing negative LOS motion on the same slopes</li><li>Gyeongju: median stack coherence 0.16–0.19 and SBAS–PS r = 0.04–0.19. SBAS velocity std 13–25 mm/yr with 37–59% of pixels above |10| mm/yr — judged as noise, not motion, over forest</li><li>66 mapped Gyeongju landslides: in all five windows the point-vs-background median difference was under one third of the background std; the only window with p &lt; 0.05 (0.011) had the opposite sign (+6.6 mm/yr), so it is not a landslide signal</li><li>PlanetScope NDVI (3 m) also showed little change at the points (median ΔNDVI +0.002; only 5 of 66 dropped by more than 0.1; p = 0.46) — possibly point-location error or small scars diluted in the window; cause not resolved</li><li>Recalculation showed the notebook&#x27;s vertical conversion multiplied LOS by cos θ; under a vertical-motion assumption it should divide, so those maps are ~1.67× too small</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/landslide-insar/00-key.webp" alt="동일 파이프라인 SBAS LOS 속도 — 경주(숲, 산사태 66지점 표시) vs 카라코람(건조 산악)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">동일 파이프라인 SBAS LOS 속도 — 경주(숲, 산사태 66지점 표시) vs 카라코람(건조 산악)</span><span lang="en">SBAS LOS velocity from the same pipeline — Gyeongju (forest, 66 mapped landslides) vs Karakoram (arid mountains)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/landslide-insar/01-baseline-network.webp" alt="경주 2022 SBAS 기선 네트워크(결맞음 기준 선별 쌍)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">경주 2022 SBAS 기선 네트워크(결맞음 기준 선별 쌍)</span><span lang="en">Gyeongju 2022 SBAS baseline network (coherence-selected pairs)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/landslide-insar/02-coherence-gyeongju.webp" alt="경주 스택 결맞음 — 평균 0.209, 중앙값 0.162, 임계 0.15" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">경주 스택 결맞음 — 평균 0.209, 중앙값 0.162, 임계 0.15</span><span lang="en">Gyeongju stack coherence — mean 0.209, median 0.162, threshold 0.15</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/landslide-insar/03-coherence-pakistan.webp" alt="카라코람 스택 결맞음 — 평균 0.415, 중앙값 0.369, 임계 0.35" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">카라코람 스택 결맞음 — 평균 0.415, 중앙값 0.369, 임계 0.35</span><span lang="en">Karakoram stack coherence — mean 0.415, median 0.369, threshold 0.35</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/landslide-insar/04-velocity-gyeongju-sbas.webp" alt="경주 2022 SBAS LOS 속도(잡음 지배)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">경주 2022 SBAS LOS 속도(잡음 지배)</span><span lang="en">Gyeongju 2022 SBAS LOS velocity (noise-dominated)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/landslide-insar/05-sbas-ps-scatter-gyeongju.webp" alt="경주 SBAS vs PS 속도 — 무상관(r=0.04)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">경주 SBAS vs PS 속도 — 무상관(r=0.04)</span><span lang="en">Gyeongju SBAS vs PS velocity — no correlation (r = 0.04)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/landslide-insar/06-velocity-pakistan-ps.webp" alt="카라코람 PS LOS 속도 — 이동 사면 3곳" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">카라코람 PS LOS 속도 — 이동 사면 3곳</span><span lang="en">Karakoram PS LOS velocity — three moving slopes</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/landslide-insar/07-sbas-ps-scatter-pakistan.webp" alt="카라코람 SBAS vs PS 속도 — 1:1 선 주변 일치(r=0.86)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">카라코람 SBAS vs PS 속도 — 1:1 선 주변 일치(r=0.86)</span><span lang="en">Karakoram SBAS vs PS velocity — clustered on the 1:1 line (r = 0.86)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/landslide-insar/08-landslide-points-validation.webp" alt="경주 산사태 지점 속도 vs 배경 — 5개 기간 모두 분리 안 됨" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">경주 산사태 지점 속도 vs 배경 — 5개 기간 모두 분리 안 됨</span><span lang="en">Gyeongju landslide-point velocities vs background — not separable in any of five windows</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>같은 파이프라인이라도 지표 피복이 결과를 좌우: 결맞음 중앙값 0.37 vs 0.16 에서 SBAS–PS 일치도가 r 0.86 vs 0.04 로 갈림 — 속도 지도를 보기 전에 SBAS–PS 상호 일치도부터 확인해야 함</li><li>숲이 덮인 국내 산지의 태풍성 얕은 산사태는 C밴드 12일 간격 InSAR 로는 사전·사후 모두 분리 불가(66지점, p 0.11–0.37). L밴드나 고해상도 광학·SAR 진폭 변화탐지가 필요</li><li>짧은 기간(17장, 7개월) 속도는 잡음이 연속도로 증폭됨: 경주 SBAS std 25.4(17장) → 13.0 mm/yr(46장)</li><li>한계: 산사태 지점 좌표는 지도 캡처를 지오레퍼런싱한 것이라 수십 m 오차 가능, 지점 목록의 출처·기준 시점을 확인하지 못함. 전국 SBAS 래스터의 생성 방법도 기록이 없어 교차검증 자료로만 사용</li></ul><ul lang="en"><li>Land cover dominated the outcome of an identical pipeline: median coherence 0.37 vs 0.16 split SBAS–PS agreement into r = 0.86 vs 0.04 — check SBAS–PS consistency before reading any velocity map</li><li>Shallow typhoon landslides on forested Korean hills could not be separated with 12-day C-band InSAR, before or after the event (66 points, p 0.11–0.37); L-band or high-resolution optical/SAR amplitude change detection is needed</li><li>Short windows inflate noise when converted to rates: Gyeongju SBAS std fell from 25.4 mm/yr (17 scenes) to 13.0 mm/yr (46 scenes)</li><li>Limitations: landslide coordinates came from a georeferenced map capture (tens of metres of possible error) whose source and reference date were not confirmed; a nationwide SBAS raster used for cross-checking had no processing record</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>SBAS·PS LOS 속도 GeoTIFF(경주 7개 기간, 카라코람 상승·하강)</li><li>PS RMSE GeoTIFF</li><li>PyGMTSAR 단계별 진단 그림 33종/실행</li><li>산사태 지점 검증 표(지점 66개 × 5개 기간)</li><li>발표자료 13장(내부)</li></ul><ul lang="en"><li>SBAS and PS LOS velocity GeoTIFFs (seven Gyeongju windows; Karakoram ascending and descending)</li><li>PS RMSE GeoTIFFs</li><li>33 PyGMTSAR diagnostic figures per run</li><li>Landslide-point validation table (66 points × 5 windows)</li><li>13-slide internal presentation</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="seoul-csk-psinsar.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">서울 COSMO-SkyMed PS-InSAR와 Sentinel-1 교차검증</span><span lang="en" class="pager-title">Seoul COSMO-SkyMed PS-InSAR with Sentinel-1 Cross-Validation</span></a>
+    <a class="pager next" href="usoi-dam.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">Usoi 자연댐(Sarez 호) Sentinel-1 SBAS 변위 모니터링</span><span lang="en" class="pager-title">Usoi Natural Dam (Lake Sarez) Sentinel-1 SBAS Monitoring</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>
