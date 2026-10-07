@@ -115,6 +115,13 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
     <ul lang="ko"><li>SWIR 밴드가 왜 고온 물체에 반응하는지(플랑크 복사의 단파장 꼬리) 물리적으로 이해했다.</li><li>GT 데이터 확보의 어려움 — 기업은 가동률을 공개하지 않는다. 검증 설계 자체가 연구의 절반이었다.</li><li>위성 데이터가 공급망·ESG 분석이라는 비(非)지리 도메인에서 어떻게 값이 매겨지는지 감을 잡았다.</li><li>한계: 구름 오염 시 시계열이 끊긴다. Sentinel-3 SLSTR 열적외 연계를 시도하지 못한 것이 아쉽다.</li></ul><ul lang="en"><li>Understood physically why SWIR responds to hot targets — the short-wavelength tail of Planck emission.</li><li>Ground truth is the hard part: companies do not publish utilisation rates, so designing the validation was half the work.</li><li>Got a feel for how satellite data gets priced in a non-geospatial domain like supply-chain and ESG analysis.</li><li>Limitation: cloud breaks the time series. I never got to pair it with Sentinel-3 SLSTR thermal infrared.</li></ul>
   </section>
 
+  
+  <section class="sec">
+    <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
+    <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/eo/sentinel-2/thermal-anomaly"><code>eo/sentinel-2/thermal-anomaly/</code></a></li></ul>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+  </section>
+
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>TAI 산출 알고리즘 코드</li><li>제련소 AOI 폴리곤 세트</li><li>국가별 분석 결과 보고서</li></ul><ul lang="en"><li>TAI computation code</li><li>Smelter AOI polygon set</li><li>Per-country analysis reports</li></ul>

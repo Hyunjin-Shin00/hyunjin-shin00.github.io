@@ -123,6 +123,13 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
     <ul lang="ko"><li>SAR 기하를 블랙박스 없이 이해하게 됐다. 제로도플러가 왜 성립하는지, 상태벡터 보간 차수가 왜 중요한지를 직접 구현하며 알았다.</li><li>오차의 크기보다 오차의 원인을 아는 것이 중요하다. 24.5 m 편이를 &#x27;맞추는&#x27; 대신 지오이드로 설명해낸 것이 이 작업에서 가장 값진 부분이었다.</li><li>백록담 건은 결론이 뒤집힌 사례다. 처음엔 &#x27;SAR에 수체 신호 없음 → 물이 없었다&#x27;로 봤는데, Sentinel-2로 교차검증하니 물은 있었고 SAR가 못 본 것이었다. NDWI 최대 0.238(개방수면은 0.4 초과)로, 개방수면이 아니라 초지 사이 얕고 탁한 습지였다. 관측 실패와 부재를 구분해야 한다는 걸 비싸게 배웠다.</li><li>한계: 백록담 수체 모니터링에 SAR 단독은 부적합하다는 것이 이 검증의 결론이다. 광학 병행이 필수다.</li></ul><ul lang="en"><li>Came to understand SAR geometry without a black box — why zero-Doppler holds, why the state-vector interpolation order matters — by implementing it.</li><li>Knowing the cause of an error matters more than its size. Explaining the 24.5 m shift as geoid undulation, rather than just tuning it away, was the most valuable part of this work.</li><li>The crater case reversed my own conclusion. I first read &#x27;no water signal in SAR&#x27; as &#x27;there was no water&#x27;. Cross-checking with Sentinel-2 showed the water was there and SAR simply could not see it — NDWI peaked at 0.238, well below the 0.4 of open water, so it was shallow turbid wetland between grasses, not an open pool. An expensive lesson in separating absence from failure to observe.</li><li>Limitation: the verification concludes that SAR alone is unsuitable for monitoring this crater. Optical imagery is required alongside it.</li></ul>
   </section>
 
+  
+  <section class="sec">
+    <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
+    <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/sar/nextsat-2/sensor-model"><code>sar/nextsat-2/sensor-model/</code></a></li></ul>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+  </section>
+
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>거리-도플러 센서모델 파이썬 구현 (n2reader · orbit · geometry · tropo · dem · simulate)</li><li>step01–step10 재현 파이프라인</li><li>12씬 5 m 지오코딩 산출물</li><li>기하 QC · PSM 정확도 보고서</li><li>인터랙티브 결과 맵</li></ul><ul lang="en"><li>Range-Doppler sensor model in Python (reader, orbit, geometry, troposphere, DEM, simulation)</li><li>A reproducible step01–step10 pipeline</li><li>12 geocoded scenes at 5 m</li><li>Geometry QC and sensor-model accuracy reports</li><li>Interactive results map</li></ul>

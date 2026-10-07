@@ -115,6 +115,13 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
     <ul lang="ko"><li>같은 파이프라인이라도 지표 피복이 결과를 좌우: 결맞음 중앙값 0.37 vs 0.16 에서 SBAS–PS 일치도가 r 0.86 vs 0.04 로 갈림 — 속도 지도를 보기 전에 SBAS–PS 상호 일치도부터 확인해야 함</li><li>숲이 덮인 국내 산지의 태풍성 얕은 산사태는 C밴드 12일 간격 InSAR 로는 사전·사후 모두 분리 불가(66지점, p 0.11–0.37). L밴드나 고해상도 광학·SAR 진폭 변화탐지가 필요</li><li>짧은 기간(17장, 7개월) 속도는 잡음이 연속도로 증폭됨: 경주 SBAS std 25.4(17장) → 13.0 mm/yr(46장)</li><li>한계: 산사태 지점 좌표는 지도 캡처를 지오레퍼런싱한 것이라 수십 m 오차 가능, 지점 목록의 출처·기준 시점을 확인하지 못함. 전국 SBAS 래스터의 생성 방법도 기록이 없어 교차검증 자료로만 사용</li></ul><ul lang="en"><li>Land cover dominated the outcome of an identical pipeline: median coherence 0.37 vs 0.16 split SBAS–PS agreement into r = 0.86 vs 0.04 — check SBAS–PS consistency before reading any velocity map</li><li>Shallow typhoon landslides on forested Korean hills could not be separated with 12-day C-band InSAR, before or after the event (66 points, p 0.11–0.37); L-band or high-resolution optical/SAR amplitude change detection is needed</li><li>Short windows inflate noise when converted to rates: Gyeongju SBAS std fell from 25.4 mm/yr (17 scenes) to 13.0 mm/yr (46 scenes)</li><li>Limitations: landslide coordinates came from a georeferenced map capture (tens of metres of possible error) whose source and reference date were not confirmed; a nationwide SBAS raster used for cross-checking had no processing record</li></ul>
   </section>
 
+  
+  <section class="sec">
+    <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
+    <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/sar/sentinel-1/insar/sbas"><code>sar/sentinel-1/insar/sbas/</code></a></li><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/applications/disaster-damage/landslide"><code>applications/disaster-damage/landslide/</code></a></li></ul>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+  </section>
+
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>SBAS·PS LOS 속도 GeoTIFF(경주 7개 기간, 카라코람 상승·하강)</li><li>PS RMSE GeoTIFF</li><li>PyGMTSAR 단계별 진단 그림 33종/실행</li><li>산사태 지점 검증 표(지점 66개 × 5개 기간)</li><li>발표자료 13장(내부)</li></ul><ul lang="en"><li>SBAS and PS LOS velocity GeoTIFFs (seven Gyeongju windows; Karakoram ascending and descending)</li><li>PS RMSE GeoTIFFs</li><li>33 PyGMTSAR diagnostic figures per run</li><li>Landslide-point validation table (66 points × 5 windows)</li><li>13-slide internal presentation</li></ul>

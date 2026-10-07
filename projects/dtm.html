@@ -111,6 +111,13 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
     <ul lang="ko"><li>InSAR 베이스라인 선택이 DEM 정확도를 어떻게 좌우하는지 실측으로 확인했다.</li><li>DSM과 DTM의 차이, 그리고 비지형 객체 제거가 왜 어려운지를 데이터로 이해했다.</li><li>한계: 비교 가능한 고해상도 참값이 없는 지역에서는 정량 검증 자체가 불가능했다. 멕시코 LiDAR 지역만이 유일한 검증지였다.</li></ul><ul lang="en"><li>Saw empirically how baseline selection drives DEM accuracy.</li><li>Understood from the data why removing non-terrain objects is the hard part of DSM→DTM.</li><li>Limitation: without high-resolution ground truth, quantitative validation is simply impossible. The Mexican LiDAR site was the only place we could actually check.</li></ul>
   </section>
 
+  
+  <section class="sec">
+    <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
+    <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/applications/dem-generation"><code>applications/dem-generation/</code></a></li></ul>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+  </section>
+
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>연구개발 결과보고서</li><li>DSM→DTM 변환 처리 체인</li><li>지역별 DSM 산출물</li></ul><ul lang="en"><li>R&amp;D results report</li><li>DSM→DTM processing chain</li><li>Regional DSM products</li></ul>
@@ -119,7 +126,7 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
 
   <nav class="proj-pager">
     <a class="pager prev" href="volcano-sar.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">초고해상도 SAR 화산 모니터링</span><span lang="en" class="pager-title">Volcano Monitoring with Very-High-Resolution SAR</span></a>
-    <a class="pager next" href="bluebon.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">초소형 위성 전처리 및 포인팅 오차 분석</span><span lang="en" class="pager-title">CubeSat Preprocessing &amp; Pointing Error Analysis</span></a>
+    <a class="pager next" href="bluebon.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">초소형 위성 영상처리 전 과정 — 복사보정 · 기하보정 · 품질분석</span><span lang="en" class="pager-title">End-to-End CubeSat Image Processing — Radiometric, Geometric, Quality</span></a>
   </nav>
 </main>
 

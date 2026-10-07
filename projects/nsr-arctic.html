@@ -95,6 +95,13 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
     <ul lang="ko"><li>해빙 원격탐사 센서별 특성 — 수동 마이크로파의 긴 시계열과 낮은 해상도, SAR의 고해상도와 좁은 관측폭, 고도계의 선형 커버리지 — 를 비교 정리했다.</li><li>NetCDF 극지 투영 좌표계 처리와 다중 데이터소스 시공간 정합을 익혔다.</li><li>AIS를 직접 구하기 어려울 때 GFW가 실용적 대안이 된다는 것을 찾아냈다.</li><li>한계: 실시간 개방 예측 모델까지는 아직 가지 못했다. 현재는 사후 분석 단계다.</li></ul><ul lang="en"><li>Mapped out the trade-offs between sea-ice sensors: passive microwave gives long records at coarse resolution, SAR gives detail over narrow swaths, altimeters give thickness along thin tracks.</li><li>Learned polar-projection NetCDF handling and multi-source space-time alignment.</li><li>Found that GFW is a workable substitute when AIS data is hard to obtain directly.</li><li>Limitation: this is still retrospective analysis — a real-time opening forecast model does not exist yet.</li></ul>
   </section>
 
+  
+  <section class="sec">
+    <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
+    <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/passive-microwave/sea-ice"><code>passive-microwave/sea-ice/</code></a></li><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/applications/arctic-route"><code>applications/arctic-route/</code></a></li></ul>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+  </section>
+
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>[연구개발계획서] 북극 항로</li><li>SIC/SIT/GFW 자동 수집 코드</li><li>분기별 분석 주제 제안서</li></ul><ul lang="en"><li>Northern Sea Route R&amp;D plan</li><li>SIC/SIT/GFW collection code</li><li>Quarterly analysis topic proposals</li></ul>

@@ -111,6 +111,13 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
     <ul lang="ko"><li>일 단위 재방문이 가능한 소형위성 군집이 &#x27;언제 시작해서 얼마나 빨리 진행되는가&#x27;라는 질문에 특히 강하다는 걸 확인했다. 중해상도 위성의 재방문 주기로는 2024년 5월의 급격한 증가 구간을 놓쳤을 것이다.</li><li>자동 변화탐지보다 수동 디지타이징이 정확했다. 산지 절토면은 나지(裸地)와 분광 특성이 비슷해 자동 분류가 혼동한다. 대상이 선형이고 시기가 7개뿐이라 사람이 그리는 편이 빠르고 믿을 만했다.</li><li>미터 단위 결과를 낼 때는 투영 선택이 결론을 바꾼다. 경위도(EPSG:4326)에서 그대로 길이를 재면 위도에 따라 오차가 생겨, 국내 표준 투영으로 변환한 뒤 계산했다.</li><li>한계: 광학 영상이라 구름 낀 시기는 공백이다. 2024.06 이후 2024.10까지 네 달의 공백이 있어 그 사이 진행 속도는 알 수 없다. Sentinel-1 SAR을 보조로 쓰면 메울 수 있었을 것이다.</li></ul><ul lang="en"><li>Confirmed that a daily-revisit smallsat constellation is especially strong at answering &#x27;when did it start and how fast is it going&#x27;. A mid-resolution satellite&#x27;s revisit would have missed the sharp May 2024 jump entirely.</li><li>Manual digitising beat automatic change detection here. Fresh cut slopes are spectrally close to bare ground, which confuses a classifier. With a linear target and only seven dates, drawing by hand was both faster and more trustworthy.</li><li>When the output is in metres, the projection choice changes the answer. Measuring length directly in EPSG:4326 introduces latitude-dependent error, so everything was reprojected to the national grid first.</li><li>Limitation: optical imagery means cloudy dates are simply gaps. There is a four-month hole between June and October 2024, so the rate in that window is unknown. Sentinel-1 SAR as a fallback would have filled it.</li></ul>
   </section>
 
+  
+  <section class="sec">
+    <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
+    <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/eo/planetscope/change-detection"><code>eo/planetscope/change-detection/</code></a></li></ul><p class="sec-note"><span lang="ko">디지타이징은 QGIS 수작업이고, 저장소에는 연장·거리를 계량하는 스크립트만 있습니다.</span><span lang="en">Digitising was manual in QGIS; the repository holds only the script that measures length and distance.</span></p>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
+  </section>
+
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
     <ul lang="ko"><li>시기별 공사현황 shapefile 5종</li><li>군사분계선 참조 레이어</li><li>시기별 주기 지도 13장</li><li>QGIS 프로젝트</li></ul><ul lang="en"><li>Five dated construction shapefiles</li><li>MDL reference layer</li><li>Thirteen annotated date maps</li><li>QGIS project</li></ul>
@@ -118,7 +125,7 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   </section>
 
   <nav class="proj-pager">
-    <a class="pager prev" href="bluebon.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">초소형 위성 전처리 및 포인팅 오차 분석</span><span lang="en" class="pager-title">CubeSat Preprocessing &amp; Pointing Error Analysis</span></a>
+    <a class="pager prev" href="bluebon.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">초소형 위성 영상처리 전 과정 — 복사보정 · 기하보정 · 품질분석</span><span lang="en" class="pager-title">End-to-End CubeSat Image Processing — Radiometric, Geometric, Quality</span></a>
     <a class="pager next" href="smelter.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">제련소 열원 활동 모니터링 (TAI)</span><span lang="en" class="pager-title">Smelter Thermal Activity Monitoring (TAI)</span></a>
   </nav>
 </main>

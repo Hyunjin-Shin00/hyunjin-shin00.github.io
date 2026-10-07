@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>초소형 위성 전처리 및 포인팅 오차 분석 · 신현진</title>
-<meta name="description" content="자사 초소형 위성의 원시 바이너리를 영상으로 바꾸는 파이프라인을 만들고, 촬영 위치가 왜 어긋나는지를 궤도·자세 메타데이터로 통계 분석했다.">
-<meta property="og:title" content="초소형 위성 전처리 및 포인팅 오차 분석 · 신현진">
-<meta property="og:description" content="자사 초소형 위성의 원시 바이너리를 영상으로 바꾸는 파이프라인을 만들고, 촬영 위치가 왜 어긋나는지를 궤도·자세 메타데이터로 통계 분석했다.">
+<title>초소형 위성 영상처리 전 과정 — 복사보정 · 기하보정 · 품질분석 · 신현진</title>
+<meta name="description" content="자사 초소형 위성의 원시 패킷을 영상으로 만들고, 물리량으로 보정하고, 지도에 앉히는 전 과정을 다뤘다. 남이 만든 산출물이 아니라 센서 자체를 상대한 유일한 작업이다.">
+<meta property="og:title" content="초소형 위성 영상처리 전 과정 — 복사보정 · 기하보정 · 품질분석 · 신현진">
+<meta property="og:description" content="자사 초소형 위성의 원시 패킷을 영상으로 만들고, 물리량으로 보정하고, 지도에 앉히는 전 과정을 다뤘다. 남이 만든 산출물이 아니라 센서 자체를 상대한 유일한 작업이다.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,31 +46,31 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   <div class="proj-head">
     <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
     <span class="proj-icon">🛰️</span>
-    <h1><span lang="ko">초소형 위성 전처리 및 포인팅 오차 분석</span><span lang="en">CubeSat Preprocessing &amp; Pointing Error Analysis</span></h1>
+    <h1><span lang="ko">초소형 위성 영상처리 전 과정 — 복사보정 · 기하보정 · 품질분석</span><span lang="en">End-to-End CubeSat Image Processing — Radiometric, Geometric, Quality</span></h1>
     <div class="proj-meta">
-      <span>2025.03 – 2026.05</span>
+      <span>2025.03 – 2026.10</span>
       <span class="dot">·</span>
       <span lang="ko">주 담당</span><span lang="en">Lead</span>
       <span class="dot">·</span>
       <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
     </div>
-    <div class="tags"><span class="tag">복사보정</span><span class="tag">검보정</span><span class="tag">PRNU</span><span class="tag">통계분석</span></div>
-    <p class="proj-sum"><span lang="ko">자사 초소형 위성의 원시 바이너리를 영상으로 바꾸는 파이프라인을 만들고, 촬영 위치가 왜 어긋나는지를 궤도·자세 메타데이터로 통계 분석했다.</span><span lang="en">Built the pipeline that turns our CubeSat&#x27;s raw binary into imagery, then statistically traced why its pointing drifts, using orbit and attitude metadata.</span></p>
+    <div class="tags"><span class="tag">복사보정</span><span class="tag">기하보정</span><span class="tag">대리보정</span><span class="tag">MTF</span><span class="tag">검보정</span></div>
+    <p class="proj-sum"><span lang="ko">자사 초소형 위성의 원시 패킷을 영상으로 만들고, 물리량으로 보정하고, 지도에 앉히는 전 과정을 다뤘다. 남이 만든 산출물이 아니라 센서 자체를 상대한 유일한 작업이다.</span><span lang="en">Took our own CubeSat from raw downlink packets to a calibrated, map-registered image — radiometry, geometry, sharpness and pointing. The one project where I worked on the sensor itself rather than somebody else&#x27;s product.</span></p>
   </div>
 
   <section class="sec">
     <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
-    <ul lang="ko"><li>자사가 운용하는 초소형 위성의 L1A 데이터 품질 검증이 필요했다.</li><li>이진 원시 데이터에서 RGB 영상까지 가는 전처리 자동화가 없었다.</li><li>포인팅 오차, PRNU(픽셀 비균일성), 색감 이상 등 센서 품질 이슈를 체계적으로 봐야 했다.</li></ul><ul lang="en"><li>The L1A data quality of our in-house CubeSat needed verification.</li><li>There was no automated path from raw binary to RGB imagery.</li><li>Sensor quality issues — pointing error, PRNU, colour anomalies — needed a systematic look.</li></ul>
+    <ul lang="ko"><li>자사가 운용하는 초소형 위성의 L1A 데이터 품질을 검증하고, 원시 데이터에서 영상까지 가는 경로를 자동화해야 했다.</li><li>복사보정 없이는 시점 간·밴드 간 비교가 불가능하고, 기하보정 없이는 다른 레이어와 겹칠 수 없다. 둘 다 없으면 영상이 아니라 그림일 뿐이다.</li><li>포인팅 오차, PRNU(픽셀 비균일성), MTF(선명도) 같은 센서 품질 이슈를 수치로 확인해야 했다.</li></ul><ul lang="en"><li>The L1A data quality of our in-house CubeSat needed verification, and the path from raw data to imagery needed automating.</li><li>Without radiometric correction you cannot compare across dates or bands; without geometric correction you cannot overlay anything. Missing both, it is a picture rather than an image.</li><li>Sensor quality — pointing error, PRNU, MTF — had to be quantified rather than described.</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
-    <ul lang="ko"><li>이진 원시 데이터 → GeoTIFF → RGB PNG 전처리 자동화 파이프라인 구축 (배치 쉘 스크립트 연동).</li><li>DN → Radiance → TOA Reflectance 복사보정 체인 구현.</li><li>위성 제조사가 제공한 궤도·자세 메타데이터와 실제 포인팅 오차를 매칭 (전체 65건, 텔레메트리 보유 27건).</li><li>Pearson · Spearman · Kendall 세 가지 상관계수를 함께 사용 — 표본이 27건으로 적을 때 Kendall의 p-value가 더 안정적이기 때문.</li><li>along / across / total 방향별로 오차를 분해해 각각의 원인 파라미터를 찾았다.</li><li>이상치 그룹과 정상 그룹의 파라미터 분포를 boxplot으로 비교.</li><li>PRNU 보정 전후 영상 품질 비교 분석.</li></ul><ul lang="en"><li>Built an automated raw-binary → GeoTIFF → RGB PNG pipeline, driven by batch shell scripts.</li><li>Implemented the DN → radiance → TOA reflectance radiometric chain.</li><li>Matched measured pointing error against orbit and attitude metadata from the manufacturer (65 scenes total, 27 with telemetry).</li><li>Used Pearson, Spearman and Kendall correlations together — with n=27, Kendall&#x27;s p-value is the more trustworthy one.</li><li>Decomposed error into along / across / total components and hunted the driving parameter for each.</li><li>Compared parameter distributions between outlier and normal groups via boxplots.</li><li>Compared image quality before and after PRNU correction.</li></ul>
+    <ul lang="ko"><li>L0 → L1A: 원시 바이너리 패킷을 읽어 DN 영상으로 복원하고, 암전류·PRNU 보정 후 복사휘도로 변환했다. 배치 쉘로 장면 단위 자동 처리.</li><li>복사휘도 → TOA 반사도: 태양천정각·일-지 거리·Thuillier 태양 복사조도 스펙트럼을 적용했다.</li><li>대리보정(vicarious calibration): 프랑스 라크로(La Crau) 검보정장의 RadCalNet 지상 관측과 대조해 밴드별 이득을 유도했다. 지상 분광 TOA 를 위성 분광응답함수(SRF)로 적분해 같은 기준에서 비교하는 방식.</li><li>Sentinel-2 MSI 와 교차보정 — 동시 관측 장면을 대조해 이득·오프셋을 독립적으로 확인했다.</li><li>기하보정 V3: 기준영상과 특징점 정합 → 이상점 제거 → RPC 적합 → 스트립 정렬. 처리 상태를 보는 웹 UI 와 도커 구성까지 포함.</li><li>MTF: 에지법으로 선명도를 측정하고, 추정한 커널로 디블러링을 적용했다.</li><li>포인팅 오차: 제조사 궤도·자세 메타데이터와 실측 오차를 매칭해 상관분석했다. 표본이 작아(65건, 텔레메트리 27건) Pearson·Spearman·Kendall 세 계수를 함께 봤다 — n이 20대일 때는 Kendall 의 p-value 가 더 믿을 만하다.</li></ul><ul lang="en"><li>L0 to L1A: decode raw binary packets into DN imagery, correct dark current and PRNU, convert to radiance. Scene-level batch automation in shell.</li><li>Radiance to TOA reflectance using solar zenith angle, Earth-Sun distance and the Thuillier solar irradiance spectrum.</li><li>Vicarious calibration against RadCalNet ground measurements at the La Crau site in France, deriving per-band gain. Ground spectra are integrated through the satellite&#x27;s spectral response functions so both sides are compared on the same basis.</li><li>Cross-calibration against Sentinel-2 MSI using coincident acquisitions, as an independent check on gain and offset.</li><li>Geometric correction V3: feature matching against a reference image, outlier rejection, RPC fitting, strip alignment — with a web UI and docker setup for monitoring runs.</li><li>MTF measured by the edge method, with the estimated kernel used for deblurring.</li><li>Pointing error: matched measured error against the manufacturer&#x27;s orbit and attitude metadata. With a small sample (65 scenes, 27 with telemetry) I read Pearson, Spearman and Kendall together — at n around 27, Kendall&#x27;s p-value is the more trustworthy one.</li></ul>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
-    <ul lang="ko"><li>전처리 자동화 파이프라인 완성 — binary에서 PNG까지 원스텝</li><li>경과일(시간 드리프트)이 along·across·total 모든 오차 유형과 유의한 상관을 보이는 유일한 변수임을 확인 (n=65, along r=0.586 p&lt;0.0001)</li><li>across 오차는 Tilt(roll) 각도와 음의 상관 (r=−0.322, p=0.0089) — 자세 제어의 영향</li><li>텔레메트리 보유 27건에서 GNSS-TLE 고도차 |Δalt|가 along·total 오차와 유의한 상관 (r=0.534 / 0.552)</li><li>이상치 그룹과 정상 그룹 사이에 통계적으로 유의한 파라미터 차이는 발견되지 않음 — 단일 원인으로 설명되지 않는다는 결론</li></ul><ul lang="en"><li>A one-step pipeline from raw binary to PNG.</li><li>Found elapsed time since start to be the only variable significantly correlated with all three error types (n=65; along r=0.586, p&lt;0.0001).</li><li>Across-track error correlates negatively with tilt/roll angle (r=−0.322, p=0.0089), pointing to attitude control.</li><li>In the 27 telemetry scenes, GNSS–TLE altitude mismatch |Δalt| correlates with along and total error (r=0.534 / 0.552).</li><li>No statistically significant parameter difference between outlier and normal groups — so the outliers are not explained by a single cause.</li></ul>
+    <ul lang="ko"><li>원시 바이너리에서 RGB 까지 원스텝 전처리 파이프라인 완성</li><li>라크로 검보정장 대리보정: 밴드별 TOA 반사도 비 평균 0.993 (1.0 이 완전 일치)</li><li>기하보정 V3 — 정합점 1,000여 개에서 RPC 적합, 평면위치오차 분포와 자가적합 잔차로 정확도 정량화</li><li>포인팅 오차: 경과일(시간 드리프트)만이 along·across·total 모든 오차와 유의한 상관 (along r=0.586, p&lt;0.0001, n=65)</li><li>across 오차는 Tilt(roll)과 음의 상관 (r=−0.322, p=0.0089) — 자세 제어의 영향</li><li>텔레메트리 27건에서 GNSS–TLE 고도차 |Δalt| 가 along·total 오차와 상관 (r=0.534 / 0.552)</li><li>이상치 그룹과 정상 그룹 사이에 통계적으로 유의한 파라미터 차이는 없음 — 단일 원인으로 설명되지 않는다는 결론</li><li>응용으로 확장: AOD 산출(MODIS MAIAC 대비 N=538, Bias +0.007, RMSE 0.033, R 0.683), 연무 제거, 해색 적조 탐지, 초해상화</li></ul><ul lang="en"><li>A one-step pipeline from raw binary to RGB.</li><li>Vicarious calibration at La Crau: per-band TOA reflectance ratio averaging 0.993, where 1.0 is exact agreement.</li><li>Geometric correction V3: RPC fitted from roughly a thousand tie points, with accuracy quantified through planimetric error distribution and self-fit residuals.</li><li>Pointing: elapsed time is the only variable significantly correlated with all three error components (along r=0.586, p&lt;0.0001, n=65).</li><li>Across-track error correlates negatively with tilt/roll (r=−0.322, p=0.0089), pointing at attitude control.</li><li>In the 27 telemetry scenes, GNSS–TLE altitude mismatch correlates with along and total error (r=0.534 / 0.552).</li><li>No statistically significant parameter difference between outlier and normal groups — the outliers are not explained by a single cause.</li><li>Extended downstream: AOD retrieval (N=538 against MODIS MAIAC, bias +0.007, RMSE 0.033, R 0.683), dehazing, ocean-colour HAB detection, super-resolution.</li></ul>
     <div class="figs">
       <figure class="fig">
         <img src="../assets/img/bluebon/00-along-drift.webp" alt="along 오차 vs 경과일 — 시간에 따른 선형 드리프트 (r=0.586)" loading="lazy" decoding="async">
@@ -89,19 +89,54 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
         <figcaption><span lang="ko">추세선 잔차 분석 — 이상치 식별</span><span lang="en">Trend-line residual analysis for outlier identification</span></figcaption>
       </figure>
       <figure class="fig">
-        <img src="../assets/img/bluebon/04-outlier-boxplot.webp" alt="이상치 vs 정상 그룹 파라미터 분포 비교" loading="lazy" decoding="async">
-        <figcaption><span lang="ko">이상치 vs 정상 그룹 파라미터 분포 비교</span><span lang="en">Parameter distributions: outlier vs normal group</span></figcaption>
+        <img src="../assets/img/bluebon/04-outlier-boxplot.webp" alt="이상치 vs 정상 그룹 파라미터 분포 — 유의한 차이 없음" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">이상치 vs 정상 그룹 파라미터 분포 — 유의한 차이 없음</span><span lang="en">Outlier vs normal group parameters — no significant difference</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/bluebon/R0-srf-spectrum.webp" alt="라크로 검보정장 — RadCalNet 지상 TOA 와 위성 분광응답(SRF) 대조" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">라크로 검보정장 — RadCalNet 지상 TOA 와 위성 분광응답(SRF) 대조</span><span lang="en">La Crau site — RadCalNet ground TOA against the satellite spectral response functions</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/bluebon/R1-band-ratio.webp" alt="밴드별 TOA 반사도 비 — 평균 0.993" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">밴드별 TOA 반사도 비 — 평균 0.993</span><span lang="en">Per-band TOA reflectance ratio, averaging 0.993</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/bluebon/R2-gain-spectrum.webp" alt="유도한 대리보정 이득 스펙트럼" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">유도한 대리보정 이득 스펙트럼</span><span lang="en">Derived vicarious gain spectrum</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/bluebon/G0-tie-points.webp" alt="기하보정 — 기준영상(좌) ↔ 대상영상(우) 타이포인트 정합" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">기하보정 — 기준영상(좌) ↔ 대상영상(우) 타이포인트 정합</span><span lang="en">Geometric correction — tie points between reference (left) and target (right)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/bluebon/G1-rpc-residual.webp" alt="RPC 자가적합 잔차 (30배 확대)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">RPC 자가적합 잔차 (30배 확대)</span><span lang="en">RPC self-fit residuals, exaggerated 30x</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/bluebon/G2-rpc-error.webp" alt="RPC 평면위치오차 분포" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">RPC 평면위치오차 분포</span><span lang="en">RPC planimetric error distribution</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/bluebon/D0-aod-scatter.webp" alt="AOD 산출 검증 — MODIS MAIAC 대비 N=538, RMSE 0.033, R 0.683" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">AOD 산출 검증 — MODIS MAIAC 대비 N=538, RMSE 0.033, R 0.683</span><span lang="en">AOD validation against MODIS MAIAC — N=538, RMSE 0.033, R 0.683</span></figcaption>
       </figure></div>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
-    <ul lang="ko"><li>초소형 위성 복사보정 파이프라인을 처음부터 끝까지 이해했다.</li><li>표본이 작을 때 어떤 상관계수를 믿어야 하는지 — Kendall τ가 n이 20대일 때 왜 더 나은지 — 를 실제 판단 근거로 썼다.</li><li>&#x27;유의한 차이가 없다&#x27;도 결론이라는 것. 이상치의 원인을 찾지 못했다는 사실 자체를 보고에 명시했다.</li><li>한계: PRNU 보정 알고리즘 최적화는 추가 연구 여지가 남아 있다.</li></ul><ul lang="en"><li>Understood a CubeSat radiometric calibration pipeline end to end.</li><li>Used the choice of correlation statistic as a real decision — why Kendall&#x27;s τ is the safer read at n≈27.</li><li>Learned that &#x27;no significant difference&#x27; is also a finding, and reported the failure to explain the outliers rather than hiding it.</li><li>Limitation: the PRNU correction algorithm still has room for optimisation.</li></ul>
+    <ul lang="ko"><li>센서를 직접 상대하면 &#x27;영상&#x27;이라는 말이 무엇으로 이루어져 있는지가 보인다. DN 은 숫자일 뿐이고, 물리량이 되려면 암전류·PRNU·태양 기하·분광응답이 전부 들어가야 한다.</li><li>대리보정은 비교 기준을 맞추는 게 절반이다. 지상 분광을 위성 SRF 로 적분하지 않고 대조하면 밴드폭 차이만큼 틀린다.</li><li>표본이 작을 때 어떤 상관계수를 믿을지가 결론을 바꾼다 — Kendall τ 를 쓴 이유를 설명할 수 있어야 한다.</li><li>&#x27;유의한 차이가 없다&#x27;도 결론이다. 포인팅 이상치의 원인을 찾지 못했다는 사실을 그대로 보고에 남겼다.</li><li>한계: PRNU 보정 알고리즘 최적화는 추가 연구 여지가 남아 있다. MTF 디블러링도 커널 추정 정확도에 결과가 크게 좌우된다.</li></ul><ul lang="en"><li>Working on the sensor shows you what an &#x27;image&#x27; is actually made of. DN is just a number; turning it into a physical quantity takes dark current, PRNU, solar geometry and spectral response, all of it.</li><li>Half of vicarious calibration is making the comparison fair. Compare ground spectra without integrating them through the satellite&#x27;s SRF and you are off by the bandwidth difference.</li><li>With a small sample, which correlation statistic you trust changes the conclusion — you should be able to say why you chose Kendall&#x27;s τ.</li><li>&#x27;No significant difference&#x27; is also a result. I recorded the failure to explain the pointing outliers rather than leaving it out.</li><li>Limitations: the PRNU correction still has room for optimisation, and MTF deblurring depends heavily on how well the kernel is estimated.</li></ul>
+  </section>
+
+  
+  <section class="sec">
+    <h2><span lang="ko">관련 코드</span><span lang="en">Code</span></h2>
+    <ul class="codelist"><li><a class="codepath" href="https://github.com/Hyunjin-Shin00/sar-eo-analysis/tree/main/eo/bluebon"><code>eo/bluebon/</code></a></li></ul>
+    <p class="sec-note"><span lang="ko">저장소는 센서 → 위성 → 기법 순으로 정리돼 있고, 각 폴더에 입력·출력 표가 있습니다.</span><span lang="en">The repository is organised by sensor, satellite and technique; each folder documents its inputs and outputs.</span></p>
   </section>
 
   <section class="sec">
     <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
-    <ul lang="ko"><li>전처리 자동화 파이프라인</li><li>포인팅 오차 분석 기술 보고서</li><li>복사보정 정리 문서</li></ul><ul lang="en"><li>Automated preprocessing pipeline</li><li>Pointing-error analysis report</li><li>Radiometric calibration notes</li></ul>
+    <ul lang="ko"><li>L0→L1A 전처리 파이프라인</li><li>복사보정·대리보정 코드와 검보정장 분석</li><li>기하보정 V3 (정합·RPC·웹 UI)</li><li>MTF 측정·디블러링</li><li>포인팅 오차 분석 보고서</li><li>응용: AOD · 연무제거 · 해색 · 초해상화</li></ul><ul lang="en"><li>L0 to L1A preprocessing pipeline</li><li>Radiometric and vicarious calibration with cal/val site analysis</li><li>Geometric correction V3 with matching, RPC and web UI</li><li>MTF measurement and deblurring</li><li>Pointing error analysis report</li><li>Downstream: AOD, dehazing, ocean colour, super-resolution</li></ul>
     <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
   </section>
 
