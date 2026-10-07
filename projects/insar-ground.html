@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>InSAR 기반 지반침하 · 산사태 모니터링 · 신현진</title>
+<meta name="description" content="밀리미터 단위 지표 변위를 위성으로 잡아내는 InSAR 처리 역량을 사내에 구축했다. SBAS와 PS 두 계열을 모두 구현하고 서로 교차검증했다.">
+<meta property="og:title" content="InSAR 기반 지반침하 · 산사태 모니터링 · 신현진">
+<meta property="og:description" content="밀리미터 단위 지표 변위를 위성으로 잡아내는 InSAR 처리 역량을 사내에 구축했다. SBAS와 PS 두 계열을 모두 구현하고 서로 교차검증했다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">🏔️</span>
+    <h1><span lang="ko">InSAR 기반 지반침하 · 산사태 모니터링</span><span lang="en">Ground Subsidence &amp; Landslide Monitoring with InSAR</span></h1>
+    <div class="proj-meta">
+      <span>2025.11 – 진행 중</span>
+      <span class="dot">·</span>
+      <span lang="ko">주 담당</span><span lang="en">Lead</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-on">진행 중</span><span lang="en" class="chip chip-on">Ongoing</span>
+    </div>
+    <div class="tags"><span class="tag">InSAR</span><span class="tag">SBAS</span><span class="tag">PS-InSAR</span><span class="tag">ISCE2</span><span class="tag">PyGMTSAR</span></div>
+    <p class="proj-sum"><span lang="ko">밀리미터 단위 지표 변위를 위성으로 잡아내는 InSAR 처리 역량을 사내에 구축했다. SBAS와 PS 두 계열을 모두 구현하고 서로 교차검증했다.</span><span lang="en">Built in-house InSAR capability for millimetre-scale surface displacement — implementing both SBAS and Persistent Scatterer approaches and cross-validating them.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>산사태와 지반침하를 사후 확인이 아니라 선제적으로 감시하려면 InSAR이 필요했다.</li><li>국립공원 관리기관의 SAR 산사태 모니터링 과제를 계기로 내부 기술 역량 구축을 시작했다.</li><li>이후 광역 지자체 지반침하 사업과 AI 기반 위성정보 활용 과제로 수요가 확대됐다.</li></ul><ul lang="en"><li>Detecting landslides and subsidence before they become incidents requires interferometry, not after-the-fact imagery.</li><li>A landslide-monitoring request from a national park authority was the trigger to build the capability in-house.</li><li>Demand then grew to a metropolitan subsidence programme and an AI-based satellite analytics project.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>PyGMTSAR 기반 SBAS InSAR 구현 — 네팔·파키스탄·경주 지역 시계열 변위 분석.</li><li>ISCE2 프레임워크로 COSMO-SkyMed(X-band) InSAR 처리 파이프라인 구축: SLC 정합 → 간섭도 생성 → coherence 산출 → 필터링 → 지오코딩.</li><li>snaphu로 위상 언래핑(phase unwrapping) 수행.</li><li>isce2 stackSentinel 기반 PS-InSAR 파이썬 구현 — 부산 지역 적용.</li><li>SBAS와 PS 속도장을 교차 비교해 서로의 신뢰도를 검증했다.</li><li>차세대소형위성 2호(N2) 메타데이터를 CSK 포맷으로 변환해 ISCE2에 투입하는 코드 개발.</li><li>SNAP Offset Tracking으로 대변위(사구 이동·빙하) 탐지 테스트.</li></ul><ul lang="en"><li>SBAS InSAR with PyGMTSAR — time-series displacement over Nepal, Pakistan and Gyeongju.</li><li>A COSMO-SkyMed (X-band) InSAR pipeline on ISCE2: SLC coregistration → interferogram → coherence → filtering → geocoding.</li><li>Phase unwrapping with snaphu.</li><li>A Python PS-InSAR implementation on top of isce2 stackSentinel, applied to Busan.</li><li>SBAS and PS velocity fields cross-compared to validate each other.</li><li>Code to translate NEXTSat-2 (N2) metadata into CSK format so ISCE2 could ingest it.</li><li>SNAP Offset Tracking tested for large displacements such as dune migration and glacier flow.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>CSK InSAR 처리 파이프라인 구축 완료 및 결과 보고서 작성</li><li>네팔 · 파키스탄 · 경주 SBAS 지표 변위 지도 생성</li><li>부산 PS-InSAR LOS 속도장 및 침하 핫스팟 시계열 도출 (Sentinel-1, 2021–2023, 약 29만 PS)</li><li>SBAS–PS 속도 교차비교로 두 기법의 일치도 정량 확인</li><li>N2 → CSK 메타데이터 변환 코드 개발 완료</li></ul><ul lang="en"><li>A working CSK InSAR pipeline, with a delivered results report.</li><li>SBAS displacement maps for Nepal, Pakistan and Gyeongju.</li><li>Busan PS-InSAR LOS velocity field and subsidence-hotspot time series (Sentinel-1, 2021–2023, ~293k persistent scatterers).</li><li>Quantified agreement between SBAS and PS velocities via direct cross-comparison.</li><li>Working N2 → CSK metadata conversion.</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/insar-ground/00-interferogram.webp" alt="간섭도 — 지형 위에 중첩한 위상 프린지" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">간섭도 — 지형 위에 중첩한 위상 프린지</span><span lang="en">Interferogram — phase fringes draped over terrain</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/insar-ground/01-wrap-unwrap.webp" alt="위상 언래핑 전후 비교 (wrapped → unwrapped)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">위상 언래핑 전후 비교 (wrapped → unwrapped)</span><span lang="en">Before and after phase unwrapping</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/insar-ground/02-baseline-network.webp" alt="SBAS 간섭쌍 베이스라인 네트워크" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">SBAS 간섭쌍 베이스라인 네트워크</span><span lang="en">SBAS interferogram pair baseline network</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/insar-ground/03-sbas-cumulative.webp" alt="SBAS 누적 LOS 변위 시계열" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">SBAS 누적 LOS 변위 시계열</span><span lang="en">SBAS cumulative LOS displacement series</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/insar-ground/04-ps-cumulative.webp" alt="PS 누적 LOS 변위 시계열" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">PS 누적 LOS 변위 시계열</span><span lang="en">PS cumulative LOS displacement series</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/insar-ground/05-sbas-ps-compare.webp" alt="SBAS vs PS 속도 교차 비교" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">SBAS vs PS 속도 교차 비교</span><span lang="en">SBAS vs PS velocity cross-comparison</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/insar-ground/06-pakistan-velocity.webp" alt="파키스탄 — LOS 변위 속도장" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">파키스탄 — LOS 변위 속도장</span><span lang="en">Pakistan — LOS velocity field</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/insar-ground/07-gyeongju-velocity.webp" alt="경주 — 산사태 지역 변위 속도" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">경주 — 산사태 지역 변위 속도</span><span lang="en">Gyeongju — displacement velocity over the landslide area</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/insar-ground/08-gyeongju-water.webp" alt="경주 — 수체 및 지형 참조" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">경주 — 수체 및 지형 참조</span><span lang="en">Gyeongju — water and terrain reference</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/insar-ground/09-landslide-inventory.webp" alt="산사태 인벤토리 — 탐지 지점 번호 부여" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">산사태 인벤토리 — 탐지 지점 번호 부여</span><span lang="en">Landslide inventory — numbered detections</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/insar-ground/10-busan-ps-velocity.webp" alt="부산 PS-InSAR LOS 속도 (Sentinel-1, 2021–2023)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">부산 PS-InSAR LOS 속도 (Sentinel-1, 2021–2023)</span><span lang="en">Busan PS-InSAR LOS velocity (Sentinel-1, 2021–2023)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/insar-ground/11-busan-ps-overlay.webp" alt="부산 PS-InSAR — 위성영상 중첩" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">부산 PS-InSAR — 위성영상 중첩</span><span lang="en">Busan PS-InSAR over satellite imagery</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/insar-ground/12-busan-timeseries.webp" alt="부산 — 침하 핫스팟 vs 기준점 시계열" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">부산 — 침하 핫스팟 vs 기준점 시계열</span><span lang="en">Busan — subsidence hotspots vs reference time series</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/insar-ground/13-river-change.webp" alt="하천 변화 탐지 — 전후 비교" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">하천 변화 탐지 — 전후 비교</span><span lang="en">River change detection — before/after</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>InSAR 전체 워크플로우(SLC → 간섭도 → 언래핑 → 변위)를 도구에 기대지 않고 단계별로 이해했다.</li><li>ISCE2 · PyGMTSAR · SNAP의 장단점을 실제 처리 경험으로 비교할 수 있게 됐다.</li><li>위성 메타데이터 포맷의 복잡성과 SAR 궤도·기하 파라미터 체계를 깊게 파고들었다.</li><li>한계: N2 위성 데이터의 품질 이슈(coherence 부족)로 InSAR 최종 검증까지는 가지 못했다.</li></ul><ul lang="en"><li>Understood the full chain — SLC to interferogram to unwrapping to displacement — step by step rather than as a black box.</li><li>Can now compare ISCE2, PyGMTSAR and SNAP from actual processing experience, not documentation.</li><li>Went deep into satellite metadata formats and SAR orbit/geometry parameter conventions.</li><li>Limitation: N2 data quality (insufficient coherence) stopped the final InSAR validation short.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>CSK InSAR 처리 파이프라인 및 결과 보고서</li><li>PS-InSAR 파이썬 구현</li><li>n2_to_csk 메타데이터 변환 코드</li></ul><ul lang="en"><li>CSK InSAR pipeline and results report</li><li>PS-InSAR Python implementation</li><li>n2_to_csk metadata converter</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="flood-sar.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">Sentinel-1 SAR 기반 홍수 탐지 알고리즘</span><span lang="en" class="pager-title">Automated Flood Mapping from Sentinel-1 SAR</span></a>
+    <a class="pager next" href="smelter.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">제련소 열원 활동 모니터링 (TAI)</span><span lang="en" class="pager-title">Smelter Thermal Activity Monitoring (TAI)</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

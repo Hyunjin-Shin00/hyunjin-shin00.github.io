@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SAR 기반 해상 기름유출 탐지 · 신현진</title>
+<meta name="description" content="기름막은 해수면의 잔물결을 눌러 SAR에서 검게 보인다. 이 성질로 실제 유출 사고 2건을 탐지하고, 자연 현상과의 오탐지를 구분했다.">
+<meta property="og:title" content="SAR 기반 해상 기름유출 탐지 · 신현진">
+<meta property="og:description" content="기름막은 해수면의 잔물결을 눌러 SAR에서 검게 보인다. 이 성질로 실제 유출 사고 2건을 탐지하고, 자연 현상과의 오탐지를 구분했다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">🛢️</span>
+    <h1><span lang="ko">SAR 기반 해상 기름유출 탐지</span><span lang="en">Marine Oil Spill Detection from SAR</span></h1>
+    <div class="proj-meta">
+      <span>2025.12, 2026.05</span>
+      <span class="dot">·</span>
+      <span lang="ko">단독 수행</span><span lang="en">Sole contributor</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+    </div>
+    <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">dark spot</span><span class="tag">재난대응</span></div>
+    <p class="proj-sum"><span lang="ko">기름막은 해수면의 잔물결을 눌러 SAR에서 검게 보인다. 이 성질로 실제 유출 사고 2건을 탐지하고, 자연 현상과의 오탐지를 구분했다.</span><span lang="en">Oil damps capillary waves, so slicks appear dark in SAR. Used that to detect two real spill events — and to separate them from look-alike natural features.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>SAR 영상에서 기름 슬릭(oil slick)을 탐지할 수 있는지 확인하고 실사례에 적용했다.</li><li>에콰도르 해안(2025.12), 이란 카르그섬(2026.05) 두 건의 실제 유출 사고를 분석했다.</li></ul><ul lang="en"><li>Tested whether oil slicks are detectable in SAR, then applied it to real incidents.</li><li>Two events analysed: the Ecuadorian coast (Dec 2025) and Kharg Island, Iran (May 2026).</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>Sentinel-1 SAR 영상의 dark spot(저후방산란 영역) 분석으로 기름막 탐지.</li><li>기름이 모세관파를 감쇠시켜 Bragg 산란이 줄어드는 원리를 탐지 근거로 사용.</li><li>풍속·파고 영향을 고려해 후방산란 임계값을 설정 — 저풍속 구역은 기름 없이도 어둡게 보이기 때문.</li><li>광학 영상과 교차 확인해 오탐지를 걸러냄.</li></ul><ul lang="en"><li>Detected slicks via dark-spot (low-backscatter) analysis of Sentinel-1 scenes.</li><li>The physical basis: oil damps capillary waves, suppressing Bragg scattering.</li><li>Set backscatter thresholds with wind and wave state in mind — low-wind zones look dark without any oil.</li><li>Cross-checked against optical imagery to screen out false positives.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>SAR 기반 기름유출 탐지 분석 프로세스 확립</li><li>2개 사례 탐지 결과 지도 및 분석 자료 완성</li><li>자연 현상(저풍속 구역·해조류)과의 오탐지 구분 기준 정리</li></ul><ul lang="en"><li>An established SAR oil-spill detection workflow.</li><li>Detection maps and analysis for both incidents.</li><li>Documented criteria for separating slicks from low-wind zones and algal look-alikes.</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/oil-spill/00-detection-overlay.webp" alt="이란 카르그섬 — 기름유출 탐지 결과 (적색)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">이란 카르그섬 — 기름유출 탐지 결과 (적색)</span><span lang="en">Kharg Island, Iran — detected slick in red</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/oil-spill/01-slick-raw.webp" alt="원본 SAR — 기름막에 의한 dark spot" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">원본 SAR — 기름막에 의한 dark spot</span><span lang="en">Raw SAR — the dark spot caused by the slick</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/oil-spill/02-optical-night.webp" alt="광학 영상 교차 확인" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">광학 영상 교차 확인</span><span lang="en">Optical cross-check</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/oil-spill/03-aoi.webp" alt="분석 대상 지역 (페르시아만)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">분석 대상 지역 (페르시아만)</span><span lang="en">Study area in the Persian Gulf</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>SAR 후방산란 감쇠(damping) 메커니즘과 기름 슬릭의 물리적 관계를 이해했다.</li><li>dark spot이 전부 기름은 아니다 — 오탐지 구분이 탐지 자체보다 중요하다는 걸 배웠다.</li></ul><ul lang="en"><li>Understood the damping mechanism linking backscatter suppression to oil films.</li><li>Learned that not every dark spot is oil — telling look-alikes apart matters more than the detection itself.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>기름유출 탐지 분석 자료</li></ul><ul lang="en"><li>Oil spill detection analysis</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="soil-moisture.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">SAR 기반 표층 토양수분 산출</span><span lang="en" class="pager-title">Surface Soil Moisture Retrieval from SAR</span></a>
+    <a class="pager next" href="mangrove.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">맹그로브 분포 · 변화 모니터링</span><span lang="en" class="pager-title">Mangrove Extent &amp; Change Monitoring</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

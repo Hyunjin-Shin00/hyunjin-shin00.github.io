@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sentinel-1 SAR 기반 홍수 탐지 알고리즘 · 신현진</title>
+<meta name="description" content="구름을 뚫고 보는 SAR의 장점을 살려, 지역마다 임계값을 손으로 맞추지 않아도 되는 자동 침수 탐지 파이프라인을 만들었다. 국내외 6개 이상 지역에서 검증했다.">
+<meta property="og:title" content="Sentinel-1 SAR 기반 홍수 탐지 알고리즘 · 신현진">
+<meta property="og:description" content="구름을 뚫고 보는 SAR의 장점을 살려, 지역마다 임계값을 손으로 맞추지 않아도 되는 자동 침수 탐지 파이프라인을 만들었다. 국내외 6개 이상 지역에서 검증했다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">🌊</span>
+    <h1><span lang="ko">Sentinel-1 SAR 기반 홍수 탐지 알고리즘</span><span lang="en">Automated Flood Mapping from Sentinel-1 SAR</span></h1>
+    <div class="proj-meta">
+      <span>2025.07 – 2026.01</span>
+      <span class="dot">·</span>
+      <span lang="ko">단독 수행</span><span lang="en">Sole contributor</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+    </div>
+    <div class="tags"><span class="tag">SAR</span><span class="tag">Otsu</span><span class="tag">Python</span><span class="tag">재난대응</span></div>
+    <p class="proj-sum"><span lang="ko">구름을 뚫고 보는 SAR의 장점을 살려, 지역마다 임계값을 손으로 맞추지 않아도 되는 자동 침수 탐지 파이프라인을 만들었다. 국내외 6개 이상 지역에서 검증했다.</span><span lang="en">An automatic inundation-mapping pipeline that removes the need for hand-tuned, per-region thresholds — validated on six-plus flood events worldwide.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>홍수 발생 시 침수 영역을 신속하게 자동 탐지할 수 있는 범용 알고리즘이 필요했다.</li><li>Sentinel-1 SAR는 구름을 투과해 홍수 감시에 최적이지만, 지역마다 후방산란 분포가 달라 임계값 자동 설정이 어렵다.</li><li>수작업 분석의 한계를 넘어 여러 지역에 그대로 적용 가능한 코드를 만드는 것이 목표였다.</li></ul><ul lang="en"><li>Flood response needs inundation extents fast, and it needs them automatically.</li><li>Sentinel-1 sees through cloud, but backscatter distributions differ by region, so a single fixed threshold does not transfer.</li><li>The goal was code that generalises across sites instead of being re-tuned by hand each time.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>Edge-Otsu thresholding으로 수체를 자동 분리 — 영상 전체 히스토그램 대신 물/육지 경계 버퍼에서만 샘플을 뽑아 Otsu를 적용해, 침수 면적이 작을 때 생기는 히스토그램 편향을 피했다.</li><li>Bmax · Edge · Fuzzy 세 가지 임계값 전략을 구현해 비교했다.</li><li>DEM slope 필터로 경사지의 레이더 음영(radar shadow) 오탐지를 제거했다.</li><li>JRC 영구수체 마스크를 적용해 상시 수체와 신규 침수를 구분했다.</li><li>DEM과 결합해 침수심(flood depth)을 추정하고 등급화했다.</li></ul><ul lang="en"><li>Edge-Otsu thresholding: instead of the whole-scene histogram, samples are drawn only from buffers along candidate water edges, which avoids the bias Otsu suffers when the flooded fraction is small.</li><li>Three thresholding strategies — Bmax, Edge, Fuzzy — implemented and compared.</li><li>DEM slope filtering to suppress radar-shadow false positives on steep terrain.</li><li>JRC permanent-water mask to separate standing water from new inundation.</li><li>Flood depth estimated and classified by combining the water mask with a DEM.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>다지역 범용 홍수 탐지 파이프라인 완성 (s1_processor v3 → v8, 8차 개선)</li><li>국내(진주·예산)와 해외(브라질·태국·부탄·필리핀·인도네시아 발리·멕시코) 사례 검증</li><li>KuroSiwo 벤치마크 데이터셋 기준 정량 성능 지표 도출</li><li>Copernicus EMS 공식 활성화 지도와 탐지 결과 대조 검증</li></ul><ul lang="en"><li>A general-purpose flood pipeline, iterated through eight versions (s1_processor v3 → v8).</li><li>Validated on Korean events (Jinju, Yesan) and international ones (Brazil, Thailand, Bhutan, Philippines, Bali, Mexico).</li><li>Quantitative performance measured against the KuroSiwo benchmark dataset.</li><li>Detections cross-checked against official Copernicus EMS activation maps.</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/flood-sar/00-method-flowchart.webp" alt="VV 편파 기반 수체 탐지 — Bmax · Edge · Fuzzy 세 가지 임계값 전략" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">VV 편파 기반 수체 탐지 — Bmax · Edge · Fuzzy 세 가지 임계값 전략</span><span lang="en">Water mapping from VV polarisation — Bmax, Edge and Fuzzy thresholding strategies</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/flood-sar/01-threshold-sensitivity.webp" alt="초기 임계값에 따른 탐지 면적 변화 — 민감도 분석" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">초기 임계값에 따른 탐지 면적 변화 — 민감도 분석</span><span lang="en">Detected area vs. initial threshold — sensitivity analysis</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/flood-sar/02-jinju-flood.webp" alt="진주 홍수 (2025.07) — SAR 영상 위 침수역" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">진주 홍수 (2025.07) — SAR 영상 위 침수역</span><span lang="en">Jinju flood, July 2025 — inundation over the SAR scene</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/flood-sar/03-jinju-depth.webp" alt="진주 — DEM 결합 침수심 등급" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">진주 — DEM 결합 침수심 등급</span><span lang="en">Jinju — flood depth classes derived with a DEM</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/flood-sar/04-jinju-t1.webp" alt="진주 — 홍수 전후 시계열 (1)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">진주 — 홍수 전후 시계열 (1)</span><span lang="en">Jinju — before/after time step 1</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/flood-sar/05-jinju-t2.webp" alt="진주 — 홍수 전후 시계열 (2)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">진주 — 홍수 전후 시계열 (2)</span><span lang="en">Jinju — before/after time step 2</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/flood-sar/06-brazil-flood.webp" alt="브라질 — 하천 범람 탐지" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">브라질 — 하천 범람 탐지</span><span lang="en">Brazil — river overflow detection</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/flood-sar/07-thailand-water.webp" alt="태국 핫야이 — 수체 탐지" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">태국 핫야이 — 수체 탐지</span><span lang="en">Hat Yai, Thailand — water extraction</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/flood-sar/08-thailand-flood.webp" alt="태국 핫야이 — 침수역 (적색)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">태국 핫야이 — 침수역 (적색)</span><span lang="en">Hat Yai, Thailand — flooded area in red</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/flood-sar/09-thailand-wide.webp" alt="태국 남부 — 광역 침수 탐지" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">태국 남부 — 광역 침수 탐지</span><span lang="en">Southern Thailand — regional inundation</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/flood-sar/10-ems-comparison.webp" alt="Copernicus EMS 공식 활성화 지도와 비교 검증" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">Copernicus EMS 공식 활성화 지도와 비교 검증</span><span lang="en">Cross-validation against the Copernicus EMS activation map</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/flood-sar/11-bali-flood.webp" alt="인도네시아 발리 — 침수 탐지" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">인도네시아 발리 — 침수 탐지</span><span lang="en">Bali, Indonesia — inundation detection</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/flood-sar/12-depth-dem.webp" alt="DEM 기반 침수심 산출" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">DEM 기반 침수심 산출</span><span lang="en">Flood depth from the DEM</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/flood-sar/13-depth-class.webp" alt="침수심 등급 분류 결과" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">침수심 등급 분류 결과</span><span lang="en">Flood depth classification</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>SAR 후방산란 물리 — 잔잔한 수면의 정반사로 인한 낮은 후방산란이 수체 탐지의 근거라는 점을 실제 데이터로 체득했다.</li><li>Otsu의 히스토그램 민감성이 실패하는 지점과, Edge-Otsu가 왜 더 강건한지를 이해했다.</li><li>한계: 도시 침수에서는 건물-수면 이중산란(double-bounce)으로 후방산란이 오히려 높아져 미탐지가 남았다. 이 부분은 해결하지 못했다.</li></ul><ul lang="en"><li>Learned the backscatter physics hands-on: calm water acts as a specular reflector, which is exactly what makes it detectable.</li><li>Saw where plain Otsu breaks down on skewed histograms, and why Edge-Otsu is more robust.</li><li>Limitation: in urban floods, building–water double-bounce raises backscatter instead of lowering it, so those areas stay under-detected. I did not solve this.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>s1_processor v3–v8 코드 시리즈</li><li>Flood_mapping 기술 문서</li><li>지역별 분석 보고서 6종</li></ul><ul lang="en"><li>s1_processor v3–v8 code series</li><li>Flood mapping technical note</li><li>Six regional analysis reports</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <span></span>
+    <a class="pager next" href="insar-ground.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">InSAR 기반 지반침하 · 산사태 모니터링</span><span lang="en" class="pager-title">Ground Subsidence &amp; Landslide Monitoring with InSAR</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>맹그로브 분포 · 변화 모니터링 · 신현진</title>
+<meta name="description" content="입사 후 첫 프로젝트. Google Earth Engine과 Random Forest로 맹그로브를 분류하고, 태풍 전후 5년 NDVI 시계열로 회복 과정을 추적했다.">
+<meta property="og:title" content="맹그로브 분포 · 변화 모니터링 · 신현진">
+<meta property="og:description" content="입사 후 첫 프로젝트. Google Earth Engine과 Random Forest로 맹그로브를 분류하고, 태풍 전후 5년 NDVI 시계열로 회복 과정을 추적했다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">🌿</span>
+    <h1><span lang="ko">맹그로브 분포 · 변화 모니터링</span><span lang="en">Mangrove Extent &amp; Change Monitoring</span></h1>
+    <div class="proj-meta">
+      <span>2025.02 – 2025.03</span>
+      <span class="dot">·</span>
+      <span lang="ko">단독 수행</span><span lang="en">Sole contributor</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+    </div>
+    <div class="tags"><span class="tag">Sentinel-2</span><span class="tag">Random Forest</span><span class="tag">GEE</span><span class="tag">NDVI</span><span class="tag">블루카본</span></div>
+    <p class="proj-sum"><span lang="ko">입사 후 첫 프로젝트. Google Earth Engine과 Random Forest로 맹그로브를 분류하고, 태풍 전후 5년 NDVI 시계열로 회복 과정을 추적했다.</span><span lang="en">My first project here. Classified mangroves with Google Earth Engine and Random Forest, then tracked five years of NDVI to follow post-typhoon recovery.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>입사 후 첫 프로젝트로, GEE와 머신러닝 기반 모니터링 역량을 구축하는 것이 목적이었다.</li><li>글로벌 블루카본·맹그로브 탄소시장 수요 증가에 대응한 원격탐사 기술 탐색.</li><li>필리핀 팔라완 등 태풍 피해 지역의 5개년 변화 탐지 가능성 검토.</li></ul><ul lang="en"><li>My first project here, aimed at building up GEE and machine-learning monitoring capability.</li><li>Motivated by growing demand in blue carbon and mangrove carbon markets.</li><li>Tested five-year change detection over typhoon-affected sites such as Palawan in the Philippines.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>Google Earth Engine + Random Forest로 맹그로브 분류 시스템 구현.</li><li>연중 구름 30% 미만 영상만 골라 median 합성 영상을 제작.</li><li>ALOS DSM &lt; 30 m, NDVI &gt; 0.15 임계값으로 후보 지역 제한.</li><li>GMW(Global Mangrove Watch) 폴리곤 내에서 훈련자료를 선정하고 검증에 활용.</li><li>NDVI·MVI 등 다수 지수를 입력 변수로 사용.</li><li>2020–2024년 월별·연별 NDVI 시계열 분석으로 태풍 전후 회복 추적.</li></ul><ul lang="en"><li>Built a mangrove classifier with Google Earth Engine and Random Forest.</li><li>Composited annual medians from scenes with under 30% cloud.</li><li>Constrained candidates with ALOS DSM &lt; 30 m and NDVI &gt; 0.15.</li><li>Drew training samples from inside Global Mangrove Watch polygons, and used GMW for validation.</li><li>Fed multiple indices, including NDVI and MVI, as predictors.</li><li>Tracked post-typhoon recovery through monthly and annual NDVI series, 2020–2024.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>GEE Random Forest 맹그로브 분류 프로토타입 완성 — 육안 검토 기준 양호한 구분</li><li>2020–2024 연별 NDVI 분포도 및 시계열 그래프 산출</li><li>태풍 이후 담수 유입으로 NDVI가 회복하는 패턴 확인 (맹그로브의 태풍 방어막 역할)</li><li>GMW 대비 분류 결과 비교 분석</li></ul><ul lang="en"><li>A working GEE Random Forest mangrove classifier with visually sound separation.</li><li>Annual NDVI distribution maps and time series for 2020–2024.</li><li>Observed NDVI recovery after typhoons as freshwater enters — consistent with mangroves acting as storm buffers.</li><li>Comparative analysis against the GMW baseline.</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/mangrove/00-spectral.webp" alt="건강한 잎과 고사한 잎의 분광 반사 특성 차이" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">건강한 잎과 고사한 잎의 분광 반사 특성 차이</span><span lang="en">Spectral reflectance: healthy vs stressed vs dead leaves</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/mangrove/01-ndvi-2020.webp" alt="연별 NDVI 분포 (2020)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">연별 NDVI 분포 (2020)</span><span lang="en">Annual NDVI distribution, 2020</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/mangrove/02-ndvi-rainbow.webp" alt="연별 NDVI 분포 — 식생 활력 분포" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">연별 NDVI 분포 — 식생 활력 분포</span><span lang="en">Annual NDVI distribution — vegetation vigour</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/mangrove/03-annual-ndvi.webp" alt="연평균 NDVI 시계열 (2020–2024) — 2022년 급감" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">연평균 NDVI 시계열 (2020–2024) — 2022년 급감</span><span lang="en">Annual mean NDVI, 2020–2024 — sharp drop in 2022</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/mangrove/04-monthly-ndvi.webp" alt="월별 평균 NDVI 시계열 — 태풍 전후 변화" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">월별 평균 NDVI 시계열 — 태풍 전후 변화</span><span lang="en">Monthly mean NDVI — change around typhoon events</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/mangrove/05-rf-classification.webp" alt="Random Forest 맹그로브 분류 결과" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">Random Forest 맹그로브 분류 결과</span><span lang="en">Random Forest mangrove classification</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/mangrove/06-typhoon-damage.webp" alt="태풍 피해 직후 영상" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">태풍 피해 직후 영상</span><span lang="en">Imagery just after typhoon impact</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/mangrove/07-rgb-baseline.webp" alt="기준 시기 RGB 영상" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">기준 시기 RGB 영상</span><span lang="en">Baseline RGB imagery</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>GEE 플랫폼과 클라우드 기반 대용량 위성 분석 워크플로우를 익혔다.</li><li>Random Forest의 성능이 훈련 데이터 품질에 얼마나 의존하는지 체감했다 — 구름 낀 영역에서 훈련자료를 추가했더니 결과가 오히려 나빠졌다.</li><li>한계: 현장 검증 데이터가 없어 정확도 개선에 명확한 한계가 있었다.</li></ul><ul lang="en"><li>Picked up GEE and cloud-scale satellite analysis workflows.</li><li>Felt how much Random Forest depends on training-sample quality — adding samples from cloudy areas actively made results worse.</li><li>Limitation: with no field validation data, there was a hard ceiling on how far accuracy could be pushed.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>맹그로브 모니터링 발표자료</li><li>GEE Random Forest 분석 결과</li></ul><ul lang="en"><li>Mangrove monitoring deck</li><li>GEE Random Forest results</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="oil-spill.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">SAR 기반 해상 기름유출 탐지</span><span lang="en" class="pager-title">Marine Oil Spill Detection from SAR</span></a>
+    <a class="pager next" href="volcano-sar.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">초고해상도 SAR 화산 모니터링</span><span lang="en" class="pager-title">Volcano Monitoring with Very-High-Resolution SAR</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

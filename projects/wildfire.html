@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>산불 피해 등급 분류 (dNBR) · 신현진</title>
+<meta name="description" content="대형 산불 직후 피해 범위와 심각도를 USGS 5등급으로 자동 분류했다. 하와이·그리스·산청 세 지역에서 검증하고, 정지궤도 위성으로 실시간 화점까지 함께 봤다.">
+<meta property="og:title" content="산불 피해 등급 분류 (dNBR) · 신현진">
+<meta property="og:description" content="대형 산불 직후 피해 범위와 심각도를 USGS 5등급으로 자동 분류했다. 하와이·그리스·산청 세 지역에서 검증하고, 정지궤도 위성으로 실시간 화점까지 함께 봤다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">🔥</span>
+    <h1><span lang="ko">산불 피해 등급 분류 (dNBR)</span><span lang="en">Wildfire Burn Severity Mapping (dNBR)</span></h1>
+    <div class="proj-meta">
+      <span>2025.07</span>
+      <span class="dot">·</span>
+      <span lang="ko">단독 수행</span><span lang="en">Sole contributor</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+    </div>
+    <div class="tags"><span class="tag">Sentinel-2</span><span class="tag">dNBR</span><span class="tag">GK2A</span><span class="tag">재난대응</span></div>
+    <p class="proj-sum"><span lang="ko">대형 산불 직후 피해 범위와 심각도를 USGS 5등급으로 자동 분류했다. 하와이·그리스·산청 세 지역에서 검증하고, 정지궤도 위성으로 실시간 화점까지 함께 봤다.</span><span lang="en">Automatic USGS five-class burn-severity mapping right after major fires — validated across Hawaii, Greece and Sancheong, paired with geostationary hotspot detection.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>대형 산불 발생 후 피해 범위와 심각도를 위성영상으로 신속히 분류하는 기술이 필요했다.</li><li>회사 신속대응 체계에서 언론 보도용 분석을 빠르게 산출해야 하는 요구가 있었다.</li></ul><ul lang="en"><li>After a major fire, burn extent and severity need to be mapped fast from satellite data.</li><li>The company&#x27;s rapid-response workflow needed analyses turned around quickly for press use.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>Sentinel-2 NBR(Normalized Burn Ratio)의 화재 전후 차분으로 dNBR을 산출했다.</li><li>USGS 기준 5등급(미피해 / 저 / 중저 / 중고 / 고피해)으로 임계값 분류했다.</li><li>OmniCloudMask로 구름과 연기를 제거한 뒤 분석해 연기로 인한 과대 추정을 줄였다.</li><li>정지궤도 위성 GK2A / GOCI-II로 화점(hotspot)과 연기 확산을 시간 단위로 추적했다.</li><li>기상 자료(풍향·풍속·습도·지표온도)를 결합해 확산 방향과 대조했다.</li></ul><ul lang="en"><li>Computed dNBR from pre- and post-fire Sentinel-2 Normalized Burn Ratio.</li><li>Classified into the five USGS severity classes (unburned, low, moderate-low, moderate-high, high).</li><li>Masked cloud and smoke with OmniCloudMask before analysis, reducing smoke-driven overestimation.</li><li>Tracked hotspots and smoke dispersion hourly using geostationary GK2A / GOCI-II.</li><li>Combined with meteorology (wind direction and speed, humidity, surface temperature) to compare against spread direction.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>dNBR 기반 피해등급 분류 파이프라인 완성</li><li>하와이(2023) · 그리스(2025) · 산청(2025) 3개 지역 비교 분석</li><li>정지궤도 기반 화점 탐지 + 풍향 벡터 중첩 시각화 완성</li></ul><ul lang="en"><li>A complete dNBR burn-severity pipeline.</li><li>Comparative analysis across Hawaii (2023), Greece (2025) and Sancheong (2025).</li><li>Geostationary hotspot detection with wind-vector overlays.</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/wildfire/00-dnbr-table.webp" alt="USGS dNBR 피해등급 임계값 기준" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">USGS dNBR 피해등급 임계값 기준</span><span lang="en">USGS dNBR severity thresholds</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/wildfire/01-dnbr-severity.webp" alt="산청 산불 — dNBR 피해등급 분류" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">산청 산불 — dNBR 피해등급 분류</span><span lang="en">Sancheong fire — dNBR severity classes</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/wildfire/02-burn-area.webp" alt="산청 — 피해 범위 추출" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">산청 — 피해 범위 추출</span><span lang="en">Sancheong — burn extent</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/wildfire/03-dnbr-uiseong.webp" alt="의성 산불 — dNBR 등급" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">의성 산불 — dNBR 등급</span><span lang="en">Uiseong fire — dNBR severity</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/wildfire/04-false-color.webp" alt="위색 합성 — 연소 지역 강조" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">위색 합성 — 연소 지역 강조</span><span lang="en">False-colour composite emphasising burned ground</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/wildfire/05-gk2a-hotspot.webp" alt="GK2A 화점 탐지 + 풍속 벡터 중첩" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">GK2A 화점 탐지 + 풍속 벡터 중첩</span><span lang="en">GK2A hotspot detection with wind-speed vectors</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/wildfire/06-wind-vector.webp" alt="지표 풍향·풍속 벡터장" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">지표 풍향·풍속 벡터장</span><span lang="en">Surface wind field</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/wildfire/07-goci-fire.webp" alt="GOCI-II — 화점 및 연기 확산" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">GOCI-II — 화점 및 연기 확산</span><span lang="en">GOCI-II — hotspots and smoke dispersion</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/wildfire/08-wind-rose.webp" alt="산청 풍배도 — 확산 방향 분석" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">산청 풍배도 — 확산 방향 분석</span><span lang="en">Sancheong wind rose — spread-direction analysis</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>NBR/dNBR의 물리적 근거 — 연소 후 NIR 감소와 SWIR 증가 — 와 USGS 임계값의 유래를 이해했다.</li><li>연기를 구름과 함께 마스킹하지 않으면 피해등급이 과대 추정된다는 점을 실제로 확인했다.</li><li>정지궤도(시간해상도)와 극궤도(공간해상도)를 역할 분담시키는 설계 감각을 얻었다.</li></ul><ul lang="en"><li>Understood the physics behind NBR/dNBR — post-fire NIR drop and SWIR rise — and where the USGS thresholds come from.</li><li>Confirmed in practice that failing to mask smoke along with cloud inflates severity estimates.</li><li>Developed a feel for splitting roles between geostationary (temporal) and polar-orbiting (spatial) sensors.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>dNBR 분류 코드</li><li>지역별 시각화 자료 3종</li></ul><ul lang="en"><li>dNBR classification code</li><li>Three regional visualisation sets</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="smelter.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">제련소 열원 활동 모니터링 (TAI)</span><span lang="en" class="pager-title">Smelter Thermal Activity Monitoring (TAI)</span></a>
+    <a class="pager next" href="dtm.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">중남미 고해상도 DTM 제작 및 초해상화</span><span lang="en" class="pager-title">High-Resolution DTM Generation for Latin America</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

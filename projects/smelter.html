@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>제련소 열원 활동 모니터링 (TAI) · 신현진</title>
+<meta name="description" content="Sentinel-2 SWIR 밴드로 용광로의 열 신호를 잡아 제련소 가동 여부를 원격 판정했다. 철강(독일·호주)과 구리(칠레·중국) 양쪽에 적용했다.">
+<meta property="og:title" content="제련소 열원 활동 모니터링 (TAI) · 신현진">
+<meta property="og:description" content="Sentinel-2 SWIR 밴드로 용광로의 열 신호를 잡아 제련소 가동 여부를 원격 판정했다. 철강(독일·호주)과 구리(칠레·중국) 양쪽에 적용했다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">🏭</span>
+    <h1><span lang="ko">제련소 열원 활동 모니터링 (TAI)</span><span lang="en">Smelter Thermal Activity Monitoring (TAI)</span></h1>
+    <div class="proj-meta">
+      <span>2025.04 – 2025.09</span>
+      <span class="dot">·</span>
+      <span lang="ko">주 담당</span><span lang="en">Lead</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+    </div>
+    <div class="tags"><span class="tag">Sentinel-2 SWIR</span><span class="tag">TAI</span><span class="tag">GEE</span><span class="tag">시계열</span><span class="tag">ESG</span></div>
+    <p class="proj-sum"><span lang="ko">Sentinel-2 SWIR 밴드로 용광로의 열 신호를 잡아 제련소 가동 여부를 원격 판정했다. 철강(독일·호주)과 구리(칠레·중국) 양쪽에 적용했다.</span><span lang="en">Used Sentinel-2 SWIR bands to pick up furnace heat signatures and infer whether a smelter is running — applied to steel (Germany, Australia) and copper (Chile, China).</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>금속 제련소의 가동 여부를 위성으로 원격 판정할 수 있는지 기술적 가능성을 탐색했다.</li><li>탄소 배출 추적과 ESG 공급망 리스크 분석 수요에 대응하는 신규 솔루션이 목적이었다.</li><li>공식 생산 통계는 보통 한 달 지연된다. 위성이 그보다 빠르면 원자재 시장에 실질적 가치가 있다.</li></ul><ul lang="en"><li>Explored whether smelter operating status can be judged remotely from orbit.</li><li>Motivated by demand for carbon-emission tracking and ESG supply-chain risk analysis.</li><li>Official production statistics lag by about a month; a satellite signal that beats that lag has real value in commodity markets.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>Sentinel-2 SWIR 밴드(B11·B12)의 고온 물체 감도를 이용해 TAI(Thermal Anomaly Index)를 설계·구현했다.</li><li>Google Earth Engine에서 전체 관측 날짜의 누적 TAI 맵을 제작해 장기 가동 패턴을 분석했다.</li><li>제련소별 AOI 폴리곤을 공정 지식 기반으로 수동 제작했다 (용광로·슬래그장·원료야적장 구분).</li><li>독일(딜링엔·잘츠기터·브레멘·HKM·TK)·호주(와이알라·켐블라) 사례에서 실제 가동 기록(GT)과 상관분석.</li><li>Sentinel-5P NO₂ 대류권 칼럼과 교차 비교해 배출 신호와의 정합성을 확인했다.</li><li>칠레·중국 구리 제련소로 확장 적용 (TAIsum 2018–2025 시계열).</li></ul><ul lang="en"><li>Designed and implemented a Thermal Anomaly Index (TAI) from Sentinel-2 SWIR bands (B11/B12), which respond to high-temperature targets.</li><li>Built cumulative TAI maps across all acquisition dates in Google Earth Engine to reveal long-run operating patterns.</li><li>Hand-drew per-smelter AOI polygons from process knowledge, separating furnaces, slag yards and feedstock stockpiles.</li><li>Correlated against actual operating records for German (Dillingen, Salzgitter, Bremen, HKM, TK) and Australian (Whyalla, Kembla) sites.</li><li>Cross-checked with Sentinel-5P tropospheric NO₂ columns to see whether the thermal and emission signals agree.</li><li>Extended to Chilean and Chinese copper smelters (TAIsum 2018–2025 time series).</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>TAI 기반 제련소 활동 탐지 알고리즘 프로토타입 완성</li><li>독일·호주 사례에서 실제 가동 기록과의 상관관계 정량 분석</li><li>칠레·중국 구리 제련소 TAIsum 2018–2025 누적 시계열 산출</li><li>제련소별 AOI 폴리곤 세트 구축 (100여 개소 대상)</li></ul><ul lang="en"><li>A working TAI-based activity-detection prototype.</li><li>Quantified correlation with ground-truth operating records at German and Australian sites.</li><li>TAIsum cumulative series (2018–2025) for Chilean and Chinese copper smelters.</li><li>An AOI polygon set covering ~100 smelters worldwide.</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/smelter/00-tai-cumulative.webp" alt="전체 관측일 누적 TAI 맵" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">전체 관측일 누적 TAI 맵</span><span lang="en">Cumulative TAI across all acquisition dates</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/smelter/01-tai-heatmap.webp" alt="제련소 TAI 열지도 — 용광로 위치가 선명하게 분리됨" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">제련소 TAI 열지도 — 용광로 위치가 선명하게 분리됨</span><span lang="en">TAI heat map — furnace locations separate clearly</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/smelter/02-tai-detail.webp" alt="TAI 상세 — 공정 구역별 신호 차이" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">TAI 상세 — 공정 구역별 신호 차이</span><span lang="en">TAI detail — signal varies by process area</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/smelter/03-swir-hotspot.webp" alt="SWIR 합성영상 — 고온 지점 (적·황색)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">SWIR 합성영상 — 고온 지점 (적·황색)</span><span lang="en">SWIR composite — high-temperature points in red and yellow</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/smelter/04-combined-panel.webp" alt="영상 · 지수 · 시계열 통합 패널" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">영상 · 지수 · 시계열 통합 패널</span><span lang="en">Combined imagery, index and time-series panel</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/smelter/05-no2-column.webp" alt="Sentinel-5P NO₂ 대류권 칼럼 교차 비교" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">Sentinel-5P NO₂ 대류권 칼럼 교차 비교</span><span lang="en">Cross-comparison with Sentinel-5P tropospheric NO₂</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/smelter/06-copper-chile.webp" alt="칠레 구리 제련소 — TAI 적용" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">칠레 구리 제련소 — TAI 적용</span><span lang="en">Chilean copper smelter — TAI applied</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/smelter/07-copper-tai.webp" alt="구리 제련소 TAI 열지도" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">구리 제련소 TAI 열지도</span><span lang="en">Copper smelter TAI heat map</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/smelter/08-furnace-annotated.webp" alt="구리 제련 공정 구역 주석 (플래시 용광로 · 스크랩 용광로)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">구리 제련 공정 구역 주석 (플래시 용광로 · 스크랩 용광로)</span><span lang="en">Annotated copper process areas — flash and scrap furnaces</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>SWIR 밴드가 왜 고온 물체에 반응하는지(플랑크 복사의 단파장 꼬리) 물리적으로 이해했다.</li><li>GT 데이터 확보의 어려움 — 기업은 가동률을 공개하지 않는다. 검증 설계 자체가 연구의 절반이었다.</li><li>위성 데이터가 공급망·ESG 분석이라는 비(非)지리 도메인에서 어떻게 값이 매겨지는지 감을 잡았다.</li><li>한계: 구름 오염 시 시계열이 끊긴다. Sentinel-3 SLSTR 열적외 연계를 시도하지 못한 것이 아쉽다.</li></ul><ul lang="en"><li>Understood physically why SWIR responds to hot targets — the short-wavelength tail of Planck emission.</li><li>Ground truth is the hard part: companies do not publish utilisation rates, so designing the validation was half the work.</li><li>Got a feel for how satellite data gets priced in a non-geospatial domain like supply-chain and ESG analysis.</li><li>Limitation: cloud breaks the time series. I never got to pair it with Sentinel-3 SLSTR thermal infrared.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>TAI 산출 알고리즘 코드</li><li>제련소 AOI 폴리곤 세트</li><li>국가별 분석 결과 보고서</li></ul><ul lang="en"><li>TAI computation code</li><li>Smelter AOI polygon set</li><li>Per-country analysis reports</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="insar-ground.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">InSAR 기반 지반침하 · 산사태 모니터링</span><span lang="en" class="pager-title">Ground Subsidence &amp; Landslide Monitoring with InSAR</span></a>
+    <a class="pager next" href="wildfire.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">산불 피해 등급 분류 (dNBR)</span><span lang="en" class="pager-title">Wildfire Burn Severity Mapping (dNBR)</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

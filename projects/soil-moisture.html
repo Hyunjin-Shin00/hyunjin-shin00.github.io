@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SAR 기반 표층 토양수분 산출 · 신현진</title>
+<meta name="description" content="무료 위성만으로 표층 토양수분을 산출하고, 논문의 방법을 수정 없이 적용해 현장 관측과 비교했다. 재현된 것과 재현되지 않은 것을 모두 기록했다.">
+<meta property="og:title" content="SAR 기반 표층 토양수분 산출 · 신현진">
+<meta property="og:description" content="무료 위성만으로 표층 토양수분을 산출하고, 논문의 방법을 수정 없이 적용해 현장 관측과 비교했다. 재현된 것과 재현되지 않은 것을 모두 기록했다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">🌾</span>
+    <h1><span lang="ko">SAR 기반 표층 토양수분 산출</span><span lang="en">Surface Soil Moisture Retrieval from SAR</span></h1>
+    <div class="proj-meta">
+      <span>2026.09 – 2026.10</span>
+      <span class="dot">·</span>
+      <span lang="ko">단독 수행</span><span lang="en">Sole contributor</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+    </div>
+    <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">논문 재현</span><span class="tag">검증</span><span class="tag">농업</span></div>
+    <p class="proj-sum"><span lang="ko">무료 위성만으로 표층 토양수분을 산출하고, 논문의 방법을 수정 없이 적용해 현장 관측과 비교했다. 재현된 것과 재현되지 않은 것을 모두 기록했다.</span><span lang="en">Retrieved surface soil moisture from free satellite data only, applying published methods without modification — and recorded both what reproduced and what did not.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>Sentinel-1·Sentinel-2만으로 표층 토양수분을 산출할 수 있는지 확인하고 싶었다.</li><li>핵심 원칙: 검증된 논문의 방법을 수정 없이 적용하고, 결과를 현장 관측과 정직하게 비교한다.</li></ul><ul lang="en"><li>The question was whether surface soil moisture can be retrieved from Sentinel-1 and Sentinel-2 alone.</li><li>The rule was: apply published methods unmodified, then compare honestly against in-situ observations.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>TU Wien 변화탐지(change detection) 기법을 Sentinel-1 GRD에 적용.</li><li>SNAP 전처리: 궤도 보정 → 열잡음 제거 → σ⁰ 보정 → SRTM 30m 지형보정 (스페클 필터 미적용).</li><li>Sentinel-2 L2A NDVI(100 m)로 식생 영향 보정, SCL 구름 마스크 적용.</li><li>영국 COSMOS-UK 3개 지점, 미국 SCAN, 국내 가평·화성에서 현장 관측과 비교.</li><li>선행강수지수(API)와 지역평균 위성 토양수분의 상관 분석.</li></ul><ul lang="en"><li>Applied the TU Wien change-detection method to Sentinel-1 GRD.</li><li>SNAP preprocessing: orbit correction → thermal noise removal → σ⁰ calibration → SRTM 30 m terrain correction, with no speckle filter.</li><li>Vegetation correction from Sentinel-2 L2A NDVI at 100 m, with SCL cloud masking.</li><li>Compared against in-situ networks: COSMOS-UK (3 sites), US SCAN, and Gapyeong/Hwaseong in Korea.</li><li>Correlated regional-mean satellite soil moisture against an antecedent precipitation index.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>영국 COSMOS-UK 3개소: r² 부분 재현 (평균 0.45 vs 논문 0.47; CHIMN 250m에서는 0.67로 논문 0.41보다 높음). RMSE는 재현되지 않음</li><li>미국 SCAN: 재현 실패 (R² 0.08 vs 논문 0.597) — 실패 기록도 그대로 보존</li><li>국내 가평: 관측소 1점 비교는 실패했으나, 지역평균과 선행강수지수의 상관 R=0.59</li><li>겨울(81%)과 여름 가뭄기(39%) 토양수분 대비를 정량화</li><li>강원 고랭지 배추밭 면적 변화 분석으로 확장</li></ul><ul lang="en"><li>COSMOS-UK (3 sites): r² partially reproduced (mean 0.45 vs 0.47 published; at CHIMN 250 m we got 0.67 against 0.41 published). RMSE did not reproduce.</li><li>US SCAN: reproduction failed (R² 0.08 vs 0.597 published) — the failure is kept on record.</li><li>Gapyeong, Korea: single-station comparison failed, but regional mean vs antecedent precipitation gave R=0.59.</li><li>Quantified the contrast between winter (81%) and summer-drought (39%) soil moisture.</li><li>Extended to analysing highland cabbage-field area change in Gangwon.</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/soil-moisture/00-cosmos-validation.webp" alt="COSMOS-UK 현장 관측 vs Sentinel-1 토양수분 (250 m)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">COSMOS-UK 현장 관측 vs Sentinel-1 토양수분 (250 m)</span><span lang="en">COSMOS-UK in-situ vs Sentinel-1 soil moisture at 250 m</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/soil-moisture/01-winter-drought.webp" alt="겨울(81%) vs 여름 가뭄기(39%) 토양수분 대비" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">겨울(81%) vs 여름 가뭄기(39%) 토양수분 대비</span><span lang="en">Winter (81%) vs summer drought (39%) soil moisture</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/soil-moisture/02-satchat-map.webp" alt="토양수분 지도 — 위성지도 중첩" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">토양수분 지도 — 위성지도 중첩</span><span lang="en">Soil moisture map over satellite basemap</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/soil-moisture/03-cabbage-ndvi.webp" alt="강원 고랭지 배추밭 — NDVI 기반 경작지 추출" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">강원 고랭지 배추밭 — NDVI 기반 경작지 추출</span><span lang="en">Gangwon highland cabbage fields — NDVI-based extraction</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/soil-moisture/04-cabbage-detail.webp" alt="배추밭 면적 변화 상세" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">배추밭 면적 변화 상세</span><span lang="en">Cabbage-field area change, detail</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>논문 재현은 생각보다 자주 실패한다. 실패를 숨기지 않고 어느 조건에서 왜 달랐는지를 기록하는 쪽이 훨씬 유용했다.</li><li>변화탐지 기반 토양수분은 절대값보다 상대 변동에서 신뢰도가 높다는 점을 확인했다.</li><li>식생이 우거진 시기에는 후방산란이 토양이 아니라 캐노피를 보고 있다는 한계를 체감했다.</li></ul><ul lang="en"><li>Reproducing published results fails more often than expected. Recording where and why it diverged turned out to be far more useful than hiding it.</li><li>Change-detection soil moisture is more trustworthy in relative variation than in absolute value.</li><li>Felt the limit directly: under dense vegetation the backscatter is reading the canopy, not the soil.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>토양수분 산출 코드 (TU Wien · Gao 2017 방법)</li><li>논문 재현 검증 보고서</li><li>영문·국문 발표자료</li></ul><ul lang="en"><li>Soil moisture retrieval code (TU Wien and Gao 2017 methods)</li><li>Reproduction validation report</li><li>EN/KO presentation decks</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="bluebon.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">초소형 위성 전처리 및 포인팅 오차 분석</span><span lang="en" class="pager-title">CubeSat Preprocessing &amp; Pointing Error Analysis</span></a>
+    <a class="pager next" href="oil-spill.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">SAR 기반 해상 기름유출 탐지</span><span lang="en" class="pager-title">Marine Oil Spill Detection from SAR</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

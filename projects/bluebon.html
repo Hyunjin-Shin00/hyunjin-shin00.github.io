@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>초소형 위성 전처리 및 포인팅 오차 분석 · 신현진</title>
+<meta name="description" content="자사 초소형 위성의 원시 바이너리를 영상으로 바꾸는 파이프라인을 만들고, 촬영 위치가 왜 어긋나는지를 궤도·자세 메타데이터로 통계 분석했다.">
+<meta property="og:title" content="초소형 위성 전처리 및 포인팅 오차 분석 · 신현진">
+<meta property="og:description" content="자사 초소형 위성의 원시 바이너리를 영상으로 바꾸는 파이프라인을 만들고, 촬영 위치가 왜 어긋나는지를 궤도·자세 메타데이터로 통계 분석했다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">🛰️</span>
+    <h1><span lang="ko">초소형 위성 전처리 및 포인팅 오차 분석</span><span lang="en">CubeSat Preprocessing &amp; Pointing Error Analysis</span></h1>
+    <div class="proj-meta">
+      <span>2025.03 – 2026.05</span>
+      <span class="dot">·</span>
+      <span lang="ko">주 담당</span><span lang="en">Lead</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+    </div>
+    <div class="tags"><span class="tag">복사보정</span><span class="tag">검보정</span><span class="tag">PRNU</span><span class="tag">통계분석</span></div>
+    <p class="proj-sum"><span lang="ko">자사 초소형 위성의 원시 바이너리를 영상으로 바꾸는 파이프라인을 만들고, 촬영 위치가 왜 어긋나는지를 궤도·자세 메타데이터로 통계 분석했다.</span><span lang="en">Built the pipeline that turns our CubeSat&#x27;s raw binary into imagery, then statistically traced why its pointing drifts, using orbit and attitude metadata.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>자사가 운용하는 초소형 위성의 L1A 데이터 품질 검증이 필요했다.</li><li>이진 원시 데이터에서 RGB 영상까지 가는 전처리 자동화가 없었다.</li><li>포인팅 오차, PRNU(픽셀 비균일성), 색감 이상 등 센서 품질 이슈를 체계적으로 봐야 했다.</li></ul><ul lang="en"><li>The L1A data quality of our in-house CubeSat needed verification.</li><li>There was no automated path from raw binary to RGB imagery.</li><li>Sensor quality issues — pointing error, PRNU, colour anomalies — needed a systematic look.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>이진 원시 데이터 → GeoTIFF → RGB PNG 전처리 자동화 파이프라인 구축 (배치 쉘 스크립트 연동).</li><li>DN → Radiance → TOA Reflectance 복사보정 체인 구현.</li><li>위성 제조사가 제공한 궤도·자세 메타데이터와 실제 포인팅 오차를 매칭 (전체 65건, 텔레메트리 보유 27건).</li><li>Pearson · Spearman · Kendall 세 가지 상관계수를 함께 사용 — 표본이 27건으로 적을 때 Kendall의 p-value가 더 안정적이기 때문.</li><li>along / across / total 방향별로 오차를 분해해 각각의 원인 파라미터를 찾았다.</li><li>이상치 그룹과 정상 그룹의 파라미터 분포를 boxplot으로 비교.</li><li>PRNU 보정 전후 영상 품질 비교 분석.</li></ul><ul lang="en"><li>Built an automated raw-binary → GeoTIFF → RGB PNG pipeline, driven by batch shell scripts.</li><li>Implemented the DN → radiance → TOA reflectance radiometric chain.</li><li>Matched measured pointing error against orbit and attitude metadata from the manufacturer (65 scenes total, 27 with telemetry).</li><li>Used Pearson, Spearman and Kendall correlations together — with n=27, Kendall&#x27;s p-value is the more trustworthy one.</li><li>Decomposed error into along / across / total components and hunted the driving parameter for each.</li><li>Compared parameter distributions between outlier and normal groups via boxplots.</li><li>Compared image quality before and after PRNU correction.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>전처리 자동화 파이프라인 완성 — binary에서 PNG까지 원스텝</li><li>경과일(시간 드리프트)이 along·across·total 모든 오차 유형과 유의한 상관을 보이는 유일한 변수임을 확인 (n=65, along r=0.586 p&lt;0.0001)</li><li>across 오차는 Tilt(roll) 각도와 음의 상관 (r=−0.322, p=0.0089) — 자세 제어의 영향</li><li>텔레메트리 보유 27건에서 GNSS-TLE 고도차 |Δalt|가 along·total 오차와 유의한 상관 (r=0.534 / 0.552)</li><li>이상치 그룹과 정상 그룹 사이에 통계적으로 유의한 파라미터 차이는 발견되지 않음 — 단일 원인으로 설명되지 않는다는 결론</li></ul><ul lang="en"><li>A one-step pipeline from raw binary to PNG.</li><li>Found elapsed time since start to be the only variable significantly correlated with all three error types (n=65; along r=0.586, p&lt;0.0001).</li><li>Across-track error correlates negatively with tilt/roll angle (r=−0.322, p=0.0089), pointing to attitude control.</li><li>In the 27 telemetry scenes, GNSS–TLE altitude mismatch |Δalt| correlates with along and total error (r=0.534 / 0.552).</li><li>No statistically significant parameter difference between outlier and normal groups — so the outliers are not explained by a single cause.</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/bluebon/00-along-drift.webp" alt="along 오차 vs 경과일 — 시간에 따른 선형 드리프트 (r=0.586)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">along 오차 vs 경과일 — 시간에 따른 선형 드리프트 (r=0.586)</span><span lang="en">Along-track error vs elapsed days — linear drift (r=0.586)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/bluebon/01-across-drift.webp" alt="across 오차 vs 경과일 (r=0.404)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">across 오차 vs 경과일 (r=0.404)</span><span lang="en">Across-track error vs elapsed days (r=0.404)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/bluebon/02-across-roll.webp" alt="across 오차 vs Tilt(roll) — 자세 제어 영향 (r=−0.322)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">across 오차 vs Tilt(roll) — 자세 제어 영향 (r=−0.322)</span><span lang="en">Across-track error vs tilt/roll — attitude-control effect (r=−0.322)</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/bluebon/03-trendline-residual.webp" alt="추세선 잔차 분석 — 이상치 식별" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">추세선 잔차 분석 — 이상치 식별</span><span lang="en">Trend-line residual analysis for outlier identification</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/bluebon/04-outlier-boxplot.webp" alt="이상치 vs 정상 그룹 파라미터 분포 비교" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">이상치 vs 정상 그룹 파라미터 분포 비교</span><span lang="en">Parameter distributions: outlier vs normal group</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>초소형 위성 복사보정 파이프라인을 처음부터 끝까지 이해했다.</li><li>표본이 작을 때 어떤 상관계수를 믿어야 하는지 — Kendall τ가 n이 20대일 때 왜 더 나은지 — 를 실제 판단 근거로 썼다.</li><li>&#x27;유의한 차이가 없다&#x27;도 결론이라는 것. 이상치의 원인을 찾지 못했다는 사실 자체를 보고에 명시했다.</li><li>한계: PRNU 보정 알고리즘 최적화는 추가 연구 여지가 남아 있다.</li></ul><ul lang="en"><li>Understood a CubeSat radiometric calibration pipeline end to end.</li><li>Used the choice of correlation statistic as a real decision — why Kendall&#x27;s τ is the safer read at n≈27.</li><li>Learned that &#x27;no significant difference&#x27; is also a finding, and reported the failure to explain the outliers rather than hiding it.</li><li>Limitation: the PRNU correction algorithm still has room for optimisation.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>전처리 자동화 파이프라인</li><li>포인팅 오차 분석 기술 보고서</li><li>복사보정 정리 문서</li></ul><ul lang="en"><li>Automated preprocessing pipeline</li><li>Pointing-error analysis report</li><li>Radiometric calibration notes</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="nsr-arctic.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">북극항로(NSR) 개방 시기 정량 분석</span><span lang="en" class="pager-title">Quantifying the Northern Sea Route Opening Window</span></a>
+    <a class="pager next" href="soil-moisture.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">SAR 기반 표층 토양수분 산출</span><span lang="en" class="pager-title">Surface Soil Moisture Retrieval from SAR</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

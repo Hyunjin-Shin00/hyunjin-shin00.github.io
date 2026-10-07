@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>초고해상도 SAR 화산 모니터링 · 신현진</title>
+<meta name="description" content="25cm급 상용 SAR(Umbra)로 화산 지형을 관측하고, Sentinel-1(10m)과 해상도를 직접 비교했다. SICD 포맷을 직접 파싱해 간섭 처리까지 시도했다.">
+<meta property="og:title" content="초고해상도 SAR 화산 모니터링 · 신현진">
+<meta property="og:description" content="25cm급 상용 SAR(Umbra)로 화산 지형을 관측하고, Sentinel-1(10m)과 해상도를 직접 비교했다. SICD 포맷을 직접 파싱해 간섭 처리까지 시도했다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">🌋</span>
+    <h1><span lang="ko">초고해상도 SAR 화산 모니터링</span><span lang="en">Volcano Monitoring with Very-High-Resolution SAR</span></h1>
+    <div class="proj-meta">
+      <span>2026.02</span>
+      <span class="dot">·</span>
+      <span lang="ko">단독 수행</span><span lang="en">Sole contributor</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+    </div>
+    <div class="tags"><span class="tag">Umbra SAR</span><span class="tag">SICD</span><span class="tag">25cm</span><span class="tag">InSAR</span></div>
+    <p class="proj-sum"><span lang="ko">25cm급 상용 SAR(Umbra)로 화산 지형을 관측하고, Sentinel-1(10m)과 해상도를 직접 비교했다. SICD 포맷을 직접 파싱해 간섭 처리까지 시도했다.</span><span lang="en">Observed volcanic terrain with 25 cm commercial SAR (Umbra) and compared it directly against Sentinel-1 at 10 m — parsing SICD natively and attempting interferometry.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>상용 초고해상도 SAR가 화산·지표 변위 모니터링에서 어디까지 쓸모 있는지 확인하고 싶었다.</li><li>인도네시아 디엥(Dieng) 화산과 남극 에레부스(Erebus) 화산을 대상으로 했다.</li></ul><ul lang="en"><li>Wanted to see how far commercial VHR SAR goes for volcano and deformation monitoring.</li><li>Targets: Dieng volcano in Indonesia and Mount Erebus in Antarctica.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>Umbra SICD(NITF) 포맷을 직접 파싱해 복소수 SAR 데이터를 읽는 코드 작성.</li><li>GEC(Geocoded Ellipsoid Corrected) 산출물과 SICD 복소영상 비교.</li><li>Sentinel-1(10 m)과 Umbra(25 cm) 해상도 직접 비교 — 동일 지역, 동일 대상.</li><li>스트립맵과 스캔 모드의 관측 기하 차이 정리.</li><li>간섭도 생성 및 SAR 영상 위 중첩 시각화.</li></ul><ul lang="en"><li>Wrote code to parse Umbra SICD (NITF) directly and read the complex SAR data.</li><li>Compared geocoded GEC products against the SICD complex imagery.</li><li>Direct resolution comparison, Sentinel-1 (10 m) vs Umbra (25 cm), same scene, same targets.</li><li>Documented the acquisition-geometry differences between stripmap and scan modes.</li><li>Generated interferograms and overlaid them on the SAR imagery.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>Umbra SICD 복소 데이터 직접 읽기 코드 개발 (view_umbra_sicd.py)</li><li>Sentinel-1 대비 해상도 비교 시각자료 제작 — 25cm에서는 개별 차량·구조물까지 식별</li><li>간섭도 생성 및 SAR 중첩 시각화 완성</li></ul><ul lang="en"><li>Working SICD complex-data reader (view_umbra_sicd.py).</li><li>Visual resolution comparison against Sentinel-1 — at 25 cm, individual vehicles and structures are identifiable.</li><li>Interferogram generation and SAR overlay visualisation.</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/volcano-sar/00-resolution-compare.webp" alt="Sentinel-1 (10 m) vs Umbra (25 cm) 해상도 비교" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">Sentinel-1 (10 m) vs Umbra (25 cm) 해상도 비교</span><span lang="en">Resolution comparison: Sentinel-1 at 10 m vs Umbra at 25 cm</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/volcano-sar/01-interferogram-overlay.webp" alt="SAR 영상 위 간섭도 중첩" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">SAR 영상 위 간섭도 중첩</span><span lang="en">Interferogram overlaid on the SAR image</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/volcano-sar/02-umbra-sar.webp" alt="Umbra 초고해상도 SAR 영상" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">Umbra 초고해상도 SAR 영상</span><span lang="en">Umbra very-high-resolution SAR scene</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/volcano-sar/03-optical-ref.webp" alt="동일 지역 광학 참조 영상" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">동일 지역 광학 참조 영상</span><span lang="en">Optical reference over the same area</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>SICD 같은 복소 SAR 표준 포맷의 구조를 직접 파싱하며 이해했다.</li><li>해상도가 올라간다고 간섭 처리가 쉬워지지는 않는다 — 짧은 재방문 주기와 궤도 정밀도가 더 중요하다는 걸 알았다.</li></ul><ul lang="en"><li>Learned the structure of complex SAR standards like SICD by parsing them myself.</li><li>Higher resolution does not make interferometry easier — short revisit and orbital precision matter more.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>view_umbra_sicd.py</li><li>Umbra SAR 분석 자료</li></ul><ul lang="en"><li>view_umbra_sicd.py</li><li>Umbra SAR analysis</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="mangrove.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">맹그로브 분포 · 변화 모니터링</span><span lang="en" class="pager-title">Mangrove Extent &amp; Change Monitoring</span></a>
+    <a class="pager next" href="spaceup.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">SpaceUp 경진대회 — 도시녹지 모니터링</span><span lang="en" class="pager-title">SpaceUp Competition — Urban Greenery Monitoring</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>
