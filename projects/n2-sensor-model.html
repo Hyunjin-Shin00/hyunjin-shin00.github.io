@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>국산 SAR 위성 엄밀센서모델 기하보정 · 신현진</title>
+<meta name="description" content="국산 X-band SAR 위성은 어떤 상용·공개 소프트웨어도 지원하지 않는다. 파일 안의 궤도·타이밍 정보만으로 거리-도플러 센서모델을 직접 세워 12씬을 5 m 격자로 지오코딩했다.">
+<meta property="og:title" content="국산 SAR 위성 엄밀센서모델 기하보정 · 신현진">
+<meta property="og:description" content="국산 X-band SAR 위성은 어떤 상용·공개 소프트웨어도 지원하지 않는다. 파일 안의 궤도·타이밍 정보만으로 거리-도플러 센서모델을 직접 세워 12씬을 5 m 격자로 지오코딩했다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">📐</span>
+    <h1><span lang="ko">국산 SAR 위성 엄밀센서모델 기하보정</span><span lang="en">Rigorous Sensor Model Geocoding for a Domestic SAR Satellite</span></h1>
+    <div class="proj-meta">
+      <span>2026.08 – 2026.09</span>
+      <span class="dot">·</span>
+      <span lang="ko">단독 수행</span><span lang="en">Sole contributor</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+    </div>
+    <div class="tags"><span class="tag">Range-Doppler</span><span class="tag">지오코딩</span><span class="tag">결합조정</span><span class="tag">EGM2008</span><span class="tag">X-band</span></div>
+    <p class="proj-sum"><span lang="ko">국산 X-band SAR 위성은 어떤 상용·공개 소프트웨어도 지원하지 않는다. 파일 안의 궤도·타이밍 정보만으로 거리-도플러 센서모델을 직접 세워 12씬을 5 m 격자로 지오코딩했다.</span><span lang="en">No commercial or open SAR software supports Korea&#x27;s X-band smallsat. I built the range-Doppler sensor model from scratch — using only the orbit and timing inside the file — and geocoded 12 scenes onto a 5 m grid.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>차세대소형위성 2호(X-band SAR)는 ISCE2·SNAP·GAMMA 어느 것도 네이티브 지원하지 않는다. 쓰려면 처리기를 직접 만들어야 한다.</li><li>SAR 픽셀은 광학처럼 &#x27;렌즈에서 뻗은 직선&#x27;이 아니라 (시각, 거리) 두 측정값으로 정의된다. 따라서 공선조건이 아니라 거리-도플러 방정식을 풀어야 한다.</li><li>한라산 백록담 일대 12씬을 대상으로, 국립공원 지형 모니터링에 쓸 수 있는 정밀도의 지오코딩 산출물을 만드는 것이 목표였다.</li></ul><ul lang="en"><li>NEXTSat-2 (X-band SAR) is not natively supported by ISCE2, SNAP or GAMMA. To use it at all, you have to write the processor yourself.</li><li>A SAR pixel is not a ray from a lens — it is two measurements, a time and a range. So the model solves range-Doppler equations, not the collinearity condition.</li><li>The target was 12 scenes over Mount Halla&#x27;s Baengnokdam crater, geocoded accurately enough to be usable for national-park terrain monitoring.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>HDF5 헤더를 SI 단위로 정리해 SLC를 읽는 리더를 작성했다 (SSC 포맷, 신형 3D SBI 레이아웃 포함).</li><li>궤도 상태벡터 60점을 다항식으로 적합해 임의 시각의 위치·속도·가속도 S(t), V(t), A(t)를 얻었다.</li><li>거리-도플러 방정식을 구현했다 — ① |P − S(t)| = R (거리), ② (P − S(t))·V(t) = 0 (제로도플러: 시선 ⊥ 속도). geo2rdr / rdr2geo 양방향 변환.</li><li>표준대기 기반 대류권 슬랜트 지연을 보정했다.</li><li>Copernicus DEM으로 SAR 영상을 시뮬레이션하고, 실영상과 마스크 상관 정합해 센서 편향을 추정했다.</li><li>12씬 결합조정으로 씬 간 상대 편이를 일괄 보정했다.</li><li>EGM2008 지오이드를 반영했다 — Copernicus DEM은 정표고라, 타원체고를 기대하는 지오코딩에서 range 방향 약 24.5 m 편이가 생긴다. 이 잔차를 지오이드 융기량으로 정확히 귀속시킬 수 있다는 것 자체가 기하 모델이 정합적이라는 증거다.</li><li>Sentinel-1 지오코딩 결과와 교차 검증했다.</li></ul><ul lang="en"><li>Wrote a reader that normalises the HDF5 header into SI units and reads the SLC (SSC format, including the newer 3D SBI layout).</li><li>Fitted 60 orbit state vectors to polynomials for position, velocity and acceleration — S(t), V(t), A(t) — at arbitrary time.</li><li>Implemented the range-Doppler equations: |P − S(t)| = R for range, and (P − S(t))·V(t) = 0 for zero-Doppler, i.e. line of sight perpendicular to velocity. Both directions: geo2rdr and rdr2geo.</li><li>Corrected tropospheric slant delay using a standard atmosphere.</li><li>Simulated the SAR image from the Copernicus DEM and matched it against the real image by masked correlation to estimate sensor bias.</li><li>Ran a 12-scene bundle adjustment to resolve relative shifts between scenes together.</li><li>Applied the EGM2008 geoid: Copernicus DEM holds orthometric heights, so geocoding that expects ellipsoidal heights picks up a ~24.5 m range-direction shift. Being able to attribute that residual precisely to geoid undulation is itself evidence the geometry model is consistent.</li><li>Cross-validated the geocoded output against Sentinel-1.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>12씬 전량을 UTM 52N 5 m 격자로 지오코딩 완료 (백록담 중심 6 km)</li><li>결합조정 후 씬 쌍 잔여 시프트가 대부분 1 화소(5 m) 이내에 수렴</li><li>잔차 위치오차 약 24.5 m를 DEM 수직기준(지오이드)으로 귀속 — 오차의 물리적 원인까지 규명</li><li>Sentinel-1 지오코딩 결과와 위치 정합 확인</li><li>부수 성과: 백록담 수체 검증 — N2(X-band)와 S1(C-band) 모두 미검출, Sentinel-2 광학만 0.11~0.58 ha 수면 확인</li></ul><ul lang="en"><li>All 12 scenes geocoded to a UTM 52N 5 m grid over a 6 km area centred on the crater.</li><li>After bundle adjustment, residual scene-pair shifts mostly converge within one pixel (5 m).</li><li>The ~24.5 m residual position error was attributed to the DEM&#x27;s vertical datum (geoid) — the physical cause, not just the magnitude.</li><li>Positional agreement confirmed against geocoded Sentinel-1.</li><li>Side result: crater water verification — neither N2 (X-band) nor S1 (C-band) detects it; only Sentinel-2 optical shows 0.11–0.58 ha of water.</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/n2-sensor-model/00-geocoded-5m.webp" alt="지오코딩 결과 — UTM 52N 5 m 격자, 백록담 중심" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">지오코딩 결과 — UTM 52N 5 m 격자, 백록담 중심</span><span lang="en">Geocoded output — UTM 52N, 5 m grid, centred on the crater</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/n2-sensor-model/01-dem-sim-match.webp" alt="DEM 시뮬레이션 ↔ 실영상 마스크 상관 정합 (센서 편향 추정)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">DEM 시뮬레이션 ↔ 실영상 마스크 상관 정합 (센서 편향 추정)</span><span lang="en">DEM simulation matched to the real image by masked correlation, for bias estimation</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/n2-sensor-model/02-bundle-residual.webp" alt="결합조정 후 씬 쌍 잔여 시프트 — 점선은 0.5 화소·1 화소" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">결합조정 후 씬 쌍 잔여 시프트 — 점선은 0.5 화소·1 화소</span><span lang="en">Residual scene-pair shift after bundle adjustment; dashed circles mark 0.5 and 1 pixel</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/n2-sensor-model/03-adjustment-12.webp" alt="12씬 결합조정 결과" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">12씬 결합조정 결과</span><span lang="en">12-scene bundle adjustment result</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/n2-sensor-model/04-halla-0301.webp" alt="한라산 지오코딩 영상 (2025.03.01)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">한라산 지오코딩 영상 (2025.03.01)</span><span lang="en">Geocoded Mount Halla scene, 2025-03-01</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/n2-sensor-model/05-halla-0525.webp" alt="한라산 지오코딩 영상 (2025.05.25)" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">한라산 지오코딩 영상 (2025.05.25)</span><span lang="en">Geocoded Mount Halla scene, 2025-05-25</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/n2-sensor-model/06-s1-crossval.webp" alt="Sentinel-1 교차 검증 — 동일 지역 위치 정합" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">Sentinel-1 교차 검증 — 동일 지역 위치 정합</span><span lang="en">Cross-validation against Sentinel-1 over the same area</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/n2-sensor-model/07-geoid-offset.webp" alt="지오이드 기준 차이에 따른 지오코딩 편이" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">지오이드 기준 차이에 따른 지오코딩 편이</span><span lang="en">Geocoding shift caused by the vertical-datum difference</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/n2-sensor-model/08-water-evidence.webp" alt="백록담 수체 증거 — S2 트루컬러 · NDWI · DEM · N2 4열 비교" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">백록담 수체 증거 — S2 트루컬러 · NDWI · DEM · N2 4열 비교</span><span lang="en">Crater water evidence — Sentinel-2 true colour, NDWI, DEM and N2 side by side</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/n2-sensor-model/09-water-anomaly.webp" alt="국지입사각 보정 후 S2 수면 위치의 SAR 이상 — 물이면 −10 dB 이하여야 하나 그렇지 않음" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">국지입사각 보정 후 S2 수면 위치의 SAR 이상 — 물이면 −10 dB 이하여야 하나 그렇지 않음</span><span lang="en">SAR anomaly at the optical water location after local-incidence correction — water should be below −10 dB; it is not</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/n2-sensor-model/10-crater-floor.webp" alt="분화구 바닥 시점별 후방산란 변화" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">분화구 바닥 시점별 후방산란 변화</span><span lang="en">Crater-floor backscatter across dates</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>SAR 기하를 블랙박스 없이 이해하게 됐다. 제로도플러가 왜 성립하는지, 상태벡터 보간 차수가 왜 중요한지를 직접 구현하며 알았다.</li><li>오차의 크기보다 오차의 원인을 아는 것이 중요하다. 24.5 m 편이를 &#x27;맞추는&#x27; 대신 지오이드로 설명해낸 것이 이 작업에서 가장 값진 부분이었다.</li><li>백록담 건은 결론이 뒤집힌 사례다. 처음엔 &#x27;SAR에 수체 신호 없음 → 물이 없었다&#x27;로 봤는데, Sentinel-2로 교차검증하니 물은 있었고 SAR가 못 본 것이었다. NDWI 최대 0.238(개방수면은 0.4 초과)로, 개방수면이 아니라 초지 사이 얕고 탁한 습지였다. 관측 실패와 부재를 구분해야 한다는 걸 비싸게 배웠다.</li><li>한계: 백록담 수체 모니터링에 SAR 단독은 부적합하다는 것이 이 검증의 결론이다. 광학 병행이 필수다.</li></ul><ul lang="en"><li>Came to understand SAR geometry without a black box — why zero-Doppler holds, why the state-vector interpolation order matters — by implementing it.</li><li>Knowing the cause of an error matters more than its size. Explaining the 24.5 m shift as geoid undulation, rather than just tuning it away, was the most valuable part of this work.</li><li>The crater case reversed my own conclusion. I first read &#x27;no water signal in SAR&#x27; as &#x27;there was no water&#x27;. Cross-checking with Sentinel-2 showed the water was there and SAR simply could not see it — NDWI peaked at 0.238, well below the 0.4 of open water, so it was shallow turbid wetland between grasses, not an open pool. An expensive lesson in separating absence from failure to observe.</li><li>Limitation: the verification concludes that SAR alone is unsuitable for monitoring this crater. Optical imagery is required alongside it.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>거리-도플러 센서모델 파이썬 구현 (n2reader · orbit · geometry · tropo · dem · simulate)</li><li>step01–step10 재현 파이프라인</li><li>12씬 5 m 지오코딩 산출물</li><li>기하 QC · PSM 정확도 보고서</li><li>인터랙티브 결과 맵</li></ul><ul lang="en"><li>Range-Doppler sensor model in Python (reader, orbit, geometry, troposphere, DEM, simulation)</li><li>A reproducible step01–step10 pipeline</li><li>12 geocoded scenes at 5 m</li><li>Geometry QC and sensor-model accuracy reports</li><li>Interactive results map</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="insar-ground.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">InSAR 기반 지반침하 · 산사태 모니터링</span><span lang="en" class="pager-title">Ground Subsidence &amp; Landslide Monitoring with InSAR</span></a>
+    <a class="pager next" href="taean-sar.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">해안사구 다중기법 SAR 분석 (InSAR · OT · ACD)</span><span lang="en" class="pager-title">Coastal Dune Monitoring with Three SAR Techniques</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

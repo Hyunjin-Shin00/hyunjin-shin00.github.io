@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ko" data-lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>해안사구 다중기법 SAR 분석 (InSAR · OT · ACD) · 신현진</title>
+<meta name="description" content="국산 X-band와 Sentinel-1 C-band에 InSAR·오프셋트래킹·진폭변화탐지 세 기법을 동일 절차로 교차 적용했다. 결론은 솔직하다 — 사구에서 X-band 위상은 수 일 만에 탈상관한다.">
+<meta property="og:title" content="해안사구 다중기법 SAR 분석 (InSAR · OT · ACD) · 신현진">
+<meta property="og:description" content="국산 X-band와 Sentinel-1 C-band에 InSAR·오프셋트래킹·진폭변화탐지 세 기법을 동일 절차로 교차 적용했다. 결론은 솔직하다 — 사구에서 X-band 위상은 수 일 만에 탈상관한다.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+<script>
+(function(){try{var l=localStorage.getItem('lang');if(l)document.documentElement.setAttribute('data-lang',l);
+var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+</head>
+<body>
+<header class="site-head">
+  <a class="brand" href="../index.html">
+    <span class="brand-mark">HS</span>
+    <span lang="ko" class="brand-name">신현진</span><span lang="en" class="brand-name">Hyunjin Shin</span>
+  </a>
+  <nav class="site-nav">
+    <a href="../index.html#about"><span lang="ko">소개</span><span lang="en">About</span></a>
+    <a href="../index.html#projects"><span lang="ko">프로젝트</span><span lang="en">Projects</span></a>
+    <a href="../index.html#engagements"><span lang="ko">제안·협업</span><span lang="en">Engagements</span></a>
+    <a href="../index.html#timeline"><span lang="ko">연혁</span><span lang="en">Timeline</span></a>
+    <a href="../index.html#contact"><span lang="ko">연락</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="head-actions">
+    <button class="toggle lang-toggle" type="button" data-lang-toggle aria-label="Switch language">
+      <span lang="ko">EN</span><span lang="en">한국어</span>
+    </button>
+    <button class="toggle theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme">
+      <svg viewBox="0 0 24 24" class="i-sun" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><g><path d="M12 2.6v2.6M12 18.8v2.6M2.6 12h2.6M18.8 12h2.6M5.3 5.3l1.9 1.9M16.8 16.8l1.9 1.9M18.7 5.3l-1.9 1.9M7.2 16.8l-1.9 1.9"/></g></svg>
+      <svg viewBox="0 0 24 24" class="i-moon" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.3 8.3 0 1 0 10.5 10.5z"/></svg>
+    </button>
+  </div>
+</header>
+<main class="proj">
+  <div class="proj-head">
+    <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
+    <span class="proj-icon">🏖️</span>
+    <h1><span lang="ko">해안사구 다중기법 SAR 분석 (InSAR · OT · ACD)</span><span lang="en">Coastal Dune Monitoring with Three SAR Techniques</span></h1>
+    <div class="proj-meta">
+      <span>2026.05 – 2026.09</span>
+      <span class="dot">·</span>
+      <span lang="ko">단독 수행</span><span lang="en">Sole contributor</span>
+      <span class="dot">·</span>
+      <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
+    </div>
+    <div class="tags"><span class="tag">InSAR</span><span class="tag">Offset Tracking</span><span class="tag">ACD</span><span class="tag">ISCE2</span><span class="tag">X/C-band</span></div>
+    <p class="proj-sum"><span lang="ko">국산 X-band와 Sentinel-1 C-band에 InSAR·오프셋트래킹·진폭변화탐지 세 기법을 동일 절차로 교차 적용했다. 결론은 솔직하다 — 사구에서 X-band 위상은 수 일 만에 탈상관한다.</span><span lang="en">Applied three techniques — phase InSAR, offset tracking and amplitude change detection — identically across a domestic X-band sensor and Sentinel-1 C-band. The honest finding: over dunes, X-band phase decorrelates within days.</span></p>
+  </div>
+
+  <section class="sec">
+    <h2><span lang="ko">배경 · 목표</span><span lang="en">Background</span></h2>
+    <ul lang="ko"><li>해안국립공원 사구 지역의 지표 변화를 SAR로 감시할 수 있는지 검토하는 과제였다.</li><li>국산 위성(X-band)과 Sentinel-1(C-band)을 같은 절차로 비교해, 국산 위성의 실제 활용 가능 범위를 가늠하는 것이 핵심이었다.</li><li>선행 검토에서 Sentinel-1 DInSAR 결과가 뚜렷하지 않았기 때문에, 위상 외 기법까지 함께 봐야 했다.</li></ul><ul lang="en"><li>The task was to assess whether SAR can monitor surface change over the dunes of a coastal national park.</li><li>The core question was how far the domestic X-band satellite actually gets, compared like-for-like against Sentinel-1.</li><li>Earlier Sentinel-1 DInSAR had produced inconclusive results, so techniques beyond phase had to be considered too.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">방법</span><span lang="en">Method</span></h2>
+    <ul lang="ko"><li>먼저 페어 적합성을 평가했다 — 동일 궤도·룩 방향, 입사각 차(dinc), 수직베이스라인 비(Bperp/Bcrit), 시간차. 폴리곤을 덮는 유효 InSAR 페어는 단 하나뿐이었다.</li><li>InSAR(위상): 국산 위성은 자체 파이썬 파이프라인, Sentinel-1은 공식 ISCE2 topsApp 2.6.3. 언래핑은 snaphu.</li><li>Offset Tracking: 정규화 상호상관(NCC)으로 정합하고, 상관 피크를 포물선 보간해 1/10~1/20 화소까지 방위·거리 이동량을 추정했다.</li><li>ACD(진폭변화탐지): 진폭 추출 → 멀티룩 → 지오코딩 → 로그비 dB 산출.</li><li>세 기법 공통으로 DEM 기반 해수역 마스킹을 적용했다.</li><li>부호 규약을 합성신호(알고 있는 이동을 주입)로 검증했다 — OT의 range(+)는 위성에서 멀어짐, InSAR LOS(+)는 가까워짐으로 서로 반대다.</li><li>갯벌 조수 관측: LiDAR DEM·정사영상과 동일한 5 m 격자에서 조위별 침수·노출을 비교했다.</li></ul><ul lang="en"><li>Started with pair suitability: same orbit and look direction, incidence-angle difference, perpendicular-to-critical baseline ratio, and temporal gap. Exactly one valid InSAR pair covered the polygon.</li><li>Phase InSAR: a custom Python pipeline for the domestic sensor, official ISCE2 topsApp 2.6.3 for Sentinel-1, unwrapping with snaphu.</li><li>Offset tracking: normalised cross-correlation matching, with parabolic interpolation of the correlation peak to estimate azimuth and range shifts down to 1/10–1/20 of a pixel.</li><li>Amplitude change detection: amplitude extraction, multilooking, geocoding, then a log-ratio in dB.</li><li>DEM-based sea masking applied identically across all three techniques.</li><li>Verified sign conventions by injecting a known synthetic displacement — offset-tracking range positive means moving away from the sensor, while InSAR LOS positive means moving toward it; they are opposite.</li><li>Tidal-flat observation: compared inundation and exposure by tide level on the same 5 m grid as the LiDAR DEM and orthophoto.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
+    <ul lang="ko"><li>InSAR · Offset Tracking · ACD 세 기법을 X-band와 C-band 양쪽에 동일 절차로 적용한 통합 프레임워크 완성</li><li>Sentinel-1에서 처리 초·중반(정합·평지/지형 위상 제거·필터링)이 ISCE2와 일치함을 확인 — 자체 코드 검증</li><li>X-band 위상은 사구에서 수 일 내 탈상관. 30~35일 간격 위상 InSAR는 성립 불가</li><li>세 기법 중 진폭변화탐지(ACD)만 구조가 있는 관측을 제공</li><li>갯벌 조수 관측: 보유 처리레벨(1A/1B/1C)에는 후방산란계수가 없어 시점 간 절대 dB 비교 불가. 설계상 Level 1D에서만 제공된다는 것을 문서로 확인</li><li>X-band 개방수면은 −20 dB 이하인데 이 센서의 잡음등가 산란계수는 −16~−17 dB — 즉 물이 설계상 잡음바닥 아래에 있다. 실측 물−육상 대비 중앙값 −2.5 dB로 물리 기대치(−13~−20 dB)에 10~17 dB 못 미침</li></ul><ul lang="en"><li>A unified framework applying all three techniques identically to both X-band and C-band.</li><li>Confirmed that the early and middle stages on Sentinel-1 — coregistration, flat-earth and topographic phase removal, filtering — match ISCE2, validating the custom code.</li><li>X-band phase decorrelates over dunes within days; phase InSAR at a 30–35 day interval is simply not viable.</li><li>Of the three techniques, only amplitude change detection yields a structured observation.</li><li>Tidal flats: the held product levels (1A/1B/1C) contain no backscatter coefficient, so absolute dB cannot be compared across dates — confirmed from the specification that it is supplied only at Level 1D.</li><li>X-band open water sits below −20 dB while this sensor&#x27;s noise-equivalent sigma zero is −16 to −17 dB, so water is below the noise floor by design. Measured water-to-land contrast has a median of −2.5 dB against a physical expectation of −13 to −20 dB, falling short by 10–17 dB.</li></ul>
+    <div class="figs">
+      <figure class="fig">
+        <img src="../assets/img/taean-sar/00-custom-vs-isce2.webp" alt="자체 파이프라인 vs ISCE2 — 간섭위상 · coherence · 언래핑 대조" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">자체 파이프라인 vs ISCE2 — 간섭위상 · coherence · 언래핑 대조</span><span lang="en">Custom pipeline vs ISCE2 — interferometric phase, coherence and unwrapping compared</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/taean-sar/01-insar-chain.webp" alt="InSAR 처리 체인 — 진폭 · coherence · 언래핑 위상 · 히스토그램" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">InSAR 처리 체인 — 진폭 · coherence · 언래핑 위상 · 히스토그램</span><span lang="en">InSAR chain — amplitude, coherence, unwrapped phase and histogram</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/taean-sar/02-decorrelation.webp" alt="시간 베이스라인에 따른 탈상관 — 사구에서 수 일 내 coherence 붕괴" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">시간 베이스라인에 따른 탈상관 — 사구에서 수 일 내 coherence 붕괴</span><span lang="en">Decorrelation against temporal baseline — coherence collapses within days over dunes</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/taean-sar/03-acd-logratio.webp" alt="진폭변화탐지 로그비 (dB) — 세 기법 중 유일하게 구조가 있는 관측" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">진폭변화탐지 로그비 (dB) — 세 기법 중 유일하게 구조가 있는 관측</span><span lang="en">Amplitude change detection log-ratio in dB — the only structured observation of the three</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/taean-sar/04-offset-tracking.webp" alt="오프셋 트래킹 — 방위·거리 이동량과 상관 품질" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">오프셋 트래킹 — 방위·거리 이동량과 상관 품질</span><span lang="en">Offset tracking — azimuth and range shifts with match quality</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/taean-sar/05-lidar-dem3d.webp" alt="LiDAR DEM 3차원 — 사구·갯벌 지형" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">LiDAR DEM 3차원 — 사구·갯벌 지형</span><span lang="en">LiDAR DEM in 3D — dune and tidal-flat terrain</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/taean-sar/06-n2-amplitude.webp" alt="X-band 진폭영상과 dB 분포" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">X-band 진폭영상과 dB 분포</span><span lang="en">X-band amplitude image and its dB distribution</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/taean-sar/07-acd-inundation.webp" alt="조위에 따른 침수·노출 변화 탐지" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">조위에 따른 침수·노출 변화 탐지</span><span lang="en">Inundation and exposure change by tide level</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/taean-sar/08-waterline-tide.webp" alt="수륙경계선 추출과 지형 대조" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">수륙경계선 추출과 지형 대조</span><span lang="en">Extracted waterline compared against terrain</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/taean-sar/09-tide-curve.webp" alt="조위 시계열과 촬영 시각 정합" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">조위 시계열과 촬영 시각 정합</span><span lang="en">Tide time series aligned to acquisition times</span></figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="../assets/img/taean-sar/10-validation.webp" alt="LiDAR 표고 대비 침수 판정 검증" loading="lazy" decoding="async">
+        <figcaption><span lang="ko">LiDAR 표고 대비 침수 판정 검증</span><span lang="en">Inundation decisions validated against LiDAR elevation</span></figcaption>
+      </figure></div>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">배운 점 · 한계</span><span lang="en">What I learned · Limitations</span></h2>
+    <ul lang="ko"><li>&#x27;코드가 맞는가&#x27;와 &#x27;결과가 좋은가&#x27;는 다른 질문이다. 결과가 약한 것은 X-band가 사구에서 탈상관하는 물리적 한계 때문이고, 같은 데이터를 ISCE2에 넣어도 같다. 이 둘을 분리해 설명하는 법을 익혔다.</li><li>자체 코드의 신뢰성을 세 층으로 나눠 논증했다 — ① 기하 모델의 정합성(잔차를 지오이드로 귀속), ② 알고리즘의 표준성(새로 발명한 것 없음), ③ 외부 도구 대조. 그리고 TOPS 정밀 방위정합은 간이 구현이라 최종 언래핑까지 ISCE2와 같다고는 주장하지 않았다. 한계를 먼저 밝히는 쪽이 신뢰를 만든다.</li><li>센서 사양서를 읽는 것이 데이터를 더 돌리는 것보다 빨랐다. 물이 안 보이는 이유를 잡음등가 산란계수 한 줄에서 찾았다.</li><li>결론을 &#x27;변위량&#x27;이 아니라 &#x27;국산 위성 처리 방법론 시연&#x27;으로 프레이밍하도록 권고했다. 데이터가 뒷받침하지 않는 주장을 하지 않는 것도 분석가의 일이다.</li></ul><ul lang="en"><li>&#x27;Is the code right&#x27; and &#x27;is the result good&#x27; are different questions. The weak result comes from X-band physically decorrelating over dunes — ISCE2 on the same data gives the same thing. I learned to argue those two apart.</li><li>Argued the custom code&#x27;s reliability in three layers: the geometry model&#x27;s consistency (residuals attributable to the geoid), the standardness of the algorithms (nothing newly invented), and comparison against an external tool. And I did not claim parity with ISCE2 through final unwrapping, because the TOPS azimuth refinement is a simplified implementation. Stating the limit first is what builds trust.</li><li>Reading the sensor specification beat running more data. The reason water was invisible turned out to be one line: the noise-equivalent sigma zero.</li><li>Recommended framing the deliverable as a processing-methodology demonstration rather than a displacement measurement. Declining to claim what the data does not support is part of the job.</li></ul>
+  </section>
+
+  <section class="sec">
+    <h2><span lang="ko">산출물</span><span lang="en">Deliverables</span></h2>
+    <ul lang="ko"><li>InSAR · OT · ACD 자체 파이썬 구현</li><li>ISCE2 topsApp 처리 설정·산출물</li><li>처리 프로토콜 순서도</li><li>인터랙티브 통합 결과 맵</li><li>인수인계 문서 및 방법론 답변자료</li></ul><ul lang="en"><li>Custom Python implementations of InSAR, offset tracking and ACD</li><li>ISCE2 topsApp configuration and products</li><li>Processing protocol diagram</li><li>Interactive combined results map</li><li>Handover document and methodology Q&amp;A</li></ul>
+    <p class="sec-note"><span lang="ko">원본 보고서와 발표자료는 사내 자료로 공개하지 않습니다. 분석 코드는 GitHub에 정리되어 있습니다.</span><span lang="en">Source reports and decks are internal and not published here. Analysis code is organised on GitHub.</span></p>
+  </section>
+
+  <nav class="proj-pager">
+    <a class="pager prev" href="n2-sensor-model.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">국산 SAR 위성 엄밀센서모델 기하보정</span><span lang="en" class="pager-title">Rigorous Sensor Model Geocoding for a Domestic SAR Satellite</span></a>
+    <a class="pager next" href="smelter.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">제련소 열원 활동 모니터링 (TAI)</span><span lang="en" class="pager-title">Smelter Thermal Activity Monitoring (TAI)</span></a>
+  </nav>
+</main>
+
+<div class="lightbox" id="lb" hidden>
+  <button class="lb-close" type="button" aria-label="Close">&times;</button>
+  <img src="" alt="">
+  <p class="lb-cap"></p>
+</div>
+<footer class="site-foot">
+  <p lang="ko">© 2026 신현진 · 위성영상 분석 · 이 사이트의 결과 그림은 본인이 수행한 분석 산출물입니다.</p>
+  <p lang="en">© 2026 Hyunjin Shin · Earth observation analysis · All result figures are from my own work.</p>
+  <p class="foot-note" lang="ko">고객사명과 계약 정보는 공개하지 않습니다. 분석 코드는 <a href="https://github.com/Hyunjin-Shin00">GitHub</a>에 별도 정리되어 있습니다.</p>
+  <p class="foot-note" lang="en">Client names and contract details are withheld. Analysis code is organised separately on <a href="https://github.com/Hyunjin-Shin00">GitHub</a>.</p>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

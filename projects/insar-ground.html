@@ -69,7 +69,7 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
 
   <section class="sec">
     <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
-    <ul lang="ko"><li>CSK InSAR 처리 파이프라인 구축 완료 및 결과 보고서 작성</li><li>네팔 · 파키스탄 · 경주 SBAS 지표 변위 지도 생성</li><li>부산 PS-InSAR LOS 속도장 및 침하 핫스팟 시계열 도출 (Sentinel-1, 2021–2023, 약 29만 PS)</li><li>SBAS–PS 속도 교차비교로 두 기법의 일치도 정량 확인</li><li>N2 → CSK 메타데이터 변환 코드 개발 완료</li></ul><ul lang="en"><li>A working CSK InSAR pipeline, with a delivered results report.</li><li>SBAS displacement maps for Nepal, Pakistan and Gyeongju.</li><li>Busan PS-InSAR LOS velocity field and subsidence-hotspot time series (Sentinel-1, 2021–2023, ~293k persistent scatterers).</li><li>Quantified agreement between SBAS and PS velocities via direct cross-comparison.</li><li>Working N2 → CSK metadata conversion.</li></ul>
+    <ul lang="ko"><li>CSK InSAR 처리 파이프라인 구축 완료 및 결과 보고서 작성</li><li>네팔 · 파키스탄 · 경주 SBAS 지표 변위 지도 생성</li><li>부산 PS-InSAR LOS 속도장 및 침하 핫스팟 시계열 도출 (Sentinel-1, 2021–2023, 약 29만 PS)</li><li>SBAS–PS 속도 교차비교로 두 기법의 일치도 정량 확인</li><li>N2 → CSK 메타데이터 변환 코드 개발 완료 (이후 전용 센서모델 구현으로 발전 — 아래 별도 프로젝트 참조)</li></ul><ul lang="en"><li>A working CSK InSAR pipeline, with a delivered results report.</li><li>SBAS displacement maps for Nepal, Pakistan and Gyeongju.</li><li>Busan PS-InSAR LOS velocity field and subsidence-hotspot time series (Sentinel-1, 2021–2023, ~293k persistent scatterers).</li><li>Quantified agreement between SBAS and PS velocities via direct cross-comparison.</li><li>Working N2 → CSK metadata conversion, which later grew into a dedicated sensor model — see the separate project below.</li></ul>
     <div class="figs">
       <figure class="fig">
         <img src="../assets/img/insar-ground/00-interferogram.webp" alt="간섭도 — 지형 위에 중첩한 위상 프린지" loading="lazy" decoding="async">
@@ -142,7 +142,7 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
 
   <nav class="proj-pager">
     <a class="pager prev" href="flood-sar.html"><span class="pager-lab"><span lang="ko">이전</span><span lang="en">Previous</span></span><span lang="ko" class="pager-title">Sentinel-1 SAR 기반 홍수 탐지 알고리즘</span><span lang="en" class="pager-title">Automated Flood Mapping from Sentinel-1 SAR</span></a>
-    <a class="pager next" href="smelter.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">제련소 열원 활동 모니터링 (TAI)</span><span lang="en" class="pager-title">Smelter Thermal Activity Monitoring (TAI)</span></a>
+    <a class="pager next" href="n2-sensor-model.html"><span class="pager-lab"><span lang="ko">다음</span><span lang="en">Next</span></span><span lang="ko" class="pager-title">국산 SAR 위성 엄밀센서모델 기하보정</span><span lang="en" class="pager-title">Rigorous Sensor Model Geocoding for a Domestic SAR Satellite</span></a>
   </nav>
 </main>
 
