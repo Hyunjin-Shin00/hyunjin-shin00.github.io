@@ -50,7 +50,7 @@ k-water 팀서버에서 온 프로젝트는 `_build/content_kwater.py`(자동 �
 - 기관은 업종·규모로만 표기합니다 (예: "국내 대형 손해보험사").
 - 발표자료에 인용된 **타인의 논문 그림은 제외**했습니다. 게시된 그림은 전부 본인 분석 산출물입니다.
 - 방송 화면 캡처, 언론 기사 이미지는 저작권 때문에 제외했습니다.
-- 분석 코드는 이 사이트에 싣지 않고 [`eo-analysis`](https://github.com/Hyunjin-Shin00/eo-analysis) 저장소에 따로 정리했습니다.
+- 분석 코드는 이 사이트에 싣지 않고 [`sar-eo-analysis`](https://github.com/Hyunjin-Shin00/sar-eo-analysis) 저장소에 따로 정리했습니다.
 
 ## 라이선스
 
