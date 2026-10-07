@@ -152,6 +152,23 @@ main{max-width:var(--maxw);margin:0 auto;padding:0 1.25rem}
 .eng-period{font-family:var(--ff-mono);font-size:.75rem;color:var(--fg-3);font-variant-numeric:tabular-nums}
 .eng p{margin:.45rem 0 0;font-size:.9rem;color:var(--fg-2)}
 
+
+/* ── 학력 · 경력 ─────────────────────────────────────────── */
+.cv-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.6rem}
+.cv{list-style:none;padding:0;display:grid;gap:1.2rem}
+.cv-item{display:flex;gap:1.1rem;margin:0}
+.cv-period{
+  flex-shrink:0;width:9.4rem;font-family:var(--ff-mono);font-size:.78rem;
+  color:var(--fg-3);font-variant-numeric:tabular-nums;padding-top:.18rem;
+}
+.cv-body h4{font-size:.98rem;font-weight:600;margin-bottom:.12rem}
+.cv-org{margin:0;font-size:.88rem;color:var(--fg-2)}
+.cv-note{margin:.2rem 0 0;font-size:.82rem;color:var(--fg-3)}
+@media (max-width:520px){
+  .cv-item{flex-direction:column;gap:.2rem}
+  .cv-period{width:auto}
+}
+
 /* ── timeline ───────────────────────────────────────────── */
 .tl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.6rem}
 .tl{list-style:none;padding:0;border-left:2px solid var(--line)}
