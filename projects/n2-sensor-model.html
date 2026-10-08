@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>국산 SAR 위성 엄밀센서모델 기하보정 · 신현진</title>
+<title>국산 SAR 위성 엄밀센서모델 기하보정 · 백록담 수체 검증 · 신현진</title>
 <meta name="description" content="국산 X-band SAR 위성은 어떤 상용·공개 소프트웨어도 지원하지 않음. 파일 안의 궤도·타이밍 정보만으로 거리-도플러 센서모델을 직접 세워 12씬을 5 m 격자로 지오코딩함.">
-<meta property="og:title" content="국산 SAR 위성 엄밀센서모델 기하보정 · 신현진">
+<meta property="og:title" content="국산 SAR 위성 엄밀센서모델 기하보정 · 백록담 수체 검증 · 신현진">
 <meta property="og:description" content="국산 X-band SAR 위성은 어떤 상용·공개 소프트웨어도 지원하지 않음. 파일 안의 궤도·타이밍 정보만으로 거리-도플러 센서모델을 직접 세워 12씬을 5 m 격자로 지오코딩함.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
@@ -47,7 +47,7 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
   <div class="proj-head">
     <a class="back" href="../index.html#projects"><span lang="ko">← 프로젝트 목록</span><span lang="en">← All projects</span></a>
     <span class="proj-icon">📐</span>
-    <h1><span lang="ko">국산 SAR 위성 엄밀센서모델 기하보정</span><span lang="en">Rigorous Sensor Model Geocoding for a Domestic SAR Satellite</span></h1>
+    <h1><span lang="ko">국산 SAR 위성 엄밀센서모델 기하보정 · 백록담 수체 검증</span><span lang="en">Rigorous Sensor Model Geocoding for a Domestic SAR Satellite, with Crater Lake Water Detection</span></h1>
     <div class="proj-meta">
       <span>2026.08 – 2026.09</span>
       <span class="dot">·</span>
@@ -55,7 +55,7 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
       <span class="dot">·</span>
       <span lang="ko" class="chip chip-done">완료</span><span lang="en" class="chip chip-done">Completed</span>
     </div>
-    <div class="tags"><span class="tag">Range-Doppler</span><span class="tag">지오코딩</span><span class="tag">결합조정</span><span class="tag">EGM2008</span><span class="tag">X-band</span></div>
+    <div class="tags"><span class="tag">Range-Doppler</span><span class="tag">지오코딩</span><span class="tag">결합조정</span><span class="tag">수체 탐지</span><span class="tag">EGM2008</span><span class="tag">X-band</span></div>
     <p class="proj-sum"><span lang="ko">국산 X-band SAR 위성은 어떤 상용·공개 소프트웨어도 지원하지 않음. 파일 안의 궤도·타이밍 정보만으로 거리-도플러 센서모델을 직접 세워 12씬을 5 m 격자로 지오코딩함.</span><span lang="en">No commercial or open SAR software supports Korea&#x27;s X-band smallsat. I built the range-Doppler sensor model from scratch — using only the orbit and timing inside the file — and geocoded 12 scenes onto a 5 m grid.</span></p>
   </div>
 
@@ -77,7 +77,7 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
 
   <section class="sec">
     <h2><span lang="ko">결과</span><span lang="en">Results</span></h2>
-    <ul lang="ko"><li>12씬 전량을 UTM 52N 5 m 격자로 지오코딩 완료 (백록담 중심 6 km)</li><li>결합조정 후 씬 쌍 잔여 시프트가 대부분 1 화소(5 m) 이내에 수렴</li><li>잔차 위치오차 약 24.5 m를 DEM 수직기준(지오이드)으로 귀속 — 오차의 물리적 원인까지 규명</li><li>Sentinel-1 지오코딩 결과와 위치 정합 확인</li><li>부수 성과: 백록담 수체 검증 — N2(X-band)와 S1(C-band) 모두 미검출, Sentinel-2 광학만 0.11~0.58 ha 수면 확인</li></ul><ul lang="en"><li>All 12 scenes geocoded to a UTM 52N 5 m grid over a 6 km area centred on the crater.</li><li>After bundle adjustment, residual scene-pair shifts mostly converge within one pixel (5 m).</li><li>The ~24.5 m residual position error was attributed to the DEM&#x27;s vertical datum (geoid) — the physical cause, not just the magnitude.</li><li>Positional agreement confirmed against geocoded Sentinel-1.</li><li>Side result: crater water verification — neither N2 (X-band) nor S1 (C-band) detects it; only Sentinel-2 optical shows 0.11–0.58 ha of water.</li></ul>
+    <ul lang="ko"><li>12씬 전량을 UTM 52N 5 m 격자로 지오코딩 완료 (백록담 중심 6 km)</li><li>결합조정 후 씬 쌍 잔여 시프트가 대부분 1 화소(5 m) 이내에 수렴</li><li>잔차 위치오차 약 24.5 m를 DEM 수직기준(지오이드)으로 귀속 — 오차의 물리적 원인까지 규명</li><li>Sentinel-1 지오코딩 결과와 위치 정합 확인</li><li>백록담 수체 검증 — N2(X-band)·S1(C-band) 모두 미검출, Sentinel-2 광학만 0.11~0.58 ha 수면 확인. SAR 단독으로는 이 규모 산정호수 모니터링이 부적합하다는 결론</li></ul><ul lang="en"><li>All 12 scenes geocoded to a UTM 52N 5 m grid over a 6 km area centred on the crater.</li><li>After bundle adjustment, residual scene-pair shifts mostly converge within one pixel (5 m).</li><li>The ~24.5 m residual position error was attributed to the DEM&#x27;s vertical datum (geoid) — the physical cause, not just the magnitude.</li><li>Positional agreement confirmed against geocoded Sentinel-1.</li><li>Side result: crater water verification — neither N2 (X-band) nor S1 (C-band) detects it; only Sentinel-2 optical shows 0.11–0.58 ha of water.</li></ul>
     <div class="figs">
       <figure class="fig">
         <img src="../assets/img/n2-sensor-model/00-geocoded-5m.webp" alt="지오코딩 결과 — UTM 52N 5 m 격자, 백록담 중심" loading="lazy" decoding="async">
