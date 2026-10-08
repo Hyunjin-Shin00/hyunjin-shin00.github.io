@@ -331,3 +331,33 @@ main{max-width:var(--maxw);margin:0 auto;padding:0 1.25rem}
 .note-private{
   padding:.55rem .8rem;border-left:2px solid var(--accent);
   background:var(--bg-2);border-radius:0 6px 6px 0}
+
+/* ── 프로젝트 분야별 묶음 ─────────────────────────────── */
+.cat-nav{
+  display:flex;flex-wrap:wrap;gap:.45rem;margin:.2rem 0 2rem;
+  padding-bottom:1.1rem;border-bottom:1px solid var(--line)}
+.cat-chip{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.38rem .75rem;border:1px solid var(--line);border-radius:999px;
+  background:var(--bg-2);color:var(--fg-2);text-decoration:none;
+  font-size:.86rem;font-weight:500;transition:border-color .15s,color .15s,background .15s}
+.cat-chip:hover{border-color:var(--accent);color:var(--accent);background:var(--bg-3)}
+.cat-chip span{
+  font-family:var(--mono);font-size:.72rem;color:var(--fg-3);
+  background:var(--bg-3);border-radius:999px;padding:.05rem .4rem}
+.cat-chip:hover span{color:var(--accent)}
+
+.cat{margin:0 0 2.6rem;scroll-margin-top:4.5rem}
+.cat-head{margin:0 0 1rem}
+.cat-head h3{
+  display:flex;align-items:baseline;gap:.55rem;margin:0;
+  font-size:1.18rem;font-weight:700;letter-spacing:-.01em}
+.cat-n{
+  font-family:var(--mono);font-size:.78rem;font-weight:500;
+  color:var(--fg-3);background:var(--bg-2);border:1px solid var(--line);
+  border-radius:999px;padding:.08rem .45rem}
+.cat-desc{margin:.3rem 0 0;color:var(--fg-3);font-size:.9rem;line-height:1.55}
+@media (max-width:640px){
+  .cat-nav{margin-bottom:1.4rem}
+  .cat{margin-bottom:2rem}
+}

@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Sentinel-1 PS-InSAR·SBAS 지반변위 분석 (국내 7개 지역 + 광역 + 하강궤도) · 신현진</title>
-<meta name="description" content="국내 대형 손해보험사와의 지반침하 PoC에서 사고 지역 7곳의 지표 변위를 Sentinel-1로 측정함. 같은 코레지 스택에서 PS-InSAR(StaMPS)와 자체 SBAS를 함께 돌려 PS 2만8천~20만 점/지역, 수도권 광역 SBAS 107만 픽셀을 만들고, 하강궤도 재처리로 수직·동서 성분을 분리함. 두 기법 비교와 하강궤도 공백(2022~2024)처럼 잘 안 된 부분도 수치로 남겼음.">
+<meta name="description" content="삼성화재와의 지반침하 PoC에서 사고 지역 7곳의 지표 변위를 Sentinel-1로 측정함. 같은 코레지 스택에서 PS-InSAR(StaMPS)와 자체 SBAS를 함께 돌려 PS 2만8천~20만 점/지역, 수도권 광역 SBAS 107만 픽셀을 만들고, 하강궤도 재처리로 수직·동서 성분을 분리함. 두 기법 비교와 하강궤도 공백(2022~2024)처럼 잘 안 된 부분도 수치로 남겼음.">
 <meta property="og:title" content="Sentinel-1 PS-InSAR·SBAS 지반변위 분석 (국내 7개 지역 + 광역 + 하강궤도) · 신현진">
-<meta property="og:description" content="국내 대형 손해보험사와의 지반침하 PoC에서 사고 지역 7곳의 지표 변위를 Sentinel-1로 측정함. 같은 코레지 스택에서 PS-InSAR(StaMPS)와 자체 SBAS를 함께 돌려 PS 2만8천~20만 점/지역, 수도권 광역 SBAS 107만 픽셀을 만들고, 하강궤도 재처리로 수직·동서 성분을 분리함. 두 기법 비교와 하강궤도 공백(2022~2024)처럼 잘 안 된 부분도 수치로 남겼음.">
+<meta property="og:description" content="삼성화재와의 지반침하 PoC에서 사고 지역 7곳의 지표 변위를 Sentinel-1로 측정함. 같은 코레지 스택에서 PS-InSAR(StaMPS)와 자체 SBAS를 함께 돌려 PS 2만8천~20만 점/지역, 수도권 광역 SBAS 107만 픽셀을 만들고, 하강궤도 재처리로 수직·동서 성분을 분리함. 두 기법 비교와 하강궤도 공백(2022~2024)처럼 잘 안 된 부분도 수치로 남겼음.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128752;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -56,7 +56,7 @@ var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('
       <span lang="ko" class="chip chip-done">완료 (경보 규칙 연계는 별도 프로젝트)</span><span lang="en" class="chip chip-done">Completed (alert-rule work continues as a separate project)</span>
     </div>
     <div class="tags"><span class="tag">Sentinel-1</span><span class="tag">PS-InSAR</span><span class="tag">SBAS</span><span class="tag">StaMPS</span><span class="tag">ISCE2</span></div>
-    <p class="proj-sum"><span lang="ko">국내 대형 손해보험사와의 지반침하 PoC에서 사고 지역 7곳의 지표 변위를 Sentinel-1로 측정함. 같은 코레지 스택에서 PS-InSAR(StaMPS)와 자체 SBAS를 함께 돌려 PS 2만8천~20만 점/지역, 수도권 광역 SBAS 107만 픽셀을 만들고, 하강궤도 재처리로 수직·동서 성분을 분리함. 두 기법 비교와 하강궤도 공백(2022~2024)처럼 잘 안 된 부분도 수치로 남겼음.</span><span lang="en">Measured surface deformation at seven Korean ground-collapse sites for a ground-subsidence PoC with a major Korean P&amp;C insurer. PS-InSAR (StaMPS) and an in-house SBAS ran on the same coregistered Sentinel-1 stacks, giving 28k–206k PS points per site and a 1.07M-pixel SBAS map of the Seoul metro area; descending-orbit reprocessing separated vertical and east-west motion. Where things did not work (PS/SBAS disagreement, the 2022–2024 descending data gap), the numbers are recorded as well.</span></p>
+    <p class="proj-sum"><span lang="ko">삼성화재와의 지반침하 PoC에서 사고 지역 7곳의 지표 변위를 Sentinel-1로 측정함. 같은 코레지 스택에서 PS-InSAR(StaMPS)와 자체 SBAS를 함께 돌려 PS 2만8천~20만 점/지역, 수도권 광역 SBAS 107만 픽셀을 만들고, 하강궤도 재처리로 수직·동서 성분을 분리함. 두 기법 비교와 하강궤도 공백(2022~2024)처럼 잘 안 된 부분도 수치로 남겼음.</span><span lang="en">Measured surface deformation at seven Korean ground-collapse sites for a ground-subsidence PoC with Samsung Fire &amp; Marine Insurance. PS-InSAR (StaMPS) and an in-house SBAS ran on the same coregistered Sentinel-1 stacks, giving 28k–206k PS points per site and a 1.07M-pixel SBAS map of the Seoul metro area; descending-orbit reprocessing separated vertical and east-west motion. Where things did not work (PS/SBAS disagreement, the 2022–2024 descending data gap), the numbers are recorded as well.</span></p>
   </div>
 
   <section class="sec">
